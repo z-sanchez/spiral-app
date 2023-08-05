@@ -1,12 +1,10 @@
 import Container from "./components/Container";
+import { HomePage } from "./pages/HomePage";
 
 function App() {
   return (
     <Container>
-      <div className="flex justify-between">
-        <p>content1</p>
-        <p>content2</p>
-      </div>
+      <HomePage />
     </Container>
   );
 }
