@@ -2,21 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* html,
+html,
 body,
 #root,
 .appHeight {
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
-  height: -webkit-fill-available;
-} */
-
-body {
-  min-height: 100vh;
-  /* mobile viewport bug fix */
-  min-height: -webkit-fill-available;
-}
-
-html {
-  height: -webkit-fill-available;
+  height: 100dvh;
 }
