@@ -2,10 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  height: -webkit-fill-available;
-}
-
+html,
 body,
 #root,
 .appHeight {
