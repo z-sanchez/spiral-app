@@ -6,5 +6,8 @@ html,
 body,
 #root,
 .appHeight {
-  height: -webkit-fill-available;
+  /* equivalent to 100dvh in major browsers */
+  min-height: calc(
+    100vh - env(safe-area-inset-bottom, 0) - env(safe-area-inset-top, 0)
+  );
 }
