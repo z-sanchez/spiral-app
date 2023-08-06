@@ -6,7 +6,9 @@ const PageLayout = ({ children }: { children?: ReactNode }) => {
   return (
     <div className="flex w-full h-full flex-col items-center">
       <Header />
-      <div className="max-w-3xl w-full px-6 overflow-scroll">{children}</div>
+      <div className="max-w-3xl w-full px-6 overflow-scroll h-full">
+        {children}
+      </div>
       <BottomNavBar />
     </div>
   );
