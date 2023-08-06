@@ -4,7 +4,7 @@ import { ReactComponent as UsersIcon } from "../assets/icons/users.svg";
 
 const BottomNavBar = () => {
   return (
-    <div className="h-14 flex items-center justify-between px-20 border-t-2 border-gray-50 w-full">
+    <div className="h-14 flex items-center justify-between px-20 border-t-2 border-gray-50">
       <HouseIcon className="fill-purple-500" />
       <CupIcon />
       <UsersIcon />
