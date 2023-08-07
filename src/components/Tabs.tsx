@@ -1,14 +1,16 @@
-import { useState } from "react";
-
 type TabsProps = {
   id: string;
   text: string;
   active: boolean;
 };
 
-const Tabs = ({ tabDetails }: { tabDetails: TabsProps[] }) => {
-  const [tabs, setTabs] = useState(tabDetails);
-
+const Tabs = ({
+  tabs,
+  onTabChange,
+}: {
+  tabs: TabsProps[];
+  onTabChange?: () => void;
+}) => {
   return (
     <div className="w-full flex justify-center">
       {tabs.map(({ text, active, id }) => {

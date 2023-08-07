@@ -7,7 +7,7 @@ const HomePage = () => {
   return (
     <PageLayout>
       <div className="flex justify-center">
-        <Tabs tabDetails={testTabs}></Tabs>
+        <Tabs tabs={testTabs}></Tabs>
       </div>
     </PageLayout>
   );
