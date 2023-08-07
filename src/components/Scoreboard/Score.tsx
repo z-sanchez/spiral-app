@@ -22,14 +22,4 @@ const Score = ({
   );
 };
 
-const Scoreboard = () => {
-  return (
-    <div className="flex w-full justify-center">
-      <Score text="W" score="7" />
-      <Score text="L" score="3" outline={true} />
-      <Score text="ROI" score="+712" style="text-green-500" />
-    </div>
-  );
-};
-
-export { Scoreboard };
+export { Score };

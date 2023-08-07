@@ -1,4 +1,4 @@
-import { Scoreboard } from "../components/ScoreBoard";
+import { Scoreboard } from "../components/Scoreboard/Scoreboard";
 import { SectionLabel } from "../components/SectionLabel";
 import { Tabs } from "../components/Tabs";
 import { PageLayout } from "../layouts/PageLayout";
@@ -12,7 +12,7 @@ const HomePage = () => {
         <Tabs tabs={testTabs}></Tabs>
       </div>
       <SectionLabel label={"Your Score"}></SectionLabel>
-      <Scoreboard />
+      <Scoreboard wins="7" loses="3" roi="+723" roiStyle="text-green-500" />
     </PageLayout>
   );
 };
