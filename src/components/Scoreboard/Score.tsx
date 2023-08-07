@@ -17,7 +17,7 @@ const Score = ({
       }
     >
       <p className="font-bold text-purple-500">{text}</p>
-      <p className={"text-xl pt-2 " + style}>{score}</p>
+      <p className={"text-xl text-gray-700 pt-2 " + style}>{score}</p>
     </div>
   );
 };
