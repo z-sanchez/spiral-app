@@ -1,17 +1,49 @@
 import { ReactComponent as RightPickIcon } from "../../assets/icons/right-pick.svg";
+import { ReactComponent as WrongPickIcon } from "../../assets/icons/wrong-pick.svg";
 
-const Team = () => {
+import { Team as TeamType } from "../../types/Team";
+
+type TeamProps = TeamType & {
+  showPickResult?: boolean;
+  correctPick?: boolean;
+  score?: string;
+  pick?: boolean;
+};
+
+const Team = ({
+  abbreviation,
+  color,
+  name,
+  showPickResult,
+  correctPick,
+  score,
+  pick,
+}: TeamProps) => {
+  const correctPickAndGameOver = showPickResult && correctPick && pick;
+  const wrongPickAndGameOver = showPickResult && !correctPick && pick;
+  const emptyOutline = !showPickResult || (showPickResult && !pick);
+
   return (
     <div className="flex items-center h-full w-full">
-      <div className="w-1 h-10 bg-green-400"></div>
+      {emptyOutline && <div className={"w-1 h-10"}></div>}
+      {correctPickAndGameOver && <div className="w-1 h-10 bg-green-500"></div>}
+      {wrongPickAndGameOver && <div className="w-1 h-10 bg-red-500"></div>}
       <div className="w-2/3 flex items-center">
-        <p className="text-blue-900 font-bold text-lg pl-2">
-          <span className="text-sm font-normal text-gray-700 pr-2">DAL</span>
-          Cowboys
+        <p className="font-bold text-lg pl-2" style={{ color: color }}>
+          <span className="text-sm font-normal text-gray-700 pr-2">
+            {abbreviation}
+          </span>
+          {name}
         </p>
-        <RightPickIcon className="ml-2" />
+        {showPickResult &&
+          pick &&
+          (correctPick ? (
+            <RightPickIcon className="ml-2" />
+          ) : (
+            <WrongPickIcon className="ml-2" />
+          ))}
       </div>
-      <p className="ml-2">7</p>
+      <p className="ml-2">{score}</p>
     </div>
   );
 };
