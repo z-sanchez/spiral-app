@@ -15,8 +15,9 @@ const Tabs = ({
     <div className="w-full flex justify-center">
       {tabs.map(({ text, active, id }) => {
         return (
-          <p
+          <button
             key={id}
+            onClick={onTabChange}
             className={
               "text-center border-b-2 w-2/4 " +
               (active
@@ -25,7 +26,7 @@ const Tabs = ({
             }
           >
             {text}
-          </p>
+          </button>
         );
       })}
     </div>
