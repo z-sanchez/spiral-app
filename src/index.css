@@ -15,10 +15,14 @@ body,
 }
 
 button,
-input {
+input,
+a,
+select,
+textarea {
   outline: none;
   border-radius: 0;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  -webkit-tap-highlight-color: transparent;
 }
