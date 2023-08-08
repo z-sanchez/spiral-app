@@ -5,6 +5,9 @@ import { Tabs } from "../components/Tabs";
 import { PageLayout } from "../layouts/PageLayout";
 import { Team } from "../types/Team";
 import { ReactComponent as DownArrowIcon } from "../assets/icons/down-arrow.svg";
+import { ReactComponent as UpArrowIcon } from "../assets/icons/up-arrow.svg";
+import { useState } from "react";
+import { Collapse } from "@mui/material";
 
 const testTabs = [{ id: "weekly", text: "Week 1 Picks", active: true }];
 
@@ -31,6 +34,7 @@ const awayTeam: Team & { score?: string; pick?: boolean } = {
 };
 
 const HomePage = () => {
+  const [showFinishedGames, setShowFinishedGames] = useState(true);
   return (
     <PageLayout>
       <div className="flex justify-center">
@@ -53,24 +57,33 @@ const HomePage = () => {
         live={true}
         lock={true}
       />
-      <div className="flex w-full items-center justify-center">
-        <SectionLabel label="Finished Games" />
-        <DownArrowIcon className="stroke-purple-500" />
+      <div
+        className="flex w-full items-center justify-center"
+        onClick={() => setShowFinishedGames((prev) => !prev)}
+      >
+        <SectionLabel label="Finished Games" />{" "}
+        {showFinishedGames ? (
+          <DownArrowIcon className="fill-purple-500" />
+        ) : (
+          <UpArrowIcon className="fill-purple-500" />
+        )}
       </div>
-      <Game
-        homeTeam={homeTeam}
-        awayTeam={awayTeam}
-        wager="127"
-        correctPick={true}
-        showPickResult={true}
-      />{" "}
-      <Game
-        homeTeam={homeTeam}
-        awayTeam={awayTeam}
-        wager="88"
-        correctPick={false}
-        showPickResult={true}
-      />
+      <Collapse in={showFinishedGames}>
+        <Game
+          homeTeam={homeTeam}
+          awayTeam={awayTeam}
+          wager="127"
+          correctPick={true}
+          showPickResult={true}
+        />{" "}
+        <Game
+          homeTeam={homeTeam}
+          awayTeam={awayTeam}
+          wager="88"
+          correctPick={false}
+          showPickResult={true}
+        />
+      </Collapse>
     </PageLayout>
   );
 };
