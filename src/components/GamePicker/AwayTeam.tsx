@@ -3,7 +3,7 @@ import { ReactComponent as CheckmarkIcon } from "../../assets/icons/checkmark.sv
 
 const AwayTeam = () => {
   return (
-    <div className="w-1/2 h-4/5 px-5 flex  flex-col">
+    <div className="w-1/2 h-4/5 px-5 flex items-center flex-col">
       <p className="mb-16 mx-auto">Prediction</p>
       <HelmetIcon className="w-28 h-28" />
       <div className="flex items-center justify-between w-full">
