@@ -6,8 +6,7 @@ const HomeTeam = () => {
     <div className="w-1/2 h-4/5 px-5 flex items-center flex-col">
       <p className="mb-16 mx-auto">Prediction</p>
       <HelmetIcon className="w-28 h-28" />
-      <div className="flex items-center justify-between w-full">
-        <CheckmarkIcon className="h-4 w-4" />
+      <div className="flex items-center justify-center w-full">
         <div className="flex flex-col items-end">
           <p>Philidelphia</p>
           <p className="font-bold text-2xl">Eagles</p>
