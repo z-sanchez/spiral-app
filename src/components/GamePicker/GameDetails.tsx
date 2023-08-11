@@ -41,7 +41,7 @@ const GameDetails = () => (
       </div>
       <div className="flex flex-col">
         <LinearProgress
-          className="mt-2 mb-12 w-full"
+          className="mt-2 mb-1 w-full"
           color="primary"
           value={50}
           variant="determinate"
@@ -49,6 +49,19 @@ const GameDetails = () => (
         <div className="flex justify-between">
           <p className="text-sm text-gray-300">50%</p>
           <p className="text-sm text-gray-300">50%</p>
+        </div>
+      </div>
+      <div className="flex w-full flex-col justify-center items-center">
+        <div className="flex flex-col items-center mb-5">
+          <p className="text-gray-700 text-sm font-semibold">Date and Time</p>
+          <p className="text-gray-700">September 7th 2023, 7:20pm</p>
+        </div>
+        <div className="flex flex-col items-center">
+          <p className="text-gray-700 text-sm font-semibold">Location</p>
+          <p className="text-gray-700">
+            Lincoln Financial Field{" "}
+            <span className="text-green-500">(eagles)</span>
+          </p>
         </div>
       </div>
     </div>
