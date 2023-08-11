@@ -41,7 +41,7 @@ const GameDetails = () => (
       </div>
       <div className="flex flex-col">
         <LinearProgress
-          className="mt-2 mb-1 w-full"
+          className="mt-2 mb-12 w-full"
           color="primary"
           value={50}
           variant="determinate"
