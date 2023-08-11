@@ -1,29 +1,9 @@
-import { AwayTeam } from "./AwayTeam";
-import { HomeTeam } from "./HomeTeam";
 import { ReactComponent as ExitIcon } from "../../assets/icons/exit.svg";
 import { ReactComponent as InfoIcon } from "../../assets/icons/info.svg";
+import { GameDetails } from "./GameDetails";
+import { TeamPicker } from "./TeamPicker";
 
 const GamePicker = () => {
-  const Pick = () => (
-    <>
-      <div className="flex items-center w-full">
-        <AwayTeam />
-        <HomeTeam />
-      </div>
-      <div className="w-full flex items-center py-5 justify-center">
-        <div className="flex border-2 border-purple-500 rounded-full px-4">
-          <p className="font-bold text-purple-500">$</p>
-          <input
-            type="number"
-            placeholder="0"
-            className=" text-purple-500 w-12 text-center font-semibold"
-          ></input>
-        </div>
-      </div>
-    </>
-  );
-
-  const GameDetails = () => <div className="flex items-center w-full"></div>;
   return (
     <>
       <div className="absolute bg-gray-300 opacity-40 h-full w-full"></div>
@@ -35,7 +15,7 @@ const GamePicker = () => {
             <InfoIcon className="w-6 h-6  drop-shadow-md" />
           </div>
           <GameDetails />
-          {/* <Pick /> */}
+          {/* <TeamPicker /> */}
         </div>
       </div>
     </>
