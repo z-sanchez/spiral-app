@@ -16,7 +16,7 @@ const LeaderboardLine = ({
   color,
 }: LeaderboardLineProps) => {
   return (
-    <div className="w-full flex items-center justify-around border-b-2 py-2 border-gray-50">
+    <div className="w-full flex items-center justify-around border-b-2 py-3 border-gray-50">
       <div className="flex items-center">
         <UpArrowIcon className="fill-green-500" />
         <ProfileIcon
