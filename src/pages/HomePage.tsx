@@ -38,7 +38,7 @@ const HomePage = () => {
   const [showFinishedGames, setShowFinishedGames] = useState(true);
   return (
     <>
-      <GamePicker></GamePicker>
+      {/* <GamePicker></GamePicker> */}
       <PageLayout>
         <div className="flex justify-center">
           <Tabs tabs={testTabs}></Tabs>

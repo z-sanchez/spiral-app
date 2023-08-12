@@ -1,8 +1,8 @@
 import { ReactComponent as ExitIcon } from "../../assets/icons/exit.svg";
 import { ReactComponent as InfoIcon } from "../../assets/icons/info.svg";
-import { ReactComponent as LockIcon } from "../../assets/icons/lock.svg";
-import { GameDetails } from "./GameDetails";
 import { TeamPicker } from "./TeamPicker";
+// import { ReactComponent as LockIcon } from "../../assets/icons/lock.svg";
+// import { GameDetails } from "./GameDetails";
 
 const GamePicker = () => {
   return (
