@@ -21,7 +21,9 @@ const Team = ({
 }: TeamProps) => {
   const correctPickAndGameOver = showPickResult && correctPick && pick;
   const wrongPickAndGameOver = showPickResult && !correctPick && pick;
-  const emptyOutline = !showPickResult || (showPickResult && !pick);
+  const emptyOutline = (!showPickResult && !pick) || (showPickResult && !pick);
+
+  console.log({ emptyOutline });
 
   return (
     <div className="flex items-center h-full w-full">
