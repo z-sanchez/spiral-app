@@ -1,12 +1,15 @@
 import { useQuery } from "react-query";
 import { GAME_SCHEDULE_QUERY } from "../utils/constants";
+import { getWeekData } from "../utils/helpers/espnApi";
 
 const useGameSchedule = () => {
-  const { data } = useQuery("gameScheduleData", () =>
+  const { isLoading, data } = useQuery("gameScheduleData", () =>
     fetch(GAME_SCHEDULE_QUERY)
       .then((result) => result.json())
       .then((scheduleData) => scheduleData.content)
   );
+
+  const currentWeeksGames = !isLoading ? getWeekData(data?.schedule) : [];
 
   const getCurrentScheduleData = () => {
     return data;
@@ -14,6 +17,7 @@ const useGameSchedule = () => {
 
   return {
     getCurrentScheduleData,
+    currentWeeksGames,
   };
 };
 

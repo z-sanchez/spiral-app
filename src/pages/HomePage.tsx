@@ -38,9 +38,12 @@ const awayTeam: Team & { score?: string; pick?: boolean } = {
 const HomePage = () => {
   const [showFinishedGames, setShowFinishedGames] = useState(true);
 
-  const { getCurrentScheduleData } = useGameSchedule();
+  const { getCurrentScheduleData, currentWeeksGames } = useGameSchedule();
 
-  console.log({ schedule: getCurrentScheduleData() });
+  console.log({
+    schedule: getCurrentScheduleData(),
+    currentWeeksGames,
+  });
 
   return (
     <>
