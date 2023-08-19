@@ -42,7 +42,7 @@ const ScorePage = () => {
         <div className="flex justify-center">
           <Tabs tabs={testTabs}></Tabs>
         </div>
-        <WeekSelector />
+        <WeekSelector activeWeekNumber={3} />
         <SectionLabel label={"Your Score"}></SectionLabel>
         <Scoreboard wins="7" loses="3" roi="+723" roiStyle="text-green-500" />
         <SectionLabel label={"League Scores"}></SectionLabel>
