@@ -8,7 +8,7 @@ import { ReactComponent as DownArrowIcon } from "../assets/icons/down-arrow.svg"
 import { ReactComponent as UpArrowIcon } from "../assets/icons/up-arrow.svg";
 import { useState } from "react";
 import { Collapse } from "@mui/material";
-import { GamePicker } from "../components/GamePicker/GamePicker";
+// import { GamePicker } from "../components/GamePicker/GamePicker";
 
 const testTabs = [{ id: "weekly", text: "Week 1 Picks", active: true }];
 
