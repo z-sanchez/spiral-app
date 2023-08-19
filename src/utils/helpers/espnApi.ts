@@ -11,7 +11,7 @@ export const getWeekData = (schedule: any) => {
   currentWeekKeys.forEach((key) => {
     const games: Game[] = schedule[key]?.games.map(
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      ({ date, id, links, name, shortName, competitions }: any) => {
+      ({ date, id, links, name, shortName, competitions, status }: any) => {
         return {
           date: date,
           id: id,
@@ -19,6 +19,7 @@ export const getWeekData = (schedule: any) => {
           name: name,
           shortName: shortName,
           venue: competitions[0]?.venue?.fullName,
+          completed: status?.type?.completed,
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           competitors: competitions[0]?.competitors?.map((competitor: any) => {
             return {

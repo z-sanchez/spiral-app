@@ -1,7 +1,7 @@
 import { Team } from "./Team";
 import { ReactComponent as CoinIcon } from "../../assets/icons/coin.svg";
 import { ReactComponent as LockIcon } from "../../assets/icons/lock.svg";
-import { Team as TeamType } from "../../types/Team";
+import { Competitors } from "../../types/Competitors";
 
 type GameProps = {
   lock?: boolean;
@@ -9,8 +9,8 @@ type GameProps = {
   live?: boolean;
   showPickResult?: boolean;
   correctPick?: boolean;
-  homeTeam: TeamType & { score?: string; pick?: boolean };
-  awayTeam: TeamType & { score?: string; pick?: boolean };
+  homeTeam: Competitors & { score?: string; pick?: boolean };
+  awayTeam: Competitors & { score?: string; pick?: boolean };
 };
 
 const Game = ({

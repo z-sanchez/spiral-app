@@ -8,4 +8,5 @@ export type Game = {
   shortName: string;
   competitors: Competitors[];
   venue: string;
+  completed: boolean;
 };
