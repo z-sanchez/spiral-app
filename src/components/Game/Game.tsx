@@ -11,6 +11,7 @@ type GameProps = {
   correctPick?: boolean;
   homeTeam: Competitors & { score?: string; pick?: boolean };
   awayTeam: Competitors & { score?: string; pick?: boolean };
+  handleClick: () => void;
 };
 
 const Game = ({
@@ -21,9 +22,13 @@ const Game = ({
   awayTeam,
   showPickResult,
   correctPick,
+  handleClick,
 }: GameProps) => {
   return (
-    <div className="border-b-2 pb-3 border-gray-100">
+    <div
+      className="border-b-2 pb-3 border-gray-100"
+      onClick={() => handleClick()}
+    >
       <div className="pt-3 flex items-center justify-between">
         {lock ? <LockIcon className="w-5 h-5 fill-purple-500" /> : null}
         {live ? (

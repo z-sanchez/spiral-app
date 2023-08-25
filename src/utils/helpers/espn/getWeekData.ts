@@ -1,6 +1,7 @@
 //takes espn nfl schedule for any given week and breaks it into objects useful for app
 
-import { Game } from "../../types/Game";
+import { Game } from "../../../types/Game";
+import { getRecord } from "./getRecord";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getWeekData = (schedule: any) => {
@@ -29,8 +30,13 @@ export const getWeekData = (schedule: any) => {
               id: competitor.id,
               location: competitor?.team?.location,
               name: competitor?.team?.name,
-              color: competitor?.team?.color,
-              alternateColor: competitor?.team?.alternateColor,
+              color: "#" + competitor?.team?.color,
+              alternateColor: "#" + competitor?.team?.alternateColor,
+              record: getRecord(
+                competitor?.records?.find(
+                  ({ name }: { name: string }) => name === "overall"
+                ).summary
+              ),
             };
           }),
         };

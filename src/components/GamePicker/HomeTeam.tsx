@@ -2,8 +2,9 @@ import { ReactComponent as HelmetIcon } from "../../assets/icons/home-team-helme
 import { ReactComponent as CheckmarkIcon } from "../../assets/icons/checkmark.svg";
 
 import { ProfileIcon } from "../ProfileIcon";
+import { Team } from "../../types/Team";
 
-const HomeTeam = () => {
+const HomeTeam = ({ name, location, color, record }: Team) => {
   return (
     <div className="w-1/2 px-5 flex flex-col items-center justify-center border-r-2 border-gray-100">
       <p className="mb-12 w-fit px-4 text-purple-500 text-sm text-center border-2 rounded-full border-purple-500 drop-shadow-sm bg-white">
@@ -12,12 +13,19 @@ const HomeTeam = () => {
       <div className="flex relative justify-center items-center w-full">
         <CheckmarkIcon className="absolute left-0  h-5 w-5" />
         <div>
-          <HelmetIcon className="w-28 h-28 flex-shrink-0" />
+          <HelmetIcon
+            className="w-28 h-28 flex-shrink-0"
+            style={{ fill: color }}
+          />
           <div className="flex items-center justify-end w-full">
             <div className="flex flex-col items-end">
-              <p>Philidephia</p>
-              <p className="font-semibold text-xl">Eagles</p>
-              <p className="font-light text-gray-400">3-2</p>
+              <p>{location}</p>
+              <p className="font-semibold text-xl" style={{ color }}>
+                {name}
+              </p>
+              <p className="font-light text-gray-400">
+                {record?.wins}-{record?.loses}
+              </p>
             </div>
           </div>
           <div className="flex flex-col mt-8">

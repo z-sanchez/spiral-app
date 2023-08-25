@@ -1,3 +1,5 @@
+import { Record } from "./Record";
+
 export type Team = {
   abbreviation: string;
   id: string;
@@ -5,4 +7,5 @@ export type Team = {
   name: string;
   color: string;
   alternateColor: string;
+  record: Record;
 };

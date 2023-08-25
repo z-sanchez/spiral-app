@@ -1,8 +1,9 @@
 import { ReactComponent as HelmetIcon } from "../../assets/icons/away-teamhelmet.svg";
 import { ReactComponent as CheckmarkIcon } from "../../assets/icons/checkmark.svg";
+import { Team } from "../../types/Team";
 import { ProfileIcon } from "../ProfileIcon";
 
-const AwayTeam = () => {
+const AwayTeam = ({ name, location, record, alternateColor }: Team) => {
   return (
     <div className="w-1/2 px-5 flex flex-col items-center justify-center border-r-2 border-gray-100">
       <p className="mb-12 w-fit px-4 text-purple-500 text-sm text-center border-2 rounded-full border-purple-500 drop-shadow-sm bg-white">
@@ -10,12 +11,22 @@ const AwayTeam = () => {
       </p>
       <div className="flex relative justify-center items-center w-full">
         <div>
-          <HelmetIcon className="w-28 h-28 flex-shrink-0" />
+          <HelmetIcon
+            className="w-28 h-28 flex-shrink-0"
+            style={{ fill: alternateColor }}
+          />
           <div className="flex items-center justify-between w-full ">
             <div className="flex flex-col items-start">
-              <p>Dallas</p>
-              <p className="font-semibold text-xl">Cowboys</p>
-              <p className="font-light text-gray-400">3-2</p>
+              <p>{location}</p>
+              <p
+                className="font-semibold text-xl"
+                style={{ color: alternateColor }}
+              >
+                {name}
+              </p>
+              <p className="font-light text-gray-400">
+                {record?.wins}-{record?.loses}
+              </p>
             </div>
           </div>
           <div className="flex flex-col mt-8">

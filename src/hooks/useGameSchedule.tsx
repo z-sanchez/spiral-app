@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 import { GAME_SCHEDULE_QUERY } from "../utils/constants";
-import { getWeekData } from "../utils/helpers/espnApi";
+import { getWeekData } from "../utils/helpers/espn/getWeekData";
 
 const useGameSchedule = () => {
   const { isLoading, data } = useQuery("gameScheduleData", () =>
