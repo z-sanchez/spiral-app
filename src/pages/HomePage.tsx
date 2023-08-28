@@ -23,7 +23,7 @@ const HomePage = () => {
     homeTeam: Competitors | null;
     awayTeam: Competitors | null;
   }>({
-    active: true,
+    active: false,
     homeTeam: getHomeTeam(currentWeeksGames[5]),
     awayTeam: getAwayTeam(currentWeeksGames[5]),
   });
