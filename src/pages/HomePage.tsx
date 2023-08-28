@@ -32,6 +32,7 @@ const HomePage = () => {
     schedule: getCurrentScheduleData(),
     currentWeeksGames,
     gamePickerData,
+    env: import.meta.env.VITE_TEST_VARIABLE,
   });
 
   const activeGames = currentWeeksGames.filter(({ completed }) => !completed);
