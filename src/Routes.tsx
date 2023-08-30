@@ -9,12 +9,14 @@ import "./index.css";
 import { HomePage } from "./pages/HomePage";
 import { ScorePage } from "./pages/ScorePage";
 import { LoginPage } from "./pages/LoginPage";
-// import { getAuth } from "firebase/auth";
+import { useRecoilValue } from "recoil";
+import { authenticationState } from "./state/AuthState";
 
 const PrivateRoutes = () => {
-  const auth = true; //getAuth().currentUser;
+  const authState = useRecoilValue(authenticationState);
 
-  return auth ? <Outlet /> : <Navigate to="/login" />;
+  console.log("update", { authState });
+  return authState.signedIn ? <Outlet /> : <Navigate to="/login" />;
 };
 
 export const AppRoutes = () => {

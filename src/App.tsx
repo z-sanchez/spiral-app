@@ -7,6 +7,7 @@ import "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { FIREBASE_CONFIGURATION } from "./utils/constants";
+import { RecoilRoot } from "recoil";
 
 const queryClient = new QueryClient();
 
@@ -20,11 +21,13 @@ function App() {
   console.log({ db });
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <Container>
-        <AppRoutes />
-      </Container>
-    </QueryClientProvider>
+    <RecoilRoot>
+      <QueryClientProvider client={queryClient}>
+        <Container>
+          <AppRoutes />
+        </Container>
+      </QueryClientProvider>
+    </RecoilRoot>
   );
 }
 
