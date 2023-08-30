@@ -8,10 +8,11 @@ import {
 import { useRecoilState } from "recoil";
 import { authenticationState } from "../state/AuthState";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const LoginPage = () => {
   const [authState, setAuthState] = useRecoilState(authenticationState);
+  const [spinner, setSpinner] = useState(true);
   const auth = getAuth();
   const navigate = useNavigate();
 
@@ -31,8 +32,14 @@ const LoginPage = () => {
     if (authState.signedIn) navigate("/");
   }, [authState, navigate]);
 
+  onAuthStateChanged(auth, (user) => {
+    setSpinner(false);
+  });
+
   console.log({ authState });
-  return (
+  return spinner ? (
+    <p>loading</p>
+  ) : (
     <div className="w-full h-full flex justify-center items-center flex-col">
       <h1>This is the login page</h1>
       <button onClick={handleSignIn}>Sign In Here</button>
