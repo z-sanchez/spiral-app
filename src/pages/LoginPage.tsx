@@ -2,6 +2,7 @@ import {
   getAuth,
   // getRedirectResult,
   GoogleAuthProvider,
+  onAuthStateChanged,
   signInWithPopup,
   // signInWithRedirect,
 } from "firebase/auth";
@@ -12,7 +13,7 @@ import { useState } from "react";
 
 const LoginPage = () => {
   const [authState, setAuthState] = useRecoilState(authenticationState);
-  const [spinner, setSpinner] = useState(false);
+  const [spinner, setSpinner] = useState(true);
   const firebaseAuth = getAuth();
   const navigate = useNavigate();
 
@@ -20,9 +21,16 @@ const LoginPage = () => {
     navigate("/");
   }
 
+  onAuthStateChanged(firebaseAuth, (result) => {
+    setSpinner(false);
+    const resultParsed = JSON.parse(JSON.stringify(result));
+    if (resultParsed) {
+      setAuthState({ ...resultParsed, signedIn: true });
+    }
+  });
+
   const handleSignIn = () => {
     const provider = new GoogleAuthProvider();
-    setSpinner(true);
     signInWithPopup(firebaseAuth, provider).then((result) => {
       if (result?.user) {
         const user = JSON.parse(JSON.stringify(result.user));
@@ -57,7 +65,6 @@ const LoginPage = () => {
         <>
           <h1>This is the login page</h1>
           <button onClick={handleSignIn}>Sign In Here</button>
-          <p>Auth State: {JSON.stringify({ authState, firebaseAuth })}</p>
         </>
       )}
     </div>
