@@ -33,6 +33,8 @@ const LoginPage = () => {
         const user = JSON.parse(JSON.stringify(result.user));
         setRedirect({ user });
         // setAuthState({ ...user, signedIn: true });
+      } else {
+        setRedirect({ result });
       }
     });
   }
