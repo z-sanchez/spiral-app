@@ -14,8 +14,6 @@ import { authenticationState } from "./state/AuthState";
 
 const PrivateRoutes = () => {
   const authState = useRecoilValue(authenticationState);
-
-  console.log("update", { authState });
   return authState.signedIn ? <Outlet /> : <Navigate to="/login" />;
 };
 
