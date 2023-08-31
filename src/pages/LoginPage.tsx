@@ -13,7 +13,7 @@ import { useState } from "react";
 
 const LoginPage = () => {
   const [authState, setAuthState] = useRecoilState(authenticationState);
-  const [spinner, setSpinner] = useState(true);
+  const [spinner, setSpinner] = useState(false);
   const firebaseAuth = getAuth();
   const navigate = useNavigate();
 
@@ -22,15 +22,16 @@ const LoginPage = () => {
   }
 
   onAuthStateChanged(firebaseAuth, (result) => {
-    setSpinner(false);
     const resultParsed = JSON.parse(JSON.stringify(result));
     if (resultParsed) {
+      setSpinner(false);
       setAuthState({ ...resultParsed, signedIn: true });
     }
   });
 
   const handleSignIn = () => {
     const provider = new GoogleAuthProvider();
+    setSpinner(true);
     signInWithPopup(firebaseAuth, provider).then((result) => {
       if (result?.user) {
         const user = JSON.parse(JSON.stringify(result.user));
