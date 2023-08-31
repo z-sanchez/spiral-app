@@ -4,13 +4,16 @@ import {
   GoogleAuthProvider,
   signInWithRedirect,
 } from "firebase/auth";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
+// import { useRecoilState, useSetRecoilState } from "recoil";
 import { authenticationState } from "../state/AuthState";
 // import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const LoginPage = () => {
-  const [authState, setAuthState] = useRecoilState(authenticationState);
+  // const [authState, setAuthState] = useRecoilState(authenticationState);
+  const authState = useSetRecoilState(authenticationState);
+
   const [spinner, setSpinner] = useState(true);
   const [redirectResult, setRedirect] = useState({});
   const firebaseAuth = getAuth();
@@ -21,8 +24,8 @@ const LoginPage = () => {
   // }
 
   if (firebaseAuth.currentUser) {
-    const user = JSON.parse(JSON.stringify(firebaseAuth.currentUser));
-    setAuthState({ ...user, signedIn: true });
+    // const user = JSON.parse(JSON.stringify(firebaseAuth.currentUser));
+    // setAuthState({ ...user, signedIn: true });
   } else {
     getRedirectResult(firebaseAuth).then((result) => {
       setSpinner(false);
