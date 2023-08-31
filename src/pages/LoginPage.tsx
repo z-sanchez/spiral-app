@@ -30,10 +30,11 @@ const LoginPage = () => {
     getRedirectResult(firebaseAuth).then((result) => {
       const response = JSON.stringify(result?.user);
 
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      document.getElementById("result").innerText = " " + response;
-
+      if (document.getElementById("result")) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        document.getElementById("result").innerText = " " + response;
+      }
       setSpinner(false);
       if (result?.user) {
         const user = JSON.parse(JSON.stringify(result.user));
