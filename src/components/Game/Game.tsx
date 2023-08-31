@@ -42,12 +42,12 @@ const Game = ({
       <div className="flex w-full justify-between items-center">
         <div className="w-full">
           <Team
-            {...homeTeam}
+            {...awayTeam}
             showPickResult={showPickResult}
             correctPick={correctPick}
           />
           <Team
-            {...awayTeam}
+            {...homeTeam}
             showPickResult={showPickResult}
             correctPick={correctPick}
           />

@@ -8,34 +8,37 @@ type TeamProps = TeamType & {
   correctPick?: boolean;
   score?: string;
   pick?: boolean;
+  isHome: boolean;
 };
 
 const Team = ({
   abbreviation,
   color,
+  alternateColor,
   name,
   showPickResult,
   correctPick,
   score,
   pick,
+  isHome,
 }: TeamProps) => {
   const correctPickAndGameOver = showPickResult && correctPick && pick;
   const wrongPickAndGameOver = showPickResult && !correctPick && pick;
   const emptyOutline = (!showPickResult && !pick) || (showPickResult && !pick);
-
+  const displayColor = isHome ? color : alternateColor;
   return (
     <div className="flex items-center h-full w-full">
       {emptyOutline && <div className={"w-1 h-10"}></div>}
       {pick && (
         <div
           className={"w-1 h-10"}
-          style={{ backgroundColor: "#" + color }}
+          style={{ backgroundColor: "#" + displayColor }}
         ></div>
       )}
       {correctPickAndGameOver && <div className="w-1 h-10 bg-green-500"></div>}
       {wrongPickAndGameOver && <div className="w-1 h-10 bg-red-500"></div>}
       <div className="w-2/3 flex items-center">
-        <p className="font-bold text-lg pl-2" style={{ color }}>
+        <p className="font-bold text-lg pl-2" style={{ color: displayColor }}>
           <span className="text-sm font-normal text-gray-700 pr-2">
             {abbreviation}
           </span>
