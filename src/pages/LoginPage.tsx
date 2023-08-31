@@ -22,8 +22,11 @@ const LoginPage = () => {
   onAuthStateChanged(firebaseAuth, (result) => {
     const resultParsed = JSON.parse(JSON.stringify(result));
     if (resultParsed) {
-      setSpinner(false);
       setAuthState({ ...resultParsed, signedIn: true });
+    } else {
+      if (spinner) {
+        setSpinner(false);
+      }
     }
   });
 
