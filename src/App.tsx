@@ -1,7 +1,6 @@
 import Container from "./components/Container";
 import { AppRoutes } from "./Routes";
 import { QueryClientProvider, QueryClient } from "react-query";
-// import firebase from "firebase/compat/app";
 // Required for side-effects
 import "firebase/firestore";
 import { initializeApp } from "firebase/app";

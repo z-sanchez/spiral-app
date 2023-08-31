@@ -1,10 +1,8 @@
 import {
   getAuth,
-  // getRedirectResult,
   GoogleAuthProvider,
   onAuthStateChanged,
   signInWithPopup,
-  // signInWithRedirect,
 } from "firebase/auth";
 import { useRecoilState } from "recoil";
 import { authenticationState } from "../state/AuthState";
