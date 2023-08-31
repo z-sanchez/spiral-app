@@ -6,18 +6,19 @@ import {
 } from "firebase/auth";
 import { useRecoilState } from "recoil";
 import { authenticationState } from "../state/AuthState";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const LoginPage = () => {
   const [authState, setAuthState] = useRecoilState(authenticationState);
   const [spinner, setSpinner] = useState(true);
+  const [redirectResult, setRedirect] = useState({});
   const firebaseAuth = getAuth();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  if (authState.signedIn) {
-    navigate("/");
-  }
+  // if (authState.signedIn) {
+  //   navigate("/");
+  // }
 
   if (firebaseAuth.currentUser) {
     const user = JSON.parse(JSON.stringify(firebaseAuth.currentUser));
@@ -27,7 +28,8 @@ const LoginPage = () => {
       setSpinner(false);
       if (result?.user) {
         const user = JSON.parse(JSON.stringify(result.user));
-        setAuthState({ ...user, signedIn: true });
+        setRedirect({ user });
+        // setAuthState({ ...user, signedIn: true });
       }
     });
   }
@@ -68,6 +70,7 @@ const LoginPage = () => {
             {JSON.stringify({
               authState,
               firebaseAuth: firebaseAuth.currentUser,
+              redirectResult: redirectResult,
             })}
           </p>
         </>
