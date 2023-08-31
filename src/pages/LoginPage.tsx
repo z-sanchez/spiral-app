@@ -1,8 +1,9 @@
 import {
   getAuth,
-  getRedirectResult,
+  // getRedirectResult,
   GoogleAuthProvider,
-  signInWithRedirect,
+  signInWithPopup,
+  // signInWithRedirect,
 } from "firebase/auth";
 import { useRecoilState } from "recoil";
 import { authenticationState } from "../state/AuthState";
@@ -11,7 +12,7 @@ import { useState } from "react";
 
 const LoginPage = () => {
   const [authState, setAuthState] = useRecoilState(authenticationState);
-  const [spinner, setSpinner] = useState(true);
+  const [spinner, setSpinner] = useState(false);
   const firebaseAuth = getAuth();
   const navigate = useNavigate();
 
@@ -19,22 +20,28 @@ const LoginPage = () => {
     navigate("/");
   }
 
-  if (firebaseAuth.currentUser) {
-    const user = JSON.parse(JSON.stringify(firebaseAuth.currentUser));
-    setAuthState({ ...user, signedIn: true });
-  } else {
-    getRedirectResult(firebaseAuth).then((result) => {
-      setSpinner(false);
+  // if (firebaseAuth.currentUser) {
+  //   const user = JSON.parse(JSON.stringify(firebaseAuth.currentUser));
+  //   setAuthState({ ...user, signedIn: true });
+  // } else {
+  //   getRedirectResult(firebaseAuth).then((result) => {
+  //     setSpinner(false);
+  //     if (result?.user) {
+  //       const user = JSON.parse(JSON.stringify(result.user));
+  //       setAuthState({ ...user, signedIn: true });
+  //     }
+  //   });
+  // }
+
+  const handleSignIn = () => {
+    const provider = new GoogleAuthProvider();
+    setSpinner(true);
+    signInWithPopup(firebaseAuth, provider).then((result) => {
       if (result?.user) {
         const user = JSON.parse(JSON.stringify(result.user));
         setAuthState({ ...user, signedIn: true });
       }
     });
-  }
-
-  const handleSignIn = () => {
-    const provider = new GoogleAuthProvider();
-    signInWithRedirect(firebaseAuth, provider);
   };
 
   return (
