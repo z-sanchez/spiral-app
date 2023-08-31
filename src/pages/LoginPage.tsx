@@ -4,42 +4,30 @@ import {
   GoogleAuthProvider,
   signInWithRedirect,
 } from "firebase/auth";
-import { useSetRecoilState } from "recoil";
-// import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { authenticationState } from "../state/AuthState";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const LoginPage = () => {
-  // const [authState, setAuthState] = useRecoilState(authenticationState);
-  const authState = useSetRecoilState(authenticationState);
-
+  const [authState, setAuthState] = useRecoilState(authenticationState);
   const [spinner, setSpinner] = useState(true);
-  const [redirectResult, setRedirect] = useState({});
   const firebaseAuth = getAuth();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  // if (authState.signedIn) {
-  //   navigate("/");
-  // }
+  if (authState.signedIn) {
+    navigate("/");
+  }
 
   if (firebaseAuth.currentUser) {
-    // const user = JSON.parse(JSON.stringify(firebaseAuth.currentUser));
-    // setAuthState({ ...user, signedIn: true });
+    const user = JSON.parse(JSON.stringify(firebaseAuth.currentUser));
+    setAuthState({ ...user, signedIn: true });
   } else {
     getRedirectResult(firebaseAuth).then((result) => {
-      const response = JSON.stringify(result?.user);
-
-      if (document.getElementById("result")) {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        document.getElementById("result").innerText = " " + response;
-      }
       setSpinner(false);
       if (result?.user) {
         const user = JSON.parse(JSON.stringify(result.user));
-        setRedirect({ user });
-        // setAuthState({ ...user, signedIn: true });
+        setAuthState({ ...user, signedIn: true });
       }
     });
   }
@@ -75,15 +63,7 @@ const LoginPage = () => {
         <>
           <h1>This is the login page</h1>
           <button onClick={handleSignIn}>Sign In Here</button>
-          <p>
-            Auth State:{" "}
-            {JSON.stringify({
-              authState,
-              firebaseAuth: firebaseAuth.currentUser,
-              redirectResult: redirectResult,
-            })}
-          </p>
-          <span id="result"></span>
+          <p>Auth State: {JSON.stringify({ authState, firebaseAuth })}</p>
         </>
       )}
     </div>
