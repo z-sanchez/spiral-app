@@ -20,19 +20,6 @@ const LoginPage = () => {
     navigate("/");
   }
 
-  // if (firebaseAuth.currentUser) {
-  //   const user = JSON.parse(JSON.stringify(firebaseAuth.currentUser));
-  //   setAuthState({ ...user, signedIn: true });
-  // } else {
-  //   getRedirectResult(firebaseAuth).then((result) => {
-  //     setSpinner(false);
-  //     if (result?.user) {
-  //       const user = JSON.parse(JSON.stringify(result.user));
-  //       setAuthState({ ...user, signedIn: true });
-  //     }
-  //   });
-  // }
-
   const handleSignIn = () => {
     const provider = new GoogleAuthProvider();
     setSpinner(true);
