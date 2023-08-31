@@ -28,13 +28,17 @@ const LoginPage = () => {
     // setAuthState({ ...user, signedIn: true });
   } else {
     getRedirectResult(firebaseAuth).then((result) => {
+      const response = JSON.stringify(result?.user);
+
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      document.getElementById("result").innerText = " " + response;
+
       setSpinner(false);
       if (result?.user) {
         const user = JSON.parse(JSON.stringify(result.user));
         setRedirect({ user });
         // setAuthState({ ...user, signedIn: true });
-      } else {
-        setRedirect({ result });
       }
     });
   }
@@ -78,6 +82,7 @@ const LoginPage = () => {
               redirectResult: redirectResult,
             })}
           </p>
+          <span id="result"></span>
         </>
       )}
     </div>
