@@ -63,7 +63,13 @@ const LoginPage = () => {
         <>
           <h1>This is the login page</h1>
           <button onClick={handleSignIn}>Sign In Here</button>
-          <p>Auth State: {JSON.stringify({ authState, firebaseAuth })}</p>
+          <p>
+            Auth State:{" "}
+            {JSON.stringify({
+              authState,
+              firebaseAuth: firebaseAuth.currentUser,
+            })}
+          </p>
         </>
       )}
     </div>
