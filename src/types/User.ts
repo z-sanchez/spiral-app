@@ -13,13 +13,35 @@ export type User = {
   coins: number;
 };
 
-type ExtendedUser = {
+export type ExtendedUser = {
   username: string;
   color: string;
   iconCharacter: string;
   id: string;
-  record: Record;
-  coins: number;
   email: string;
-  picks: Picks;
+  groupGameData?: {
+    goupId: string;
+    roi: number;
+    record: Record;
+    picks: Picks;
+  }[];
+};
+
+export type Group = {
+  id: string;
+  players: string[];
+  seasonPot: number;
+  weekPots: [];
+};
+
+export type WeekPot = {
+  id: string;
+  pot: number;
+  ante: number;
+  players: string[];
+  multipliers: {
+    first: number;
+    second: number;
+    third: number;
+  };
 };

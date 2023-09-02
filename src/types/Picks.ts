@@ -1,12 +1,15 @@
-export type Picks = WeekPicks[];
+import { Record } from "./Record";
+
+export type Picks = WeekPicks[] | null;
 
 type WeekPicks = {
-  weekId: string;
+  id: string;
   games: PickGame[];
+  record: Record;
 };
 
 type PickGame = {
-  gameId: string;
+  id: string;
   pick: PickOptions;
   winner: PickOptions;
 };
@@ -14,5 +17,6 @@ type PickGame = {
 enum PickOptions {
   HOME = "home",
   AWAY = "away",
-  NONE = "none",
+  TIE = "tie",
+  NOT_COMPLETED = "not completed",
 }
