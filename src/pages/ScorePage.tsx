@@ -24,6 +24,7 @@ const testPlayers: User[] = [
     id: "12",
     roi: 345,
     picks: [],
+    photoURL: "",
   },
   {
     username: "Test User",
@@ -36,6 +37,7 @@ const testPlayers: User[] = [
     },
     id: "13",
     roi: 345,
+    photoURL: "",
     picks: [],
   },
 ];

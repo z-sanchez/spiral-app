@@ -10,6 +10,7 @@ export type User = {
   record: Record;
   roi: number;
   picks: Picks;
+  photoURL: string;
 };
 
 export type Group = {
