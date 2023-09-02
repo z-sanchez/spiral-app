@@ -8,7 +8,7 @@ export type UserObject = {
   iconCharacter: string;
   id: string;
   email: string;
-  groupGameData?: {
+  groupGameData: {
     goupId: string;
     roi: number;
     record: Record;
