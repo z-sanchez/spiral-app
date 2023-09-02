@@ -1,6 +1,6 @@
 import { Record } from "./Record";
 
-export type Picks = WeekPicks[] | null;
+export type Picks = WeekPicks[];
 
 type WeekPicks = {
   id: string;

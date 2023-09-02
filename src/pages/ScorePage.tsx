@@ -19,9 +19,11 @@ const testPlayers: User[] = [
     record: {
       wins: 7,
       loses: 3,
+      ties: 0,
     },
     id: "12",
-    coins: 345,
+    roi: 345,
+    picks: [],
   },
   {
     username: "Test User",
@@ -30,9 +32,11 @@ const testPlayers: User[] = [
     record: {
       wins: 7,
       loses: 3,
+      ties: 0,
     },
     id: "13",
-    coins: 345,
+    roi: 345,
+    picks: [],
   },
 ];
 const ScorePage = () => {

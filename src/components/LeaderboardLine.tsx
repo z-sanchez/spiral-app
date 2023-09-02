@@ -11,7 +11,7 @@ type LeaderboardLineProps = User & {
 const LeaderboardLine = ({
   record,
   iconCharacter,
-  coins,
+  roi,
   username,
   color,
 }: LeaderboardLineProps) => {
@@ -31,7 +31,7 @@ const LeaderboardLine = ({
       </p>
       <div className="flex items-center">
         <CoinIcon className="stroke-purple-500" />
-        <p className="text-purple-500 font-bold text-sm ml-1">{coins}</p>
+        <p className="text-purple-500 font-bold text-sm ml-1">{roi}</p>
       </div>
     </div>
   );
