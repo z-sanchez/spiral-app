@@ -9,3 +9,5 @@ export const FIREBASE_CONFIGURATION = {
   messagingSenderId: import.meta.env.MESSAGING_SENDER_ID,
   appId: import.meta.env.APP_ID,
 };
+
+export const SPIRAL_COOKIE_NAME = "spiralAppCookie";

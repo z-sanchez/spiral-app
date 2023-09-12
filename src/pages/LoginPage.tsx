@@ -1,11 +1,21 @@
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useUser } from "../hooks/useUser";
+import { getCookie } from "../utils/helpers/cookie";
+import { SPIRAL_COOKIE_NAME } from "../utils/constants";
 
 const LoginPage = () => {
-  const { signInUser } = useUser();
+  const { signInUser, signInUserWithCookie } = useUser();
   const [spinner, setSpinner] = useState(false);
   const firebaseAuth = getAuth();
+
+  useEffect(() => {
+    const cookieValid = getCookie(SPIRAL_COOKIE_NAME);
+
+    if (cookieValid) {
+      signInUserWithCookie({ firebaseAuthUserId: cookieValid });
+    }
+  }, [signInUserWithCookie]);
 
   const handleSignIn = () => {
     const provider = new GoogleAuthProvider();

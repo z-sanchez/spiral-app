@@ -5,16 +5,18 @@ import { NavLink } from "react-router-dom";
 import { getAuth, signOut } from "firebase/auth";
 import { useSetRecoilState } from "recoil";
 import { authenticationState } from "../state/AuthState";
+import { SPIRAL_COOKIE_NAME } from "../utils/constants";
+import { setCookie } from "../utils/helpers/cookie";
 
 const BottomNavBar = () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const setAuthState = useSetRecoilState(authenticationState);
 
   const handleSignOut = () => {
     const auth = getAuth();
 
     signOut(auth).then(() => {
-      setAuthState({ signedIn: false });
+      setCookie(SPIRAL_COOKIE_NAME, "", 365);
+      setAuthState({ signedIn: false, authUser: {}, user: {} });
     });
   };
 

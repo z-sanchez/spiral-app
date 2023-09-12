@@ -19,10 +19,12 @@ const HomePage = () => {
 
   const [showFinishedGames, setShowFinishedGames] = useState(true);
   const [gamePickerData, setGamePickerData] = useState<{
+    gameId: string;
     active: boolean;
     homeTeam: Competitors | null;
     awayTeam: Competitors | null;
   }>({
+    gameId: "",
     active: false,
     homeTeam: getHomeTeam(currentWeeksGames[5]),
     awayTeam: getAwayTeam(currentWeeksGames[5]),
@@ -43,14 +45,19 @@ const HomePage = () => {
     <>
       {gamePickerData.active ? (
         <GamePicker
+          gameId={gamePickerData.gameId}
           homeTeam={gamePickerData?.homeTeam as Competitors}
           awayTeam={gamePickerData?.awayTeam as Competitors}
           handleClose={() => {
             setGamePickerData({
+              gameId: "",
               active: false,
               homeTeam: null,
               awayTeam: null,
             });
+          }}
+          onPick={(pick) => {
+            console.log({ pick, gameId: gamePickerData.gameId });
           }}
         ></GamePicker>
       ) : null}
@@ -61,7 +68,7 @@ const HomePage = () => {
         <SectionLabel label={"Your Score"}></SectionLabel>
         <Scoreboard wins="7" loses="3" roi="+723" roiStyle="text-green-500" />
         <SectionLabel label={"Games"}></SectionLabel>
-        {activeGames.map((game) => {
+        {completedGames.map((game) => {
           const homeTeam = game.competitors.find(({ isHome }) => isHome);
           const awayTeam = game.competitors.find(({ isHome }) => !isHome);
           const isLive = !game.completed && new Date(game.date) < new Date();
@@ -69,12 +76,14 @@ const HomePage = () => {
           return (
             <Game
               key={game.id}
+              gameId={game.id}
               homeTeam={{ ...(homeTeam as Competitors), pick: true }}
               awayTeam={awayTeam as Competitors}
               live={isLive}
               lock={isLive}
-              handleClick={() => {
+              onClick={() => {
                 setGamePickerData({
+                  gameId: game.id,
                   active: true,
                   awayTeam: awayTeam as Competitors,
                   homeTeam: homeTeam as Competitors,
@@ -103,10 +112,11 @@ const HomePage = () => {
 
                 return (
                   <Game
+                    gameId={game.id}
                     key={game.id}
                     homeTeam={homeTeam as Competitors}
                     awayTeam={awayTeam as Competitors}
-                    handleClick={() => null}
+                    onClick={() => null}
                   />
                 );
               })}

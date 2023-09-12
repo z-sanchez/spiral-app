@@ -9,10 +9,21 @@ import { ClickAwayListener } from "@mui/base/ClickAwayListener";
 type GamePickerProps = {
   homeTeam: Team;
   awayTeam: Team;
+  gameId: string;
   handleClose: () => void;
+  onPick: (pick: string) => void;
 };
 
-const GamePicker = ({ homeTeam, awayTeam, handleClose }: GamePickerProps) => {
+const GamePicker = ({
+  homeTeam,
+  awayTeam,
+  handleClose,
+  onPick,
+}: GamePickerProps) => {
+  const handlePick = (pick: string) => {
+    onPick(pick);
+  };
+
   return (
     <>
       <div className="absolute bg-gray-300 opacity-40 h-full w-full"></div>
@@ -38,7 +49,11 @@ const GamePicker = ({ homeTeam, awayTeam, handleClose }: GamePickerProps) => {
             <LockIcon className="fill-purple-500 h-8 w-8" />
           </div> */}
             {/* <GameDetails /> */}
-            <TeamPicker homeTeam={homeTeam} awayTeam={awayTeam} />
+            <TeamPicker
+              homeTeam={homeTeam}
+              awayTeam={awayTeam}
+              onPick={handlePick}
+            />
           </div>
         </ClickAwayListener>
       </div>

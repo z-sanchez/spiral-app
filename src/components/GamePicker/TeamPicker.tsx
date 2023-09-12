@@ -5,13 +5,14 @@ import { HomeTeam } from "./HomeTeam";
 type TeamPickerProps = {
   homeTeam: Team;
   awayTeam: Team;
+  onPick: (pick: string) => void;
 };
 
-const TeamPicker = ({ homeTeam, awayTeam }: TeamPickerProps) => (
+const TeamPicker = ({ homeTeam, awayTeam, onPick }: TeamPickerProps) => (
   <>
     <div className="flex items-center w-full">
-      <AwayTeam {...awayTeam} />
-      <HomeTeam {...homeTeam} />
+      <AwayTeam team={awayTeam} onPick={onPick} />
+      <HomeTeam team={homeTeam} onPick={onPick} />
     </div>
     <div className="w-full flex items-center py-5 justify-center">
       <div className="flex border-2 border-purple-500 rounded-full px-4">

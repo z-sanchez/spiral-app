@@ -3,9 +3,19 @@ import { ReactComponent as CheckmarkIcon } from "../../assets/icons/checkmark.sv
 import { Team } from "../../types/Team";
 import { ProfileIcon } from "../ProfileIcon";
 
-const AwayTeam = ({ name, location, record, alternateColor }: Team) => {
+const AwayTeam = ({
+  team,
+  onPick,
+}: {
+  team: Team;
+  onPick: (pick: string) => void;
+}) => {
+  const { name, location, alternateColor, record, abbreviation } = team;
   return (
-    <div className="w-1/2 px-5 flex flex-col items-center justify-center border-r-2 border-gray-100">
+    <div
+      className="w-1/2 px-5 flex flex-col items-center justify-center border-r-2 border-gray-100"
+      onClick={() => onPick(abbreviation)}
+    >
       <p className="mb-12 w-fit px-4 text-purple-500 text-sm text-center border-2 rounded-full border-purple-500 drop-shadow-sm bg-white">
         18%
       </p>
