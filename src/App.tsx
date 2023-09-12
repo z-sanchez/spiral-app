@@ -6,27 +6,30 @@ import "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { FIREBASE_CONFIGURATION } from "./utils/constants";
-import { RecoilRoot } from "recoil";
+import { useRecoilState } from "recoil";
+import { firestoreState } from "./state/FirestoreState";
 
 const queryClient = new QueryClient();
 
 function App() {
+  const [firestoreStateData, setFirestoreData] = useRecoilState(firestoreState);
+
   // Initialize Firebase
   const app = initializeApp(FIREBASE_CONFIGURATION);
 
   // Initialize Cloud Firestore and get a reference to the service
   const db = getFirestore(app);
 
-  console.log({ db });
+  if (!firestoreStateData.db) {
+    setFirestoreData({ db });
+  }
 
   return (
-    <RecoilRoot>
-      <QueryClientProvider client={queryClient}>
-        <Container>
-          <AppRoutes />
-        </Container>
-      </QueryClientProvider>
-    </RecoilRoot>
+    <QueryClientProvider client={queryClient}>
+      <Container>
+        <AppRoutes />
+      </Container>
+    </QueryClientProvider>
   );
 }
 

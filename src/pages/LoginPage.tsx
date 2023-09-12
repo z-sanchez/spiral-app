@@ -1,34 +1,11 @@
-import {
-  getAuth,
-  GoogleAuthProvider,
-  onAuthStateChanged,
-  signInWithPopup,
-} from "firebase/auth";
-import { useRecoilState } from "recoil";
-import { authenticationState } from "../state/AuthState";
-import { useNavigate } from "react-router-dom";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useState } from "react";
+import { useUser } from "../hooks/useUser";
 
 const LoginPage = () => {
-  const [authState, setAuthState] = useRecoilState(authenticationState);
+  const { signInUser } = useUser();
   const [spinner, setSpinner] = useState(false);
   const firebaseAuth = getAuth();
-  const navigate = useNavigate();
-
-  if (authState.signedIn) {
-    navigate("/");
-  }
-
-  onAuthStateChanged(firebaseAuth, (result) => {
-    const resultParsed = JSON.parse(JSON.stringify(result));
-    if (resultParsed) {
-      setAuthState({ ...resultParsed, signedIn: true });
-    } else {
-      if (spinner) {
-        setSpinner(false);
-      }
-    }
-  });
 
   const handleSignIn = () => {
     const provider = new GoogleAuthProvider();
@@ -36,7 +13,7 @@ const LoginPage = () => {
     signInWithPopup(firebaseAuth, provider).then((result) => {
       if (result?.user) {
         const user = JSON.parse(JSON.stringify(result.user));
-        setAuthState({ ...user, signedIn: true });
+        signInUser({ firebaseAuthUser: { ...user } });
       }
     });
   };
