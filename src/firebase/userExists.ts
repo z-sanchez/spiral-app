@@ -1,10 +1,4 @@
-import {
-  Firestore,
-  collection,
-  getDocs,
-  query,
-  where,
-} from "firebase/firestore";
+import { Firestore, doc, getDoc } from "firebase/firestore";
 
 export const userExists = async ({
   userId,
@@ -14,16 +8,13 @@ export const userExists = async ({
   db: Firestore;
 }): Promise<boolean> => {
   try {
-    const usersRef = collection(db, "users");
+    const docRef = doc(db, "users", userId);
 
-    // Create a query against the collection.
-    const q = query(usersRef, where("id", "==", userId));
+    const querySnapshot = await getDoc(docRef);
 
-    const querySnapshot = await getDocs(q);
-
-    return querySnapshot.docs.length ? true : false;
+    return querySnapshot.exists();
   } catch (err) {
     console.log("ERROR HERE", { err });
+    return false;
   }
-  return true;
 };

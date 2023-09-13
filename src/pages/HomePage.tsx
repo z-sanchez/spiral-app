@@ -11,6 +11,7 @@ import { useGameSchedule } from "../hooks/useGameSchedule";
 import { Competitors } from "../types/Competitors";
 import { GamePicker } from "../components/GamePicker/GamePicker";
 import { getAwayTeam, getHomeTeam } from "../utils/helpers/espn/getTeam";
+import { usePicks } from "../hooks/usePicks";
 
 const testTabs = [{ id: "weekly", text: "Week 1 Picks", active: true }];
 
@@ -29,6 +30,7 @@ const HomePage = () => {
     homeTeam: getHomeTeam(currentWeeksGames[5]),
     awayTeam: getAwayTeam(currentWeeksGames[5]),
   });
+  const { makePick } = usePicks();
 
   console.log({
     schedule: getCurrentScheduleData(),
@@ -57,7 +59,7 @@ const HomePage = () => {
             });
           }}
           onPick={(pick) => {
-            console.log({ pick, gameId: gamePickerData.gameId });
+            makePick(pick, gamePickerData.gameId);
           }}
         ></GamePicker>
       ) : null}
@@ -68,7 +70,7 @@ const HomePage = () => {
         <SectionLabel label={"Your Score"}></SectionLabel>
         <Scoreboard wins="7" loses="3" roi="+723" roiStyle="text-green-500" />
         <SectionLabel label={"Games"}></SectionLabel>
-        {completedGames.map((game) => {
+        {activeGames.map((game) => {
           const homeTeam = game.competitors.find(({ isHome }) => isHome);
           const awayTeam = game.competitors.find(({ isHome }) => !isHome);
           const isLive = !game.completed && new Date(game.date) < new Date();
