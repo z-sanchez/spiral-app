@@ -15,7 +15,7 @@ import { getPick } from "../utils/helpers/espn/getPick";
 import { NO_PICK } from "../utils/constants";
 import { useLocation } from "react-router-dom";
 
-const testTabs = [{ id: "weekly", text: "Week 1 Picks", active: true }];
+const testTabs = [{ id: "weekly", text: "Week 2 Picks", active: true }];
 
 type GamePickerDataType = {
   gameId: string;
@@ -157,10 +157,10 @@ const HomePage = () => {
       ) : null}
       <PageLayout>
         <div className="flex justify-center">
-          <Tabs tabs={testTabs}></Tabs>
+          <Tabs tabs={testTabs} onTabChange={() => null}></Tabs>
         </div>
         <SectionLabel label={"Your Score"}></SectionLabel>
-        <Scoreboard wins="7" loses="3" roi="+723" roiStyle="text-green-500" />
+        <Scoreboard wins="0" loses="0" roi="0" roiStyle="text-green-500" />
         <SectionLabel label={"Games"}></SectionLabel>
         {activeGames.map((game) => {
           const homeTeam = game.competitors.find(({ isHome }) => isHome);

@@ -9,7 +9,7 @@ const Tabs = ({
   onTabChange,
 }: {
   tabs: TabsProps[];
-  onTabChange?: () => void;
+  onTabChange: (activeTabId: string) => void;
 }) => {
   return (
     <div className="w-full flex justify-center">
@@ -17,7 +17,7 @@ const Tabs = ({
         return (
           <button
             key={id}
-            onClick={onTabChange}
+            onClick={() => onTabChange(id)}
             className={
               "text-center border-b-2 w-2/4 " +
               (active
