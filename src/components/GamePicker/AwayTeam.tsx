@@ -39,7 +39,7 @@ const AwayTeam = ({
       <div className="flex relative justify-center items-center w-full">
         <div>
           <HelmetIcon
-            className="w-28 h-28 flex-shrink-0"
+            className="w-28 h-28 flex-shrink-0 transition-colors"
             style={{ fill: displayColor }}
           />
           <div className="flex items-center justify-between w-full ">

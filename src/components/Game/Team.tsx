@@ -46,7 +46,7 @@ const Team = ({
       )}
       {correctPickAndGameOver && <div className="w-1 h-10 bg-green-500"></div>}
       {wrongPickAndGameOver && <div className="w-1 h-10 bg-red-500"></div>}
-      <div className="w-2/3 flex items-center">
+      <div className="w-3/4 flex items-center">
         <p className="font-bold text-lg pl-2" style={{ color: displayColor }}>
           <span className="text-sm font-normal text-gray-700 pr-2">
             {abbreviation}

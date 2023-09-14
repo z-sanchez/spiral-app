@@ -10,7 +10,6 @@ import { Collapse } from "@mui/material";
 import { useGameSchedule } from "../hooks/useGameSchedule";
 import { Competitors } from "../types/Competitors";
 import { GamePicker } from "../components/GamePicker/GamePicker";
-import { getAwayTeam, getHomeTeam } from "../utils/helpers/espn/getTeam";
 import { usePicks } from "../hooks/usePicks";
 import { getPick } from "../utils/helpers/espn/getPick";
 
@@ -28,8 +27,8 @@ const HomePage = () => {
   }>({
     gameId: "",
     active: false,
-    homeTeam: getHomeTeam(currentWeeksGames[5]),
-    awayTeam: getAwayTeam(currentWeeksGames[5]),
+    homeTeam: null,
+    awayTeam: null,
   });
   const { makePick, picks } = usePicks();
 
@@ -59,7 +58,6 @@ const HomePage = () => {
             const awayTeamData = {
               ...gamePickerData.awayTeam,
             } as Competitors & { pick?: boolean };
-
             makePick(gamePickerData.gameId, pick);
             setGamePickerData({
               ...gamePickerData,

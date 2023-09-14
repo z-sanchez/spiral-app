@@ -36,7 +36,7 @@ const Game = ({
         ) : null}
       </div>
       <div className="flex w-full justify-between items-center">
-        <div className="w-full">
+        <div className="w-10/12">
           <Team
             {...awayTeam}
             showPickResult={showPickResult}
@@ -48,7 +48,7 @@ const Game = ({
             correctPick={correctPick}
           />
         </div>
-        <div className="flex items-center w-1/8">
+        <div className="flex items-center w-2/12">
           <p className="text-purple-500 font-bold text-sm text-center">
             {!homeTeam.pick && !awayTeam.pick ? "no pick" : ""}
           </p>
