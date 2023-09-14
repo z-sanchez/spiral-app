@@ -1,5 +1,4 @@
 import { Team } from "./Team";
-import { ReactComponent as CoinIcon } from "../../assets/icons/coin.svg";
 import { ReactComponent as LockIcon } from "../../assets/icons/lock.svg";
 import { Competitors } from "../../types/Competitors";
 
@@ -17,7 +16,6 @@ type GameProps = {
 
 const Game = ({
   lock,
-  wager,
   live,
   homeTeam,
   awayTeam,
@@ -50,9 +48,10 @@ const Game = ({
             correctPick={correctPick}
           />
         </div>
-        <div className="flex items-center">
-          <CoinIcon className="stroke-purple-500" />
-          <p className="text-purple-500 font-bold text-sm">{wager}</p>
+        <div className="flex items-center w-1/8">
+          <p className="text-purple-500 font-bold text-sm text-center">
+            {!homeTeam.pick && !awayTeam.pick ? "no pick" : ""}
+          </p>
         </div>
       </div>
     </div>

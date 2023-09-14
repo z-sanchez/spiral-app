@@ -15,6 +15,6 @@ export const userExists = async ({
     return querySnapshot.exists();
   } catch (err) {
     console.log("ERROR HERE", { err });
-    return false;
+    return true;
   }
 };

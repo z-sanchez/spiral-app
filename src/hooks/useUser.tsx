@@ -1,4 +1,4 @@
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { authenticationState } from "../state/AuthState";
 import { createNewUserInFirebase } from "../firebase/createNewUserInFirebase";
 import { createUserObjectFromGoogleUser } from "../utils/helpers/firebase/user";
@@ -10,9 +10,11 @@ import { getUser } from "../firebase/getUser";
 import { useNavigate } from "react-router-dom";
 import { setCookie } from "../utils/helpers/cookie";
 import { SPIRAL_COOKIE_NAME } from "../utils/constants";
+import { userPicksState } from "../state/UserPicksState";
 
 export const useUser = () => {
   const [authState, setAuthState] = useRecoilState(authenticationState);
+  const setUserPicksState = useSetRecoilState(userPicksState);
   const navigate = useNavigate();
   const { db } = useRecoilValue(firestoreState) as { db: Firestore };
 
@@ -31,6 +33,7 @@ export const useUser = () => {
         authUser: { ...firebaseAuthUser },
         user: newUser,
       });
+      setUserPicksState({ picks: newUser.picks });
       navigate("/");
     }
 
@@ -41,6 +44,7 @@ export const useUser = () => {
       authUser: { ...firebaseAuthUser },
       user,
     });
+    setUserPicksState({ picks: user.picks });
     setCookie(SPIRAL_COOKIE_NAME, firebaseAuthUser.uid, 365);
     navigate("/");
   };
@@ -57,7 +61,7 @@ export const useUser = () => {
       authUser: JSON.parse(JSON.stringify(getAuth())),
       user,
     });
-
+    setUserPicksState({ picks: user.picks });
     navigate("/");
   };
 

@@ -25,14 +25,23 @@ const Team = ({
   const correctPickAndGameOver = showPickResult && correctPick && pick;
   const wrongPickAndGameOver = showPickResult && !correctPick && pick;
   const emptyOutline = (!showPickResult && !pick) || (showPickResult && !pick);
-  const displayColor = isHome ? color : alternateColor;
+  let displayColor = isHome ? color : alternateColor;
+
+  if (abbreviation === "NYJ") {
+    displayColor = color;
+  }
+
+  if (abbreviation === "IND") {
+    displayColor = color;
+  }
+
   return (
     <div className="flex items-center h-full w-full">
       {emptyOutline && <div className={"w-1 h-10"}></div>}
       {pick && (
         <div
           className={"w-1 h-10"}
-          style={{ backgroundColor: "#" + displayColor }}
+          style={{ backgroundColor: displayColor }}
         ></div>
       )}
       {correctPickAndGameOver && <div className="w-1 h-10 bg-green-500"></div>}

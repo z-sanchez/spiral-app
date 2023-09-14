@@ -12,11 +12,12 @@ import { Competitors } from "../types/Competitors";
 import { GamePicker } from "../components/GamePicker/GamePicker";
 import { getAwayTeam, getHomeTeam } from "../utils/helpers/espn/getTeam";
 import { usePicks } from "../hooks/usePicks";
+import { getPick } from "../utils/helpers/espn/getPick";
 
 const testTabs = [{ id: "weekly", text: "Week 1 Picks", active: true }];
 
 const HomePage = () => {
-  const { getCurrentScheduleData, currentWeeksGames } = useGameSchedule();
+  const { currentWeeksGames, currentWeekId } = useGameSchedule();
 
   const [showFinishedGames, setShowFinishedGames] = useState(true);
   const [gamePickerData, setGamePickerData] = useState<{
@@ -30,14 +31,7 @@ const HomePage = () => {
     homeTeam: getHomeTeam(currentWeeksGames[5]),
     awayTeam: getAwayTeam(currentWeeksGames[5]),
   });
-  const { makePick } = usePicks();
-
-  console.log({
-    schedule: getCurrentScheduleData(),
-    currentWeeksGames,
-    gamePickerData,
-    env: import.meta.env.VITE_TEST_VARIABLE,
-  });
+  const { makePick, picks } = usePicks();
 
   const activeGames = currentWeeksGames.filter(({ completed }) => !completed);
 
@@ -59,7 +53,7 @@ const HomePage = () => {
             });
           }}
           onPick={(pick) => {
-            makePick(pick, gamePickerData.gameId);
+            makePick(gamePickerData.gameId, pick);
           }}
         ></GamePicker>
       ) : null}
@@ -74,13 +68,20 @@ const HomePage = () => {
           const homeTeam = game.competitors.find(({ isHome }) => isHome);
           const awayTeam = game.competitors.find(({ isHome }) => !isHome);
           const isLive = !game.completed && new Date(game.date) < new Date();
+          const userPick = getPick(currentWeekId, game.id, picks);
 
           return (
             <Game
               key={game.id}
               gameId={game.id}
-              homeTeam={{ ...(homeTeam as Competitors), pick: true }}
-              awayTeam={awayTeam as Competitors}
+              homeTeam={{
+                ...(homeTeam as Competitors),
+                pick: userPick === homeTeam?.abbreviation,
+              }}
+              awayTeam={{
+                ...(awayTeam as Competitors),
+                pick: userPick === awayTeam?.abbreviation,
+              }}
               live={isLive}
               lock={isLive}
               onClick={() => {

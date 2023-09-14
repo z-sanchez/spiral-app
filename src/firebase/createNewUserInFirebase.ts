@@ -1,5 +1,5 @@
 import { User } from "../types/User";
-import { collection, addDoc, Firestore } from "firebase/firestore";
+import { Firestore, setDoc, doc } from "firebase/firestore";
 
 export const createNewUserInFirebase = async ({
   newUser,
@@ -9,10 +9,9 @@ export const createNewUserInFirebase = async ({
   db: Firestore;
 }) => {
   try {
-    const docRef = await addDoc(collection(db, "users"), {
-      ...newUser,
-    });
-    console.log("Document written with ID: ", docRef.id);
+    await setDoc(doc(db, "users", newUser.id), { ...newUser });
+
+    console.log("Document written with ID: ", newUser.id);
   } catch (e) {
     console.error("Error adding document: ", e);
   }

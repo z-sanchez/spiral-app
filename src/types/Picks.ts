@@ -10,19 +10,6 @@ type WeekPicks = {
 
 type PickGame = {
   id: string;
-  pick: PickOptions;
-  winner: GAME_WINNER;
+  pick: string;
+  winner: string;
 };
-
-enum GAME_WINNER {
-  HOME = "home",
-  AWAY = "away",
-  TIE = "tie",
-  NOT_COMPLETED = "not completed",
-}
-
-enum PickOptions {
-  HOME = "home",
-  AWAY = "away",
-  NO_PICK = "no pick",
-}

@@ -1,10 +1,4 @@
-import {
-  Firestore,
-  collection,
-  getDocs,
-  query,
-  where,
-} from "firebase/firestore";
+import { Firestore, doc, getDoc } from "firebase/firestore";
 
 export const getUser = async ({
   userId,
@@ -15,14 +9,11 @@ export const getUser = async ({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 }): Promise<any> => {
   try {
-    const usersRef = collection(db, "users");
+    const usersRef = doc(db, "users", userId);
 
-    // Create a query against the collection.
-    const q = query(usersRef, where("id", "==", userId));
+    const querySnapshot = await getDoc(usersRef);
 
-    const querySnapshot = await getDocs(q);
-
-    return querySnapshot.docs[0].data();
+    return querySnapshot.data();
   } catch (err) {
     console.log("ERROR HERE", { err });
   }

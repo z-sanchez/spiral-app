@@ -10,7 +10,18 @@ const AwayTeam = ({
   team: Team;
   onPick: (pick: string) => void;
 }) => {
-  const { name, location, alternateColor, record, abbreviation } = team;
+  const { name, location, alternateColor, color, record, abbreviation } = team;
+
+  let displayColor = alternateColor;
+
+  if (abbreviation === "NYJ") {
+    displayColor = color;
+  }
+
+  if (abbreviation === "IND") {
+    displayColor = color;
+  }
+
   return (
     <div
       className="w-1/2 px-5 flex flex-col items-center justify-center border-r-2 border-gray-100"
@@ -23,14 +34,14 @@ const AwayTeam = ({
         <div>
           <HelmetIcon
             className="w-28 h-28 flex-shrink-0"
-            style={{ fill: alternateColor }}
+            style={{ fill: displayColor }}
           />
           <div className="flex items-center justify-between w-full ">
             <div className="flex flex-col items-start">
               <p>{location}</p>
               <p
                 className="font-semibold text-xl"
-                style={{ color: alternateColor }}
+                style={{ color: displayColor }}
               >
                 {name}
               </p>

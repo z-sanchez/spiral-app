@@ -11,3 +11,5 @@ export const FIREBASE_CONFIGURATION = {
 };
 
 export const SPIRAL_COOKIE_NAME = "spiralAppCookie";
+
+export const NO_PICK = "no pick";
