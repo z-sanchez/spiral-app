@@ -7,12 +7,21 @@ import { userPicksState } from "../state/UserPicksState";
 import { updateUserPicks } from "../firebase/updateUserPicks";
 import { authenticationState } from "../state/AuthState";
 import { User } from "../types/User";
+import { NO_PICK } from "../utils/constants";
 
 export const usePicks = () => {
   const [{ picks }, setPicks] = useRecoilState(userPicksState);
   const { db } = useRecoilValue(firestoreState) as { db: Firestore };
   const { user } = useRecoilValue(authenticationState) as { user: User };
   const { currentWeeksGames, currentWeekId } = useGameSchedule();
+
+  const getNumberOfPicksMissing = (): number => {
+    const weekPicks = picks.find((week) => week.id === currentWeekId);
+
+    if (!weekPicks) return currentWeeksGames.length;
+
+    return weekPicks?.games.filter((game) => game.pick === NO_PICK).length || 0;
+  };
 
   const makePick = (gameId: string, pick: string) => {
     const updatedPicks = updatePicks({
@@ -30,5 +39,6 @@ export const usePicks = () => {
   return {
     makePick,
     picks,
+    getNumberOfPicksMissing,
   };
 };

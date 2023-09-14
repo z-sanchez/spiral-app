@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { ReactComponent as HelmetIcon } from "../../assets/icons/home-team-helmet.svg";
 // import { ReactComponent as CheckmarkIcon } from "../../assets/icons/checkmark.svg";
 
@@ -13,19 +14,27 @@ const HomeTeam = ({
   pick: boolean;
   onPick: (pick: string) => void;
 }) => {
+  const [showAnimation, setShowAnimation] = useState(false);
+
   const { name, location, color, record, abbreviation } = team;
   return (
     <div
-      className="w-1/2 px-5 flex flex-col items-center justify-center border-r-2 border-gray-100"
-      onClick={() => onPick(abbreviation)}
+      className="w-1/2 px-5 flex flex-col items-center justify-center border-r-2 border-gray-100 gamePicker-team"
+      onClick={() => setShowAnimation(true)}
     >
-      {pick ? (
-        <p className="mb-12 w-fit px-4 text-white text-sm text-center rounded-full  bg-purple-500 h-5">
-          Your Pick
-        </p>
-      ) : (
-        <p className="h-5 mb-12"></p>
-      )}
+      <p
+        onAnimationEnd={() => {
+          onPick(abbreviation);
+          setShowAnimation(false);
+        }}
+        className={
+          "mb-12 w-fit px-4 text-white text-sm text-center rounded-full  bg-purple-500 h-5 " +
+          (pick ? "" : "invisible") +
+          (showAnimation ? "visible pickAnimation" : "")
+        }
+      >
+        Your Pick
+      </p>
       <div className="flex relative justify-center items-center w-full">
         {/* <CheckmarkIcon className="absolute left-0  h-5 w-5" /> */}
         <div>

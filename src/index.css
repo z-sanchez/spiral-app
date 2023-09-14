@@ -26,3 +26,16 @@ textarea {
   appearance: none;
   -webkit-tap-highlight-color: transparent;
 }
+
+.pickAnimation {
+  animation: pickAnimation 0.75s forwards;
+}
+
+@keyframes pickAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100;
+  }
+}

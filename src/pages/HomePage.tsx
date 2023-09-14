@@ -12,29 +12,126 @@ import { Competitors } from "../types/Competitors";
 import { GamePicker } from "../components/GamePicker/GamePicker";
 import { usePicks } from "../hooks/usePicks";
 import { getPick } from "../utils/helpers/espn/getPick";
+import { NO_PICK } from "../utils/constants";
+import { useLocation } from "react-router-dom";
 
 const testTabs = [{ id: "weekly", text: "Week 1 Picks", active: true }];
 
+type GamePickerDataType = {
+  gameId: string;
+  active: boolean;
+  homeTeam: (Competitors & { pick?: boolean }) | null;
+  awayTeam: (Competitors & { pick?: boolean }) | null;
+};
+
 const HomePage = () => {
+  const { state } = useLocation();
   const { currentWeeksGames, currentWeekId } = useGameSchedule();
+  const { makePick, picks } = usePicks();
+  const makeContinuousPick = state?.makePicks || false;
 
   const [showFinishedGames, setShowFinishedGames] = useState(true);
-  const [gamePickerData, setGamePickerData] = useState<{
-    gameId: string;
-    active: boolean;
-    homeTeam: (Competitors & { pick?: boolean }) | null;
-    awayTeam: (Competitors & { pick?: boolean }) | null;
-  }>({
-    gameId: "",
-    active: false,
-    homeTeam: null,
-    awayTeam: null,
-  });
-  const { makePick, picks } = usePicks();
+  const [gamePickerData, setGamePickerData] = useState<GamePickerDataType>(
+    () => {
+      const weekPicks = picks.find((week) => week.id === currentWeekId);
+
+      const nextGameId = weekPicks
+        ? (weekPicks?.games.find((game) => game.pick === NO_PICK)?.id as string)
+        : currentWeeksGames[0]?.id;
+
+      if (!makeContinuousPick || (!nextGameId && weekPicks)) {
+        return {
+          gameId: "",
+          active: false,
+          homeTeam: null,
+          awayTeam: null,
+        };
+      }
+
+      const gameData = currentWeeksGames.find((game) => game.id === nextGameId);
+      const homeTeam = gameData?.competitors.find(({ isHome }) => isHome);
+      const awayTeam = gameData?.competitors.find(({ isHome }) => !isHome);
+
+      return {
+        gameId: nextGameId,
+        active: true,
+        awayTeam: {
+          ...(awayTeam as Competitors),
+          pick: false,
+        },
+        homeTeam: {
+          ...(homeTeam as Competitors),
+          pick: false,
+        },
+      };
+    }
+  );
 
   const activeGames = currentWeeksGames.filter(({ completed }) => !completed);
 
   const completedGames = currentWeeksGames.filter(({ completed }) => completed);
+
+  const handleMakePick = (pick: string) => {
+    const homeTeamData = {
+      ...gamePickerData.homeTeam,
+    } as Competitors & { pick?: boolean };
+    const awayTeamData = {
+      ...gamePickerData.awayTeam,
+    } as Competitors & { pick?: boolean };
+    makePick(gamePickerData.gameId, pick);
+    setGamePickerData({
+      ...gamePickerData,
+      homeTeam: {
+        ...homeTeamData,
+        pick: pick === gamePickerData.homeTeam?.abbreviation,
+      },
+      awayTeam: {
+        ...awayTeamData,
+        pick: pick === gamePickerData.awayTeam?.abbreviation,
+      },
+    });
+  };
+
+  const handleContinuousPick = (pick: string) => {
+    makePick(gamePickerData.gameId, pick);
+
+    const weekPicks = picks.find((week) => week.id === currentWeekId);
+
+    const nextGameId = weekPicks
+      ? (weekPicks?.games.find(
+          (game) => game.pick === NO_PICK && game.id !== gamePickerData.gameId
+        )?.id as string)
+      : currentWeeksGames.find(
+          (weekGame) => weekGame.id !== gamePickerData.gameId
+        )?.id;
+
+    if (!nextGameId) {
+      setGamePickerData({
+        gameId: "",
+        active: false,
+        homeTeam: null,
+        awayTeam: null,
+      });
+      return;
+    }
+
+    const gameData = currentWeeksGames.find((game) => game.id === nextGameId);
+    const homeTeam = gameData?.competitors.find(({ isHome }) => isHome);
+    const awayTeam = gameData?.competitors.find(({ isHome }) => !isHome);
+
+    setGamePickerData({
+      gameId: nextGameId,
+      active: true,
+      awayTeam: {
+        ...(awayTeam as Competitors),
+        pick: false,
+      },
+      homeTeam: {
+        ...(homeTeam as Competitors),
+        pick: false,
+      },
+    });
+  };
 
   return (
     <>
@@ -52,24 +149,9 @@ const HomePage = () => {
             });
           }}
           onPick={(pick) => {
-            const homeTeamData = {
-              ...gamePickerData.homeTeam,
-            } as Competitors & { pick?: boolean };
-            const awayTeamData = {
-              ...gamePickerData.awayTeam,
-            } as Competitors & { pick?: boolean };
-            makePick(gamePickerData.gameId, pick);
-            setGamePickerData({
-              ...gamePickerData,
-              homeTeam: {
-                ...homeTeamData,
-                pick: pick === gamePickerData.homeTeam?.abbreviation,
-              },
-              awayTeam: {
-                ...awayTeamData,
-                pick: pick === gamePickerData.awayTeam?.abbreviation,
-              },
-            });
+            makeContinuousPick
+              ? handleContinuousPick(pick)
+              : handleMakePick(pick);
           }}
         ></GamePicker>
       ) : null}

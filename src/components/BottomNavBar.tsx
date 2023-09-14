@@ -1,6 +1,8 @@
 import { ReactComponent as HouseIcon } from "../assets/icons/house.svg";
 import { ReactComponent as CupIcon } from "../assets/icons/cup.svg";
-import { ReactComponent as UsersIcon } from "../assets/icons/users.svg";
+// import { ReactComponent as UsersIcon } from "../assets/icons/users.svg";
+import { ReactComponent as LogoutIcon } from "../assets/icons/logout.svg";
+
 import { NavLink } from "react-router-dom";
 import { getAuth, signOut } from "firebase/auth";
 import { useSetRecoilState } from "recoil";
@@ -35,7 +37,8 @@ const BottomNavBar = () => {
       >
         <CupIcon />
       </NavLink>
-      <UsersIcon onClick={handleSignOut} />
+      {/* <UsersIcon onClick={handleSignOut} /> */}
+      <LogoutIcon onClick={handleSignOut} />
     </div>
   );
 };
