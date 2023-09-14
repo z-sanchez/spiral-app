@@ -23,8 +23,8 @@ const HomePage = () => {
   const [gamePickerData, setGamePickerData] = useState<{
     gameId: string;
     active: boolean;
-    homeTeam: Competitors | null;
-    awayTeam: Competitors | null;
+    homeTeam: (Competitors & { pick?: boolean }) | null;
+    awayTeam: (Competitors & { pick?: boolean }) | null;
   }>({
     gameId: "",
     active: false,
@@ -53,7 +53,25 @@ const HomePage = () => {
             });
           }}
           onPick={(pick) => {
+            const homeTeamData = {
+              ...gamePickerData.homeTeam,
+            } as Competitors & { pick?: boolean };
+            const awayTeamData = {
+              ...gamePickerData.awayTeam,
+            } as Competitors & { pick?: boolean };
+
             makePick(gamePickerData.gameId, pick);
+            setGamePickerData({
+              ...gamePickerData,
+              homeTeam: {
+                ...homeTeamData,
+                pick: pick === gamePickerData.homeTeam?.abbreviation,
+              },
+              awayTeam: {
+                ...awayTeamData,
+                pick: pick === gamePickerData.awayTeam?.abbreviation,
+              },
+            });
           }}
         ></GamePicker>
       ) : null}
@@ -88,8 +106,14 @@ const HomePage = () => {
                 setGamePickerData({
                   gameId: game.id,
                   active: true,
-                  awayTeam: awayTeam as Competitors,
-                  homeTeam: homeTeam as Competitors,
+                  awayTeam: {
+                    ...(awayTeam as Competitors),
+                    pick: userPick === awayTeam?.abbreviation,
+                  },
+                  homeTeam: {
+                    ...(homeTeam as Competitors),
+                    pick: userPick === homeTeam?.abbreviation,
+                  },
                 });
               }}
             />

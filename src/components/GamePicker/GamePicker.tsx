@@ -7,8 +7,8 @@ import { ClickAwayListener } from "@mui/base/ClickAwayListener";
 // import { GameDetails } from "./GameDetails";
 
 type GamePickerProps = {
-  homeTeam: Team;
-  awayTeam: Team;
+  homeTeam: Team & { pick?: boolean };
+  awayTeam: Team & { pick?: boolean };
   gameId: string;
   handleClose: () => void;
   onPick: (pick: string) => void;

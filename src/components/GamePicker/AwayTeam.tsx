@@ -5,9 +5,11 @@ import { Team } from "../../types/Team";
 
 const AwayTeam = ({
   team,
+  pick,
   onPick,
 }: {
   team: Team;
+  pick: boolean;
   onPick: (pick: string) => void;
 }) => {
   const { name, location, alternateColor, color, record, abbreviation } = team;
@@ -27,9 +29,13 @@ const AwayTeam = ({
       className="w-1/2 px-5 flex flex-col items-center justify-center border-r-2 border-gray-100"
       onClick={() => onPick(abbreviation)}
     >
-      <p className="mb-12 w-fit px-4 text-sm text-white text-center border-2 rounded-full border-purple-500 drop-shadow-sm bg-purple-500">
-        Your Pick
-      </p>
+      {pick ? (
+        <p className="mb-12 w-fit px-4 text-sm text-white text-center rounded-full border-purple-500 drop-shadow-sm bg-purple-500">
+          Your Pick
+        </p>
+      ) : (
+        <p className="h-5 mb-12"></p>
+      )}
       <div className="flex relative justify-center items-center w-full">
         <div>
           <HelmetIcon
