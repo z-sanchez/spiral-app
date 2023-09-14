@@ -1,7 +1,7 @@
 import { ReactComponent as HelmetIcon } from "../../assets/icons/away-teamhelmet.svg";
-import { ReactComponent as CheckmarkIcon } from "../../assets/icons/checkmark.svg";
+// import { ReactComponent as CheckmarkIcon } from "../../assets/icons/checkmark.svg";
 import { Team } from "../../types/Team";
-import { ProfileIcon } from "../ProfileIcon";
+// import { ProfileIcon } from "../ProfileIcon";
 
 const AwayTeam = ({
   team,
@@ -27,8 +27,8 @@ const AwayTeam = ({
       className="w-1/2 px-5 flex flex-col items-center justify-center border-r-2 border-gray-100"
       onClick={() => onPick(abbreviation)}
     >
-      <p className="mb-12 w-fit px-4 text-purple-500 text-sm text-center border-2 rounded-full border-purple-500 drop-shadow-sm bg-white">
-        18%
+      <p className="mb-12 w-fit px-4 text-sm text-white text-center border-2 rounded-full border-purple-500 drop-shadow-sm bg-purple-500">
+        Your Pick
       </p>
       <div className="flex relative justify-center items-center w-full">
         <div>
@@ -51,7 +51,7 @@ const AwayTeam = ({
             </div>
           </div>
           <div className="flex flex-col mt-8">
-            <div className="flex relative">
+            {/* <div className="flex relative">
               <ProfileIcon
                 character="Z"
                 styles="bg-cyan-500 z-10 absolute left-0"
@@ -73,11 +73,11 @@ const AwayTeam = ({
                 styles="bg-purple-500 z-50 absolute left-16"
               />
             </div>
-            <p className="mt-10 font-light text-sm text-gray-300">4 votes</p>
+            <p className="mt-10 font-light text-sm text-gray-300">4 votes</p> */}
           </div>
         </div>
 
-        <CheckmarkIcon className="absolute right-0  h-5 w-5" />
+        {/* <CheckmarkIcon className="absolute right-0  h-5 w-5" /> */}
       </div>
     </div>
   );
