@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { setCookie } from "../utils/helpers/cookie";
 import { SPIRAL_COOKIE_NAME } from "../utils/constants";
 import { userPicksState } from "../state/UserPicksState";
+import { transformFirebaseUserToAppUser } from "../utils/helpers/transformFirebaseUserToAppUser";
 
 export const useUser = () => {
   const [authState, setAuthState] = useRecoilState(authenticationState);
@@ -28,23 +29,27 @@ export const useUser = () => {
     if (!userExist) {
       const newUser = createUserObjectFromGoogleUser(firebaseAuthUser);
       await createNewUserInFirebase({ newUser, db });
+
+      const appUser = transformFirebaseUserToAppUser(newUser);
+
       setAuthState({
         signedIn: true,
         authUser: { ...firebaseAuthUser },
-        user: newUser,
+        user: appUser,
       });
-      setUserPicksState({ picks: newUser.picks });
+      setUserPicksState({ picks: appUser.picks });
       navigate("/");
     }
 
     const user = await getUser({ userId: firebaseAuthUser.uid, db });
+    const appUser = transformFirebaseUserToAppUser(user);
 
     setAuthState({
       signedIn: true,
       authUser: { ...firebaseAuthUser },
-      user,
+      user: appUser,
     });
-    setUserPicksState({ picks: user.picks });
+    setUserPicksState({ picks: appUser.picks });
     setCookie(SPIRAL_COOKIE_NAME, firebaseAuthUser.uid, 365);
     navigate("/");
   };
@@ -55,13 +60,14 @@ export const useUser = () => {
     firebaseAuthUserId: string;
   }) => {
     const user = await getUser({ userId: firebaseAuthUserId, db });
+    const appUser = transformFirebaseUserToAppUser(user);
 
     setAuthState({
       signedIn: true,
       authUser: JSON.parse(JSON.stringify(getAuth())),
-      user,
+      user: appUser,
     });
-    setUserPicksState({ picks: user.picks });
+    setUserPicksState({ picks: appUser.picks });
     navigate("/");
   };
 

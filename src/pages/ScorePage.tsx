@@ -12,36 +12,7 @@ const testTabs = [
   { id: "all-time", text: "All Time", active: false },
 ];
 
-const testPlayers: User[] = [
-  {
-    username: "Bruhdot777",
-    color: "#4ea5fc",
-    iconCharacter: "Z",
-    record: {
-      wins: 7,
-      loses: 3,
-      ties: 0,
-    },
-    id: "12",
-    roi: 345,
-    picks: [],
-    photoURL: "",
-  },
-  {
-    username: "Test User",
-    color: "#f44efc",
-    iconCharacter: "T",
-    record: {
-      wins: 7,
-      loses: 3,
-      ties: 0,
-    },
-    id: "13",
-    roi: 345,
-    photoURL: "",
-    picks: [],
-  },
-];
+const testPlayers: User[] = [];
 const ScorePage = () => {
   const [tabData, setTabData] = useState(testTabs);
 

@@ -1,11 +1,11 @@
-import { User } from "../types/User";
+import { UserObject } from "../types/Firebase";
 import { Firestore, setDoc, doc } from "firebase/firestore";
 
 export const createNewUserInFirebase = async ({
   newUser,
   db,
 }: {
-  newUser: User;
+  newUser: UserObject;
   db: Firestore;
 }) => {
   try {
