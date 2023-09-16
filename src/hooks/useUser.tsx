@@ -59,7 +59,10 @@ export const useUser = () => {
     const userPicks = (await getUserPicks({
       userId: firebaseAuthUser.uid,
       db,
+      userObject: appUser,
     })) as UserPicksObject;
+
+    console.log({ userPicks });
 
     setAuthState({
       signedIn: true,
@@ -86,6 +89,7 @@ export const useUser = () => {
     const userPicks = (await getUserPicks({
       userId: firebaseAuthUserId,
       db,
+      userObject: appUser,
     })) as UserPicksObject;
 
     setAuthState({
