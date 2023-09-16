@@ -1,4 +1,4 @@
-import { Firestore, doc, updateDoc } from "firebase/firestore";
+import { Firestore, doc, getDoc, updateDoc } from "firebase/firestore";
 import { Picks } from "../types/Picks";
 
 export const updateUserPicks = async (
@@ -10,7 +10,12 @@ export const updateUserPicks = async (
     const groupId = "sanchez-group";
     const userDocRef = doc(db, "picks", groupId);
 
+    const allPicks = await getDoc(userDocRef);
+
+    const allPicksData = allPicks.data();
+
     await updateDoc(userDocRef, {
+      ...allPicksData,
       [`${userId}.picks`]: picks,
     });
   } catch (e) {
