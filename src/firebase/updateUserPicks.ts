@@ -1,4 +1,4 @@
-import { Firestore, doc, getDoc, updateDoc } from "firebase/firestore";
+import { Firestore, doc, updateDoc } from "firebase/firestore";
 import { Picks } from "../types/Picks";
 
 export const updateUserPicks = async (
@@ -7,17 +7,10 @@ export const updateUserPicks = async (
   db: Firestore
 ) => {
   try {
-    const groupId = "sanchez-group";
-    const userDocRef = doc(db, "picks", groupId);
+    // const groupId = "sanchez-group";
+    const userDocRef = doc(db, "picks", userId);
 
-    const allPicks = await getDoc(userDocRef);
-
-    const allPicksData = allPicks.data();
-
-    await updateDoc(userDocRef, {
-      ...allPicksData,
-      [`${userId}.picks`]: picks,
-    });
+    await updateDoc(userDocRef, { picks });
   } catch (e) {
     console.log("FAILED TO UPDATE USER PICKS", userId, e);
   }

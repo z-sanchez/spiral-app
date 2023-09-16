@@ -9,9 +9,7 @@ export const createNewPicksUserInFirebase = async ({
   db: Firestore;
 }) => {
   try {
-    await setDoc(doc(db, "picks", "sanchez-group"), {
-      [`${newUser.id}`]: { ...newUser },
-    });
+    await setDoc(doc(db, "picks", newUser.id), { ...newUser });
 
     console.log("Document written with ID: ", newUser.id);
   } catch (e) {

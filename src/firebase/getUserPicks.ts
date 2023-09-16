@@ -10,13 +10,13 @@ export const getUserPicks = async ({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 }): Promise<any> => {
   try {
-    const usersRef = doc(db, "picks", "sanchez-group");
+    const usersRef = doc(db, "picks", userId);
 
     const querySnapshot = await getDoc(usersRef);
 
-    const data = querySnapshot.data() as { [key: string]: UserPicksObject };
+    const data = querySnapshot.data();
 
-    return data[userId] as UserPicksObject;
+    return data as UserPicksObject;
   } catch (err) {
     console.log("ERROR HERE", { err });
   }
