@@ -6,6 +6,7 @@ import { Tabs } from "../components/Tabs";
 // import { WeekSelector } from "../components/WeekSelector";
 import { PageLayout } from "../layouts/PageLayout";
 import { User } from "../types/User";
+import { usePicks } from "../hooks/usePicks";
 
 const testTabs = [
   { id: "weekly", text: "Week 2 Picks", active: true },
@@ -15,6 +16,11 @@ const testTabs = [
 const testPlayers: User[] = [];
 const ScorePage = () => {
   const [tabData, setTabData] = useState(testTabs);
+  const { roi, allTimeRecord, getCurrentWeekRecord } = usePicks();
+  const activeTab = tabData.find(({ active }) => active);
+
+  const { wins, loses } =
+    activeTab?.id === "all-time" ? allTimeRecord : getCurrentWeekRecord();
 
   const handleTabClick = (selectedTabId: string) => {
     const newTabs = tabData.map((tab) => {
@@ -44,7 +50,12 @@ const ScorePage = () => {
         </div>
         {/* <WeekSelector activeWeekNumber={3} /> */}
         <SectionLabel label={"Your Score"}></SectionLabel>
-        <Scoreboard wins="0" loses="0" roi="0" roiStyle="text-green-500" />
+        <Scoreboard
+          wins={String(wins)}
+          loses={String(loses)}
+          roi={String(roi)}
+          roiStyle="text-green-500"
+        />
         <SectionLabel label={"League Scores"}></SectionLabel>
         <div className="flex w-full items-center justify-center flex-col">
           {testPlayers.map((player) => {

@@ -8,9 +8,11 @@ import { updateUserPicks } from "../firebase/updateUserPicks";
 import { authenticationState } from "../state/AuthState";
 import { User } from "../types/User";
 import { NO_PICK } from "../utils/constants";
+import { Record } from "../types/Record";
 
 export const usePicks = () => {
-  const [{ picks }, setPicks] = useRecoilState(userPicksState);
+  const [{ picks, allTimeRecord, roi }, setPicks] =
+    useRecoilState(userPicksState);
   const { db } = useRecoilValue(firestoreState) as { db: Firestore };
   const { user } = useRecoilValue(authenticationState) as { user: User };
   const { currentWeeksGames, currentWeekId } = useGameSchedule();
@@ -23,6 +25,16 @@ export const usePicks = () => {
     return weekPicks?.games.filter((game) => game.pick === NO_PICK).length || 0;
   };
 
+  const getCurrentWeekRecord = (): Record => {
+    return (
+      picks.find((weekPicks) => weekPicks.id === currentWeekId)?.record || {
+        wins: 0,
+        loses: 0,
+        ties: 0,
+      }
+    );
+  };
+
   const makePick = (gameId: string, pick: string) => {
     const updatedPicks = updatePicks({
       picks,
@@ -32,13 +44,16 @@ export const usePicks = () => {
       pick,
     });
 
-    setPicks({ picks: updatedPicks });
+    setPicks({ allTimeRecord, picks: updatedPicks, roi });
     updateUserPicks(user.id, updatedPicks, db);
   };
 
   return {
     makePick,
     picks,
+    allTimeRecord,
+    roi,
     getNumberOfPicksMissing,
+    getCurrentWeekRecord,
   };
 };

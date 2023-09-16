@@ -27,7 +27,7 @@ type GamePickerDataType = {
 const HomePage = () => {
   const { state } = useLocation();
   const { currentWeeksGames, currentWeekId } = useGameSchedule();
-  const { makePick, picks } = usePicks();
+  const { makePick, picks, getCurrentWeekRecord, roi } = usePicks();
   const makeContinuousPick = state?.makePicks || false;
 
   const [showFinishedGames, setShowFinishedGames] = useState(true);
@@ -160,7 +160,12 @@ const HomePage = () => {
           <Tabs tabs={testTabs} onTabChange={() => null}></Tabs>
         </div>
         <SectionLabel label={"Your Score"}></SectionLabel>
-        <Scoreboard wins="0" loses="0" roi="0" roiStyle="text-green-500" />
+        <Scoreboard
+          wins={String(getCurrentWeekRecord().wins)}
+          loses={String(getCurrentWeekRecord().loses)}
+          roi={String(roi)}
+          roiStyle="text-green-500"
+        />
         <SectionLabel label={"Games"}></SectionLabel>
         {activeGames.map((game) => {
           const homeTeam = game.competitors.find(({ isHome }) => isHome);

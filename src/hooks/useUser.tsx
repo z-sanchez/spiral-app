@@ -12,6 +12,10 @@ import { setCookie } from "../utils/helpers/cookie";
 import { SPIRAL_COOKIE_NAME } from "../utils/constants";
 import { userPicksState } from "../state/UserPicksState";
 import { transformFirebaseUserToAppUser } from "../utils/helpers/transformFirebaseUserToAppUser";
+import { createUserPickObjectUser } from "../utils/helpers/firebase/picks";
+import { createNewPicksUserInFirebase } from "../firebase/createNewPicksUserInFirebase";
+import { getUserPicks } from "../firebase/getUserPicks";
+import { UserPicksObject } from "../types/Firebase";
 
 export const useUser = () => {
   const [authState, setAuthState] = useRecoilState(authenticationState);
@@ -32,24 +36,41 @@ export const useUser = () => {
 
       const appUser = transformFirebaseUserToAppUser(newUser);
 
+      const userPicks = createUserPickObjectUser(appUser);
+
+      await createNewPicksUserInFirebase({ newUser: userPicks, db });
+
       setAuthState({
         signedIn: true,
         authUser: { ...firebaseAuthUser },
         user: appUser,
       });
-      setUserPicksState({ picks: appUser.picks });
+      setUserPicksState({
+        picks: userPicks.picks,
+        allTimeRecord: userPicks.record,
+        roi: userPicks.roi,
+      });
       navigate("/");
     }
 
     const user = await getUser({ userId: firebaseAuthUser.uid, db });
     const appUser = transformFirebaseUserToAppUser(user);
 
+    const userPicks = (await getUserPicks({
+      userId: firebaseAuthUser.uid,
+      db,
+    })) as UserPicksObject;
+
     setAuthState({
       signedIn: true,
       authUser: { ...firebaseAuthUser },
       user: appUser,
     });
-    setUserPicksState({ picks: appUser.picks });
+    setUserPicksState({
+      picks: userPicks.picks,
+      allTimeRecord: userPicks.record,
+      roi: userPicks.roi,
+    });
     setCookie(SPIRAL_COOKIE_NAME, firebaseAuthUser.uid, 365);
     navigate("/");
   };
@@ -62,12 +83,21 @@ export const useUser = () => {
     const user = await getUser({ userId: firebaseAuthUserId, db });
     const appUser = transformFirebaseUserToAppUser(user);
 
+    const userPicks = (await getUserPicks({
+      userId: firebaseAuthUserId,
+      db,
+    })) as UserPicksObject;
+
     setAuthState({
       signedIn: true,
       authUser: JSON.parse(JSON.stringify(getAuth())),
       user: appUser,
     });
-    setUserPicksState({ picks: appUser.picks });
+    setUserPicksState({
+      picks: userPicks.picks,
+      allTimeRecord: userPicks.record,
+      roi: userPicks.roi,
+    });
     navigate("/");
   };
 

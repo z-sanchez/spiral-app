@@ -1,4 +1,3 @@
-import { Picks } from "./Picks";
 import { Record } from "./Record";
 
 //model in firebase
@@ -9,10 +8,12 @@ export type UserObject = {
   id: string;
   email: string;
   photoUrl: string;
-  groupGameData: {
-    groupId: string;
-    roi: number;
-    record: Record;
-    picks: Picks;
-  }[];
+};
+
+export type UserPicksObject = {
+  id: string;
+  username: string;
+  roi: number;
+  record: Record;
+  picks: [];
 };

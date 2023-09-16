@@ -7,12 +7,13 @@ export const updateUserPicks = async (
   db: Firestore
 ) => {
   try {
-    const userDocRef = doc(db, "users", userId);
+    const groupId = "sanchez-group";
+    const userDocRef = doc(db, "picks", groupId);
 
     await updateDoc(userDocRef, {
-      picks,
+      [`${userId}.picks`]: picks,
     });
   } catch (e) {
-    console.log("FAILED TO UPDATE USER PICKS", userId);
+    console.log("FAILED TO UPDATE USER PICKS", userId, e);
   }
 };

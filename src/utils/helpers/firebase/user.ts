@@ -7,19 +7,11 @@ export const createUserObjectFromGoogleUser = ({
   photoURL,
 }: firebaseAuthUser): UserObject => {
   return {
-    username: "",
+    username: email ?? "",
     color: "",
     iconCharacter: "",
     id: uid,
     photoUrl: photoURL ?? "",
     email: email ?? "",
-    groupGameData: [
-      {
-        groupId: "sanchez-group",
-        record: { wins: 0, loses: 0, ties: 0 },
-        roi: 0,
-        picks: [],
-      },
-    ],
   };
 };
