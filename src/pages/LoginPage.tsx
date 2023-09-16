@@ -54,6 +54,8 @@ const LoginPage = () => {
   };
 
   const handleCreateAccount = () => {
+    setSpinner(true);
+
     createUserWithEmailAndPassword(firebaseAuth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
@@ -64,11 +66,14 @@ const LoginPage = () => {
         const errorMessage = error.message;
 
         console.log({ errorCode, errorMessage });
+        setSpinner(false);
         setErrorBannerText("Bad Email or Password");
       });
   };
 
   const handleSignInWithEmailAndPassword = () => {
+    setSpinner(true);
+
     signInWithEmailAndPassword(firebaseAuth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
@@ -78,6 +83,7 @@ const LoginPage = () => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log({ errorCode, errorMessage });
+        setSpinner(false);
         setErrorBannerText("Bad Email or Password");
       });
   };
