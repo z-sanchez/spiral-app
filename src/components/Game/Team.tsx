@@ -38,12 +38,12 @@ const Team = ({
   return (
     <div className="flex items-center h-full w-full">
       {emptyOutline && <div className={"w-1 h-10"}></div>}
-      {pick && (
+      {pick && !showPickResult ? (
         <div
           className={"w-1 h-10"}
           style={{ backgroundColor: displayColor }}
         ></div>
-      )}
+      ) : null}
       {correctPickAndGameOver && <div className="w-1 h-10 bg-green-500"></div>}
       {wrongPickAndGameOver && <div className="w-1 h-10 bg-red-500"></div>}
       <div className="w-3/4 flex items-center">

@@ -2,10 +2,13 @@ import { ProfileIcon } from "./ProfileIcon";
 import { ReactComponent as UpArrowIcon } from "../assets/icons/up-arrow.svg";
 import { ReactComponent as CoinIcon } from "../assets/icons/coin.svg";
 import { User } from "../types/User";
+import { Record } from "../types/Record";
 
 type LeaderboardLineProps = User & {
   increaseIcon?: boolean;
   decreaseIcon?: boolean;
+  record: Record;
+  roi: number;
 };
 
 const LeaderboardLine = ({

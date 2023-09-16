@@ -219,15 +219,38 @@ const HomePage = () => {
             </div>
             <Collapse in={showFinishedGames}>
               {completedGames.map((game) => {
-                const homeTeam = game.competitors.find(({ isHome }) => isHome);
-                const awayTeam = game.competitors.find(({ isHome }) => !isHome);
+                const homeTeam = game.competitors.find(
+                  ({ isHome }) => isHome
+                ) as Competitors;
+                const awayTeam = game.competitors.find(
+                  ({ isHome }) => !isHome
+                ) as Competitors;
+                const userPick = getPick(currentWeekId, game.id, picks);
+                const isTie = homeTeam.score === awayTeam.score ? true : false;
+
+                let winner = "";
+
+                if (!isTie) {
+                  winner =
+                    homeTeam?.score > awayTeam?.score
+                      ? homeTeam.abbreviation
+                      : awayTeam.abbreviation;
+                }
 
                 return (
                   <Game
+                    showPickResult={true}
+                    correctPick={userPick !== winner && !isTie ? false : true}
                     gameId={game.id}
                     key={game.id}
-                    homeTeam={homeTeam as Competitors}
-                    awayTeam={awayTeam as Competitors}
+                    homeTeam={{
+                      ...homeTeam,
+                      pick: userPick === homeTeam.abbreviation,
+                    }}
+                    awayTeam={{
+                      ...awayTeam,
+                      pick: userPick === awayTeam.abbreviation,
+                    }}
                     onClick={() => null}
                   />
                 );

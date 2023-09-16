@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { LeaderboardLine } from "../components/LeaderboardLine";
+// import { LeaderboardLine } from "../components/LeaderboardLine";
 import { Scoreboard } from "../components/Scoreboard/Scoreboard";
 import { SectionLabel } from "../components/SectionLabel";
 import { Tabs } from "../components/Tabs";
 // import { WeekSelector } from "../components/WeekSelector";
 import { PageLayout } from "../layouts/PageLayout";
-import { User } from "../types/User";
+// import { User } from "../types/User";
 import { usePicks } from "../hooks/usePicks";
 
 const testTabs = [
@@ -13,7 +13,7 @@ const testTabs = [
   { id: "all-time", text: "All Time", active: false },
 ];
 
-const testPlayers: User[] = [];
+// const testPlayers: User[] = [];
 const ScorePage = () => {
   const [tabData, setTabData] = useState(testTabs);
   const { roi, allTimeRecord, getCurrentWeekRecord } = usePicks();
@@ -58,9 +58,9 @@ const ScorePage = () => {
         />
         <SectionLabel label={"League Scores"}></SectionLabel>
         <div className="flex w-full items-center justify-center flex-col">
-          {testPlayers.map((player) => {
-            return <LeaderboardLine {...player} key={player.id} />;
-          })}
+          {/* {testPlayers.map((player) => {
+            return <LeaderboardLine {...player} key={player.id}  />;
+          })} */}
         </div>
       </PageLayout>
     </>
