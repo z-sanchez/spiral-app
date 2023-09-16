@@ -141,6 +141,7 @@ const LoginPage = () => {
           <Tabs
             tabs={tabData}
             onTabChange={(activeTabId) => {
+              setErrorBannerText("");
               setTabData((prevTabData) => {
                 return prevTabData.map((tab) => {
                   return { ...tab, active: tab.id === activeTabId };
