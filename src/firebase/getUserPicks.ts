@@ -1,8 +1,17 @@
-import { Firestore, doc, getDoc } from "firebase/firestore";
+import {
+  Firestore,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
 import { UserPicksObject } from "../types/Firebase";
 import { User } from "../types/User";
 import { createUserPickObjectUser } from "../utils/helpers/firebase/picks";
 import { createNewPicksUserInFirebase } from "./createNewPicksUserInFirebase";
+import { Picks } from "../types/Picks";
 
 export const getUserPicks = async ({
   userId,
@@ -34,4 +43,27 @@ export const getUserPicks = async ({
   } catch (err) {
     console.log({ err });
   }
+};
+
+export const getUserPicksByEmail = async ({
+  userEmail,
+  db,
+}: {
+  userEmail: string;
+  db: Firestore;
+}) => {
+  const userPicksQuery = query(
+    collection(db, "picks"),
+    where("username", "==", userEmail)
+  );
+
+  const querySnapshot = await getDocs(userPicksQuery);
+
+  let picks: Picks = [];
+
+  querySnapshot.forEach((doc) => {
+    picks = doc.data().picks;
+  });
+
+  return picks;
 };
