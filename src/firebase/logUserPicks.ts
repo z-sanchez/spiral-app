@@ -1,6 +1,6 @@
 import { Firestore } from "firebase/firestore";
 import { getUserPicksByEmail } from "./getUserPicks";
-import { Picks } from "../types/Picks";
+import { UserPicksObject } from "../types/Firebase";
 
 const emails = [
   "ricksanchez3@yahoo.com",
@@ -11,14 +11,11 @@ const emails = [
 ];
 
 export const logUserPicks = async (db: Firestore) => {
-  const userPicks: {
-    picks: Picks;
-    email: string;
-  }[] = [];
+  const userPicks: UserPicksObject[] = [];
 
   emails.forEach(async (email) => {
     const userPick = await getUserPicksByEmail({ userEmail: email, db });
-    userPicks.push({ picks: userPick, email });
+    userPicks.push(userPick);
   });
 
   console.log({ userPicks });

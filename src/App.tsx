@@ -1,5 +1,5 @@
 import Container from "./components/Container";
-// import { AppRoutes } from "./Routes";
+import { AppRoutes } from "./Routes";
 import { QueryClientProvider, QueryClient } from "react-query";
 // Required for side-effects
 import "firebase/firestore";
@@ -8,7 +8,9 @@ import { getFirestore } from "firebase/firestore";
 import { FIREBASE_CONFIGURATION } from "./utils/constants";
 import { useRecoilState } from "recoil";
 import { firestoreState } from "./state/FirestoreState";
-import { logUserPicks } from "./firebase/logUserPicks";
+// import { logUserPicks } from "./firebase/logUserPicks";
+// import userPicksInJson from "./state/userPicksWeek2.json";
+// import { uploadUserPicksFromJson } from "./firebase/uploadUserPicksFromJson";
 
 const queryClient = new QueryClient();
 
@@ -22,15 +24,13 @@ function App() {
   const db = getFirestore(app);
 
   if (!firestoreStateData.db) {
-    logUserPicks(db);
     setFirestoreData({ db });
   }
 
   return (
     <QueryClientProvider client={queryClient}>
       <Container>
-        <h1>Testing</h1>
-        {/* <AppRoutes /> */}
+        <AppRoutes />
       </Container>
     </QueryClientProvider>
   );

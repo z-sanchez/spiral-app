@@ -11,7 +11,6 @@ import { UserPicksObject } from "../types/Firebase";
 import { User } from "../types/User";
 import { createUserPickObjectUser } from "../utils/helpers/firebase/picks";
 import { createNewPicksUserInFirebase } from "./createNewPicksUserInFirebase";
-import { Picks } from "../types/Picks";
 
 export const getUserPicks = async ({
   userId,
@@ -59,10 +58,16 @@ export const getUserPicksByEmail = async ({
 
   const querySnapshot = await getDocs(userPicksQuery);
 
-  let picks: Picks = [];
+  let picks: UserPicksObject = {
+    id: "",
+    username: "",
+    roi: 0,
+    picks: [],
+    record: { wins: 0, loses: 0, ties: 0 },
+  };
 
   querySnapshot.forEach((doc) => {
-    picks = doc.data().picks;
+    picks = doc.data() as UserPicksObject;
   });
 
   return picks;
