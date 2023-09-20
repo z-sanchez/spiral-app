@@ -9,20 +9,35 @@ import { authenticationState } from "../state/AuthState";
 import { User } from "../types/User";
 import { NO_PICK } from "../utils/constants";
 import { Record } from "../types/Record";
+import { WeekPicks } from "../types/Picks";
 
 export const usePicks = () => {
   const [{ picks, allTimeRecord, roi }, setPicks] =
     useRecoilState(userPicksState);
   const { db } = useRecoilValue(firestoreState) as { db: Firestore };
   const { user } = useRecoilValue(authenticationState) as { user: User };
-  const { currentWeeksGames, currentWeekId } = useGameSchedule();
+  const { currentWeeksGames, currentWeekId, gamesInProgress } =
+    useGameSchedule();
+  const currentWeekPicks: WeekPicks | false =
+    picks.find((week) => week.id === currentWeekId) || false;
 
   const getNumberOfPicksMissing = (): number => {
     const weekPicks = picks.find((week) => week.id === currentWeekId);
+    const gamesEligibleForPicks = currentWeeksGames.filter(
+      ({ id }) =>
+        !gamesInProgress.find((gameInProgress) => gameInProgress.id === id)
+    );
 
-    if (!weekPicks) return currentWeeksGames.length;
+    if (!weekPicks) return gamesEligibleForPicks.length;
 
-    return weekPicks?.games.filter((game) => game.pick === NO_PICK).length || 0;
+    return (
+      weekPicks?.games.filter((game) => {
+        return (
+          game.pick === NO_PICK &&
+          gamesEligibleForPicks.find(({ id }) => id === game.id)
+        );
+      }).length || 0
+    );
   };
 
   const getCurrentWeekRecord = (): Record => {
@@ -55,5 +70,6 @@ export const usePicks = () => {
     roi,
     getNumberOfPicksMissing,
     getCurrentWeekRecord,
+    currentWeekPicks,
   };
 };

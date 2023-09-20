@@ -2,7 +2,7 @@ import { Record } from "./Record";
 
 export type Picks = WeekPicks[];
 
-type WeekPicks = {
+export type WeekPicks = {
   id: string;
   games: PickGame[];
   record: Record;

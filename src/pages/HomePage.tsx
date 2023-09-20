@@ -28,20 +28,32 @@ type GamePickerDataType = {
 
 const HomePage = () => {
   const { state } = useLocation();
-  const { currentWeeksGames, currentWeekId } = useGameSchedule();
-  const { makePick, picks, getCurrentWeekRecord, roi } = usePicks();
+  const {
+    currentWeeksGames,
+    currentWeekId,
+    activeGames,
+    completedGames,
+    gamesNotStarted,
+  } = useGameSchedule();
+  const { makePick, picks, getCurrentWeekRecord, roi, currentWeekPicks } =
+    usePicks();
   const makeContinuousPick = state?.makePicks || false;
 
   const [showFinishedGames, setShowFinishedGames] = useState(true);
   const [gamePickerData, setGamePickerData] = useState<GamePickerDataType>(
     () => {
-      const weekPicks = picks.find((week) => week.id === currentWeekId);
+      const nextGameId =
+        gamesNotStarted.find(
+          ({ id }) =>
+            currentWeekPicks &&
+            currentWeekPicks?.games.find(
+              (currentPick) =>
+                currentPick.id === id && currentPick.pick === NO_PICK
+            )
+        )?.id || "";
 
-      const nextGameId = weekPicks
-        ? (weekPicks?.games.find((game) => game.pick === NO_PICK)?.id as string)
-        : currentWeeksGames[0]?.id;
-
-      if (!makeContinuousPick || (!nextGameId && weekPicks)) {
+      //no flag to make continuous pick on render or no gameId found while picks array is present
+      if (!makeContinuousPick || (!nextGameId && currentWeekPicks)) {
         return {
           gameId: "",
           active: false,
@@ -69,10 +81,6 @@ const HomePage = () => {
     }
   );
 
-  const activeGames = currentWeeksGames.filter(({ completed }) => !completed);
-
-  const completedGames = currentWeeksGames.filter(({ completed }) => completed);
-
   const handleMakePick = (pick: string) => {
     const homeTeamData = {
       ...gamePickerData.homeTeam,
@@ -97,15 +105,17 @@ const HomePage = () => {
   const handleContinuousPick = (pick: string) => {
     makePick(gamePickerData.gameId, pick);
 
-    const weekPicks = picks.find((week) => week.id === currentWeekId);
-
-    const nextGameId = weekPicks
-      ? (weekPicks?.games.find(
-          (game) => game.pick === NO_PICK && game.id !== gamePickerData.gameId
-        )?.id as string)
-      : currentWeeksGames.find(
-          (weekGame) => weekGame.id !== gamePickerData.gameId
-        )?.id;
+    const nextGameId =
+      gamesNotStarted.find(
+        ({ id }) =>
+          currentWeekPicks &&
+          currentWeekPicks?.games.find(
+            (currentPick) =>
+              currentPick.id === id &&
+              currentPick.pick === NO_PICK &&
+              gamePickerData.gameId !== id
+          )
+      )?.id || "";
 
     if (!nextGameId) {
       setGamePickerData({
