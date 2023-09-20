@@ -37,7 +37,8 @@ const LoginPage = () => {
     if (cookieValid) {
       signInUserWithCookie({ firebaseAuthUserId: cookieValid });
     }
-  }, [signInUserWithCookie]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleSignInWithGoogle = () => {
     const provider = new GoogleAuthProvider();
