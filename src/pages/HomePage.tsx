@@ -14,6 +14,8 @@ import { usePicks } from "../hooks/usePicks";
 import { getPick } from "../utils/helpers/espn/getPick";
 import { NO_PICK } from "../utils/constants";
 import { useLocation } from "react-router-dom";
+import { getAwayTeam, getHomeTeam } from "../utils/helpers/espn/getTeam";
+import { getGameWinner } from "../utils/helpers/espn/getGameWinner";
 
 const testTabs = [{ id: "weekly", text: "Week 2 Picks", active: true }];
 
@@ -219,28 +221,22 @@ const HomePage = () => {
             </div>
             <Collapse in={showFinishedGames}>
               {completedGames.map((game) => {
-                const homeTeam = game.competitors.find(
-                  ({ isHome }) => isHome
-                ) as Competitors;
-                const awayTeam = game.competitors.find(
-                  ({ isHome }) => !isHome
-                ) as Competitors;
+                const homeTeam = getHomeTeam(game) as Competitors;
+                const awayTeam = getAwayTeam(game) as Competitors;
+
                 const userPick = getPick(currentWeekId, game.id, picks);
-                const isTie = homeTeam.score === awayTeam.score ? true : false;
 
-                let winner = "";
-
-                if (!isTie) {
-                  winner =
-                    homeTeam?.score > awayTeam?.score
-                      ? homeTeam.abbreviation
-                      : awayTeam.abbreviation;
-                }
+                const gameWinner = getGameWinner(game);
 
                 return (
                   <Game
                     showPickResult={true}
-                    correctPick={userPick !== winner && !isTie ? false : true}
+                    correctPick={
+                      (gameWinner && userPick === gameWinner?.abbreviation) ||
+                      !gameWinner
+                        ? true
+                        : false
+                    }
                     gameId={game.id}
                     key={game.id}
                     homeTeam={{
