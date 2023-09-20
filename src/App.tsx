@@ -1,5 +1,4 @@
 import Container from "./components/Container";
-import { AppRoutes } from "./Routes";
 import { QueryClientProvider, QueryClient } from "react-query";
 // Required for side-effects
 import "firebase/firestore";
@@ -32,7 +31,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Container>
-        <AppRoutes />
+        <h1>Testing Data</h1>
       </Container>
     </QueryClientProvider>
   );
