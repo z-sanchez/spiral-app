@@ -16,6 +16,8 @@ import { createUserPickObjectUser } from "../utils/helpers/firebase/picks";
 import { createNewPicksUserInFirebase } from "../firebase/createNewPicksUserInFirebase";
 import { getUserPicks } from "../firebase/getUserPicks";
 import { UserPicksObject } from "../types/Firebase";
+import userPicksData from "../mock/getUserPicksData.json";
+import userData from "../mock/getUserData.json";
 
 export const useUser = () => {
   const [authState, setAuthState] = useRecoilState(authenticationState);
@@ -62,8 +64,6 @@ export const useUser = () => {
       userObject: appUser,
     })) as UserPicksObject;
 
-    console.log({ userPicks });
-
     setAuthState({
       signedIn: true,
       authUser: { ...firebaseAuthUser },
@@ -83,14 +83,17 @@ export const useUser = () => {
   }: {
     firebaseAuthUserId: string;
   }) => {
-    const user = await getUser({ userId: firebaseAuthUserId, db });
+    console.log({ firebaseAuthUserId });
+    const user = JSON.parse(JSON.stringify(userData.user)); //await getUser({ userId: firebaseAuthUserId, db });
     const appUser = transformFirebaseUserToAppUser(user);
 
-    const userPicks = (await getUserPicks({
-      userId: firebaseAuthUserId,
-      db,
-      userObject: appUser,
-    })) as UserPicksObject;
+    const userPicks = JSON.parse(JSON.stringify(userPicksData));
+
+    // (await getUserPicks({
+    //   userId: firebaseAuthUserId,
+    //   db,
+    //   userObject: appUser,
+    // })) as UserPicksObject;
 
     setAuthState({
       signedIn: true,
