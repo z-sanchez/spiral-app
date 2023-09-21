@@ -20,7 +20,7 @@ import userPicksMockData from "../mock/getUserPicksData.json";
 import userData from "../mock/getUserData.json";
 import { updateGroupPicks } from "../firebase/updateGroupPicks";
 
-const useMockData = import.meta.env.DEV;
+const useMockData = false; //import.meta.env.DEV;
 
 export const useUser = () => {
   const [authState, setAuthState] = useRecoilState(authenticationState);
@@ -47,11 +47,10 @@ export const useUser = () => {
 
       const needUpdate = true;
 
+      const groupPicks = await updateGroupPicks(db, 3);
       if (needUpdate) {
         userPicks =
-          (await updateGroupPicks(db, 3)).find(
-            ({ id }) => id === userPicks.id
-          ) || userPicks;
+          groupPicks.find(({ id }) => id === userPicks.id) || userPicks;
       }
 
       setAuthState({
@@ -61,6 +60,7 @@ export const useUser = () => {
       });
       setUserPicksState({
         ...userPicks,
+        groupPicks,
       });
       navigate("/");
       return;
@@ -76,11 +76,10 @@ export const useUser = () => {
     })) as UserPicksObject;
 
     const needUpdate = true;
+    const groupPicks = await updateGroupPicks(db, 3);
 
     if (needUpdate) {
-      userPicks =
-        (await updateGroupPicks(db, 3)).find(({ id }) => id === userPicks.id) ||
-        userPicks;
+      userPicks = groupPicks.find(({ id }) => id === userPicks.id) || userPicks;
     }
 
     setAuthState({
@@ -90,6 +89,7 @@ export const useUser = () => {
     });
     setUserPicksState({
       ...userPicks,
+      groupPicks,
     });
     setCookie(SPIRAL_COOKIE_NAME, firebaseAuthUser.uid, 365);
     navigate("/");
@@ -114,11 +114,10 @@ export const useUser = () => {
         })) as UserPicksObject);
 
     const needUpdate = true;
+    const groupPicks = await updateGroupPicks(db, 3);
 
     if (needUpdate) {
-      userPicks =
-        (await updateGroupPicks(db, 3)).find(({ id }) => id === userPicks.id) ||
-        userPicks;
+      userPicks = groupPicks.find(({ id }) => id === userPicks.id) || userPicks;
     }
 
     setAuthState({
@@ -128,6 +127,7 @@ export const useUser = () => {
     });
     setUserPicksState({
       ...userPicks,
+      groupPicks,
     });
     navigate("/");
   };
