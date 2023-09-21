@@ -1,4 +1,4 @@
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { authenticationState } from "../state/AuthState";
 import { createNewUserInFirebase } from "../firebase/createNewUserInFirebase";
 import { createUserObjectFromGoogleUser } from "../utils/helpers/firebase/user";
@@ -18,36 +18,15 @@ import { getUserPicks } from "../firebase/getUserPicks";
 import { UserPicksObject } from "../types/Firebase";
 import userPicksMockData from "../mock/getUserPicksData.json";
 import userData from "../mock/getUserData.json";
-import { useMemo } from "react";
-import { doesUserPickObjectNeedUpdate } from "../utils/helpers/doesUserPickObjectNeedUpdate";
-import { useGameSchedule } from "./useGameSchedule";
-import { WeekPicks } from "../types/Picks";
 import { updateGroupPicks } from "../firebase/updateGroupPicks";
 
 const useMockData = import.meta.env.DEV;
 
 export const useUser = () => {
   const [authState, setAuthState] = useRecoilState(authenticationState);
-  const [userPicksData, setUserPicksState] = useRecoilState(userPicksState);
+  const setUserPicksState = useSetRecoilState(userPicksState);
   const navigate = useNavigate();
   const { db } = useRecoilValue(firestoreState) as { db: Firestore };
-  const { currentWeekId, currentWeekNumber, currentWeeksGames } =
-    useGameSchedule();
-  const currentWeekPicks: WeekPicks | false =
-    userPicksData.picks.find((week) => week.id === currentWeekId) || false;
-
-  const needUpdate = useMemo(() => {
-    if (authState.signedIn) return false;
-    if (!currentWeekPicks) return true;
-
-    doesUserPickObjectNeedUpdate({
-      latestWeekNumber: currentWeekNumber,
-      userPicks: userPicksData.picks,
-      currentWeekPicks,
-      currentWeekGames: currentWeeksGames,
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const signInUser = async ({
     firebaseAuthUser,
@@ -66,9 +45,11 @@ export const useUser = () => {
 
       await createNewPicksUserInFirebase({ newUser: userPicks, db });
 
+      const needUpdate = true;
+
       if (needUpdate) {
         userPicks =
-          (await updateGroupPicks(db, currentWeekNumber)).find(
+          (await updateGroupPicks(db, 3)).find(
             ({ id }) => id === userPicks.id
           ) || userPicks;
       }
@@ -94,11 +75,12 @@ export const useUser = () => {
       userObject: appUser,
     })) as UserPicksObject;
 
+    const needUpdate = true;
+
     if (needUpdate) {
       userPicks =
-        (await updateGroupPicks(db, currentWeekNumber)).find(
-          ({ id }) => id === userPicks.id
-        ) || userPicks;
+        (await updateGroupPicks(db, 3)).find(({ id }) => id === userPicks.id) ||
+        userPicks;
     }
 
     setAuthState({
@@ -124,18 +106,19 @@ export const useUser = () => {
     const appUser = transformFirebaseUserToAppUser(user);
 
     let userPicks = useMockData
-      ? JSON.parse(JSON.stringify(userPicksMockData))
+      ? (JSON.parse(JSON.stringify(userPicksMockData)) as UserPicksObject)
       : ((await getUserPicks({
           userId: firebaseAuthUserId,
           db,
           userObject: appUser,
         })) as UserPicksObject);
 
+    const needUpdate = true;
+
     if (needUpdate) {
       userPicks =
-        (await updateGroupPicks(db, currentWeekNumber)).find(
-          ({ id }) => id === userPicks.id
-        ) || userPicks;
+        (await updateGroupPicks(db, 3)).find(({ id }) => id === userPicks.id) ||
+        userPicks;
     }
 
     setAuthState({

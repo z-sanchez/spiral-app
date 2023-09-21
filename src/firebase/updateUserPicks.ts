@@ -25,7 +25,7 @@ export const updateUserPickObject = async (
   try {
     // const groupId = "sanchez-group";
     const userDocRef = doc(db, "picks", userId);
-
+    console.log("UPDATING", pickObject.id);
     await updateDoc(userDocRef, { ...pickObject });
   } catch (e) {
     console.log("FAILED TO UPDATE USER PICKS", userId, e);
