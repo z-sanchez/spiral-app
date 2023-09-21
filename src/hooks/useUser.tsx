@@ -1,4 +1,4 @@
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { authenticationState } from "../state/AuthState";
 import { createNewUserInFirebase } from "../firebase/createNewUserInFirebase";
 import { createUserObjectFromGoogleUser } from "../utils/helpers/firebase/user";
@@ -12,20 +12,45 @@ import { setCookie } from "../utils/helpers/cookie";
 import { SPIRAL_COOKIE_NAME } from "../utils/constants";
 import { userPicksState } from "../state/UserPicksState";
 import { transformFirebaseUserToAppUser } from "../utils/helpers/transformFirebaseUserToAppUser";
-import { createUserPickObjectUser } from "../utils/helpers/firebase/picks";
+import {
+  createUserPickObjectUser,
+  updateUserPickObjectForFirebase,
+} from "../utils/helpers/firebase/picks";
 import { createNewPicksUserInFirebase } from "../firebase/createNewPicksUserInFirebase";
 import { getUserPicks } from "../firebase/getUserPicks";
 import { UserPicksObject } from "../types/Firebase";
-import userPicksData from "../mock/getUserPicksData.json";
+import userPicksMockData from "../mock/getUserPicksData.json";
 import userData from "../mock/getUserData.json";
+import { useMemo } from "react";
+import { doesUserPickObjectNeedUpdate } from "../utils/helpers/doesUserPickObjectNeedUpdate";
+import groupPicks from "../mock/userPicksWeek2.json";
+import { useGameSchedule } from "./useGameSchedule";
+import { WeekPicks } from "../types/Picks";
 
 const useMockData = import.meta.env.DEV;
 
 export const useUser = () => {
   const [authState, setAuthState] = useRecoilState(authenticationState);
-  const setUserPicksState = useSetRecoilState(userPicksState);
+  const [userPicksData, setUserPicksState] = useRecoilState(userPicksState);
   const navigate = useNavigate();
   const { db } = useRecoilValue(firestoreState) as { db: Firestore };
+  const { currentWeekId, currentWeekNumber, currentWeeksGames } =
+    useGameSchedule();
+  const currentWeekPicks: WeekPicks | false =
+    userPicksData.picks.find((week) => week.id === currentWeekId) || false;
+
+  const needUpdate = useMemo(() => {
+    if (authState.signedIn) return false;
+    if (!currentWeekPicks) return true;
+
+    doesUserPickObjectNeedUpdate({
+      latestWeekNumber: currentWeekNumber,
+      userPicks: userPicksData.picks,
+      currentWeekPicks,
+      currentWeekGames: currentWeeksGames,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const signInUser = async ({
     firebaseAuthUser,
@@ -44,6 +69,23 @@ export const useUser = () => {
 
       await createNewPicksUserInFirebase({ newUser: userPicks, db });
 
+      if (needUpdate) {
+        console.log("SIGN IN NEW USER");
+
+        groupPicks.forEach((groupUserPickData) => {
+          console.log(
+            groupUserPickData.username,
+            updateUserPickObjectForFirebase(
+              groupUserPickData,
+              currentWeekNumber
+            )
+          );
+        });
+
+        //update state
+        //update firebase here
+      }
+
       setAuthState({
         signedIn: true,
         authUser: { ...firebaseAuthUser },
@@ -53,6 +95,7 @@ export const useUser = () => {
         ...userPicks,
       });
       navigate("/");
+      return;
     }
 
     const user = await getUser({ userId: firebaseAuthUser.uid, db });
@@ -63,6 +106,20 @@ export const useUser = () => {
       db,
       userObject: appUser,
     })) as UserPicksObject;
+
+    if (needUpdate) {
+      console.log("SIGN IN PREVIOUS USER");
+
+      groupPicks.forEach((groupUserPickData) => {
+        console.log(
+          groupUserPickData.username,
+          updateUserPickObjectForFirebase(groupUserPickData, currentWeekNumber)
+        );
+      });
+
+      //update state
+      //update firebase here
+    }
 
     setAuthState({
       signedIn: true,
@@ -87,12 +144,25 @@ export const useUser = () => {
     const appUser = transformFirebaseUserToAppUser(user);
 
     const userPicks = useMockData
-      ? JSON.parse(JSON.stringify(userPicksData))
+      ? JSON.parse(JSON.stringify(userPicksMockData))
       : ((await getUserPicks({
           userId: firebaseAuthUserId,
           db,
           userObject: appUser,
         })) as UserPicksObject);
+
+    if (needUpdate) {
+      console.log("SIGN IN WITH COOKIE");
+      groupPicks.forEach((groupUserPickData) => {
+        console.log(
+          groupUserPickData.username,
+          updateUserPickObjectForFirebase(groupUserPickData, currentWeekNumber)
+        );
+      });
+
+      //update state
+      //update firebase here
+    }
 
     setAuthState({
       signedIn: true,

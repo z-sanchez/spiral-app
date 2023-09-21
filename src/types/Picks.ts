@@ -6,6 +6,7 @@ export type WeekPicks = {
   id: string;
   games: PickGame[];
   record: Record;
+  completed: boolean;
 };
 
 type PickGame = {

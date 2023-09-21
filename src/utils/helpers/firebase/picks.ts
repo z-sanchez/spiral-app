@@ -42,6 +42,7 @@ export const createEmptyWeekPickObject = ({
         pick: NO_PICK,
       };
     }),
+    completed: false,
   };
 };
 

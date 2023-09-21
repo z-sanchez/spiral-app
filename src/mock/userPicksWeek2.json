@@ -96,7 +96,8 @@
             "pick": "PIT",
             "id": "401547424"
           }
-        ]
+        ],
+        "completed": false
       }
     ],
     "username": "ricksanchez3@yahoo.com"
@@ -203,7 +204,8 @@
           "loses": 0,
           "wins": 0,
           "ties": 0
-        }
+        },
+        "completed": false
       }
     ],
     "id": "Df7FOWz8bcg3KDujgMa6aPM5JSg1",
@@ -305,7 +307,8 @@
             "winner": "not completed",
             "id": "401547424"
           }
-        ]
+        ],
+        "completed": false
       }
     ],
     "roi": 0,
@@ -406,7 +409,8 @@
           "loses": 0,
           "ties": 0,
           "wins": 0
-        }
+        },
+        "completed": false
       }
     ],
     "id": "5AeB9qQUglQHvx7X05qp2B69nIw1",

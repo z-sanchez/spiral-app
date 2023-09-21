@@ -57,6 +57,7 @@ export const updatePicks = ({
           pick: gameId !== game.id ? NO_PICK : pick,
         };
       }),
+      completed: false,
     });
   }
 
@@ -79,6 +80,10 @@ export const updateAndRecordWeekScoresOnPickObject = ({
   weekPicks = recordWinnerOnWeekPicks({ weekPicks, weekGames });
 
   weekPicks.record = getUserWeekRecord(weekPicks);
+
+  if (weekPicks.games.every(({ winner }) => winner !== "not completed")) {
+    weekPicks.completed = true;
+  }
 
   const newPicks = pickObject.filter((week) => week.id !== weekId);
 

@@ -13,19 +13,20 @@ export const doesUserPickObjectNeedUpdate = ({
   userPicks: Picks;
   currentWeekPicks: WeekPicks;
 }) => {
-  let previousWeekPicksPresent = true;
+  let previousWeekPicksFinished = true;
 
   for (let i = 2; i <= latestWeekNumber; i++) {
-    if (!previousWeekPicksPresent) break;
+    if (!previousWeekPicksFinished) break;
     const weekId = getWeekId({ seasontype: 2, week: i, year: 2023 });
     const weekPicks = userPicks.find(({ id }) => id === weekId);
 
-    if (!weekPicks) previousWeekPicksPresent = false;
+    if (!weekPicks || (!weekPicks.completed && i !== latestWeekNumber))
+      previousWeekPicksFinished = false;
   }
 
   const currentWeeksPicksUpToDate =
     currentWeekGames.filter(({ completed }) => completed).length ===
     currentWeekPicks?.games.filter(({ winner }) => winner).length;
 
-  return !previousWeekPicksPresent || !currentWeeksPicksUpToDate;
+  return !previousWeekPicksFinished || !currentWeeksPicksUpToDate;
 };
