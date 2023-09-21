@@ -12,10 +12,7 @@ import { setCookie } from "../utils/helpers/cookie";
 import { SPIRAL_COOKIE_NAME } from "../utils/constants";
 import { userPicksState } from "../state/UserPicksState";
 import { transformFirebaseUserToAppUser } from "../utils/helpers/transformFirebaseUserToAppUser";
-import {
-  createUserPickObjectUser,
-  updateUserPickObjectForFirebase,
-} from "../utils/helpers/firebase/picks";
+import { createUserPickObjectUser } from "../utils/helpers/firebase/picks";
 import { createNewPicksUserInFirebase } from "../firebase/createNewPicksUserInFirebase";
 import { getUserPicks } from "../firebase/getUserPicks";
 import { UserPicksObject } from "../types/Firebase";
@@ -23,9 +20,9 @@ import userPicksMockData from "../mock/getUserPicksData.json";
 import userData from "../mock/getUserData.json";
 import { useMemo } from "react";
 import { doesUserPickObjectNeedUpdate } from "../utils/helpers/doesUserPickObjectNeedUpdate";
-import groupPicks from "../mock/userPicksWeek2.json";
 import { useGameSchedule } from "./useGameSchedule";
 import { WeekPicks } from "../types/Picks";
+import { updateGroupPicks } from "../firebase/updateGroupPicks";
 
 const useMockData = import.meta.env.DEV;
 
@@ -65,25 +62,15 @@ export const useUser = () => {
 
       const appUser = transformFirebaseUserToAppUser(newUser);
 
-      const userPicks = createUserPickObjectUser(appUser);
+      let userPicks = createUserPickObjectUser(appUser);
 
       await createNewPicksUserInFirebase({ newUser: userPicks, db });
 
       if (needUpdate) {
-        console.log("SIGN IN NEW USER");
-
-        groupPicks.forEach((groupUserPickData) => {
-          console.log(
-            groupUserPickData.username,
-            updateUserPickObjectForFirebase(
-              groupUserPickData,
-              currentWeekNumber
-            )
-          );
-        });
-
-        //update state
-        //update firebase here
+        userPicks =
+          (await updateGroupPicks(db, currentWeekNumber)).find(
+            ({ id }) => id === userPicks.id
+          ) || userPicks;
       }
 
       setAuthState({
@@ -101,24 +88,17 @@ export const useUser = () => {
     const user = await getUser({ userId: firebaseAuthUser.uid, db });
     const appUser = transformFirebaseUserToAppUser(user);
 
-    const userPicks = (await getUserPicks({
+    let userPicks = (await getUserPicks({
       userId: firebaseAuthUser.uid,
       db,
       userObject: appUser,
     })) as UserPicksObject;
 
     if (needUpdate) {
-      console.log("SIGN IN PREVIOUS USER");
-
-      groupPicks.forEach((groupUserPickData) => {
-        console.log(
-          groupUserPickData.username,
-          updateUserPickObjectForFirebase(groupUserPickData, currentWeekNumber)
-        );
-      });
-
-      //update state
-      //update firebase here
+      userPicks =
+        (await updateGroupPicks(db, currentWeekNumber)).find(
+          ({ id }) => id === userPicks.id
+        ) || userPicks;
     }
 
     setAuthState({
@@ -143,7 +123,7 @@ export const useUser = () => {
       : await getUser({ userId: firebaseAuthUserId, db });
     const appUser = transformFirebaseUserToAppUser(user);
 
-    const userPicks = useMockData
+    let userPicks = useMockData
       ? JSON.parse(JSON.stringify(userPicksMockData))
       : ((await getUserPicks({
           userId: firebaseAuthUserId,
@@ -152,16 +132,10 @@ export const useUser = () => {
         })) as UserPicksObject);
 
     if (needUpdate) {
-      console.log("SIGN IN WITH COOKIE");
-      groupPicks.forEach((groupUserPickData) => {
-        console.log(
-          groupUserPickData.username,
-          updateUserPickObjectForFirebase(groupUserPickData, currentWeekNumber)
-        );
-      });
-
-      //update state
-      //update firebase here
+      userPicks =
+        (await updateGroupPicks(db, currentWeekNumber)).find(
+          ({ id }) => id === userPicks.id
+        ) || userPicks;
     }
 
     setAuthState({
