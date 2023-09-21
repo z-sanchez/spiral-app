@@ -4,7 +4,7 @@ import { getWeekData } from "../utils/helpers/espn/getWeekData";
 import { getWeekId } from "../utils/helpers/espn/getWeekId";
 import scheduleData from "../mock/scheduleData.json";
 
-const useMockData = import.meta.env.DEV;
+const useMockData = false; //import.meta.env.DEV;
 
 const useGameSchedule = () => {
   const { isLoading, data } = useQuery("gameScheduleData", () =>

@@ -7,16 +7,83 @@ import { Tabs } from "../components/Tabs";
 import { PageLayout } from "../layouts/PageLayout";
 // import { User } from "../types/User";
 import { usePicks } from "../hooks/usePicks";
+import { LeaderboardLine } from "../components/LeaderboardLine";
 
-const testTabs = [
-  { id: "weekly", text: "Week 2 Picks", active: true },
-  { id: "all-time", text: "All Time", active: false },
+const testPlayers = [
+  {
+    record: {
+      wins: 12,
+      loses: 4,
+      ties: 0,
+    },
+    roi: 1,
+    iconCharacter: "R",
+    username: "Rick",
+    color: "#A855F7",
+    id: "rick",
+    photoURL: "",
+  },
+  {
+    record: {
+      wins: 10,
+      loses: 6,
+      ties: 0,
+    },
+    roi: 2,
+    iconCharacter: "B",
+    username: "Bella",
+    color: "#A855F7",
+    id: "bella",
+    photoURL: "",
+  },
+  {
+    record: {
+      wins: 10,
+      loses: 6,
+      ties: 0,
+    },
+    roi: 2,
+    iconCharacter: "S",
+    username: "Sam",
+    color: "#A855F7",
+    id: "sam",
+    photoURL: "",
+  },
+  {
+    record: {
+      wins: 9,
+      loses: 7,
+      ties: 0,
+    },
+    roi: 3,
+    iconCharacter: "Z",
+    username: "Ziek",
+    color: "#A855F7",
+    id: "ziek",
+    photoURL: "",
+  },
+  {
+    record: {
+      wins: 9,
+      loses: 7,
+      ties: 0,
+    },
+    roi: 3,
+    iconCharacter: "A",
+    username: "Amanda",
+    color: "#A855F7",
+    id: "amanda",
+    photoURL: "",
+  },
 ];
-
-// const testPlayers: User[] = [];
 const ScorePage = () => {
-  const [tabData, setTabData] = useState(testTabs);
-  const { roi, allTimeRecord, getCurrentWeekRecord } = usePicks();
+  const { getUserRank, allTimeRecord, getCurrentWeekRecord } = usePicks();
+
+  const tabs = [
+    { id: "weekly", text: "Week 3 Picks", active: true },
+    { id: "all-time", text: "All Time", active: false },
+  ];
+  const [tabData, setTabData] = useState(tabs);
   const activeTab = tabData.find(({ active }) => active);
 
   const { wins, loses } =
@@ -53,14 +120,14 @@ const ScorePage = () => {
         <Scoreboard
           wins={String(wins)}
           loses={String(loses)}
-          roi={String(roi)}
-          roiStyle="text-green-500"
+          rank={String(getUserRank())}
+          rankStyle="text-green-500"
         />
         <SectionLabel label={"League Scores"}></SectionLabel>
         <div className="flex w-full items-center justify-center flex-col">
-          {/* {testPlayers.map((player) => {
-            return <LeaderboardLine {...player} key={player.id}  />;
-          })} */}
+          {testPlayers.map((player) => {
+            return <LeaderboardLine {...player} key={player.id} />;
+          })}
         </div>
       </PageLayout>
     </>

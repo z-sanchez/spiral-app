@@ -17,7 +17,7 @@ export const usePicks = () => {
   const { user } = useRecoilValue(authenticationState) as { user: User };
   const { currentWeeksGames, currentWeekId, gamesInProgress } =
     useGameSchedule();
-  const { picks, record, roi } = userPicksStateData;
+  const { picks, record, roi, groupPicks } = userPicksStateData;
   const weekPicks = picks.find((week) => week.id === currentWeekId);
   const currentWeekPicks: WeekPicks | false =
     picks.find((week) => week.id === currentWeekId) || false;
@@ -63,6 +63,21 @@ export const usePicks = () => {
     updateUserPicks(user.id, updatedPicks, db);
   };
 
+  const getUserRank = (): number => {
+    let userScores = structuredClone(groupPicks).map(
+      ({ record }) => record.wins
+    );
+
+    userScores = userScores
+      .filter((score, index) => userScores.indexOf(score) === index)
+      .sort((a, b) => b - a);
+    return (
+      userScores.findIndex(
+        (score) => score === userPicksStateData.record.wins
+      ) + 1
+    );
+  };
+
   return {
     makePick,
     picks,
@@ -71,5 +86,6 @@ export const usePicks = () => {
     getNumberOfPicksMissing,
     getCurrentWeekRecord,
     currentWeekPicks,
+    getUserRank,
   };
 };

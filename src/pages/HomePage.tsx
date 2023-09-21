@@ -17,8 +17,6 @@ import { useLocation } from "react-router-dom";
 import { getAwayTeam, getHomeTeam } from "../utils/helpers/espn/getTeam";
 import { getGameWinner } from "../utils/helpers/espn/getGameWinner";
 
-const testTabs = [{ id: "weekly", text: "Week 2 Picks", active: true }];
-
 type GamePickerDataType = {
   gameId: string;
   active: boolean;
@@ -34,10 +32,20 @@ const HomePage = () => {
     activeGames,
     completedGames,
     gamesNotStarted,
+    currentWeekNumber,
   } = useGameSchedule();
-  const { makePick, picks, getCurrentWeekRecord, roi, currentWeekPicks } =
-    usePicks();
+  const {
+    makePick,
+    picks,
+    getCurrentWeekRecord,
+    currentWeekPicks,
+    getUserRank,
+  } = usePicks();
   const makeContinuousPick = state?.makePicks || false;
+
+  const tabs = [
+    { id: "weekly", text: `Week ${currentWeekNumber} Picks`, active: true },
+  ];
 
   const [showFinishedGames, setShowFinishedGames] = useState(true);
   const [gamePickerData, setGamePickerData] = useState<GamePickerDataType>(
@@ -169,14 +177,14 @@ const HomePage = () => {
       ) : null}
       <PageLayout>
         <div className="flex justify-center">
-          <Tabs tabs={testTabs} onTabChange={() => null}></Tabs>
+          <Tabs tabs={tabs} onTabChange={() => null}></Tabs>
         </div>
         <SectionLabel label={"Your Score"}></SectionLabel>
         <Scoreboard
           wins={String(getCurrentWeekRecord().wins)}
           loses={String(getCurrentWeekRecord().loses)}
-          roi={String(roi)}
-          roiStyle="text-green-500"
+          rank={String(getUserRank())}
+          rankStyle="text-green-500"
         />
         <SectionLabel label={"Games"}></SectionLabel>
         {activeGames.map((game) => {
