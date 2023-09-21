@@ -1,3 +1,4 @@
+import { Picks } from "./Picks";
 import { Record } from "./Record";
 
 //model in firebase
@@ -15,5 +16,5 @@ export type UserPicksObject = {
   username: string;
   roi: number;
   record: Record;
-  picks: [];
+  picks: Picks;
 };

@@ -19,6 +19,8 @@ const useGameSchedule = () => {
 
   const currentWeekId = !isLoading ? getWeekId(data?.parameters) : "";
 
+  const currentWeekNumber = !isLoading ? data?.parameters.week : 2;
+
   const activeGames = currentWeeksGames.filter(({ completed }) => !completed);
   const gamesInProgress = activeGames.filter(
     ({ date }) => new Date(date) < new Date()
@@ -40,6 +42,7 @@ const useGameSchedule = () => {
     completedGames,
     gamesInProgress,
     gamesNotStarted,
+    currentWeekNumber,
   };
 };
 

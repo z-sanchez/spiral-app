@@ -50,9 +50,7 @@ export const useUser = () => {
         user: appUser,
       });
       setUserPicksState({
-        picks: userPicks.picks,
-        allTimeRecord: userPicks.record,
-        roi: userPicks.roi,
+        ...userPicks,
       });
       navigate("/");
     }
@@ -72,9 +70,7 @@ export const useUser = () => {
       user: appUser,
     });
     setUserPicksState({
-      picks: userPicks.picks,
-      allTimeRecord: userPicks.record,
-      roi: userPicks.roi,
+      ...userPicks,
     });
     setCookie(SPIRAL_COOKIE_NAME, firebaseAuthUser.uid, 365);
     navigate("/");
@@ -85,7 +81,6 @@ export const useUser = () => {
   }: {
     firebaseAuthUserId: string;
   }) => {
-    console.log({ firebaseAuthUserId });
     const user = useMockData
       ? JSON.parse(JSON.stringify(userData.user))
       : await getUser({ userId: firebaseAuthUserId, db });
@@ -105,9 +100,7 @@ export const useUser = () => {
       user: appUser,
     });
     setUserPicksState({
-      picks: userPicks.picks,
-      allTimeRecord: userPicks.record,
-      roi: userPicks.roi,
+      ...userPicks,
     });
     navigate("/");
   };

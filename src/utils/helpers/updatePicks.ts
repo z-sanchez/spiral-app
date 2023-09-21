@@ -1,6 +1,9 @@
 import { Game } from "../../types/Game";
 import { Picks } from "../../types/Picks";
 import { NO_PICK } from "../constants";
+import { createEmptyWeekPickObject } from "./firebase/picks";
+import { getUserWeekRecord } from "./picksCalculator";
+import { recordWinnerOnWeekPicks } from "./recordWinnersOnWeekPicks";
 
 export const updatePicks = ({
   picks,
@@ -56,6 +59,30 @@ export const updatePicks = ({
       }),
     });
   }
+
+  return newPicks;
+};
+
+export const updateAndRecordWeekScoresOnPickObject = ({
+  pickObject, //entire pick array
+  weekGames, //week games to update
+  weekId, // weekId that labels to week games
+}: {
+  pickObject: Picks;
+  weekGames: Game[];
+  weekId: string;
+}): Picks => {
+  let weekPicks =
+    pickObject.find((weekPicks) => weekPicks.id === weekId) ||
+    createEmptyWeekPickObject({ weekId, weekGames });
+
+  weekPicks = recordWinnerOnWeekPicks({ weekPicks, weekGames });
+
+  weekPicks.record = getUserWeekRecord(weekPicks);
+
+  const newPicks = pickObject.filter((week) => week.id !== weekId);
+
+  newPicks.push(weekPicks);
 
   return newPicks;
 };

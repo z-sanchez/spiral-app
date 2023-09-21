@@ -10,19 +10,45 @@ import { User } from "../types/User";
 import { NO_PICK } from "../utils/constants";
 import { Record } from "../types/Record";
 import { WeekPicks } from "../types/Picks";
+import { useMemo } from "react";
+import { doesUserPickObjectNeedUpdate } from "../utils/helpers/doesUserPickObjectNeedUpdate";
+import { updateUserPickObjectForFirebase } from "../utils/helpers/firebase/picks";
 
 export const usePicks = () => {
-  const [{ picks, allTimeRecord, roi }, setPicks] =
-    useRecoilState(userPicksState);
+  const [userPicksStateData, setPicks] = useRecoilState(userPicksState);
   const { db } = useRecoilValue(firestoreState) as { db: Firestore };
   const { user } = useRecoilValue(authenticationState) as { user: User };
-  const { currentWeeksGames, currentWeekId, gamesInProgress } =
-    useGameSchedule();
+  const {
+    currentWeeksGames,
+    currentWeekId,
+    gamesInProgress,
+    currentWeekNumber,
+  } = useGameSchedule();
+  const { picks, record, roi } = userPicksStateData;
+  const weekPicks = picks.find((week) => week.id === currentWeekId);
   const currentWeekPicks: WeekPicks | false =
     picks.find((week) => week.id === currentWeekId) || false;
 
-  const getNumberOfPicksMissing = (): number => {
-    const weekPicks = picks.find((week) => week.id === currentWeekId);
+  const needUpdate = useMemo(() => {
+    if (!currentWeekPicks) return true;
+
+    doesUserPickObjectNeedUpdate({
+      latestWeekNumber: currentWeekNumber,
+      userPicks: picks,
+      currentWeekPicks,
+      currentWeekGames: currentWeeksGames,
+    });
+  }, []);
+
+  if (needUpdate) {
+    console.log(
+      updateUserPickObjectForFirebase(userPicksStateData, currentWeekNumber)
+    );
+    //update state
+    //update firebase here
+  }
+
+  const getNumberOfPicksMissing = async (): Promise<number> => {
     const gamesEligibleForPicks = currentWeeksGames.filter(
       ({ id }) =>
         !gamesInProgress.find((gameInProgress) => gameInProgress.id === id)
@@ -59,14 +85,14 @@ export const usePicks = () => {
       pick,
     });
 
-    setPicks({ allTimeRecord, picks: updatedPicks, roi });
+    setPicks({ ...userPicksStateData, picks: updatedPicks });
     updateUserPicks(user.id, updatedPicks, db);
   };
 
   return {
     makePick,
     picks,
-    allTimeRecord,
+    allTimeRecord: record,
     roi,
     getNumberOfPicksMissing,
     getCurrentWeekRecord,
