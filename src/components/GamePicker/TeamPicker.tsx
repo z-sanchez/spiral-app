@@ -6,20 +6,28 @@ type TeamPickerProps = {
   homeTeam: Team & { pick?: boolean };
   awayTeam: Team & { pick?: boolean };
   onPick: (pick: string) => void;
+  makeContinuousPick: boolean;
 };
 
-const TeamPicker = ({ homeTeam, awayTeam, onPick }: TeamPickerProps) => (
+const TeamPicker = ({
+  homeTeam,
+  awayTeam,
+  onPick,
+  makeContinuousPick,
+}: TeamPickerProps) => (
   <>
     <div className="flex items-center w-full">
       <AwayTeam
         team={awayTeam}
         onPick={onPick}
         pick={awayTeam?.pick as boolean}
+        makeContinuousPick={makeContinuousPick}
       />
       <HomeTeam
         team={homeTeam}
         onPick={onPick}
         pick={homeTeam?.pick as boolean}
+        makeContinuousPick={makeContinuousPick}
       />
     </div>
     <div className="w-full flex items-center py-5 justify-center">

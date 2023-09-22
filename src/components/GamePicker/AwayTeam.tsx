@@ -8,10 +8,12 @@ const AwayTeam = ({
   team,
   pick,
   onPick,
+  makeContinuousPick,
 }: {
   team: Team;
   pick: boolean;
   onPick: (pick: string) => void;
+  makeContinuousPick: boolean;
 }) => {
   const [showAnimation, setShowAnimation] = useState(false);
   const { name, location, alternateColor, color, record, abbreviation } = team;
@@ -29,7 +31,9 @@ const AwayTeam = ({
   return (
     <div
       className="w-1/2 px-5 flex flex-col items-center justify-center border-r-2 border-gray-100"
-      onClick={() => setShowAnimation(true)}
+      onClick={() =>
+        makeContinuousPick ? setShowAnimation(true) : onPick(abbreviation)
+      }
     >
       <p
         onAnimationEnd={() => {

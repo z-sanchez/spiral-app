@@ -7,3 +7,11 @@ export const fetchWeekData = async (weekNumber: number) => {
 
   return getWeekData(resultData.content.schedule);
 };
+
+export const fetchCurrentWeekParams = async () => {
+  const resultData = await fetch(
+    `https://cdn.espn.com/core/nfl/schedule?xhr=1&year=2023&seasontype=2`
+  ).then((result) => result.json());
+
+  return resultData.content.parameters;
+};

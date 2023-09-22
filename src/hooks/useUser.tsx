@@ -9,7 +9,7 @@ import { userExists } from "../firebase/userExists";
 import { getUser } from "../firebase/getUser";
 import { useNavigate } from "react-router-dom";
 import { setCookie } from "../utils/helpers/cookie";
-import { SPIRAL_COOKIE_NAME } from "../utils/constants";
+import { GAME_SCHEDULE_QUERY, SPIRAL_COOKIE_NAME } from "../utils/constants";
 import { userPicksState } from "../state/UserPicksState";
 import { transformFirebaseUserToAppUser } from "../utils/helpers/transformFirebaseUserToAppUser";
 import { createUserPickObjectUser } from "../utils/helpers/firebase/picks";
@@ -19,10 +19,22 @@ import { UserPicksObject } from "../types/Firebase";
 import userPicksMockData from "../mock/getUserPicksData.json";
 import userData from "../mock/getUserData.json";
 import { updateGroupPicks } from "../firebase/updateGroupPicks";
+import scheduleData from "../mock/scheduleData.json";
+import { doesUserPickObjectNeedUpdate } from "../utils/helpers/doesUserPickObjectNeedUpdate";
+import { useQuery } from "react-query";
+import { getWeekData } from "../utils/helpers/espn/getWeekData";
+import { getGroupPicks } from "../firebase/getGroupPicks";
 
 const useMockData = false; //import.meta.env.DEV;
 
 export const useUser = () => {
+  const { isLoading, data } = useQuery("gameScheduleData", () =>
+    useMockData
+      ? JSON.parse(JSON.stringify(scheduleData)).content
+      : fetch(GAME_SCHEDULE_QUERY)
+          .then((result) => result.json())
+          .then((scheduleData) => scheduleData.content)
+  );
   const [authState, setAuthState] = useRecoilState(authenticationState);
   const setUserPicksState = useSetRecoilState(userPicksState);
   const navigate = useNavigate();
@@ -45,10 +57,16 @@ export const useUser = () => {
 
       await createNewPicksUserInFirebase({ newUser: userPicks, db });
 
-      const needUpdate = true;
+      let groupPicks = await getGroupPicks(db);
 
-      const groupPicks = await updateGroupPicks(db, 3);
+      const needUpdate = doesUserPickObjectNeedUpdate({
+        latestWeekNumber: data?.parameters.week,
+        currentWeekGames: getWeekData(data.schedule),
+        userPicks: userPicks.picks,
+      });
+
       if (needUpdate) {
+        groupPicks = await updateGroupPicks(db);
         userPicks =
           groupPicks.find(({ id }) => id === userPicks.id) || userPicks;
       }
@@ -75,10 +93,16 @@ export const useUser = () => {
       userObject: appUser,
     })) as UserPicksObject;
 
-    const needUpdate = true;
-    const groupPicks = await updateGroupPicks(db, 3);
+    let groupPicks = await getGroupPicks(db);
+
+    const needUpdate = doesUserPickObjectNeedUpdate({
+      latestWeekNumber: data?.parameters.week,
+      currentWeekGames: getWeekData(data.schedule),
+      userPicks: userPicks.picks,
+    });
 
     if (needUpdate) {
+      groupPicks = await updateGroupPicks(db);
       userPicks = groupPicks.find(({ id }) => id === userPicks.id) || userPicks;
     }
 
@@ -113,10 +137,16 @@ export const useUser = () => {
           userObject: appUser,
         })) as UserPicksObject);
 
-    const needUpdate = true;
-    const groupPicks = await updateGroupPicks(db, 3);
+    let groupPicks = await getGroupPicks(db);
+
+    const needUpdate = doesUserPickObjectNeedUpdate({
+      latestWeekNumber: data?.parameters.week,
+      currentWeekGames: getWeekData(data.schedule),
+      userPicks: userPicks.picks,
+    });
 
     if (needUpdate) {
+      groupPicks = await updateGroupPicks(db);
       userPicks = groupPicks.find(({ id }) => id === userPicks.id) || userPicks;
     }
 
@@ -133,6 +163,7 @@ export const useUser = () => {
   };
 
   return {
+    userStateLoading: isLoading,
     authState,
     signInUser,
     signInUserWithCookie,
