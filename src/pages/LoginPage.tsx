@@ -26,19 +26,24 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorBannerText, setErrorBannerText] = useState("");
-  const { signInUser, signInUserWithCookie } = useUser();
-  const [spinner, setSpinner] = useState(false);
+  const { signInUser, signInUserWithCookie, userStateLoading } = useUser();
+  const [spinner, setSpinner] = useState(true);
   const firebaseAuth = getAuth();
   const activeTab = tabData.find((tab) => tab.active)?.id;
 
   useEffect(() => {
     const cookieValid = getCookie(SPIRAL_COOKIE_NAME);
 
-    if (cookieValid) {
+    if (cookieValid && !userStateLoading) {
       signInUserWithCookie({ firebaseAuthUserId: cookieValid });
     }
+
+    if (!cookieValid) {
+      setSpinner(false);
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [userStateLoading]);
 
   const handleSignInWithGoogle = () => {
     const provider = new GoogleAuthProvider();
@@ -137,7 +142,7 @@ const LoginPage = () => {
 
   return (
     <div className="w-full h-full flex justify-center items-center flex-col">
-      {spinner ? (
+      {spinner || userStateLoading ? (
         <Spinner />
       ) : (
         <div className="h-full flex w-full flex-col py-10">
