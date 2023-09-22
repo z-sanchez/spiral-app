@@ -1,5 +1,6 @@
 import { Firestore, doc, updateDoc } from "firebase/firestore";
 import { Picks } from "../types/Picks";
+import { UserPicksObject } from "../types/Firebase";
 
 export const updateUserPicks = async (
   userId: string,
@@ -11,6 +12,21 @@ export const updateUserPicks = async (
     const userDocRef = doc(db, "picks", userId);
 
     await updateDoc(userDocRef, { picks });
+  } catch (e) {
+    console.log("FAILED TO UPDATE USER PICKS", userId, e);
+  }
+};
+
+export const updateUserPickObject = async (
+  userId: string,
+  pickObject: UserPicksObject,
+  db: Firestore
+) => {
+  try {
+    // const groupId = "sanchez-group";
+    const userDocRef = doc(db, "picks", userId);
+    console.log("UPDATING", pickObject.id);
+    await updateDoc(userDocRef, { ...pickObject });
   } catch (e) {
     console.log("FAILED TO UPDATE USER PICKS", userId, e);
   }

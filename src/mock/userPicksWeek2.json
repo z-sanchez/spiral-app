@@ -18,7 +18,7 @@
         "games": [
           {
             "winner": "not completed",
-            "pick": "no pick",
+            "pick": "MIN",
             "id": "401547410"
           },
           {
@@ -110,7 +110,98 @@
     },
     "id": "GltrBWMcoxaKj0WFKpQVY9qAumb2",
     "roi": 0,
-    "picks": []
+    "picks": [
+      {
+        "games": [
+          {
+            "winner": "not completed",
+            "id": "401547410",
+            "pick": "PHI"
+          },
+          {
+            "id": "401547417",
+            "pick": "GB",
+            "winner": "not completed"
+          },
+          {
+            "pick": "BUF",
+            "id": "401547411",
+            "winner": "not completed"
+          },
+          {
+            "winner": "not completed",
+            "id": "401547412",
+            "pick": "BAL"
+          },
+          {
+            "pick": "SEA",
+            "id": "401547418",
+            "winner": "not completed"
+          },
+          {
+            "winner": "not completed",
+            "id": "401547414",
+            "pick": "TEN"
+          },
+          {
+            "pick": "TB",
+            "id": "401547420",
+            "winner": "not completed"
+          },
+          {
+            "id": "401547413",
+            "pick": "KC",
+            "winner": "not completed"
+          },
+          {
+            "pick": "HOU",
+            "id": "401547419",
+            "winner": "not completed"
+          },
+          {
+            "winner": "not completed",
+            "id": "401547422",
+            "pick": "SF"
+          },
+          {
+            "pick": "ARI",
+            "winner": "not completed",
+            "id": "401547421"
+          },
+          {
+            "winner": "not completed",
+            "pick": "DAL",
+            "id": "401547415"
+          },
+          {
+            "pick": "DEN",
+            "winner": "not completed",
+            "id": "401547416"
+          },
+          {
+            "pick": "NE",
+            "id": "401547423",
+            "winner": "not completed"
+          },
+          {
+            "pick": "CAR",
+            "winner": "not completed",
+            "id": "401547425"
+          },
+          {
+            "pick": "PIT",
+            "id": "401547424",
+            "winner": "not completed"
+          }
+        ],
+        "id": "222023",
+        "record": {
+          "loses": 0,
+          "wins": 0,
+          "ties": 0
+        }
+      }
+    ]
   },
   {
     "roi": 0,
@@ -120,7 +211,7 @@
           {
             "winner": "not completed",
             "id": "401547410",
-            "pick": "no pick"
+            "pick": "MIN"
           },
           {
             "id": "401547417",
@@ -215,7 +306,7 @@
     }
   },
   {
-    "id": "3VS4TWwrXOUwnlANpfbGVmMsay22",
+    "id": "6mwSuKjLhIPYd96mIcAjC8sUUZc2",
     "picks": [
       {
         "id": "222023",

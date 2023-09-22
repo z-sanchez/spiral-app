@@ -16,6 +16,11 @@ import { createUserPickObjectUser } from "../utils/helpers/firebase/picks";
 import { createNewPicksUserInFirebase } from "../firebase/createNewPicksUserInFirebase";
 import { getUserPicks } from "../firebase/getUserPicks";
 import { UserPicksObject } from "../types/Firebase";
+import userPicksMockData from "../mock/getUserPicksData.json";
+import userData from "../mock/getUserData.json";
+import { updateGroupPicks } from "../firebase/updateGroupPicks";
+
+const useMockData = false; //import.meta.env.DEV;
 
 export const useUser = () => {
   const [authState, setAuthState] = useRecoilState(authenticationState);
@@ -36,9 +41,17 @@ export const useUser = () => {
 
       const appUser = transformFirebaseUserToAppUser(newUser);
 
-      const userPicks = createUserPickObjectUser(appUser);
+      let userPicks = createUserPickObjectUser(appUser);
 
       await createNewPicksUserInFirebase({ newUser: userPicks, db });
+
+      const needUpdate = true;
+
+      const groupPicks = await updateGroupPicks(db, 3);
+      if (needUpdate) {
+        userPicks =
+          groupPicks.find(({ id }) => id === userPicks.id) || userPicks;
+      }
 
       setAuthState({
         signedIn: true,
@@ -46,23 +59,28 @@ export const useUser = () => {
         user: appUser,
       });
       setUserPicksState({
-        picks: userPicks.picks,
-        allTimeRecord: userPicks.record,
-        roi: userPicks.roi,
+        ...userPicks,
+        groupPicks,
       });
       navigate("/");
+      return;
     }
 
     const user = await getUser({ userId: firebaseAuthUser.uid, db });
     const appUser = transformFirebaseUserToAppUser(user);
 
-    const userPicks = (await getUserPicks({
+    let userPicks = (await getUserPicks({
       userId: firebaseAuthUser.uid,
       db,
       userObject: appUser,
     })) as UserPicksObject;
 
-    console.log({ userPicks });
+    const needUpdate = true;
+    const groupPicks = await updateGroupPicks(db, 3);
+
+    if (needUpdate) {
+      userPicks = groupPicks.find(({ id }) => id === userPicks.id) || userPicks;
+    }
 
     setAuthState({
       signedIn: true,
@@ -70,9 +88,8 @@ export const useUser = () => {
       user: appUser,
     });
     setUserPicksState({
-      picks: userPicks.picks,
-      allTimeRecord: userPicks.record,
-      roi: userPicks.roi,
+      ...userPicks,
+      groupPicks,
     });
     setCookie(SPIRAL_COOKIE_NAME, firebaseAuthUser.uid, 365);
     navigate("/");
@@ -83,14 +100,25 @@ export const useUser = () => {
   }: {
     firebaseAuthUserId: string;
   }) => {
-    const user = await getUser({ userId: firebaseAuthUserId, db });
+    const user = useMockData
+      ? JSON.parse(JSON.stringify(userData.user))
+      : await getUser({ userId: firebaseAuthUserId, db });
     const appUser = transformFirebaseUserToAppUser(user);
 
-    const userPicks = (await getUserPicks({
-      userId: firebaseAuthUserId,
-      db,
-      userObject: appUser,
-    })) as UserPicksObject;
+    let userPicks = useMockData
+      ? (JSON.parse(JSON.stringify(userPicksMockData)) as UserPicksObject)
+      : ((await getUserPicks({
+          userId: firebaseAuthUserId,
+          db,
+          userObject: appUser,
+        })) as UserPicksObject);
+
+    const needUpdate = true;
+    const groupPicks = await updateGroupPicks(db, 3);
+
+    if (needUpdate) {
+      userPicks = groupPicks.find(({ id }) => id === userPicks.id) || userPicks;
+    }
 
     setAuthState({
       signedIn: true,
@@ -98,9 +126,8 @@ export const useUser = () => {
       user: appUser,
     });
     setUserPicksState({
-      picks: userPicks.picks,
-      allTimeRecord: userPicks.record,
-      roi: userPicks.roi,
+      ...userPicks,
+      groupPicks,
     });
     navigate("/");
   };

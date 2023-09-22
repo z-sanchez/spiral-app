@@ -9,20 +9,35 @@ import { authenticationState } from "../state/AuthState";
 import { User } from "../types/User";
 import { NO_PICK } from "../utils/constants";
 import { Record } from "../types/Record";
+import { WeekPicks } from "../types/Picks";
 
 export const usePicks = () => {
-  const [{ picks, allTimeRecord, roi }, setPicks] =
-    useRecoilState(userPicksState);
+  const [userPicksStateData, setPicks] = useRecoilState(userPicksState);
   const { db } = useRecoilValue(firestoreState) as { db: Firestore };
   const { user } = useRecoilValue(authenticationState) as { user: User };
-  const { currentWeeksGames, currentWeekId } = useGameSchedule();
+  const { currentWeeksGames, currentWeekId, gamesInProgress } =
+    useGameSchedule();
+  const { picks, record, roi, groupPicks } = userPicksStateData;
+  const weekPicks = picks.find((week) => week.id === currentWeekId);
+  const currentWeekPicks: WeekPicks | false =
+    picks.find((week) => week.id === currentWeekId) || false;
 
-  const getNumberOfPicksMissing = (): number => {
-    const weekPicks = picks.find((week) => week.id === currentWeekId);
+  const getNumberOfPicksMissing = () => {
+    const gamesEligibleForPicks = currentWeeksGames.filter(
+      ({ id }) =>
+        !gamesInProgress.find((gameInProgress) => gameInProgress.id === id)
+    );
 
-    if (!weekPicks) return currentWeeksGames.length;
+    if (!weekPicks) return gamesEligibleForPicks.length;
 
-    return weekPicks?.games.filter((game) => game.pick === NO_PICK).length || 0;
+    return (
+      weekPicks?.games.filter((game) => {
+        return (
+          game.pick === NO_PICK &&
+          gamesEligibleForPicks.find(({ id }) => id === game.id)
+        );
+      }).length || 0
+    );
   };
 
   const getCurrentWeekRecord = (): Record => {
@@ -44,16 +59,33 @@ export const usePicks = () => {
       pick,
     });
 
-    setPicks({ allTimeRecord, picks: updatedPicks, roi });
+    setPicks({ ...userPicksStateData, picks: updatedPicks });
     updateUserPicks(user.id, updatedPicks, db);
+  };
+
+  const getUserRank = (): number => {
+    let userScores = structuredClone(groupPicks).map(
+      ({ record }) => record.wins
+    );
+
+    userScores = userScores
+      .filter((score, index) => userScores.indexOf(score) === index)
+      .sort((a, b) => b - a);
+    return (
+      userScores.findIndex(
+        (score) => score === userPicksStateData.record.wins
+      ) + 1
+    );
   };
 
   return {
     makePick,
     picks,
-    allTimeRecord,
+    allTimeRecord: record,
     roi,
     getNumberOfPicksMissing,
     getCurrentWeekRecord,
+    currentWeekPicks,
+    getUserRank,
   };
 };

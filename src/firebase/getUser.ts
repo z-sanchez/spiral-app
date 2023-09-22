@@ -10,9 +10,7 @@ export const getUser = async ({
 }): Promise<any> => {
   try {
     const usersRef = doc(db, "users", userId);
-
     const querySnapshot = await getDoc(usersRef);
-
     return querySnapshot.data();
   } catch (err) {
     console.log("ERROR HERE", { err });

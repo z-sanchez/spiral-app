@@ -33,8 +33,8 @@ const LeaderboardLine = ({
         {record.wins}-{record.loses}
       </p>
       <div className="flex items-center">
-        <CoinIcon className="stroke-purple-500" />
-        <p className="text-purple-500 font-bold text-sm ml-1">{roi}</p>
+        {roi === 1 ? <CoinIcon className="stroke-purple-500" /> : <CoinIcon />}
+        {/* <p className="text-purple-500 font-bold text-sm ml-1">{roi}</p> */}
       </div>
     </div>
   );

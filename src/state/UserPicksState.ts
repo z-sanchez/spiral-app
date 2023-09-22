@@ -1,15 +1,16 @@
 import { atom } from "recoil";
-import { Picks } from "../types/Picks";
-import { Record } from "../types/Record";
 
-const defaultUserPicksState: {
-  picks: Picks;
-  allTimeRecord: Record;
-  roi: number;
+import { UserPicksObject } from "../types/Firebase";
+
+const defaultUserPicksState: UserPicksObject & {
+  groupPicks: UserPicksObject[];
 } = {
   picks: [],
-  allTimeRecord: { wins: 0, loses: 0, ties: 0 },
+  record: { wins: 0, loses: 0, ties: 0 },
+  id: "",
+  username: "",
   roi: 0,
+  groupPicks: [],
 };
 
 export const userPicksState = atom({

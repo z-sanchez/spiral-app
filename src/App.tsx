@@ -8,10 +8,6 @@ import { getFirestore } from "firebase/firestore";
 import { FIREBASE_CONFIGURATION } from "./utils/constants";
 import { useRecoilState } from "recoil";
 import { firestoreState } from "./state/FirestoreState";
-// import { uploadUserPicksFromJson } from "./firebase/uploadUserPicksFromJson";
-// import { logUserPicks } from "./firebase/logUserPicks";
-// import userPicksInJson from "./state/userPicksWeek2.json";
-// import { uploadUserPicksFromJson } from "./firebase/uploadUserPicksFromJson";
 
 const queryClient = new QueryClient();
 
@@ -25,7 +21,6 @@ function App() {
   const db = getFirestore(app);
 
   if (!firestoreStateData.db) {
-    // uploadUserPicksFromJson(JSON.parse(JSON.stringify(userPicksInJson)), db);
     setFirestoreData({ db });
   }
 
