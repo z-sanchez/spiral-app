@@ -61,7 +61,7 @@ export const usePicks = () => {
     updateUserPicks(user.id, updatedPicks, db);
   };
 
-  const getUserRank = (): number => {
+  const getUserAllTimeRank = (): number => {
     let userScores = structuredClone(groupPicks).map(
       ({ record }) => record.wins
     );
@@ -76,6 +76,110 @@ export const usePicks = () => {
     );
   };
 
+  const getGroupWeekWinsRanked = (): number[] => {
+    const usersWeekRecords = structuredClone(groupPicks).map(({ picks }) => {
+      return picks.find(({ id }) => id === currentWeekId)?.record
+        .wins as number;
+    });
+
+    const userScores: number[] = usersWeekRecords
+      .filter((score, index) => usersWeekRecords.indexOf(score) === index)
+      .sort((a, b) => b - a);
+
+    return userScores;
+  };
+
+  const getGroupAllTimeWinsRanked = (): number[] => {
+    const usersWeekRecords = structuredClone(groupPicks).map(({ record }) => {
+      return record.wins as number;
+    });
+
+    const userScores: number[] = usersWeekRecords
+      .filter((score, index) => usersWeekRecords.indexOf(score) === index)
+      .sort((a, b) => b - a);
+
+    return userScores;
+  };
+
+  const getUserWeekRank = (): number => {
+    const usersWeekRecords = structuredClone(groupPicks).map(({ picks }) => {
+      const groupRecord = picks.find(({ id }) => id === currentWeekId);
+      return groupRecord?.record.wins as number;
+    });
+
+    const userScores: number[] = usersWeekRecords
+      .filter((score, index) => usersWeekRecords.indexOf(score) === index)
+      .sort((a, b) => b - a);
+
+    return (
+      userScores.findIndex(
+        (rankNumber) => rankNumber === weekPicks?.record.wins
+      ) + 1
+    );
+  };
+
+  const getGroupUsersRankedByCurrentWeek = () => {
+    const groupOrdered: {
+      record: Record;
+      rank: number;
+      iconCharacter: string;
+      username: string;
+      color: string;
+      id: string;
+      photoURL: string;
+    }[] = [];
+
+    getGroupWeekWinsRanked().forEach((winNumber, index) => {
+      groupPicks.forEach((groupUser) => {
+        const week = groupUser.picks.find(({ id }) => id === currentWeekId);
+
+        if (week?.record.wins === winNumber) {
+          groupOrdered.push({
+            record: week.record,
+            rank: index + 1,
+            iconCharacter: groupUser.username[0].toUpperCase(),
+            username: groupUser.username,
+            color: "#A855F7",
+            id: groupUser.id,
+            photoURL: "",
+          });
+        }
+      });
+    });
+
+    return groupOrdered;
+  };
+
+  const getGroupUsersRankedByAllTime = () => {
+    const groupOrdered: {
+      record: Record;
+      rank: number;
+      iconCharacter: string;
+      username: string;
+      color: string;
+      id: string;
+      photoURL: string;
+    }[] = [];
+
+    getGroupAllTimeWinsRanked().forEach((winNumber, index) => {
+      groupPicks.forEach((groupUser) => {
+        if (groupUser?.record.wins === winNumber) {
+          groupOrdered.push({
+            record: groupUser.record,
+            rank: index + 1,
+            iconCharacter: groupUser.username[0].toUpperCase(),
+            username: groupUser.username,
+            color: "#A855F7",
+            id: groupUser.id,
+            photoURL: "",
+          });
+        }
+      });
+    });
+
+    return groupOrdered;
+  };
+
   return {
     makePick,
     picks,
@@ -84,6 +188,10 @@ export const usePicks = () => {
     getNumberOfPicksMissing,
     getCurrentWeekRecord,
     currentWeekPicks,
-    getUserRank,
+    getUserWeekRank,
+    getGroupWeekWinsRanked,
+    getUserAllTimeRank,
+    getGroupUsersRankedByCurrentWeek,
+    getGroupUsersRankedByAllTime,
   };
 };

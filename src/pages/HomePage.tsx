@@ -40,7 +40,7 @@ const HomePage = () => {
     picks,
     getCurrentWeekRecord,
     currentWeekPicks,
-    getUserRank,
+    getUserWeekRank,
   } = usePicks();
 
   const tabs = [
@@ -190,7 +190,7 @@ const HomePage = () => {
         <Scoreboard
           wins={String(getCurrentWeekRecord().wins)}
           loses={String(getCurrentWeekRecord().loses)}
-          rank={String(getUserRank())}
+          rank={String(getUserWeekRank())}
           rankStyle="text-green-500"
         />
         <SectionLabel label={"Games"}></SectionLabel>
