@@ -22,6 +22,7 @@ type GamePickerDataType = {
   active: boolean;
   homeTeam: (Competitors & { pick?: boolean }) | null;
   awayTeam: (Competitors & { pick?: boolean }) | null;
+  makeContinuousPick: boolean;
 };
 
 const HomePage = () => {
@@ -41,7 +42,6 @@ const HomePage = () => {
     currentWeekPicks,
     getUserRank,
   } = usePicks();
-  const makeContinuousPick = state?.makePicks || false;
 
   const tabs = [
     { id: "weekly", text: `Week ${currentWeekNumber} Picks`, active: true },
@@ -61,12 +61,13 @@ const HomePage = () => {
         )?.id || "";
 
       //no flag to make continuous pick on render or no gameId found while picks array is present
-      if (!makeContinuousPick || (!nextGameId && currentWeekPicks)) {
+      if (!state?.makePicks || (!nextGameId && currentWeekPicks)) {
         return {
           gameId: "",
           active: false,
           homeTeam: null,
           awayTeam: null,
+          makeContinuousPick: state?.makePicks || false,
         };
       }
 
@@ -85,6 +86,7 @@ const HomePage = () => {
           ...(homeTeam as Competitors),
           pick: false,
         },
+        makeContinuousPick: true,
       };
     }
   );
@@ -107,6 +109,7 @@ const HomePage = () => {
         ...awayTeamData,
         pick: pick === gamePickerData.awayTeam?.abbreviation,
       },
+      makeContinuousPick: false,
     });
   };
 
@@ -131,6 +134,7 @@ const HomePage = () => {
         active: false,
         homeTeam: null,
         awayTeam: null,
+        makeContinuousPick: false,
       });
       return;
     }
@@ -150,6 +154,7 @@ const HomePage = () => {
         ...(homeTeam as Competitors),
         pick: false,
       },
+      makeContinuousPick: true,
     });
   };
 
@@ -157,6 +162,7 @@ const HomePage = () => {
     <>
       {gamePickerData.active ? (
         <GamePicker
+          makeContinuousPick={gamePickerData.makeContinuousPick}
           gameId={gamePickerData.gameId}
           homeTeam={gamePickerData?.homeTeam as Competitors}
           awayTeam={gamePickerData?.awayTeam as Competitors}
@@ -166,10 +172,11 @@ const HomePage = () => {
               active: false,
               homeTeam: null,
               awayTeam: null,
+              makeContinuousPick: false,
             });
           }}
           onPick={(pick) => {
-            makeContinuousPick
+            gamePickerData.makeContinuousPick
               ? handleContinuousPick(pick)
               : handleMakePick(pick);
           }}
@@ -208,6 +215,7 @@ const HomePage = () => {
               live={isLive}
               lock={isLive}
               onClick={() => {
+                if (isLive) return;
                 setGamePickerData({
                   gameId: game.id,
                   active: true,
@@ -219,6 +227,7 @@ const HomePage = () => {
                     ...(homeTeam as Competitors),
                     pick: userPick === homeTeam?.abbreviation,
                   },
+                  makeContinuousPick: false,
                 });
               }}
             />

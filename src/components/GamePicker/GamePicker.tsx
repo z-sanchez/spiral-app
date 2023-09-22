@@ -12,6 +12,7 @@ type GamePickerProps = {
   gameId: string;
   handleClose: () => void;
   onPick: (pick: string) => void;
+  makeContinuousPick: boolean;
 };
 
 const GamePicker = ({
@@ -19,6 +20,7 @@ const GamePicker = ({
   awayTeam,
   handleClose,
   onPick,
+  makeContinuousPick,
 }: GamePickerProps) => {
   const handlePick = (pick: string) => {
     onPick(pick);
@@ -53,6 +55,7 @@ const GamePicker = ({
               homeTeam={homeTeam}
               awayTeam={awayTeam}
               onPick={handlePick}
+              makeContinuousPick={makeContinuousPick}
             />
           </div>
         </ClickAwayListener>
