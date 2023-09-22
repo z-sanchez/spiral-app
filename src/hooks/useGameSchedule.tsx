@@ -19,7 +19,7 @@ const useGameSchedule = () => {
 
   const currentWeekId = !isLoading ? getWeekId(data?.parameters) : "";
 
-  const currentWeekNumber = !isLoading ? data?.parameters.week : 2;
+  const currentWeekNumber = !isLoading ? data?.parameters.week : 0;
 
   const activeGames = currentWeeksGames.filter(({ completed }) => !completed);
   const gamesInProgress = activeGames.filter(

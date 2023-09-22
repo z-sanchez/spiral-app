@@ -15,8 +15,7 @@ export const usePicks = () => {
   const [userPicksStateData, setPicks] = useRecoilState(userPicksState);
   const { db } = useRecoilValue(firestoreState) as { db: Firestore };
   const { user } = useRecoilValue(authenticationState) as { user: User };
-  const { currentWeeksGames, currentWeekId, gamesInProgress } =
-    useGameSchedule();
+  const { currentWeeksGames, currentWeekId } = useGameSchedule();
   const { picks, record, roi, groupPicks } = userPicksStateData;
   const weekPicks = picks.find((week) => week.id === currentWeekId);
   const currentWeekPicks: WeekPicks | false =
@@ -24,8 +23,7 @@ export const usePicks = () => {
 
   const getNumberOfPicksMissing = () => {
     const gamesEligibleForPicks = currentWeeksGames.filter(
-      ({ id }) =>
-        !gamesInProgress.find((gameInProgress) => gameInProgress.id === id)
+      ({ completed, date }) => !completed && new Date() < new Date(date)
     );
 
     if (!weekPicks) return gamesEligibleForPicks.length;
