@@ -1,4 +1,5 @@
 import { Firestore, doc, getDoc } from "firebase/firestore";
+import getUserMockData from "../mock/getUserW3NotComplete.json";
 
 export const getUser = async ({
   userId,
@@ -8,6 +9,8 @@ export const getUser = async ({
   db: Firestore;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 }): Promise<any> => {
+  if (import.meta.env.VITE_USE_MOCK_DATA) return getUserMockData;
+
   try {
     const usersRef = doc(db, "users", userId);
     const querySnapshot = await getDoc(usersRef);

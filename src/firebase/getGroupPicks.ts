@@ -1,7 +1,10 @@
 import { Firestore, collection, getDocs } from "firebase/firestore";
 import { UserPicksObject } from "../types/Firebase";
+import getGroupPicksMockResult from "../mock/getGroupPicksW3NotComplete.json";
 
 export const getGroupPicks = async (db: Firestore) => {
+  if (import.meta.env.VITE_USE_MOCK_DATA) return getGroupPicksMockResult;
+
   const querySnapshot = await getDocs(collection(db, "picks"));
   const groupUserPickObjects: UserPicksObject[] = [];
 

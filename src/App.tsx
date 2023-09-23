@@ -14,6 +14,10 @@ const queryClient = new QueryClient();
 function App() {
   const [firestoreStateData, setFirestoreData] = useRecoilState(firestoreState);
 
+  if (import.meta.env.VITE_USE_MOCK_DATA) {
+    console.log("USING MOCK DATA");
+  }
+
   // Initialize Firebase
   const app = initializeApp(FIREBASE_CONFIGURATION);
 

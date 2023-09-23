@@ -8,6 +8,8 @@ export const createNewPicksUserInFirebase = async ({
   newUser: UserPicksObject;
   db: Firestore;
 }) => {
+  if (import.meta.env.USE_MOCK_DATA) return;
+
   try {
     await setDoc(doc(db, "picks", newUser.id), { ...newUser });
 

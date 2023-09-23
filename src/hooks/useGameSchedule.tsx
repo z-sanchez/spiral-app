@@ -1,18 +1,11 @@
 import { useQuery } from "react-query";
-import { GAME_SCHEDULE_QUERY } from "../utils/constants";
 import { getWeekData } from "../utils/helpers/espn/getWeekData";
 import { getWeekId } from "../utils/helpers/espn/getWeekId";
-import scheduleData from "../mock/scheduleData.json";
-
-const useMockData = false; //import.meta.env.DEV;
+import { fetchCurrentWeekData } from "../utils/helpers/espn/fetchWeekData";
 
 const useGameSchedule = () => {
   const { isLoading, data } = useQuery("gameScheduleData", () =>
-    useMockData
-      ? JSON.parse(JSON.stringify(scheduleData)).content
-      : fetch(GAME_SCHEDULE_QUERY)
-          .then((result) => result.json())
-          .then((scheduleData) => scheduleData.content)
+    fetchCurrentWeekData()
   );
 
   const currentWeeksGames = !isLoading ? getWeekData(data?.schedule) : [];
