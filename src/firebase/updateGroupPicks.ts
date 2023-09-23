@@ -3,16 +3,22 @@ import { UserPicksObject } from "../types/Firebase";
 import { updateUserPickObjectForFirebase } from "../utils/helpers/firebase/picks";
 import { updateUserPickObject } from "./updateUserPicks";
 import { fetchCurrentWeekParams } from "../utils/helpers/espn/fetchWeekData";
+import getGroupPicksMockResult from "../mock/getGroupPicksW3NotComplete.json";
 
 export const updateGroupPicks = async (db: Firestore) => {
-  const querySnapshot = await getDocs(collection(db, "picks"));
   let groupUserPickObjects: UserPicksObject[] = [];
 
-  querySnapshot.forEach((result) => {
-    const userPickObject = result.data() as UserPicksObject;
+  if (import.meta.env.VITE_USE_MOCK_DATA) {
+    groupUserPickObjects = getGroupPicksMockResult;
+  } else {
+    const querySnapshot = await getDocs(collection(db, "picks"));
 
-    groupUserPickObjects.push(userPickObject);
-  });
+    querySnapshot.forEach((result) => {
+      const userPickObject = result.data() as UserPicksObject;
+
+      groupUserPickObjects.push(userPickObject);
+    });
+  }
 
   const latestWeekNumber = await fetchCurrentWeekParams().then(
     (result) => result.week
