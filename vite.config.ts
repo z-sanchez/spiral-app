@@ -10,9 +10,13 @@ export default defineConfig({
     react(),
     VitePWA({
       manifest: {
+        name: "Spiral v2",
+        short_name: "Spiral",
+        description: "Pick'em App",
+        theme_color: "#ffffff",
         icons: [
           {
-            src: "src/assets/icons/spiral-v2-logo.png",
+            src: "assets/icons/spiral-v2-logo.png",
             sizes: "512x512",
             type: "image/png",
             purpose: "any maskable",
