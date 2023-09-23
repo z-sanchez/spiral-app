@@ -16,7 +16,7 @@ export default defineConfig({
         theme_color: "#ffffff",
         icons: [
           {
-            src: "assets/icons/spiral-v2-logo.png",
+            src: "/icons/spiral-v2-logo.png",
             sizes: "512x512",
             type: "image/png",
             purpose: "any maskable",
