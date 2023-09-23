@@ -22,7 +22,7 @@ const BottomNavBar = () => {
   };
 
   return (
-    <div className="flex-shrink-0 bg-white w-full h-16 pb-4 flex items-center justify-between px-20 border-t-2 border-gray-50">
+    <div className="flex-shrink-0 bg-white w-full pb-8 pt-2 flex items-center justify-between px-20 border-t-2 border-gray-50">
       <NavLink
         onClick={(e) => e.stopPropagation()}
         to="/"

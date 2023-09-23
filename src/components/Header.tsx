@@ -1,5 +1,4 @@
 import { ReactComponent as CoinIcon } from "../assets/icons/coin.svg";
-import { ReactComponent as BrightnessIcon } from "../assets/icons/brightness.svg";
 
 const Header = () => {
   return (
@@ -8,7 +7,6 @@ const Header = () => {
         <CoinIcon className="stroke-purple-500" />
         <p className="text-purple-500 font-bold text-sm ml-1">Pot $125</p>
       </div>
-      <BrightnessIcon />
     </div>
   );
 };
