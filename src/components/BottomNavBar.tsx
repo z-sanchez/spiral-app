@@ -1,6 +1,5 @@
 import { ReactComponent as HouseIcon } from "../assets/icons/house.svg";
 import { ReactComponent as CupIcon } from "../assets/icons/cup.svg";
-// import { ReactComponent as UsersIcon } from "../assets/icons/users.svg";
 import { ReactComponent as LogoutIcon } from "../assets/icons/logout.svg";
 
 import { NavLink } from "react-router-dom";
@@ -37,7 +36,6 @@ const BottomNavBar = () => {
       >
         <CupIcon />
       </NavLink>
-      {/* <UsersIcon onClick={handleSignOut} /> */}
       <LogoutIcon onClick={handleSignOut} />
     </div>
   );
