@@ -12,7 +12,7 @@ export default defineConfig({
       manifest: {
         icons: [
           {
-            src: "/src/assets/icons/spiral-v2-logo.png",
+            src: "src/assets/icons/spiral-v2-logo.png",
             sizes: "512x512",
             type: "image/png",
             purpose: "any maskable",
