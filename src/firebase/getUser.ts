@@ -1,5 +1,5 @@
 import { Firestore, doc, getDoc } from "firebase/firestore";
-import getUserMockData from "../mock/getUserW3NotComplete.json";
+import getUserMockData from "../mock/getUserData.json";
 
 export const getUser = async ({
   userId,
