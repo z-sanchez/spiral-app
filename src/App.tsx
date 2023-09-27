@@ -9,8 +9,8 @@ import { useRecoilState } from "recoil";
 import { firestoreState } from "./state/FirestoreState";
 // import { uploadUserPicksFromJson } from "./firebase/uploadUserPicksFromJson";
 // import { logUserPicks } from "./firebase/logUserPicks";
-import userPicksInJson from "./mock/userPicksWeek2.json";
-import { uploadUserPicksFromJson } from "./firebase/uploadUserPicksFromJson";
+// import userPicksInJson from "./mock/userPicksWeek3Started.json";
+// import { uploadUserPicksFromJson } from "./firebase/uploadUserPicksFromJson";
 
 const queryClient = new QueryClient();
 
@@ -24,7 +24,8 @@ function App() {
   const db = getFirestore(app);
 
   if (!firestoreStateData.db) {
-    uploadUserPicksFromJson(JSON.parse(JSON.stringify(userPicksInJson)), db);
+    // uploadUserPicksFromJson(JSON.parse(JSON.stringify(userPicksInJson)), db);
+    // logUserPicks(db);
     setFirestoreData({ db });
   }
 
