@@ -1,6 +1,6 @@
 import { GAME_SCHEDULE_QUERY } from "../../constants";
 import { getWeekData } from "./getWeekData";
-import scheduleData from "../../../mock/scheduleDataWK3NotComplete.json";
+import scheduleData from "../../../mock/scheduleDataWK4NotStarted.json";
 
 export const fetchCurrentWeekData = async () => {
   if (import.meta.env.VITE_USE_MOCK_DATA) return scheduleData;

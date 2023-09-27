@@ -3,7 +3,7 @@ import { UserPicksObject } from "../types/Firebase";
 import { updateUserPickObjectForFirebase } from "../utils/helpers/firebase/picks";
 import { updateUserPickObject } from "./updateUserPicks";
 import { fetchCurrentWeekParams } from "../utils/helpers/espn/fetchWeekData";
-import getGroupPicksMockResult from "../mock/getGroupPicksW3NotComplete.json";
+import getGroupPicksMockResult from "../mock/getGroupPicks.json";
 
 export const updateGroupPicks = async (db: Firestore) => {
   let groupUserPickObjects: UserPicksObject[] = [];
