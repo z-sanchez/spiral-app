@@ -7,6 +7,7 @@ export const updateUserPicks = async (
   picks: Picks,
   db: Firestore
 ) => {
+  if (import.meta.env.VITE_USE_MOCK_DATA) return;
   try {
     // const groupId = "sanchez-group";
     const userDocRef = doc(db, "picks", userId);
@@ -22,6 +23,8 @@ export const updateUserPickObject = async (
   pickObject: UserPicksObject,
   db: Firestore
 ) => {
+  if (import.meta.env.VITE_USE_MOCK_DATA) return;
+
   try {
     // const groupId = "sanchez-group";
     const userDocRef = doc(db, "picks", userId);

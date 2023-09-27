@@ -8,6 +8,8 @@ export const createNewUserInFirebase = async ({
   newUser: UserObject;
   db: Firestore;
 }) => {
+  if (import.meta.env.VITE_USE_MOCK_DATA) return;
+
   try {
     await setDoc(doc(db, "users", newUser.id), { ...newUser });
 
