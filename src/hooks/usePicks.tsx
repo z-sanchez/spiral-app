@@ -1,4 +1,4 @@
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { firestoreState } from "../state/FirestoreState";
 import { Firestore } from "firebase/firestore";
 import { useGameSchedule } from "./useGameSchedule";
@@ -10,8 +10,10 @@ import { User } from "../types/User";
 import { NO_PICK } from "../utils/constants";
 import { Record } from "../types/Record";
 import { WeekPicks } from "../types/Picks";
+import { notificationState } from "../state/NotificationState";
 
 export const usePicks = () => {
+  const setNotificationState = useSetRecoilState(notificationState);
   const [userPicksStateData, setPicks] = useRecoilState(userPicksState);
   const { db } = useRecoilValue(firestoreState) as { db: Firestore };
   const { user } = useRecoilValue(authenticationState) as { user: User };
@@ -58,7 +60,19 @@ export const usePicks = () => {
     });
 
     setPicks({ ...userPicksStateData, picks: updatedPicks });
-    updateUserPicks(user.id, updatedPicks, db);
+    updateUserPicks(user.id, updatedPicks, db).then((result) =>
+      result?.success
+        ? setNotificationState({
+            show: true,
+            backgroundColor: "rgb(34 197 94)",
+            message: "Pick Made Successfully",
+          })
+        : setNotificationState({
+            show: true,
+            backgroundColor: "rgb(244 63 94)",
+            message: "Pick Failed",
+          })
+    );
   };
 
   const getUserAllTimeRank = (): number => {

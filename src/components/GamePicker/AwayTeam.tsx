@@ -28,6 +28,10 @@ const AwayTeam = ({
     displayColor = color;
   }
 
+  if (abbreviation === "ARI") {
+    displayColor = color;
+  }
+
   return (
     <div
       className="w-1/2 px-5 flex flex-col items-center justify-center border-r-2 border-gray-100"
