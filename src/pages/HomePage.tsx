@@ -16,6 +16,7 @@ import { NO_PICK } from "../utils/constants";
 import { useLocation } from "react-router-dom";
 import { getAwayTeam, getHomeTeam } from "../utils/helpers/espn/getTeam";
 import { getGameWinner } from "../utils/helpers/espn/getGameWinner";
+import { SectionIndicator } from "../components/SectionIndicator";
 
 type GamePickerDataType = {
   gameId: string;
@@ -41,7 +42,10 @@ const HomePage = () => {
     getCurrentWeekRecord,
     currentWeekPicks,
     getUserWeekRank,
+    getNumberOfPicksMissing,
   } = usePicks();
+
+  const numberOfPicksNeeded = getNumberOfPicksMissing();
 
   const tabs = [
     { id: "weekly", text: `Week ${currentWeekNumber} Picks`, active: true },
@@ -193,7 +197,19 @@ const HomePage = () => {
           rank={String(getUserWeekRank())}
           rankStyle="text-green-500"
         />
-        <SectionLabel label={"Games"}></SectionLabel>
+        <div className="flex justify-between">
+          <SectionLabel label={"Games"}></SectionLabel>
+          {numberOfPicksNeeded ? (
+            <SectionIndicator
+              text={`${numberOfPicksNeeded} Picks Missing`}
+              backgroundColor={"#f44336"}
+            />
+          ) : (
+            <p className="text-green-500 text-xs self-center font-medium">
+              All Picks Submitted!
+            </p>
+          )}
+        </div>
         {activeGames.map((game) => {
           const homeTeam = game.competitors.find(({ isHome }) => isHome);
           const awayTeam = game.competitors.find(({ isHome }) => !isHome);
