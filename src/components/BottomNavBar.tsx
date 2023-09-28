@@ -1,6 +1,5 @@
 import { ReactComponent as HouseIcon } from "../assets/icons/house.svg";
 import { ReactComponent as CupIcon } from "../assets/icons/cup.svg";
-// import { ReactComponent as UsersIcon } from "../assets/icons/users.svg";
 import { ReactComponent as LogoutIcon } from "../assets/icons/logout.svg";
 
 import { NavLink } from "react-router-dom";
@@ -23,7 +22,7 @@ const BottomNavBar = () => {
   };
 
   return (
-    <div className="flex-shrink-0 bg-white w-full h-14 flex items-center justify-between px-20 border-t-2 border-gray-50">
+    <div className="flex-shrink-0 bg-white w-full pb-8 pt-2 flex items-center justify-between px-20 border-t-2 border-gray-50">
       <NavLink
         onClick={(e) => e.stopPropagation()}
         to="/"
@@ -37,7 +36,6 @@ const BottomNavBar = () => {
       >
         <CupIcon />
       </NavLink>
-      {/* <UsersIcon onClick={handleSignOut} /> */}
       <LogoutIcon onClick={handleSignOut} />
     </div>
   );

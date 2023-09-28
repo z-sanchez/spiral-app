@@ -11,6 +11,7 @@ import { UserPicksObject } from "../types/Firebase";
 import { User } from "../types/User";
 import { createUserPickObjectUser } from "../utils/helpers/firebase/picks";
 import { createNewPicksUserInFirebase } from "./createNewPicksUserInFirebase";
+import getUserPicksMockData from "../mock/getUserPicksW4NotStarted.json";
 
 export const getUserPicks = async ({
   userId,
@@ -22,6 +23,8 @@ export const getUserPicks = async ({
   userObject: User;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 }): Promise<any> => {
+  if (import.meta.env.VITE_USE_MOCK_DATA) return getUserPicksMockData;
+
   try {
     const usersRef = doc(db, "picks", userId);
 

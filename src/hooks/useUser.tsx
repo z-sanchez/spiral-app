@@ -9,31 +9,23 @@ import { userExists } from "../firebase/userExists";
 import { getUser } from "../firebase/getUser";
 import { useNavigate } from "react-router-dom";
 import { setCookie } from "../utils/helpers/cookie";
-import { GAME_SCHEDULE_QUERY, SPIRAL_COOKIE_NAME } from "../utils/constants";
+import { SPIRAL_COOKIE_NAME } from "../utils/constants";
 import { userPicksState } from "../state/UserPicksState";
 import { transformFirebaseUserToAppUser } from "../utils/helpers/transformFirebaseUserToAppUser";
 import { createUserPickObjectUser } from "../utils/helpers/firebase/picks";
 import { createNewPicksUserInFirebase } from "../firebase/createNewPicksUserInFirebase";
 import { getUserPicks } from "../firebase/getUserPicks";
 import { UserPicksObject } from "../types/Firebase";
-import userPicksMockData from "../mock/getUserPicksData.json";
-import userData from "../mock/getUserData.json";
 import { updateGroupPicks } from "../firebase/updateGroupPicks";
-import scheduleData from "../mock/scheduleData.json";
 import { doesUserPickObjectNeedUpdate } from "../utils/helpers/doesUserPickObjectNeedUpdate";
 import { useQuery } from "react-query";
 import { getWeekData } from "../utils/helpers/espn/getWeekData";
 import { getGroupPicks } from "../firebase/getGroupPicks";
-
-const useMockData = false; //import.meta.env.DEV;
+import { fetchCurrentWeekData } from "../utils/helpers/espn/fetchWeekData";
 
 export const useUser = () => {
   const { isLoading, data } = useQuery("gameScheduleData", () =>
-    useMockData
-      ? JSON.parse(JSON.stringify(scheduleData)).content
-      : fetch(GAME_SCHEDULE_QUERY)
-          .then((result) => result.json())
-          .then((scheduleData) => scheduleData.content)
+    fetchCurrentWeekData()
   );
   const [authState, setAuthState] = useRecoilState(authenticationState);
   const setUserPicksState = useSetRecoilState(userPicksState);
@@ -124,18 +116,14 @@ export const useUser = () => {
   }: {
     firebaseAuthUserId: string;
   }) => {
-    const user = useMockData
-      ? JSON.parse(JSON.stringify(userData.user))
-      : await getUser({ userId: firebaseAuthUserId, db });
+    const user = await getUser({ userId: firebaseAuthUserId, db });
     const appUser = transformFirebaseUserToAppUser(user);
 
-    let userPicks = useMockData
-      ? (JSON.parse(JSON.stringify(userPicksMockData)) as UserPicksObject)
-      : ((await getUserPicks({
-          userId: firebaseAuthUserId,
-          db,
-          userObject: appUser,
-        })) as UserPicksObject);
+    let userPicks = (await getUserPicks({
+      userId: firebaseAuthUserId,
+      db,
+      userObject: appUser,
+    })) as UserPicksObject;
 
     let groupPicks = await getGroupPicks(db);
 

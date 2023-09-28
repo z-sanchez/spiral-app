@@ -7,13 +7,27 @@ export const updateUserPicks = async (
   picks: Picks,
   db: Firestore
 ) => {
+  if (import.meta.env.VITE_USE_MOCK_DATA) {
+    return {
+      success: true,
+      error: null,
+    };
+  }
   try {
     // const groupId = "sanchez-group";
     const userDocRef = doc(db, "picks", userId);
 
     await updateDoc(userDocRef, { picks });
+    return {
+      success: true,
+      error: null,
+    };
   } catch (e) {
     console.log("FAILED TO UPDATE USER PICKS", userId, e);
+    return {
+      success: false,
+      error: e,
+    };
   }
 };
 
@@ -22,6 +36,8 @@ export const updateUserPickObject = async (
   pickObject: UserPicksObject,
   db: Firestore
 ) => {
+  if (import.meta.env.VITE_USE_MOCK_DATA) return;
+
   try {
     // const groupId = "sanchez-group";
     const userDocRef = doc(db, "picks", userId);
