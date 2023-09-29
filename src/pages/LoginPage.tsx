@@ -8,7 +8,6 @@ import {
 import { useEffect, useState } from "react";
 import { useUser } from "../hooks/useUser";
 import { getCookie } from "../utils/helpers/cookie";
-import { SPIRAL_COOKIE_NAME } from "../utils/constants";
 import { Spinner } from "../components/Spinner";
 import { ReactComponent as FieldGoalPost } from "../assets/icons/field-goal-post.svg";
 import { Tabs } from "../components/Tabs";
@@ -32,7 +31,7 @@ const LoginPage = () => {
   const activeTab = tabData.find((tab) => tab.active)?.id;
 
   useEffect(() => {
-    const cookieValid = getCookie(SPIRAL_COOKIE_NAME);
+    const cookieValid = getCookie(import.meta.env.VITE_COOKIE);
 
     if (cookieValid && !userStateLoading) {
       signInUserWithCookie({ firebaseAuthUserId: cookieValid });
