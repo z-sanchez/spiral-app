@@ -9,7 +9,6 @@ import { userExists } from "../firebase/userExists";
 import { getUser } from "../firebase/getUser";
 import { useNavigate } from "react-router-dom";
 import { setCookie } from "../utils/helpers/cookie";
-import { SPIRAL_COOKIE_NAME } from "../utils/constants";
 import { userPicksState } from "../state/UserPicksState";
 import { transformFirebaseUserToAppUser } from "../utils/helpers/transformFirebaseUserToAppUser";
 import { createUserPickObjectUser } from "../utils/helpers/firebase/picks";
@@ -107,7 +106,7 @@ export const useUser = () => {
       ...userPicks,
       groupPicks,
     });
-    setCookie(SPIRAL_COOKIE_NAME, firebaseAuthUser.uid, 365);
+    setCookie(import.meta.env.VITE_COOKIE, firebaseAuthUser.uid, 365);
     navigate("/");
   };
 

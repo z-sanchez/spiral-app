@@ -6,6 +6,7 @@ import { Tabs } from "../components/Tabs";
 import { PageLayout } from "../layouts/PageLayout";
 import { usePicks } from "../hooks/usePicks";
 import { LeaderboardLine } from "../components/LeaderboardLine";
+import { useGameSchedule } from "../hooks/useGameSchedule";
 
 const ScorePage = () => {
   const {
@@ -16,8 +17,9 @@ const ScorePage = () => {
     getGroupUsersRankedByCurrentWeek,
     getGroupUsersRankedByAllTime,
   } = usePicks();
+  const { currentWeekNumber } = useGameSchedule();
   const tabs = [
-    { id: "weekly", text: "Week 3 Picks", active: true },
+    { id: "weekly", text: `Week ${currentWeekNumber} Picks"`, active: true },
     { id: "all-time", text: "All Time", active: false },
   ];
   const [tabData, setTabData] = useState(tabs);
