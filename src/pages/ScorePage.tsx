@@ -19,7 +19,7 @@ const ScorePage = () => {
   } = usePicks();
   const { currentWeekNumber } = useGameSchedule();
   const tabs = [
-    { id: "weekly", text: `Week ${currentWeekNumber} Picks"`, active: true },
+    { id: "weekly", text: `Week ${currentWeekNumber} Picks`, active: true },
     { id: "all-time", text: "All Time", active: false },
   ];
   const [tabData, setTabData] = useState(tabs);
