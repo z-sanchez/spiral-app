@@ -35,6 +35,10 @@ const Team = ({
     displayColor = color;
   }
 
+  if (abbreviation === "ARI") {
+    displayColor = color;
+  }
+
   return (
     <div className="flex items-center h-full w-full">
       {emptyOutline && <div className={"w-1 h-10"}></div>}

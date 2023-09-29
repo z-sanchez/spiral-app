@@ -31,11 +31,24 @@ textarea {
   animation: pickAnimation 0.75s forwards;
 }
 
+.fadeOut {
+  animation: fadeOut 1.5s forwards;
+}
+
 @keyframes pickAnimation {
   0% {
     opacity: 0;
   }
   100% {
     opacity: 100;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 100;
+  }
+  100% {
+    opacity: 0;
   }
 }

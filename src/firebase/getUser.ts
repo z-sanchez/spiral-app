@@ -9,7 +9,7 @@ export const getUser = async ({
   db: Firestore;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 }): Promise<any> => {
-  if (import.meta.env.VITE_USE_MOCK_DATA) return getUserMockData;
+  if (import.meta.env.VITE_USE_MOCK_DATA) return getUserMockData.user;
 
   try {
     const usersRef = doc(db, "users", userId);
