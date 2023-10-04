@@ -11,7 +11,7 @@ import { UserPicksObject } from "../types/Firebase";
 import { User } from "../types/User";
 import { createUserPickObjectUser } from "../utils/helpers/firebase/picks";
 import { createNewPicksUserInFirebase } from "./createNewPicksUserInFirebase";
-import getUserPicksMockData from "../mock/getUserPicksW4NotStarted.json";
+import getUserPicksMockData from "../mock/getUserPicksW4Finished.json";
 
 export const getUserPicks = async ({
   userId,
