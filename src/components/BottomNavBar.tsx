@@ -6,7 +6,6 @@ import { NavLink } from "react-router-dom";
 import { getAuth, signOut } from "firebase/auth";
 import { useSetRecoilState } from "recoil";
 import { authenticationState } from "../state/AuthState";
-import { SPIRAL_COOKIE_NAME } from "../utils/constants";
 import { setCookie } from "../utils/helpers/cookie";
 
 const BottomNavBar = () => {
@@ -16,7 +15,7 @@ const BottomNavBar = () => {
     const auth = getAuth();
 
     signOut(auth).then(() => {
-      setCookie(SPIRAL_COOKIE_NAME, "", 365);
+      setCookie(import.meta.env.VITE_COOKIE, "", 365);
       setAuthState({ signedIn: false, authUser: {}, user: {} });
     });
   };
