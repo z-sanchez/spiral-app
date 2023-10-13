@@ -11,13 +11,24 @@ import { NO_PICK } from "../utils/constants";
 import { Record } from "../types/Record";
 import { WeekPicks } from "../types/Picks";
 import { notificationState } from "../state/NotificationState";
+import {
+  calculateUserAllTimeRank,
+  calculateUserWeekRank,
+  getAllTimeGroupScores,
+  getRankingNotificationData,
+  getWeekGroupScores,
+  sortGroupScores,
+} from "../utils/helpers/rankCalculators";
+import { RankingNotifications } from "../types/RankingNotifications";
+import { getWeekId } from "../utils/helpers/espn/getWeekId";
 
 export const usePicks = () => {
   const setNotificationState = useSetRecoilState(notificationState);
   const [userPicksStateData, setPicks] = useRecoilState(userPicksState);
   const { db } = useRecoilValue(firestoreState) as { db: Firestore };
   const { user } = useRecoilValue(authenticationState) as { user: User };
-  const { currentWeeksGames, currentWeekId } = useGameSchedule();
+  const { currentWeeksGames, currentWeekId, currentWeekNumber } =
+    useGameSchedule();
   const { picks, record, roi, groupPicks } = userPicksStateData;
   const weekPicks = picks.find((week) => week.id === currentWeekId);
   const currentWeekPicks: WeekPicks | false =
@@ -76,59 +87,28 @@ export const usePicks = () => {
   };
 
   const getUserAllTimeRank = (): number => {
-    let userScores = structuredClone(groupPicks).map(
-      ({ record }) => record.wins
-    );
-
-    userScores = userScores
-      .filter((score, index) => userScores.indexOf(score) === index)
-      .sort((a, b) => b - a);
-    return (
-      userScores.findIndex(
-        (score) => score === userPicksStateData.record.wins
-      ) + 1
-    );
+    return calculateUserAllTimeRank(userPicksStateData.groupPicks, record.wins);
   };
 
   const getGroupWeekWinsRanked = (): number[] => {
-    const usersWeekRecords = structuredClone(groupPicks).map(({ picks }) => {
-      return picks.find(({ id }) => id === currentWeekId)?.record
-        .wins as number;
-    });
-
-    const userScores: number[] = usersWeekRecords
-      .filter((score, index) => usersWeekRecords.indexOf(score) === index)
-      .sort((a, b) => b - a);
+    const usersWeekRecords = getWeekGroupScores(groupPicks, currentWeekId);
+    const userScores = sortGroupScores(usersWeekRecords);
 
     return userScores;
   };
 
   const getGroupAllTimeWinsRanked = (): number[] => {
-    const usersWeekRecords = structuredClone(groupPicks).map(({ record }) => {
-      return record.wins as number;
-    });
-
-    const userScores: number[] = usersWeekRecords
-      .filter((score, index) => usersWeekRecords.indexOf(score) === index)
-      .sort((a, b) => b - a);
+    const usersWeekRecords = getAllTimeGroupScores(groupPicks);
+    const userScores = sortGroupScores(usersWeekRecords);
 
     return userScores;
   };
 
   const getUserWeekRank = (): number => {
-    const usersWeekRecords = structuredClone(groupPicks).map(({ picks }) => {
-      const groupRecord = picks.find(({ id }) => id === currentWeekId);
-      return groupRecord?.record.wins as number;
-    });
-
-    const userScores: number[] = usersWeekRecords
-      .filter((score, index) => usersWeekRecords.indexOf(score) === index)
-      .sort((a, b) => b - a);
-
-    return (
-      userScores.findIndex(
-        (rankNumber) => rankNumber === weekPicks?.record.wins
-      ) + 1
+    return calculateUserWeekRank(
+      groupPicks,
+      getCurrentWeekRecord().wins,
+      currentWeekId
     );
   };
 
@@ -141,13 +121,27 @@ export const usePicks = () => {
       color: string;
       id: string;
       photoURL: string;
+      rankingNotifications?: RankingNotifications;
     }[] = [];
+
+    const previousWeekNumber = currentWeekNumber - 1;
+    const previousWeekId = getWeekId({
+      seasontype: 2,
+      week: previousWeekNumber,
+      year: 2023,
+    });
 
     getGroupWeekWinsRanked().forEach((winNumber, index) => {
       groupPicks.forEach((groupUser) => {
         const week = groupUser.picks.find(({ id }) => id === currentWeekId);
 
         if (week?.record.wins === winNumber) {
+          const rankingNotifications = getRankingNotificationData(
+            previousWeekId,
+            currentWeekId,
+            groupUser.id,
+            groupPicks
+          );
           groupOrdered.push({
             record: week.record,
             rank: index + 1,
@@ -156,6 +150,7 @@ export const usePicks = () => {
             color: "#A855F7",
             id: groupUser.id,
             photoURL: "",
+            rankingNotifications,
           });
         }
       });
@@ -173,11 +168,25 @@ export const usePicks = () => {
       color: string;
       id: string;
       photoURL: string;
+      rankingNotifications?: RankingNotifications;
     }[] = [];
+
+    const previousWeekNumber = currentWeekNumber - 1;
+    const previousWeekId = getWeekId({
+      seasontype: 2,
+      week: previousWeekNumber,
+      year: 2023,
+    });
 
     getGroupAllTimeWinsRanked().forEach((winNumber, index) => {
       groupPicks.forEach((groupUser) => {
         if (groupUser?.record.wins === winNumber) {
+          const rankingNotifications = getRankingNotificationData(
+            previousWeekId,
+            currentWeekId,
+            groupUser.id,
+            groupPicks
+          );
           groupOrdered.push({
             record: groupUser.record,
             rank: index + 1,
@@ -186,6 +195,7 @@ export const usePicks = () => {
             color: "#A855F7",
             id: groupUser.id,
             photoURL: "",
+            rankingNotifications,
           });
         }
       });

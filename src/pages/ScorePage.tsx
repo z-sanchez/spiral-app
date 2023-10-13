@@ -24,9 +24,13 @@ const ScorePage = () => {
   const activeTab = tabData.find(({ active }) => active);
   const isAllTime = activeTab?.id === "all-time";
 
-  const groupRanked = isAllTime
-    ? getGroupUsersRankedByAllTime()
-    : getGroupUsersRankedByCurrentWeek();
+  const groupRankedForAllTime = getGroupUsersRankedByAllTime();
+
+  const groupRankedForWeek = getGroupUsersRankedByCurrentWeek();
+
+  const selectedGroupRank = isAllTime
+    ? groupRankedForAllTime
+    : groupRankedForWeek;
 
   const { wins, loses } = isAllTime ? allTimeRecord : getCurrentWeekRecord();
 
@@ -68,12 +72,35 @@ const ScorePage = () => {
         />
         <SectionLabel label={"League Scores"}></SectionLabel>
         <div className="flex w-full items-center justify-center flex-col">
-          {groupRanked.map((player) => {
+          {selectedGroupRank.map((player) => {
+            const lastPlace =
+              player.rank ===
+              groupRankedForAllTime[groupRankedForAllTime.length - 1].rank;
+            const firstPlace =
+              groupRankedForAllTime.find(({ id }) => id === player.id)?.rank ===
+              1;
+
             return (
               <LeaderboardLine
-                allTime={isAllTime}
                 {...player}
                 key={player.id}
+                lastPlace={lastPlace && isAllTime}
+                allTimeLeader={firstPlace}
+                increaseIcon={
+                  !isAllTime
+                    ? player.rankingNotifications?.weekRankIncreased
+                    : false
+                }
+                decreaseIcon={
+                  !isAllTime
+                    ? player.rankingNotifications?.weekRankDecreased
+                    : false
+                }
+                hotStreakIcon={
+                  !isAllTime
+                    ? player.rankingNotifications?.isHotWeekStreak
+                    : false
+                }
               />
             );
           })}
