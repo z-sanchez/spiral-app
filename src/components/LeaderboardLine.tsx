@@ -8,6 +8,9 @@ type LeaderboardLineProps = User & {
   increaseIcon?: boolean;
   decreaseIcon?: boolean;
   hotStreakIcon?: boolean;
+  silverMedalIcon?: boolean;
+  bronzeMedalIcon?: boolean;
+  trophyIcon?: boolean;
   lastPlace?: boolean;
   record: Record;
   rank: number;
@@ -23,6 +26,9 @@ const LeaderboardLine = ({
   increaseIcon,
   decreaseIcon,
   hotStreakIcon,
+  silverMedalIcon,
+  bronzeMedalIcon,
+  trophyIcon,
   lastPlace,
   allTimeLeader,
 }: LeaderboardLineProps) => {
@@ -59,6 +65,9 @@ const LeaderboardLine = ({
         {allTimeLeader ? <>&#128081;</> : null}
         {lastPlace ? <>&#128546;</> : null}
         {hotStreakIcon ? <>&#128293;</> : null}
+        {bronzeMedalIcon ? <>&#129353;</> : null}
+        {silverMedalIcon ? <>&#129352;</> : null}
+        {trophyIcon ? <>&#127942;</> : null}
       </p>
     </div>
   );

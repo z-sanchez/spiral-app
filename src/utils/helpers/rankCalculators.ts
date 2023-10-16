@@ -50,6 +50,7 @@ export const getRankingNotificationData = (
   groupPicks: UserPicksObject[]
 ): RankingNotifications => {
   const userPicksObject = groupPicks.find(({ id }) => userId === id);
+  const allTimeWins = userPicksObject?.record.wins as number;
 
   const currentWeekWins = userPicksObject?.picks.find(
     ({ id }) => id === currentWeekId
@@ -69,6 +70,8 @@ export const getRankingNotificationData = (
     previousWeekId
   );
 
+  const allTimeRank = calculateUserAllTimeRank(groupPicks, allTimeWins);
+
   return {
     weekRankIncreased:
       previousWeekRank !== 0 ? currentWeekRank < previousWeekRank : false,
@@ -78,5 +81,8 @@ export const getRankingNotificationData = (
       previousWeekRank !== 0
         ? currentWeekRank === 1 && previousWeekRank === 1
         : false,
+    silverMedal: allTimeRank === 2,
+    bronzeMedal: allTimeRank === 3,
+    trophy: previousWeekRank === 1,
   };
 };
