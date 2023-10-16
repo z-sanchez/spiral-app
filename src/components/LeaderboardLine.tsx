@@ -1,15 +1,20 @@
 import { ProfileIcon } from "./ProfileIcon";
 import { ReactComponent as UpArrowIcon } from "../assets/icons/up-arrow.svg";
-import { ReactComponent as CoinIcon } from "../assets/icons/coin.svg";
+import { ReactComponent as DownArrowIcon } from "../assets/icons/down-arrow.svg";
 import { User } from "../types/User";
 import { Record } from "../types/Record";
 
 type LeaderboardLineProps = User & {
   increaseIcon?: boolean;
   decreaseIcon?: boolean;
+  hotStreakIcon?: boolean;
+  silverMedalIcon?: boolean;
+  bronzeMedalIcon?: boolean;
+  trophyIcon?: boolean;
+  lastPlace?: boolean;
   record: Record;
   rank: number;
-  allTime: boolean;
+  allTimeLeader?: boolean;
 };
 
 const LeaderboardLine = ({
@@ -18,13 +23,34 @@ const LeaderboardLine = ({
   rank,
   username,
   color,
-  allTime,
+  increaseIcon,
+  decreaseIcon,
+  hotStreakIcon,
+  silverMedalIcon,
+  bronzeMedalIcon,
+  trophyIcon,
+  lastPlace,
+  allTimeLeader,
 }: LeaderboardLineProps) => {
   return (
     <div className="w-full flex items-center justify-between border-b-2 py-3 border-gray-50">
-      <p className="text-purple-500 font-bold text-sm ml-1">{rank}</p>
+      <p className="text-purple-500 font-bold text-sm text-center w-4">
+        {rank}
+      </p>
       <div className="flex items-center">
-        <UpArrowIcon className="fill-green-500" />
+        {!increaseIcon && !decreaseIcon ? (
+          <p className="w-8"></p>
+        ) : (
+          <>
+            {increaseIcon ? (
+              <UpArrowIcon className="fill-green-500 w-8" />
+            ) : null}
+            {decreaseIcon ? (
+              <DownArrowIcon className="fill-red-500 w-8" />
+            ) : null}
+          </>
+        )}
+
         <ProfileIcon
           character={iconCharacter}
           styles="bg-cyan-500 drop-shadow-none w-5 h-5"
@@ -32,16 +58,17 @@ const LeaderboardLine = ({
         />
       </div>
       <p className="text-gray-700 w-1/4 text-start truncate">{username}</p>
-      <p className="bg-gray-100 rounded-full text-purple-500 text-sm  px-3">
+      <p className="bg-gray-100 rounded-full text-purple-500 text-sm w-16 text-center">
         {record.wins}-{record.loses}
       </p>
-      <div className="flex items-center">
-        {rank === 1 && allTime ? (
-          <CoinIcon className="stroke-purple-500" />
-        ) : (
-          <CoinIcon />
-        )}
-      </div>
+      <p className="w-10 ">
+        {allTimeLeader ? <>&#128081;</> : null}
+        {lastPlace ? <>&#128546;</> : null}
+        {hotStreakIcon ? <>&#128293;</> : null}
+        {bronzeMedalIcon ? <>&#129353;</> : null}
+        {silverMedalIcon ? <>&#129352;</> : null}
+        {trophyIcon ? <>&#127942;</> : null}
+      </p>
     </div>
   );
 };
