@@ -51,13 +51,11 @@ const LeaderboardLine = ({
           </>
         )}
 
-        <ProfileIcon
-          character={iconCharacter}
-          styles="bg-cyan-500 drop-shadow-none w-5 h-5"
-          backgroundColor={color}
-        />
+        <ProfileIcon character={iconCharacter} backgroundColor={color} />
       </div>
-      <p className="text-gray-700 w-1/4 text-start truncate">{username}</p>
+      <p className="text-gray-700 w-5/12 px-2 text-start truncate">
+        {username}
+      </p>
       <p className="bg-gray-100 rounded-full text-purple-500 text-sm w-16 text-center">
         {record.wins}-{record.loses}
       </p>

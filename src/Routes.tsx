@@ -11,6 +11,7 @@ import { ScorePage } from "./pages/ScorePage";
 import { LoginPage } from "./pages/LoginPage";
 import { useRecoilValue } from "recoil";
 import { authenticationState } from "./state/AuthState";
+import { ProfileSettingsPage } from "./pages/ProfileSettingsPage";
 
 const PrivateRoutes = () => {
   const authState = useRecoilValue(authenticationState);
@@ -24,6 +25,7 @@ export const AppRoutes = () => {
         <Route element={<PrivateRoutes />}>
           <Route element={<HomePage />} path="/" />
           <Route element={<ScorePage />} path="/scores" />
+          <Route element={<ProfileSettingsPage />} path="/profileSettings" />
         </Route>
         <Route element={<LoginPage />} path="/login" />
         <Route path="*" element={<p>No Page Found</p>} />
