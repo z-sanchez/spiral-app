@@ -17,4 +17,5 @@ export type UserPicksObject = {
   roi: number;
   record: Record;
   picks: Picks;
+  color?: string;
 };
