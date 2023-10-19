@@ -112,10 +112,12 @@ const ProfileSettingsPage = () => {
   return (
     <PageLayout>
       <SectionLabel label="Profile Settings"></SectionLabel>
-      <SectionIndicator
-        text="Please Update Your Username and Color"
-        backgroundColor={"rgb(168, 85, 247)"}
-      />
+      {!selectedColor ? (
+        <SectionIndicator
+          text="Please Update Your Username and Color"
+          backgroundColor={"rgb(168, 85, 247)"}
+        />
+      ) : null}
       <div className="flex flex-col justify-center items-center mt-8">
         <ProfileIcon
           character={usernameState[0].toLocaleUpperCase()}
