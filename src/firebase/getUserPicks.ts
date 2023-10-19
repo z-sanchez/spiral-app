@@ -45,16 +45,16 @@ export const getUserPicks = async ({
   }
 };
 
-export const getUserPicksByEmail = async ({
-  userEmail,
+export const getUserPicksByIdForLogging = async ({
+  userId,
   db,
 }: {
-  userEmail: string;
+  userId: string;
   db: Firestore;
 }) => {
   const userPicksQuery = query(
     collection(db, "picks"),
-    where("username", "==", userEmail)
+    where("id", "==", userId)
   );
 
   const querySnapshot = await getDocs(userPicksQuery);
