@@ -1,4 +1,5 @@
 import { Game } from "../components/Game/Game";
+import { NewGame } from "../components/Game/NewGame";
 import { Scoreboard } from "../components/Scoreboard/Scoreboard";
 import { SectionLabel } from "../components/SectionLabel";
 import { Tabs } from "../components/Tabs";
@@ -217,20 +218,21 @@ const HomePage = () => {
           const userPick = getPick(currentWeekId, game.id, picks);
 
           return (
-            <Game
+            <NewGame
               key={game.id}
               gameId={game.id}
               homeTeam={{
                 ...(homeTeam as Competitors),
-                pick: userPick === homeTeam?.abbreviation,
+                isPicked: userPick === homeTeam?.abbreviation,
               }}
               awayTeam={{
                 ...(awayTeam as Competitors),
-                pick: userPick === awayTeam?.abbreviation,
+                isPicked: userPick === awayTeam?.abbreviation,
               }}
-              live={isLive}
-              lock={isLive}
-              onClick={() => {
+              showScores={false}
+              showResults={false}
+              readonly={isLive}
+              onPick={() => {
                 if (isLive) return;
                 setGamePickerData({
                   gameId: game.id,
