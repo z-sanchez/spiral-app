@@ -1,6 +1,10 @@
 export const GAME_SCHEDULE_QUERY =
   "https://cdn.espn.com/core/nfl/schedule?xhr=1&year=2023&seasontype=2";
 
+export const ENV_VARIABLES = {
+  useMockData: import.meta.env.VITE_USE_MOCK_DATA,
+};
+
 export const FIREBASE_CONFIGURATION = {
   apiKey: import.meta.env.VITE_API_KEY,
   authDomain: import.meta.env.VITE_AUTH_DOMAIN,
