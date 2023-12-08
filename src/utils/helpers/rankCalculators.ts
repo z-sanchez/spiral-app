@@ -79,7 +79,9 @@ export const getRankingNotificationData = (
       previousWeekRank !== 0 ? currentWeekRank > previousWeekRank : false,
     isHotWeekStreak:
       previousWeekRank !== 0
-        ? currentWeekRank === 1 && previousWeekRank === 1
+        ? currentWeekRank === 1 &&
+          previousWeekRank === 1 &&
+          currentWeekWins !== 0
         : false,
     silverMedal: allTimeRank === 2,
     bronzeMedal: allTimeRank === 3,

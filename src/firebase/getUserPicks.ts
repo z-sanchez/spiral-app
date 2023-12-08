@@ -11,7 +11,7 @@ import { UserPicksObject } from "../types/Firebase";
 import { User } from "../types/User";
 import { createUserPickObjectUser } from "../utils/helpers/firebase/picks";
 import { createNewPicksUserInFirebase } from "./createNewPicksUserInFirebase";
-import getUserPicksMockData from "../mock/getUserPicksW4Finished.json";
+import getUserPicksMockData from "../mock/getUserPicks.json";
 
 export const getUserPicks = async ({
   userId,
@@ -45,16 +45,16 @@ export const getUserPicks = async ({
   }
 };
 
-export const getUserPicksByEmail = async ({
-  userEmail,
+export const getUserPicksByIdForLogging = async ({
+  userId,
   db,
 }: {
-  userEmail: string;
+  userId: string;
   db: Firestore;
 }) => {
   const userPicksQuery = query(
     collection(db, "picks"),
-    where("username", "==", userEmail)
+    where("id", "==", userId)
   );
 
   const querySnapshot = await getDocs(userPicksQuery);
