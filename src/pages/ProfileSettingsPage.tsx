@@ -43,6 +43,15 @@ const ProfileSettingsPage = () => {
       return;
     }
 
+    if (!selectedColor) {
+      setNotificationState({
+        show: true,
+        backgroundColor: "rgb(244 63 94)",
+        message: "No Color Picked",
+      });
+      return;
+    }
+
     updateUserObjectColorAndUsername(id, selectedColor, usernameState, db)
       .then((result) => {
         result?.success
