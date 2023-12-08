@@ -2,6 +2,7 @@ import { useQuery } from "react-query";
 import { getWeekData } from "../utils/helpers/espn/getWeekData";
 import { getWeekId } from "../utils/helpers/espn/getWeekId";
 import { fetchCurrentWeekData } from "../utils/helpers/espn/fetchWeekData";
+import { sortScheduleIntoDays } from "../utils/helpers/sortScheduleIntoDays";
 
 const useGameSchedule = () => {
   const { isLoading, data } = useQuery("gameScheduleData", () =>
@@ -27,8 +28,13 @@ const useGameSchedule = () => {
     return data;
   };
 
+  const activeGameScheduleInDays = !isLoading
+    ? sortScheduleIntoDays(activeGames)
+    : [];
+
   return {
     getCurrentScheduleData,
+    activeGameScheduleInDays,
     currentWeeksGames,
     currentWeekId,
     activeGames,
