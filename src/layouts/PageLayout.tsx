@@ -14,9 +14,7 @@ const PageLayout = ({ children }: { children?: ReactNode }) => {
   const numberOfPicksMissing = getNumberOfPicksMissing();
 
   const handleNotificationClick = () => {
-    navigate("/", {
-      state: { makePicks: true },
-    });
+    navigate("/");
   };
 
   return (
