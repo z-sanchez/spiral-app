@@ -1,9 +1,9 @@
-import { GAME_SCHEDULE_QUERY } from "../../constants";
+import { ENV_VARIABLES, GAME_SCHEDULE_QUERY } from "../../constants";
 import { getWeekData } from "./getWeekData";
 import scheduleData from "../../../mock/scheduleData.json";
 
 export const fetchCurrentWeekData = async () => {
-  if (import.meta.env.VITE_USE_MOCK_DATA) return scheduleData;
+  if (ENV_VARIABLES.useMockData) return scheduleData;
 
   const result = await fetch(GAME_SCHEDULE_QUERY)
     .then((result) => result.json())
@@ -13,8 +13,7 @@ export const fetchCurrentWeekData = async () => {
 };
 
 export const fetchWeekData = async (weekNumber: number) => {
-  if (import.meta.env.VITE_USE_MOCK_DATA)
-    return getWeekData(scheduleData.schedule);
+  if (ENV_VARIABLES.useMockData) return getWeekData(scheduleData.schedule);
 
   const resultData = await fetch(
     `https://cdn.espn.com/core/nfl/schedule?xhr=1&year=2023&seasontype=2&week=${weekNumber}`
@@ -24,7 +23,7 @@ export const fetchWeekData = async (weekNumber: number) => {
 };
 
 export const fetchCurrentWeekParams = async () => {
-  if (import.meta.env.VITE_USE_MOCK_DATA) scheduleData.parameters;
+  if (ENV_VARIABLES.useMockData) scheduleData.parameters;
 
   const resultData = await fetch(
     `https://cdn.espn.com/core/nfl/schedule?xhr=1&year=2023&seasontype=2`
