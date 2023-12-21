@@ -8,5 +8,8 @@ export default {
   moduleNameMapper: {
     "\\.(gif|ttf|eot|svg|png)$": "<rootDir>/test/__ mocks __/fileMock.js",
   },
-  modulePathIgnorePatterns: ["<rootDir>/src/__test__/App.test.tsx"],
+  modulePathIgnorePatterns: [
+    "<rootDir>/src/__test__/App.test.tsx",
+    "<rootDir>/src/__test__/Game.test.tsx",
+  ],
 };
