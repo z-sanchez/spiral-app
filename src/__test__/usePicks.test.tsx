@@ -12,6 +12,7 @@ jest.mock("../utils/constants", () => ({
 }));
 
 jest.mock("recoil", () => ({
+  //only want to mock a few functions
   ...jest.requireActual("recoil"),
   useSetRecoilState: jest.fn(),
   useRecoilState: jest.fn(),

@@ -30,7 +30,6 @@ export const usePicks = () => {
   const { currentWeeksGames, currentWeekId, currentWeekNumber } =
     useGameSchedule();
 
-  console.log({ userPicksStateData, currentWeekId });
   const { picks, record, roi, groupPicks } = userPicksStateData;
   const weekPicks = picks.find((week) => week.id === currentWeekId);
   const currentWeekPicks: WeekPicks | false =

@@ -1,6 +1,7 @@
 import "@testing-library/jest-dom";
 import { Game } from "../components/Game/Game";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import renderer from "react-test-renderer";
 
 //this solves the jest-vite incompatibility when using import.meta.env
 jest.mock("../utils/constants", () => ({
@@ -76,6 +77,8 @@ describe("New Game Component Functions", () => {
   let awayTeamComponent: HTMLElement | null = null;
 
   beforeEach(() => {
+    cleanup(); //unmounts react components
+    jest.restoreAllMocks(); //resets all mocks
     render(GameComponent);
     homeTeamComponent = screen.getByTestId("homeTeam");
     awayTeamComponent = screen.getByTestId("awayTeam");
@@ -252,6 +255,27 @@ describe("New Game Component UI", () => {
 
     expect(outline).toBe(pickedStyles.outline);
     expect(backgroundColor).toBe(pickedStyles.background);
+  });
+
+  test("Away team picked and highlighted -- Snapshot Test", () => {
+    const awayTeamPicked = { ...awayTeam, isPicked: true };
+
+    const tree = renderer
+      .create(
+        <Game
+          gameId="1234"
+          readonly={false}
+          homeTeam={homeTeam}
+          awayTeam={awayTeamPicked}
+          showScores={false}
+          onPick={handlePickMock}
+          showResults={false}
+          correctPick={false}
+        ></Game>
+      )
+      .toJSON();
+
+    expect(tree).toMatchSnapshot();
   });
 
   test("No pick made", () => {
