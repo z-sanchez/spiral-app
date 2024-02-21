@@ -16,6 +16,7 @@ import { getAwayTeam, getHomeTeam } from "../utils/helpers/espn/getTeam";
 import { getGameWinner } from "../utils/helpers/espn/getGameWinner";
 import { SectionIndicator } from "../components/SectionIndicator";
 import { format } from "date-fns";
+import React from "react";
 
 const HomePage = () => {
   const {
@@ -72,7 +73,7 @@ const HomePage = () => {
             format(dateObject, "P") + " " + format(dateObject, "p");
           const isLive = dateObject < new Date();
           return (
-            <>
+            <React.Fragment key={date}>
               <div className="flex items-center justify-between">
                 <p className="text-gray-800 mb-2 mt-4 text-xs font-medium">
                   {dateLabel}
@@ -107,7 +108,7 @@ const HomePage = () => {
                   />
                 );
               })}
-            </>
+            </React.Fragment>
           );
         })}
         {completedGames.length ? (
