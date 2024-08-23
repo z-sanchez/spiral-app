@@ -1,5 +1,4 @@
 import "@testing-library/jest-dom";
-// import * as renderer from "react-test-renderer";
 import { Game } from "../components/Game/Game";
 import { fireEvent, render, screen } from "@testing-library/react";
 

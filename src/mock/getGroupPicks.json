@@ -1,35 +1,36 @@
 [
   {
-    "username": "ricksanchez3@yahoo.com",
-    "roi": 0,
+    "id": "uOuggH3osrNoBDi20594olte9f82",
     "record": {
+      "loses": 35,
       "ties": 0,
-      "wins": 41,
-      "loses": 35
+      "wins": 42
     },
+    "roi": 0,
     "picks": [
       {
-        "record": {
-          "loses": 4,
-          "ties": 0,
-          "wins": 12
-        },
         "id": "222023",
+        "completed": true,
+        "record": {
+          "wins": 12,
+          "loses": 4,
+          "ties": 0
+        },
         "games": [
           {
-            "winner": "PHI",
             "pick": "MIN",
+            "winner": "PHI",
             "id": "401547410"
           },
           {
-            "pick": "ATL",
             "winner": "ATL",
-            "id": "401547417"
+            "id": "401547417",
+            "pick": "ATL"
           },
           {
+            "id": "401547411",
             "pick": "BUF",
-            "winner": "BUF",
-            "id": "401547411"
+            "winner": "BUF"
           },
           {
             "id": "401547412",
@@ -37,29 +38,29 @@
             "winner": "BAL"
           },
           {
-            "winner": "SEA",
             "pick": "SEA",
-            "id": "401547418"
+            "id": "401547418",
+            "winner": "SEA"
           },
           {
+            "id": "401547414",
             "winner": "TEN",
-            "pick": "TEN",
-            "id": "401547414"
+            "pick": "TEN"
           },
           {
             "id": "401547420",
-            "winner": "TB",
-            "pick": "TB"
+            "pick": "TB",
+            "winner": "TB"
           },
           {
-            "winner": "KC",
             "pick": "KC",
-            "id": "401547413"
+            "id": "401547413",
+            "winner": "KC"
           },
           {
+            "winner": "IND",
             "id": "401547419",
-            "pick": "HOU",
-            "winner": "IND"
+            "pick": "HOU"
           },
           {
             "id": "401547422",
@@ -67,9 +68,9 @@
             "pick": "SF"
           },
           {
-            "id": "401547421",
             "pick": "NYG",
-            "winner": "NYG"
+            "winner": "NYG",
+            "id": "401547421"
           },
           {
             "pick": "DAL",
@@ -82,66 +83,64 @@
             "id": "401547416"
           },
           {
+            "pick": "NE",
             "id": "401547423",
-            "winner": "MIA",
-            "pick": "NE"
+            "winner": "MIA"
           },
           {
-            "id": "401547425",
             "winner": "NO",
+            "id": "401547425",
             "pick": "NO"
           },
           {
             "winner": "PIT",
-            "pick": "PIT",
-            "id": "401547424"
+            "id": "401547424",
+            "pick": "PIT"
           }
-        ],
-        "completed": true
+        ]
       },
       {
-        "id": "232023",
         "record": {
-          "loses": 10,
           "wins": 6,
-          "ties": 0
+          "ties": 0,
+          "loses": 10
         },
         "completed": true,
         "games": [
           {
+            "id": "401547426",
             "pick": "SF",
-            "winner": "SF",
-            "id": "401547426"
+            "winner": "SF"
           },
           {
             "id": "401547428",
-            "pick": "CLE",
-            "winner": "CLE"
+            "winner": "CLE",
+            "pick": "CLE"
           },
           {
-            "winner": "DET",
+            "id": "401547433",
             "pick": "ATL",
-            "id": "401547433"
+            "winner": "DET"
           },
           {
+            "id": "401547434",
             "winner": "GB",
-            "pick": "no pick",
-            "id": "401547434"
-          },
-          {
-            "id": "401547429",
-            "winner": "MIA",
             "pick": "no pick"
           },
           {
-            "winner": "LAC",
             "pick": "no pick",
+            "winner": "MIA",
+            "id": "401547429"
+          },
+          {
+            "pick": "no pick",
+            "winner": "LAC",
             "id": "401547436"
           },
           {
+            "pick": "no pick",
             "id": "401547430",
-            "winner": "NE",
-            "pick": "no pick"
+            "winner": "NE"
           },
           {
             "pick": "no pick",
@@ -149,14 +148,544 @@
             "id": "401547431"
           },
           {
-            "id": "401547435",
             "pick": "no pick",
+            "id": "401547435",
             "winner": "HOU"
           },
           {
             "winner": "IND",
             "id": "401547427",
             "pick": "no pick"
+          },
+          {
+            "pick": "no pick",
+            "id": "401547432",
+            "winner": "SEA"
+          },
+          {
+            "pick": "no pick",
+            "id": "401547438",
+            "winner": "KC"
+          },
+          {
+            "id": "401547437",
+            "winner": "ARI",
+            "pick": "no pick"
+          },
+          {
+            "pick": "no pick",
+            "id": "401547439",
+            "winner": "PIT"
+          },
+          {
+            "id": "401547440",
+            "winner": "PHI",
+            "pick": "no pick"
+          },
+          {
+            "winner": "CIN",
+            "id": "401547441",
+            "pick": "no pick"
+          }
+        ],
+        "id": "232023"
+      },
+      {
+        "id": "242023",
+        "record": {
+          "loses": 8,
+          "wins": 8,
+          "ties": 0
+        },
+        "completed": true,
+        "games": [
+          {
+            "pick": "GB",
+            "winner": "DET",
+            "id": "401547442"
+          },
+          {
+            "pick": "ATL",
+            "winner": "JAX",
+            "id": "401547227"
+          },
+          {
+            "pick": "MIA",
+            "id": "401547443",
+            "winner": "BUF"
+          },
+          {
+            "winner": "DEN",
+            "pick": "CHI",
+            "id": "401547444"
+          },
+          {
+            "pick": "CLE",
+            "winner": "BAL",
+            "id": "401547445"
+          },
+          {
+            "id": "401547452",
+            "pick": "TEN",
+            "winner": "TEN"
+          },
+          {
+            "id": "401547449",
+            "winner": "LAR",
+            "pick": "IND"
+          },
+          {
+            "winner": "TB",
+            "id": "401547450",
+            "pick": "TB"
+          },
+          {
+            "winner": "PHI",
+            "id": "401547451",
+            "pick": "PHI"
+          },
+          {
+            "winner": "MIN",
+            "id": "401547448",
+            "pick": "MIN"
+          },
+          {
+            "pick": "PIT",
+            "winner": "HOU",
+            "id": "401547446"
+          },
+          {
+            "id": "401547447",
+            "pick": "LAC",
+            "winner": "LAC"
+          },
+          {
+            "id": "401547453",
+            "winner": "DAL",
+            "pick": "DAL"
+          },
+          {
+            "pick": "SF",
+            "winner": "SF",
+            "id": "401547454"
+          },
+          {
+            "winner": "KC",
+            "id": "401547455",
+            "pick": "KC"
+          },
+          {
+            "id": "401547456",
+            "pick": "NYG",
+            "winner": "SEA"
+          }
+        ]
+      },
+      {
+        "games": [
+          {
+            "pick": "WSH",
+            "winner": "CHI",
+            "id": "401547457"
+          },
+          {
+            "winner": "JAX",
+            "pick": "BUF",
+            "id": "401547228"
+          },
+          {
+            "id": "401547463",
+            "pick": "ATL",
+            "winner": "ATL"
+          },
+          {
+            "pick": "DET",
+            "winner": "DET",
+            "id": "401547464"
+          },
+          {
+            "pick": "IND",
+            "winner": "IND",
+            "id": "401547458"
+          },
+          {
+            "winner": "MIA",
+            "id": "401547465",
+            "pick": "MIA"
+          },
+          {
+            "pick": "NO",
+            "winner": "NO",
+            "id": "401547459"
+          },
+          {
+            "id": "401547460",
+            "winner": "PIT",
+            "pick": "BAL"
+          },
+          {
+            "id": "401547467",
+            "pick": "LAR",
+            "winner": "PHI"
+          },
+          {
+            "pick": "ARI",
+            "id": "401547466",
+            "winner": "CIN"
+          },
+          {
+            "pick": "DEN",
+            "id": "401547461",
+            "winner": "NYJ"
+          },
+          {
+            "id": "401547462",
+            "winner": "KC",
+            "pick": "KC"
+          },
+          {
+            "pick": "DAL",
+            "id": "401547354",
+            "winner": "SF"
+          },
+          {
+            "winner": "LV",
+            "pick": "LV",
+            "id": "401547468"
+          }
+        ],
+        "record": {
+          "ties": 0,
+          "loses": 7,
+          "wins": 7
+        },
+        "id": "252023",
+        "completed": true
+      },
+      {
+        "record": {
+          "loses": 6,
+          "ties": 0,
+          "wins": 9
+        },
+        "games": [
+          {
+            "pick": "KC",
+            "id": "401547469",
+            "winner": "KC"
+          },
+          {
+            "pick": "BAL",
+            "id": "401547229",
+            "winner": "BAL"
+          },
+          {
+            "pick": "ATL",
+            "winner": "WSH",
+            "id": "401547470"
+          },
+          {
+            "winner": "MIN",
+            "id": "401547475",
+            "pick": "CHI"
+          },
+          {
+            "winner": "CIN",
+            "pick": "SEA",
+            "id": "401547471"
+          },
+          {
+            "pick": "SF",
+            "winner": "CLE",
+            "id": "401547476"
+          },
+          {
+            "winner": "MIA",
+            "id": "401547473",
+            "pick": "MIA"
+          },
+          {
+            "pick": "JAX",
+            "winner": "JAX",
+            "id": "401547472"
+          },
+          {
+            "winner": "HOU",
+            "pick": "HOU",
+            "id": "401547477"
+          },
+          {
+            "pick": "LV",
+            "id": "401547474",
+            "winner": "LV"
+          },
+          {
+            "pick": "LAR",
+            "winner": "LAR",
+            "id": "401547479"
+          },
+          {
+            "id": "401547480",
+            "winner": "NYJ",
+            "pick": "PHI"
+          },
+          {
+            "winner": "DET",
+            "pick": "TB",
+            "id": "401547478"
+          },
+          {
+            "pick": "BUF",
+            "winner": "BUF",
+            "id": "401547481"
+          },
+          {
+            "id": "401547482",
+            "pick": "DAL",
+            "winner": "DAL"
+          }
+        ],
+        "completed": true,
+        "id": "262023"
+      },
+      {
+        "record": {
+          "ties": 0,
+          "wins": 0,
+          "loses": 0
+        },
+        "games": [
+          {
+            "id": "401547483",
+            "winner": "not completed",
+            "pick": "no pick"
+          },
+          {
+            "pick": "no pick",
+            "winner": "not completed",
+            "id": "401547490"
+          },
+          {
+            "pick": "no pick",
+            "winner": "not completed",
+            "id": "401547484"
+          },
+          {
+            "winner": "not completed",
+            "id": "401547485",
+            "pick": "no pick"
+          },
+          {
+            "winner": "not completed",
+            "pick": "no pick",
+            "id": "401547486"
+          },
+          {
+            "winner": "not completed",
+            "id": "401547491",
+            "pick": "no pick"
+          },
+          {
+            "winner": "not completed",
+            "id": "401547489",
+            "pick": "no pick"
+          },
+          {
+            "pick": "no pick",
+            "id": "401547492",
+            "winner": "not completed"
+          },
+          {
+            "winner": "not completed",
+            "id": "401547493",
+            "pick": "no pick"
+          },
+          {
+            "pick": "no pick",
+            "id": "401547487",
+            "winner": "not completed"
+          },
+          {
+            "pick": "no pick",
+            "id": "401547488",
+            "winner": "not completed"
+          },
+          {
+            "id": "401547494",
+            "winner": "not completed",
+            "pick": "no pick"
+          },
+          {
+            "pick": "no pick",
+            "id": "401547495",
+            "winner": "not completed"
+          }
+        ],
+        "id": "272023",
+        "completed": false
+      }
+    ],
+    "username": "ricksanchez3@yahoo.com"
+  },
+  {
+    "roi": 0,
+    "id": "GltrBWMcoxaKj0WFKpQVY9qAumb2",
+    "record": {
+      "loses": 30,
+      "ties": 0,
+      "wins": 47
+    },
+    "username": "samanthasanchez887@gmail.com",
+    "picks": [
+      {
+        "games": [
+          {
+            "pick": "PHI",
+            "winner": "PHI",
+            "id": "401547410"
+          },
+          {
+            "pick": "GB",
+            "id": "401547417",
+            "winner": "ATL"
+          },
+          {
+            "id": "401547411",
+            "pick": "BUF",
+            "winner": "BUF"
+          },
+          {
+            "winner": "BAL",
+            "pick": "BAL",
+            "id": "401547412"
+          },
+          {
+            "winner": "SEA",
+            "pick": "SEA",
+            "id": "401547418"
+          },
+          {
+            "winner": "TEN",
+            "id": "401547414",
+            "pick": "TEN"
+          },
+          {
+            "winner": "TB",
+            "pick": "TB",
+            "id": "401547420"
+          },
+          {
+            "winner": "KC",
+            "id": "401547413",
+            "pick": "KC"
+          },
+          {
+            "pick": "HOU",
+            "id": "401547419",
+            "winner": "IND"
+          },
+          {
+            "id": "401547422",
+            "winner": "SF",
+            "pick": "SF"
+          },
+          {
+            "winner": "NYG",
+            "pick": "ARI",
+            "id": "401547421"
+          },
+          {
+            "winner": "DAL",
+            "pick": "DAL",
+            "id": "401547415"
+          },
+          {
+            "winner": "WSH",
+            "pick": "DEN",
+            "id": "401547416"
+          },
+          {
+            "pick": "NE",
+            "winner": "MIA",
+            "id": "401547423"
+          },
+          {
+            "id": "401547425",
+            "winner": "NO",
+            "pick": "CAR"
+          },
+          {
+            "winner": "PIT",
+            "pick": "PIT",
+            "id": "401547424"
+          }
+        ],
+        "completed": true,
+        "id": "222023",
+        "record": {
+          "wins": 10,
+          "ties": 0,
+          "loses": 6
+        }
+      },
+      {
+        "completed": true,
+        "id": "232023",
+        "record": {
+          "loses": 5,
+          "ties": 0,
+          "wins": 11
+        },
+        "games": [
+          {
+            "pick": "no pick",
+            "winner": "SF",
+            "id": "401547426"
+          },
+          {
+            "winner": "CLE",
+            "id": "401547428",
+            "pick": "no pick"
+          },
+          {
+            "pick": "no pick",
+            "id": "401547433",
+            "winner": "DET"
+          },
+          {
+            "id": "401547434",
+            "pick": "no pick",
+            "winner": "GB"
+          },
+          {
+            "winner": "MIA",
+            "id": "401547429",
+            "pick": "no pick"
+          },
+          {
+            "id": "401547436",
+            "pick": "no pick",
+            "winner": "LAC"
+          },
+          {
+            "id": "401547430",
+            "winner": "NE",
+            "pick": "no pick"
+          },
+          {
+            "id": "401547431",
+            "pick": "no pick",
+            "winner": "BUF"
+          },
+          {
+            "id": "401547435",
+            "pick": "no pick",
+            "winner": "HOU"
+          },
+          {
+            "id": "401547427",
+            "pick": "no pick",
+            "winner": "IND"
           },
           {
             "id": "401547432",
@@ -179,482 +708,30 @@
             "pick": "no pick"
           },
           {
-            "winner": "PHI",
             "pick": "no pick",
-            "id": "401547440"
-          },
-          {
-            "winner": "CIN",
-            "id": "401547441",
-            "pick": "no pick"
-          }
-        ]
-      },
-      {
-        "id": "242023",
-        "completed": true,
-        "games": [
-          {
-            "winner": "DET",
-            "pick": "GB",
-            "id": "401547442"
-          },
-          {
-            "id": "401547227",
-            "pick": "ATL",
-            "winner": "JAX"
-          },
-          {
-            "winner": "BUF",
-            "id": "401547443",
-            "pick": "MIA"
-          },
-          {
-            "winner": "DEN",
-            "id": "401547444",
-            "pick": "CHI"
-          },
-          {
-            "id": "401547445",
-            "pick": "CLE",
-            "winner": "BAL"
-          },
-          {
-            "pick": "TEN",
-            "id": "401547452",
-            "winner": "TEN"
-          },
-          {
-            "id": "401547449",
-            "winner": "LAR",
-            "pick": "IND"
-          },
-          {
-            "winner": "TB",
-            "pick": "TB",
-            "id": "401547450"
-          },
-          {
-            "winner": "PHI",
-            "id": "401547451",
-            "pick": "PHI"
-          },
-          {
-            "id": "401547448",
-            "pick": "MIN",
-            "winner": "MIN"
-          },
-          {
-            "id": "401547446",
-            "pick": "PIT",
-            "winner": "HOU"
-          },
-          {
-            "winner": "LAC",
-            "id": "401547447",
-            "pick": "LAC"
-          },
-          {
-            "id": "401547453",
-            "winner": "DAL",
-            "pick": "DAL"
-          },
-          {
-            "winner": "SF",
-            "id": "401547454",
-            "pick": "SF"
-          },
-          {
-            "id": "401547455",
-            "pick": "KC",
-            "winner": "KC"
-          },
-          {
-            "id": "401547456",
-            "winner": "SEA",
-            "pick": "NYG"
-          }
-        ],
-        "record": {
-          "loses": 8,
-          "wins": 8,
-          "ties": 0
-        }
-      },
-      {
-        "id": "252023",
-        "completed": true,
-        "record": {
-          "ties": 0,
-          "wins": 7,
-          "loses": 7
-        },
-        "games": [
-          {
-            "winner": "CHI",
-            "pick": "WSH",
-            "id": "401547457"
-          },
-          {
-            "winner": "JAX",
-            "pick": "BUF",
-            "id": "401547228"
-          },
-          {
-            "winner": "ATL",
-            "pick": "ATL",
-            "id": "401547463"
-          },
-          {
-            "id": "401547464",
-            "pick": "DET",
-            "winner": "DET"
-          },
-          {
-            "id": "401547458",
-            "pick": "IND",
-            "winner": "IND"
-          },
-          {
-            "id": "401547465",
-            "winner": "MIA",
-            "pick": "MIA"
-          },
-          {
-            "pick": "NO",
-            "id": "401547459",
-            "winner": "NO"
-          },
-          {
-            "pick": "BAL",
-            "winner": "PIT",
-            "id": "401547460"
-          },
-          {
-            "winner": "PHI",
-            "pick": "LAR",
-            "id": "401547467"
-          },
-          {
-            "winner": "CIN",
-            "id": "401547466",
-            "pick": "ARI"
-          },
-          {
-            "pick": "DEN",
-            "winner": "NYJ",
-            "id": "401547461"
-          },
-          {
-            "id": "401547462",
-            "winner": "KC",
-            "pick": "KC"
-          },
-          {
-            "pick": "DAL",
-            "id": "401547354",
-            "winner": "SF"
-          },
-          {
-            "winner": "LV",
-            "id": "401547468",
-            "pick": "LV"
-          }
-        ]
-      },
-      {
-        "record": {
-          "wins": 8,
-          "ties": 0,
-          "loses": 6
-        },
-        "id": "262023",
-        "completed": false,
-        "games": [
-          {
-            "winner": "KC",
-            "pick": "KC",
-            "id": "401547469"
-          },
-          {
-            "pick": "BAL",
-            "id": "401547229",
-            "winner": "BAL"
-          },
-          {
-            "id": "401547470",
-            "winner": "WSH",
-            "pick": "ATL"
-          },
-          {
-            "winner": "MIN",
-            "pick": "CHI",
-            "id": "401547475"
-          },
-          {
-            "winner": "CIN",
-            "id": "401547471",
-            "pick": "SEA"
-          },
-          {
-            "winner": "CLE",
-            "id": "401547476",
-            "pick": "SF"
-          },
-          {
-            "id": "401547473",
-            "winner": "MIA",
-            "pick": "MIA"
-          },
-          {
-            "winner": "JAX",
-            "id": "401547472",
-            "pick": "JAX"
-          },
-          {
-            "pick": "HOU",
-            "id": "401547477",
-            "winner": "HOU"
-          },
-          {
-            "id": "401547474",
-            "pick": "LV",
-            "winner": "LV"
-          },
-          {
-            "winner": "LAR",
-            "pick": "LAR",
-            "id": "401547479"
-          },
-          {
-            "winner": "NYJ",
-            "pick": "PHI",
-            "id": "401547480"
-          },
-          {
-            "pick": "TB",
-            "winner": "DET",
-            "id": "401547478"
-          },
-          {
-            "winner": "BUF",
-            "id": "401547481",
-            "pick": "BUF"
-          },
-          {
-            "winner": "not completed",
-            "pick": "DAL",
-            "id": "401547482"
-          }
-        ]
-      }
-    ],
-    "id": "uOuggH3osrNoBDi20594olte9f82"
-  },
-  {
-    "username": "samanthasanchez887@gmail.com",
-    "roi": 0,
-    "id": "GltrBWMcoxaKj0WFKpQVY9qAumb2",
-    "record": {
-      "ties": 0,
-      "wins": 46,
-      "loses": 30
-    },
-    "picks": [
-      {
-        "completed": true,
-        "id": "222023",
-        "games": [
-          {
-            "pick": "PHI",
-            "id": "401547410",
+            "id": "401547440",
             "winner": "PHI"
           },
           {
-            "winner": "ATL",
-            "id": "401547417",
-            "pick": "GB"
-          },
-          {
-            "pick": "BUF",
-            "id": "401547411",
-            "winner": "BUF"
-          },
-          {
-            "id": "401547412",
-            "winner": "BAL",
-            "pick": "BAL"
-          },
-          {
-            "id": "401547418",
-            "pick": "SEA",
-            "winner": "SEA"
-          },
-          {
-            "winner": "TEN",
-            "id": "401547414",
-            "pick": "TEN"
-          },
-          {
-            "pick": "TB",
-            "winner": "TB",
-            "id": "401547420"
-          },
-          {
-            "id": "401547413",
-            "winner": "KC",
-            "pick": "KC"
-          },
-          {
-            "id": "401547419",
-            "winner": "IND",
-            "pick": "HOU"
-          },
-          {
-            "id": "401547422",
-            "pick": "SF",
-            "winner": "SF"
-          },
-          {
-            "pick": "ARI",
-            "id": "401547421",
-            "winner": "NYG"
-          },
-          {
-            "pick": "DAL",
-            "winner": "DAL",
-            "id": "401547415"
-          },
-          {
-            "id": "401547416",
-            "winner": "WSH",
-            "pick": "DEN"
-          },
-          {
-            "winner": "MIA",
-            "id": "401547423",
-            "pick": "NE"
-          },
-          {
-            "id": "401547425",
-            "pick": "CAR",
-            "winner": "NO"
-          },
-          {
-            "winner": "PIT",
-            "id": "401547424",
-            "pick": "PIT"
-          }
-        ],
-        "record": {
-          "wins": 10,
-          "ties": 0,
-          "loses": 6
-        }
-      },
-      {
-        "completed": true,
-        "games": [
-          {
-            "pick": "no pick",
-            "id": "401547426",
-            "winner": "SF"
-          },
-          {
-            "pick": "no pick",
-            "id": "401547428",
-            "winner": "CLE"
-          },
-          {
-            "pick": "no pick",
-            "winner": "DET",
-            "id": "401547433"
-          },
-          {
-            "pick": "no pick",
-            "id": "401547434",
-            "winner": "GB"
-          },
-          {
-            "pick": "no pick",
-            "id": "401547429",
-            "winner": "MIA"
-          },
-          {
-            "pick": "no pick",
-            "winner": "LAC",
-            "id": "401547436"
-          },
-          {
-            "id": "401547430",
-            "pick": "no pick",
-            "winner": "NE"
-          },
-          {
-            "winner": "BUF",
-            "id": "401547431",
-            "pick": "no pick"
-          },
-          {
-            "pick": "no pick",
-            "id": "401547435",
-            "winner": "HOU"
-          },
-          {
-            "id": "401547427",
-            "pick": "no pick",
-            "winner": "IND"
-          },
-          {
-            "winner": "SEA",
-            "pick": "no pick",
-            "id": "401547432"
-          },
-          {
-            "pick": "no pick",
-            "id": "401547438",
-            "winner": "KC"
-          },
-          {
-            "id": "401547437",
-            "pick": "no pick",
-            "winner": "ARI"
-          },
-          {
-            "winner": "PIT",
-            "id": "401547439",
-            "pick": "no pick"
-          },
-          {
-            "pick": "no pick",
-            "winner": "PHI",
-            "id": "401547440"
-          },
-          {
-            "id": "401547441",
             "winner": "CIN",
-            "pick": "no pick"
+            "pick": "no pick",
+            "id": "401547441"
           }
-        ],
-        "record": {
-          "loses": 5,
-          "wins": 11,
-          "ties": 0
-        },
-        "id": "232023"
+        ]
       },
       {
         "record": {
-          "loses": 8,
           "wins": 8,
+          "loses": 8,
           "ties": 0
         },
+        "completed": true,
         "id": "242023",
         "games": [
           {
-            "winner": "DET",
+            "id": "401547442",
             "pick": "GB",
-            "id": "401547442"
+            "winner": "DET"
           },
           {
             "winner": "JAX",
@@ -668,18 +745,538 @@
           },
           {
             "winner": "DEN",
-            "pick": "DEN",
-            "id": "401547444"
+            "id": "401547444",
+            "pick": "DEN"
           },
           {
-            "id": "401547445",
+            "winner": "BAL",
             "pick": "BAL",
+            "id": "401547445"
+          },
+          {
+            "pick": "CIN",
+            "winner": "TEN",
+            "id": "401547452"
+          },
+          {
+            "pick": "LAR",
+            "id": "401547449",
+            "winner": "LAR"
+          },
+          {
+            "id": "401547450",
+            "winner": "TB",
+            "pick": "NO"
+          },
+          {
+            "pick": "PHI",
+            "id": "401547451",
+            "winner": "PHI"
+          },
+          {
+            "id": "401547448",
+            "winner": "MIN",
+            "pick": "MIN"
+          },
+          {
+            "id": "401547446",
+            "pick": "PIT",
+            "winner": "HOU"
+          },
+          {
+            "winner": "LAC",
+            "id": "401547447",
+            "pick": "LV"
+          },
+          {
+            "id": "401547453",
+            "pick": "NE",
+            "winner": "DAL"
+          },
+          {
+            "pick": "SF",
+            "winner": "SF",
+            "id": "401547454"
+          },
+          {
+            "pick": "KC",
+            "winner": "KC",
+            "id": "401547455"
+          },
+          {
+            "id": "401547456",
+            "winner": "SEA",
+            "pick": "SEA"
+          }
+        ]
+      },
+      {
+        "id": "252023",
+        "games": [
+          {
+            "id": "401547457",
+            "pick": "CHI",
+            "winner": "CHI"
+          },
+          {
+            "pick": "BUF",
+            "winner": "JAX",
+            "id": "401547228"
+          },
+          {
+            "id": "401547463",
+            "winner": "ATL",
+            "pick": "ATL"
+          },
+          {
+            "id": "401547464",
+            "pick": "DET",
+            "winner": "DET"
+          },
+          {
+            "id": "401547458",
+            "winner": "IND",
+            "pick": "IND"
+          },
+          {
+            "id": "401547465",
+            "winner": "MIA",
+            "pick": "NYG"
+          },
+          {
+            "id": "401547459",
+            "pick": "NO",
+            "winner": "NO"
+          },
+          {
+            "winner": "PIT",
+            "id": "401547460",
+            "pick": "BAL"
+          },
+          {
+            "winner": "PHI",
+            "pick": "LAR",
+            "id": "401547467"
+          },
+          {
+            "pick": "CIN",
+            "winner": "CIN",
+            "id": "401547466"
+          },
+          {
+            "pick": "NYJ",
+            "id": "401547461",
+            "winner": "NYJ"
+          },
+          {
+            "winner": "KC",
+            "pick": "KC",
+            "id": "401547462"
+          },
+          {
+            "winner": "SF",
+            "pick": "DAL",
+            "id": "401547354"
+          },
+          {
+            "winner": "LV",
+            "id": "401547468",
+            "pick": "GB"
+          }
+        ],
+        "record": {
+          "loses": 6,
+          "ties": 0,
+          "wins": 8
+        },
+        "completed": true
+      },
+      {
+        "record": {
+          "loses": 5,
+          "wins": 10,
+          "ties": 0
+        },
+        "games": [
+          {
+            "winner": "KC",
+            "id": "401547469",
+            "pick": "KC"
+          },
+          {
+            "pick": "BAL",
+            "id": "401547229",
             "winner": "BAL"
           },
           {
+            "pick": "WSH",
+            "id": "401547470",
+            "winner": "WSH"
+          },
+          {
+            "pick": "MIN",
+            "id": "401547475",
+            "winner": "MIN"
+          },
+          {
+            "pick": "SEA",
+            "id": "401547471",
+            "winner": "CIN"
+          },
+          {
+            "pick": "SF",
+            "id": "401547476",
+            "winner": "CLE"
+          },
+          {
+            "id": "401547473",
+            "winner": "MIA",
+            "pick": "MIA"
+          },
+          {
+            "pick": "IND",
+            "id": "401547472",
+            "winner": "JAX"
+          },
+          {
+            "winner": "HOU",
+            "id": "401547477",
+            "pick": "NO"
+          },
+          {
+            "winner": "LV",
+            "pick": "LV",
+            "id": "401547474"
+          },
+          {
+            "winner": "LAR",
+            "id": "401547479",
+            "pick": "LAR"
+          },
+          {
+            "id": "401547480",
+            "winner": "NYJ",
+            "pick": "NYJ"
+          },
+          {
+            "winner": "DET",
+            "pick": "DET",
+            "id": "401547478"
+          },
+          {
+            "winner": "BUF",
+            "pick": "NYG",
+            "id": "401547481"
+          },
+          {
+            "winner": "DAL",
+            "pick": "DAL",
+            "id": "401547482"
+          }
+        ],
+        "completed": true,
+        "id": "262023"
+      },
+      {
+        "record": {
+          "wins": 0,
+          "loses": 0,
+          "ties": 0
+        },
+        "completed": false,
+        "id": "272023",
+        "games": [
+          {
+            "winner": "not completed",
+            "id": "401547483",
+            "pick": "NO"
+          },
+          {
+            "winner": "not completed",
+            "id": "401547490",
+            "pick": "LV"
+          },
+          {
+            "pick": "CLE",
+            "id": "401547484",
+            "winner": "not completed"
+          },
+          {
+            "id": "401547485",
+            "winner": "not completed",
+            "pick": "BUF"
+          },
+          {
+            "pick": "WSH",
+            "winner": "not completed",
+            "id": "401547486"
+          },
+          {
+            "pick": "ATL",
+            "id": "401547491",
+            "winner": "not completed"
+          },
+          {
+            "id": "401547489",
+            "winner": "not completed",
+            "pick": "BAL"
+          },
+          {
+            "id": "401547492",
+            "winner": "not completed",
+            "pick": "PIT"
+          },
+          {
+            "pick": "SEA",
+            "id": "401547493",
+            "winner": "not completed"
+          },
+          {
+            "winner": "not completed",
+            "id": "401547487",
+            "pick": "GB"
+          },
+          {
+            "id": "401547488",
+            "winner": "not completed",
+            "pick": "KC"
+          },
+          {
+            "pick": "MIA",
+            "winner": "not completed",
+            "id": "401547494"
+          },
+          {
+            "pick": "SF",
+            "winner": "not completed",
+            "id": "401547495"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "roi": 0,
+    "username": "amanda3491@gmail.com",
+    "picks": [
+      {
+        "id": "222023",
+        "games": [
+          {
+            "winner": "PHI",
+            "id": "401547410",
+            "pick": "MIN"
+          },
+          {
+            "winner": "ATL",
+            "id": "401547417",
+            "pick": "GB"
+          },
+          {
+            "pick": "BUF",
+            "id": "401547411",
+            "winner": "BUF"
+          },
+          {
+            "pick": "BAL",
+            "id": "401547412",
+            "winner": "BAL"
+          },
+          {
+            "winner": "SEA",
+            "id": "401547418",
+            "pick": "SEA"
+          },
+          {
+            "pick": "TEN",
+            "id": "401547414",
+            "winner": "TEN"
+          },
+          {
+            "id": "401547420",
+            "pick": "TB",
+            "winner": "TB"
+          },
+          {
+            "pick": "KC",
+            "winner": "KC",
+            "id": "401547413"
+          },
+          {
+            "winner": "IND",
+            "pick": "HOU",
+            "id": "401547419"
+          },
+          {
+            "pick": "SF",
+            "winner": "SF",
+            "id": "401547422"
+          },
+          {
+            "pick": "ARI",
+            "winner": "NYG",
+            "id": "401547421"
+          },
+          {
+            "winner": "DAL",
+            "pick": "DAL",
+            "id": "401547415"
+          },
+          {
+            "id": "401547416",
+            "winner": "WSH",
+            "pick": "DEN"
+          },
+          {
+            "id": "401547423",
+            "winner": "MIA",
+            "pick": "NE"
+          },
+          {
+            "winner": "NO",
+            "pick": "CAR",
+            "id": "401547425"
+          },
+          {
+            "winner": "PIT",
+            "pick": "PIT",
+            "id": "401547424"
+          }
+        ],
+        "record": {
+          "wins": 9,
+          "ties": 0,
+          "loses": 7
+        },
+        "completed": true
+      },
+      {
+        "record": {
+          "ties": 0,
+          "wins": 8,
+          "loses": 8
+        },
+        "completed": true,
+        "games": [
+          {
+            "pick": "SF",
+            "winner": "SF",
+            "id": "401547426"
+          },
+          {
+            "pick": "TEN",
+            "winner": "CLE",
+            "id": "401547428"
+          },
+          {
+            "winner": "DET",
+            "id": "401547433",
+            "pick": "ATL"
+          },
+          {
+            "id": "401547434",
+            "pick": "NO",
+            "winner": "GB"
+          },
+          {
+            "pick": "MIA",
+            "winner": "MIA",
+            "id": "401547429"
+          },
+          {
+            "pick": "LAC",
+            "winner": "LAC",
+            "id": "401547436"
+          },
+          {
+            "winner": "NE",
+            "pick": "NE",
+            "id": "401547430"
+          },
+          {
+            "pick": "BUF",
+            "winner": "BUF",
+            "id": "401547431"
+          },
+          {
+            "id": "401547435",
+            "winner": "HOU",
+            "pick": "JAX"
+          },
+          {
+            "pick": "BAL",
+            "winner": "IND",
+            "id": "401547427"
+          },
+          {
+            "pick": "SEA",
+            "winner": "SEA",
+            "id": "401547432"
+          },
+          {
+            "id": "401547438",
+            "winner": "KC",
+            "pick": "KC"
+          },
+          {
+            "winner": "ARI",
+            "pick": "DAL",
+            "id": "401547437"
+          },
+          {
+            "winner": "PIT",
+            "id": "401547439",
+            "pick": "PIT"
+          },
+          {
+            "id": "401547440",
+            "winner": "PHI",
+            "pick": "TB"
+          },
+          {
+            "id": "401547441",
+            "winner": "CIN",
+            "pick": "LAR"
+          }
+        ],
+        "id": "232023"
+      },
+      {
+        "record": {
+          "loses": 5,
+          "ties": 0,
+          "wins": 11
+        },
+        "games": [
+          {
+            "id": "401547442",
+            "winner": "DET",
+            "pick": "GB"
+          },
+          {
+            "id": "401547227",
+            "winner": "JAX",
+            "pick": "ATL"
+          },
+          {
+            "pick": "BUF",
+            "winner": "BUF",
+            "id": "401547443"
+          },
+          {
+            "winner": "DEN",
+            "id": "401547444",
+            "pick": "DEN"
+          },
+          {
+            "winner": "BAL",
+            "id": "401547445",
+            "pick": "BAL"
+          },
+          {
             "winner": "TEN",
-            "id": "401547452",
-            "pick": "CIN"
+            "pick": "TEN",
+            "id": "401547452"
           },
           {
             "winner": "LAR",
@@ -689,7 +1286,7 @@
           {
             "winner": "TB",
             "id": "401547450",
-            "pick": "NO"
+            "pick": "TB"
           },
           {
             "pick": "PHI",
@@ -697,23 +1294,23 @@
             "id": "401547451"
           },
           {
-            "id": "401547448",
-            "pick": "MIN",
-            "winner": "MIN"
+            "pick": "CAR",
+            "winner": "MIN",
+            "id": "401547448"
           },
           {
+            "pick": "PIT",
             "winner": "HOU",
-            "id": "401547446",
-            "pick": "PIT"
+            "id": "401547446"
           },
           {
             "id": "401547447",
-            "pick": "LV",
-            "winner": "LAC"
+            "winner": "LAC",
+            "pick": "LV"
           },
           {
             "winner": "DAL",
-            "pick": "NE",
+            "pick": "DAL",
             "id": "401547453"
           },
           {
@@ -727,96 +1324,96 @@
             "pick": "KC"
           },
           {
-            "pick": "SEA",
             "winner": "SEA",
+            "pick": "SEA",
             "id": "401547456"
           }
         ],
-        "completed": true
+        "completed": true,
+        "id": "242023"
       },
       {
-        "completed": true,
-        "record": {
-          "loses": 6,
-          "ties": 0,
-          "wins": 8
-        },
+        "id": "252023",
         "games": [
           {
-            "pick": "CHI",
+            "pick": "WSH",
             "winner": "CHI",
             "id": "401547457"
           },
           {
-            "id": "401547228",
             "pick": "BUF",
-            "winner": "JAX"
+            "winner": "JAX",
+            "id": "401547228"
           },
           {
+            "pick": "HOU",
             "winner": "ATL",
-            "pick": "ATL",
             "id": "401547463"
           },
           {
-            "pick": "DET",
             "id": "401547464",
-            "winner": "DET"
+            "winner": "DET",
+            "pick": "DET"
           },
           {
-            "pick": "IND",
-            "winner": "IND",
-            "id": "401547458"
+            "id": "401547458",
+            "pick": "TEN",
+            "winner": "IND"
           },
           {
-            "pick": "NYG",
+            "pick": "MIA",
             "winner": "MIA",
             "id": "401547465"
           },
           {
             "pick": "NO",
-            "id": "401547459",
-            "winner": "NO"
+            "winner": "NO",
+            "id": "401547459"
           },
           {
+            "winner": "PIT",
             "pick": "BAL",
-            "id": "401547460",
-            "winner": "PIT"
+            "id": "401547460"
           },
           {
+            "pick": "LAR",
             "id": "401547467",
-            "winner": "PHI",
-            "pick": "LAR"
+            "winner": "PHI"
           },
           {
             "id": "401547466",
-            "pick": "CIN",
+            "pick": "ARI",
             "winner": "CIN"
           },
           {
-            "winner": "NYJ",
-            "pick": "NYJ",
-            "id": "401547461"
+            "pick": "DEN",
+            "id": "401547461",
+            "winner": "NYJ"
           },
           {
+            "pick": "KC",
             "id": "401547462",
-            "winner": "KC",
-            "pick": "KC"
+            "winner": "KC"
           },
           {
-            "id": "401547354",
             "pick": "DAL",
-            "winner": "SF"
+            "winner": "SF",
+            "id": "401547354"
           },
           {
+            "pick": "GB",
             "winner": "LV",
-            "id": "401547468",
-            "pick": "GB"
+            "id": "401547468"
           }
         ],
-        "id": "252023"
+        "record": {
+          "ties": 0,
+          "wins": 4,
+          "loses": 10
+        },
+        "completed": true
       },
       {
-        "completed": false,
         "id": "262023",
         "games": [
           {
@@ -825,133 +1422,205 @@
             "id": "401547469"
           },
           {
-            "id": "401547229",
             "winner": "BAL",
+            "id": "401547229",
             "pick": "BAL"
           },
           {
             "id": "401547470",
-            "winner": "WSH",
-            "pick": "WSH"
+            "pick": "ATL",
+            "winner": "WSH"
           },
           {
-            "id": "401547475",
             "winner": "MIN",
-            "pick": "MIN"
+            "pick": "CHI",
+            "id": "401547475"
           },
           {
+            "pick": "SEA",
             "winner": "CIN",
-            "id": "401547471",
-            "pick": "SEA"
+            "id": "401547471"
           },
           {
-            "id": "401547476",
             "winner": "CLE",
+            "id": "401547476",
             "pick": "SF"
           },
           {
-            "winner": "MIA",
+            "pick": "MIA",
             "id": "401547473",
-            "pick": "MIA"
+            "winner": "MIA"
           },
           {
-            "winner": "JAX",
-            "pick": "IND",
-            "id": "401547472"
+            "id": "401547472",
+            "pick": "JAX",
+            "winner": "JAX"
           },
           {
-            "pick": "NO",
             "winner": "HOU",
+            "pick": "NO",
             "id": "401547477"
           },
           {
             "winner": "LV",
-            "pick": "LV",
-            "id": "401547474"
+            "id": "401547474",
+            "pick": "LV"
           },
           {
-            "pick": "LAR",
             "id": "401547479",
+            "pick": "LAR",
             "winner": "LAR"
           },
           {
-            "pick": "NYJ",
             "id": "401547480",
+            "pick": "PHI",
             "winner": "NYJ"
           },
           {
-            "pick": "DET",
-            "id": "401547478",
-            "winner": "DET"
+            "pick": "TB",
+            "winner": "DET",
+            "id": "401547478"
           },
           {
             "winner": "BUF",
-            "pick": "NYG",
+            "pick": "BUF",
             "id": "401547481"
           },
           {
+            "winner": "DAL",
             "id": "401547482",
-            "winner": "not completed",
             "pick": "DAL"
           }
         ],
+        "completed": true,
         "record": {
           "ties": 0,
-          "loses": 5,
-          "wins": 9
+          "loses": 7,
+          "wins": 8
         }
+      },
+      {
+        "record": {
+          "loses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "completed": false,
+        "games": [
+          {
+            "pick": "no pick",
+            "id": "401547483",
+            "winner": "not completed"
+          },
+          {
+            "pick": "no pick",
+            "id": "401547490",
+            "winner": "not completed"
+          },
+          {
+            "id": "401547484",
+            "pick": "no pick",
+            "winner": "not completed"
+          },
+          {
+            "pick": "no pick",
+            "id": "401547485",
+            "winner": "not completed"
+          },
+          {
+            "pick": "no pick",
+            "winner": "not completed",
+            "id": "401547486"
+          },
+          {
+            "id": "401547491",
+            "pick": "no pick",
+            "winner": "not completed"
+          },
+          {
+            "winner": "not completed",
+            "id": "401547489",
+            "pick": "no pick"
+          },
+          {
+            "winner": "not completed",
+            "id": "401547492",
+            "pick": "no pick"
+          },
+          {
+            "pick": "no pick",
+            "winner": "not completed",
+            "id": "401547493"
+          },
+          {
+            "winner": "not completed",
+            "id": "401547487",
+            "pick": "no pick"
+          },
+          {
+            "pick": "no pick",
+            "winner": "not completed",
+            "id": "401547488"
+          },
+          {
+            "id": "401547494",
+            "winner": "not completed",
+            "pick": "no pick"
+          },
+          {
+            "pick": "no pick",
+            "id": "401547495",
+            "winner": "not completed"
+          }
+        ],
+        "id": "272023"
       }
-    ]
+    ],
+    "id": "Df7FOWz8bcg3KDujgMa6aPM5JSg1",
+    "record": {
+      "ties": 0,
+      "wins": 40,
+      "loses": 37
+    }
   },
   {
-    "username": "amanda3491@gmail.com",
-    "record": {
-      "wins": 39,
-      "loses": 37,
-      "ties": 0
-    },
     "picks": [
       {
         "id": "222023",
-        "record": {
-          "ties": 0,
-          "wins": 9,
-          "loses": 7
-        },
         "games": [
           {
-            "winner": "PHI",
-            "pick": "MIN",
-            "id": "401547410"
+            "id": "401547410",
+            "pick": "PHI",
+            "winner": "PHI"
           },
           {
             "winner": "ATL",
-            "id": "401547417",
-            "pick": "GB"
+            "pick": "GB",
+            "id": "401547417"
           },
           {
-            "id": "401547411",
             "pick": "BUF",
+            "id": "401547411",
             "winner": "BUF"
           },
           {
+            "pick": "CIN",
             "id": "401547412",
-            "pick": "BAL",
             "winner": "BAL"
           },
           {
-            "winner": "SEA",
             "pick": "SEA",
-            "id": "401547418"
+            "id": "401547418",
+            "winner": "SEA"
           },
           {
-            "winner": "TEN",
             "id": "401547414",
-            "pick": "TEN"
+            "winner": "TEN",
+            "pick": "LAC"
           },
           {
-            "pick": "TB",
             "winner": "TB",
+            "pick": "TB",
             "id": "401547420"
           },
           {
@@ -960,13 +1629,13 @@
             "pick": "KC"
           },
           {
-            "pick": "HOU",
-            "id": "401547419",
-            "winner": "IND"
+            "pick": "IND",
+            "winner": "IND",
+            "id": "401547419"
           },
           {
-            "id": "401547422",
             "pick": "SF",
+            "id": "401547422",
             "winner": "SF"
           },
           {
@@ -985,39 +1654,51 @@
             "id": "401547416"
           },
           {
+            "pick": "MIA",
             "id": "401547423",
-            "pick": "NE",
             "winner": "MIA"
           },
           {
+            "id": "401547425",
             "winner": "NO",
-            "pick": "CAR",
-            "id": "401547425"
+            "pick": "CAR"
           },
           {
+            "winner": "PIT",
             "id": "401547424",
-            "pick": "PIT",
-            "winner": "PIT"
+            "pick": "CLE"
           }
         ],
+        "record": {
+          "wins": 9,
+          "ties": 0,
+          "loses": 7
+        },
         "completed": true
       },
       {
+        "record": {
+          "ties": 0,
+          "wins": 6,
+          "loses": 10
+        },
+        "completed": true,
+        "id": "232023",
         "games": [
           {
-            "id": "401547426",
             "winner": "SF",
-            "pick": "SF"
+            "pick": "SF",
+            "id": "401547426"
           },
           {
-            "id": "401547428",
             "winner": "CLE",
-            "pick": "TEN"
+            "pick": "TEN",
+            "id": "401547428"
           },
           {
-            "winner": "DET",
             "pick": "ATL",
-            "id": "401547433"
+            "id": "401547433",
+            "winner": "DET"
           },
           {
             "id": "401547434",
@@ -1030,23 +1711,23 @@
             "id": "401547429"
           },
           {
-            "pick": "LAC",
-            "id": "401547436",
-            "winner": "LAC"
+            "pick": "MIN",
+            "winner": "LAC",
+            "id": "401547436"
           },
           {
             "id": "401547430",
-            "pick": "NE",
-            "winner": "NE"
+            "winner": "NE",
+            "pick": "NYJ"
           },
           {
-            "pick": "BUF",
             "winner": "BUF",
+            "pick": "BUF",
             "id": "401547431"
           },
           {
-            "id": "401547435",
             "winner": "HOU",
+            "id": "401547435",
             "pick": "JAX"
           },
           {
@@ -1056,471 +1737,18 @@
           },
           {
             "winner": "SEA",
-            "id": "401547432",
-            "pick": "SEA"
+            "pick": "SEA",
+            "id": "401547432"
           },
           {
             "id": "401547438",
-            "winner": "KC",
-            "pick": "KC"
+            "pick": "KC",
+            "winner": "KC"
           },
           {
-            "id": "401547437",
             "winner": "ARI",
-            "pick": "DAL"
-          },
-          {
-            "winner": "PIT",
-            "id": "401547439",
-            "pick": "PIT"
-          },
-          {
-            "id": "401547440",
-            "pick": "TB",
-            "winner": "PHI"
-          },
-          {
-            "winner": "CIN",
-            "pick": "LAR",
-            "id": "401547441"
-          }
-        ],
-        "completed": true,
-        "id": "232023",
-        "record": {
-          "ties": 0,
-          "loses": 8,
-          "wins": 8
-        }
-      },
-      {
-        "completed": true,
-        "games": [
-          {
-            "pick": "GB",
-            "winner": "DET",
-            "id": "401547442"
-          },
-          {
-            "id": "401547227",
-            "pick": "ATL",
-            "winner": "JAX"
-          },
-          {
-            "id": "401547443",
-            "pick": "BUF",
-            "winner": "BUF"
-          },
-          {
-            "pick": "DEN",
-            "winner": "DEN",
-            "id": "401547444"
-          },
-          {
-            "id": "401547445",
-            "pick": "BAL",
-            "winner": "BAL"
-          },
-          {
-            "id": "401547452",
-            "pick": "TEN",
-            "winner": "TEN"
-          },
-          {
-            "pick": "LAR",
-            "id": "401547449",
-            "winner": "LAR"
-          },
-          {
-            "id": "401547450",
-            "winner": "TB",
-            "pick": "TB"
-          },
-          {
-            "winner": "PHI",
-            "id": "401547451",
-            "pick": "PHI"
-          },
-          {
-            "pick": "CAR",
-            "winner": "MIN",
-            "id": "401547448"
-          },
-          {
-            "winner": "HOU",
-            "id": "401547446",
-            "pick": "PIT"
-          },
-          {
-            "id": "401547447",
-            "winner": "LAC",
-            "pick": "LV"
-          },
-          {
-            "winner": "DAL",
             "pick": "DAL",
-            "id": "401547453"
-          },
-          {
-            "id": "401547454",
-            "winner": "SF",
-            "pick": "SF"
-          },
-          {
-            "pick": "KC",
-            "id": "401547455",
-            "winner": "KC"
-          },
-          {
-            "id": "401547456",
-            "winner": "SEA",
-            "pick": "SEA"
-          }
-        ],
-        "id": "242023",
-        "record": {
-          "ties": 0,
-          "wins": 11,
-          "loses": 5
-        }
-      },
-      {
-        "record": {
-          "wins": 4,
-          "loses": 10,
-          "ties": 0
-        },
-        "games": [
-          {
-            "winner": "CHI",
-            "id": "401547457",
-            "pick": "WSH"
-          },
-          {
-            "pick": "BUF",
-            "id": "401547228",
-            "winner": "JAX"
-          },
-          {
-            "winner": "ATL",
-            "id": "401547463",
-            "pick": "HOU"
-          },
-          {
-            "pick": "DET",
-            "winner": "DET",
-            "id": "401547464"
-          },
-          {
-            "id": "401547458",
-            "pick": "TEN",
-            "winner": "IND"
-          },
-          {
-            "pick": "MIA",
-            "id": "401547465",
-            "winner": "MIA"
-          },
-          {
-            "winner": "NO",
-            "pick": "NO",
-            "id": "401547459"
-          },
-          {
-            "winner": "PIT",
-            "pick": "BAL",
-            "id": "401547460"
-          },
-          {
-            "id": "401547467",
-            "pick": "LAR",
-            "winner": "PHI"
-          },
-          {
-            "pick": "ARI",
-            "winner": "CIN",
-            "id": "401547466"
-          },
-          {
-            "winner": "NYJ",
-            "pick": "DEN",
-            "id": "401547461"
-          },
-          {
-            "winner": "KC",
-            "id": "401547462",
-            "pick": "KC"
-          },
-          {
-            "id": "401547354",
-            "pick": "DAL",
-            "winner": "SF"
-          },
-          {
-            "id": "401547468",
-            "winner": "LV",
-            "pick": "GB"
-          }
-        ],
-        "id": "252023",
-        "completed": true
-      },
-      {
-        "games": [
-          {
-            "winner": "KC",
-            "pick": "KC",
-            "id": "401547469"
-          },
-          {
-            "winner": "BAL",
-            "id": "401547229",
-            "pick": "BAL"
-          },
-          {
-            "winner": "WSH",
-            "id": "401547470",
-            "pick": "ATL"
-          },
-          {
-            "winner": "MIN",
-            "pick": "CHI",
-            "id": "401547475"
-          },
-          {
-            "id": "401547471",
-            "pick": "SEA",
-            "winner": "CIN"
-          },
-          {
-            "id": "401547476",
-            "pick": "SF",
-            "winner": "CLE"
-          },
-          {
-            "id": "401547473",
-            "winner": "MIA",
-            "pick": "MIA"
-          },
-          {
-            "winner": "JAX",
-            "id": "401547472",
-            "pick": "JAX"
-          },
-          {
-            "pick": "NO",
-            "winner": "HOU",
-            "id": "401547477"
-          },
-          {
-            "id": "401547474",
-            "winner": "LV",
-            "pick": "LV"
-          },
-          {
-            "id": "401547479",
-            "winner": "LAR",
-            "pick": "LAR"
-          },
-          {
-            "winner": "NYJ",
-            "pick": "PHI",
-            "id": "401547480"
-          },
-          {
-            "pick": "TB",
-            "winner": "DET",
-            "id": "401547478"
-          },
-          {
-            "winner": "BUF",
-            "id": "401547481",
-            "pick": "BUF"
-          },
-          {
-            "winner": "not completed",
-            "pick": "DAL",
-            "id": "401547482"
-          }
-        ],
-        "id": "262023",
-        "record": {
-          "loses": 7,
-          "wins": 7,
-          "ties": 0
-        },
-        "completed": false
-      }
-    ],
-    "roi": 0,
-    "id": "Df7FOWz8bcg3KDujgMa6aPM5JSg1"
-  },
-  {
-    "picks": [
-      {
-        "record": {
-          "loses": 7,
-          "ties": 0,
-          "wins": 9
-        },
-        "id": "222023",
-        "completed": true,
-        "games": [
-          {
-            "id": "401547410",
-            "pick": "PHI",
-            "winner": "PHI"
-          },
-          {
-            "id": "401547417",
-            "pick": "GB",
-            "winner": "ATL"
-          },
-          {
-            "pick": "BUF",
-            "winner": "BUF",
-            "id": "401547411"
-          },
-          {
-            "winner": "BAL",
-            "id": "401547412",
-            "pick": "CIN"
-          },
-          {
-            "winner": "SEA",
-            "id": "401547418",
-            "pick": "SEA"
-          },
-          {
-            "id": "401547414",
-            "winner": "TEN",
-            "pick": "LAC"
-          },
-          {
-            "winner": "TB",
-            "pick": "TB",
-            "id": "401547420"
-          },
-          {
-            "id": "401547413",
-            "winner": "KC",
-            "pick": "KC"
-          },
-          {
-            "id": "401547419",
-            "winner": "IND",
-            "pick": "IND"
-          },
-          {
-            "id": "401547422",
-            "winner": "SF",
-            "pick": "SF"
-          },
-          {
-            "id": "401547421",
-            "winner": "NYG",
-            "pick": "ARI"
-          },
-          {
-            "id": "401547415",
-            "winner": "DAL",
-            "pick": "DAL"
-          },
-          {
-            "id": "401547416",
-            "pick": "DEN",
-            "winner": "WSH"
-          },
-          {
-            "id": "401547423",
-            "winner": "MIA",
-            "pick": "MIA"
-          },
-          {
-            "winner": "NO",
-            "pick": "CAR",
-            "id": "401547425"
-          },
-          {
-            "pick": "CLE",
-            "winner": "PIT",
-            "id": "401547424"
-          }
-        ]
-      },
-      {
-        "id": "232023",
-        "completed": true,
-        "record": {
-          "ties": 0,
-          "loses": 10,
-          "wins": 6
-        },
-        "games": [
-          {
-            "pick": "SF",
-            "winner": "SF",
-            "id": "401547426"
-          },
-          {
-            "id": "401547428",
-            "winner": "CLE",
-            "pick": "TEN"
-          },
-          {
-            "id": "401547433",
-            "winner": "DET",
-            "pick": "ATL"
-          },
-          {
-            "pick": "NO",
-            "id": "401547434",
-            "winner": "GB"
-          },
-          {
-            "winner": "MIA",
-            "pick": "MIA",
-            "id": "401547429"
-          },
-          {
-            "id": "401547436",
-            "pick": "MIN",
-            "winner": "LAC"
-          },
-          {
-            "winner": "NE",
-            "pick": "NYJ",
-            "id": "401547430"
-          },
-          {
-            "winner": "BUF",
-            "pick": "BUF",
-            "id": "401547431"
-          },
-          {
-            "pick": "JAX",
-            "id": "401547435",
-            "winner": "HOU"
-          },
-          {
-            "id": "401547427",
-            "pick": "BAL",
-            "winner": "IND"
-          },
-          {
-            "pick": "SEA",
-            "id": "401547432",
-            "winner": "SEA"
-          },
-          {
-            "id": "401547438",
-            "pick": "KC",
-            "winner": "KC"
-          },
-          {
-            "id": "401547437",
-            "pick": "DAL",
-            "winner": "ARI"
+            "id": "401547437"
           },
           {
             "winner": "PIT",
@@ -1528,8 +1756,8 @@
             "id": "401547439"
           },
           {
-            "id": "401547440",
             "pick": "PHI",
+            "id": "401547440",
             "winner": "PHI"
           },
           {
@@ -1540,47 +1768,46 @@
         ]
       },
       {
-        "id": "242023",
         "record": {
           "loses": 6,
-          "wins": 10,
-          "ties": 0
+          "ties": 0,
+          "wins": 10
         },
         "games": [
           {
+            "id": "401547442",
             "winner": "DET",
-            "pick": "GB",
-            "id": "401547442"
+            "pick": "GB"
           },
           {
-            "winner": "JAX",
+            "id": "401547227",
             "pick": "JAX",
-            "id": "401547227"
+            "winner": "JAX"
           },
           {
             "winner": "BUF",
-            "id": "401547443",
-            "pick": "BUF"
+            "pick": "BUF",
+            "id": "401547443"
           },
           {
-            "pick": "DEN",
+            "id": "401547444",
             "winner": "DEN",
-            "id": "401547444"
+            "pick": "DEN"
           },
           {
-            "pick": "CLE",
+            "winner": "BAL",
             "id": "401547445",
-            "winner": "BAL"
+            "pick": "CLE"
           },
           {
-            "winner": "TEN",
+            "pick": "CIN",
             "id": "401547452",
-            "pick": "CIN"
+            "winner": "TEN"
           },
           {
             "pick": "LAR",
-            "id": "401547449",
-            "winner": "LAR"
+            "winner": "LAR",
+            "id": "401547449"
           },
           {
             "id": "401547450",
@@ -1603,19 +1830,19 @@
             "id": "401547446"
           },
           {
-            "winner": "LAC",
             "id": "401547447",
-            "pick": "LAC"
+            "pick": "LAC",
+            "winner": "LAC"
           },
           {
-            "winner": "DAL",
             "id": "401547453",
-            "pick": "DAL"
+            "pick": "DAL",
+            "winner": "DAL"
           },
           {
-            "id": "401547454",
             "pick": "SF",
-            "winner": "SF"
+            "winner": "SF",
+            "id": "401547454"
           },
           {
             "id": "401547455",
@@ -1623,31 +1850,27 @@
             "pick": "KC"
           },
           {
-            "id": "401547456",
             "pick": "SEA",
-            "winner": "SEA"
+            "winner": "SEA",
+            "id": "401547456"
           }
         ],
-        "completed": true
+        "completed": true,
+        "id": "242023"
       },
       {
-        "id": "252023",
         "completed": true,
-        "record": {
-          "ties": 0,
-          "loses": 7,
-          "wins": 7
-        },
+        "id": "252023",
         "games": [
           {
-            "winner": "CHI",
             "pick": "WSH",
-            "id": "401547457"
+            "id": "401547457",
+            "winner": "CHI"
           },
           {
+            "id": "401547228",
             "winner": "JAX",
-            "pick": "BUF",
-            "id": "401547228"
+            "pick": "BUF"
           },
           {
             "winner": "ATL",
@@ -1655,9 +1878,9 @@
             "id": "401547463"
           },
           {
+            "id": "401547464",
             "winner": "DET",
-            "pick": "DET",
-            "id": "401547464"
+            "pick": "DET"
           },
           {
             "id": "401547458",
@@ -1665,78 +1888,79 @@
             "winner": "IND"
           },
           {
+            "pick": "MIA",
             "id": "401547465",
-            "winner": "MIA",
-            "pick": "MIA"
+            "winner": "MIA"
           },
           {
-            "winner": "NO",
             "pick": "NO",
-            "id": "401547459"
+            "id": "401547459",
+            "winner": "NO"
           },
           {
-            "winner": "PIT",
             "pick": "BAL",
-            "id": "401547460"
+            "id": "401547460",
+            "winner": "PIT"
           },
           {
-            "winner": "PHI",
             "id": "401547467",
+            "winner": "PHI",
             "pick": "PHI"
           },
           {
+            "pick": "ARI",
             "id": "401547466",
-            "winner": "CIN",
-            "pick": "ARI"
+            "winner": "CIN"
           },
           {
+            "pick": "DEN",
             "winner": "NYJ",
-            "id": "401547461",
-            "pick": "DEN"
+            "id": "401547461"
           },
           {
             "id": "401547462",
-            "winner": "KC",
-            "pick": "KC"
+            "pick": "KC",
+            "winner": "KC"
           },
           {
-            "winner": "SF",
             "pick": "DAL",
-            "id": "401547354"
+            "id": "401547354",
+            "winner": "SF"
           },
           {
             "winner": "LV",
-            "id": "401547468",
-            "pick": "GB"
+            "pick": "GB",
+            "id": "401547468"
           }
-        ]
+        ],
+        "record": {
+          "ties": 0,
+          "loses": 7,
+          "wins": 7
+        }
       },
       {
-        "record": {
-          "loses": 5,
-          "ties": 0,
-          "wins": 9
-        },
+        "completed": true,
         "games": [
           {
-            "winner": "KC",
             "id": "401547469",
-            "pick": "KC"
+            "pick": "KC",
+            "winner": "KC"
           },
           {
-            "pick": "TEN",
             "id": "401547229",
-            "winner": "BAL"
+            "winner": "BAL",
+            "pick": "TEN"
           },
           {
-            "id": "401547470",
+            "winner": "WSH",
             "pick": "ATL",
-            "winner": "WSH"
+            "id": "401547470"
           },
           {
-            "winner": "MIN",
+            "id": "401547475",
             "pick": "CHI",
-            "id": "401547475"
+            "winner": "MIN"
           },
           {
             "id": "401547471",
@@ -1744,44 +1968,44 @@
             "pick": "CIN"
           },
           {
+            "id": "401547476",
             "pick": "SF",
-            "winner": "CLE",
-            "id": "401547476"
+            "winner": "CLE"
           },
           {
-            "id": "401547473",
             "pick": "MIA",
+            "id": "401547473",
             "winner": "MIA"
           },
           {
-            "pick": "JAX",
             "winner": "JAX",
+            "pick": "JAX",
             "id": "401547472"
           },
           {
             "pick": "HOU",
-            "winner": "HOU",
-            "id": "401547477"
+            "id": "401547477",
+            "winner": "HOU"
           },
           {
+            "winner": "LV",
             "pick": "LV",
-            "id": "401547474",
-            "winner": "LV"
+            "id": "401547474"
           },
           {
             "pick": "LAR",
-            "winner": "LAR",
-            "id": "401547479"
+            "id": "401547479",
+            "winner": "LAR"
           },
           {
-            "pick": "PHI",
             "id": "401547480",
+            "pick": "PHI",
             "winner": "NYJ"
           },
           {
-            "id": "401547478",
+            "pick": "DET",
             "winner": "DET",
-            "pick": "DET"
+            "id": "401547478"
           },
           {
             "id": "401547481",
@@ -1789,50 +2013,124 @@
             "pick": "BUF"
           },
           {
+            "winner": "DAL",
             "pick": "DAL",
-            "winner": "not completed",
             "id": "401547482"
           }
         ],
-        "completed": false,
-        "id": "262023"
-      }
-    ],
-    "username": "zieksanchez3@gmail.com",
-    "id": "3VS4TWwrXOUwnlANpfbGVmMsay22",
-    "record": {
-      "wins": 41,
-      "ties": 0,
-      "loses": 35
-    },
-    "roi": 0
-  },
-  {
-    "record": {
-      "wins": 45,
-      "loses": 31,
-      "ties": 0
-    },
-    "roi": 0,
-    "username": "mumychelsea@gmail.com",
-    "id": "5AeB9qQUglQHvx7X05qp2B69nIw1",
-    "picks": [
-      {
-        "completed": true,
+        "id": "262023",
         "record": {
           "wins": 10,
+          "loses": 5,
+          "ties": 0
+        }
+      },
+      {
+        "completed": false,
+        "id": "272023",
+        "record": {
+          "wins": 0,
           "ties": 0,
-          "loses": 6
+          "loses": 0
+        },
+        "games": [
+          {
+            "pick": "JAX",
+            "winner": "not completed",
+            "id": "401547483"
+          },
+          {
+            "id": "401547490",
+            "winner": "not completed",
+            "pick": "LV"
+          },
+          {
+            "winner": "not completed",
+            "pick": "CLE",
+            "id": "401547484"
+          },
+          {
+            "pick": "BUF",
+            "winner": "not completed",
+            "id": "401547485"
+          },
+          {
+            "winner": "not completed",
+            "pick": "WSH",
+            "id": "401547486"
+          },
+          {
+            "winner": "not completed",
+            "id": "401547491",
+            "pick": "TB"
+          },
+          {
+            "pick": "BAL",
+            "winner": "not completed",
+            "id": "401547489"
+          },
+          {
+            "id": "401547492",
+            "winner": "not completed",
+            "pick": "LAR"
+          },
+          {
+            "winner": "not completed",
+            "id": "401547493",
+            "pick": "SEA"
+          },
+          {
+            "winner": "not completed",
+            "id": "401547487",
+            "pick": "DEN"
+          },
+          {
+            "id": "401547488",
+            "pick": "KC",
+            "winner": "not completed"
+          },
+          {
+            "winner": "not completed",
+            "pick": "MIA",
+            "id": "401547494"
+          },
+          {
+            "id": "401547495",
+            "pick": "SF",
+            "winner": "not completed"
+          }
+        ]
+      }
+    ],
+    "record": {
+      "loses": 35,
+      "ties": 0,
+      "wins": 42
+    },
+    "id": "6mwSuKjLhIPYd96mIcAjC8sUUZc2",
+    "color": "#3b82f6",
+    "roi": 0,
+    "username": "Ziek"
+  },
+  {
+    "username": "mumychelsea@gmail.com",
+    "picks": [
+      {
+        "id": "222023",
+        "record": {
+          "wins": 10,
+          "loses": 6,
+          "ties": 0
         },
         "games": [
           {
             "id": "401547410",
-            "pick": "PHI",
-            "winner": "PHI"
+            "winner": "PHI",
+            "pick": "PHI"
           },
           {
-            "winner": "ATL",
             "id": "401547417",
+            "winner": "ATL",
             "pick": "GB"
           },
           {
@@ -1841,151 +2139,145 @@
             "id": "401547411"
           },
           {
-            "winner": "BAL",
             "pick": "BAL",
+            "winner": "BAL",
             "id": "401547412"
           },
           {
-            "winner": "SEA",
             "pick": "SEA",
+            "winner": "SEA",
             "id": "401547418"
           },
           {
             "pick": "LAC",
-            "id": "401547414",
-            "winner": "TEN"
+            "winner": "TEN",
+            "id": "401547414"
           },
           {
-            "id": "401547420",
             "winner": "TB",
-            "pick": "CHI"
+            "pick": "CHI",
+            "id": "401547420"
           },
           {
-            "pick": "JAX",
+            "id": "401547413",
             "winner": "KC",
-            "id": "401547413"
-          },
-          {
-            "id": "401547419",
-            "pick": "IND",
-            "winner": "IND"
-          },
-          {
-            "id": "401547422",
-            "pick": "SF",
-            "winner": "SF"
-          },
-          {
-            "pick": "NYG",
-            "winner": "NYG",
-            "id": "401547421"
-          },
-          {
-            "id": "401547415",
-            "winner": "DAL",
-            "pick": "DAL"
-          },
-          {
-            "winner": "WSH",
-            "pick": "DEN",
-            "id": "401547416"
-          },
-          {
-            "id": "401547423",
-            "pick": "NE",
-            "winner": "MIA"
-          },
-          {
-            "winner": "NO",
-            "id": "401547425",
-            "pick": "NO"
-          },
-          {
-            "id": "401547424",
-            "pick": "PIT",
-            "winner": "PIT"
-          }
-        ],
-        "id": "222023"
-      },
-      {
-        "id": "232023",
-        "completed": true,
-        "record": {
-          "loses": 9,
-          "ties": 0,
-          "wins": 7
-        },
-        "games": [
-          {
-            "pick": "NYG",
-            "winner": "SF",
-            "id": "401547426"
-          },
-          {
-            "id": "401547428",
-            "winner": "CLE",
-            "pick": "TEN"
-          },
-          {
-            "pick": "DET",
-            "id": "401547433",
-            "winner": "DET"
-          },
-          {
-            "id": "401547434",
-            "winner": "GB",
-            "pick": "NO"
-          },
-          {
-            "winner": "MIA",
-            "pick": "DEN",
-            "id": "401547429"
-          },
-          {
-            "winner": "LAC",
-            "id": "401547436",
-            "pick": "LAC"
-          },
-          {
-            "id": "401547430",
-            "pick": "NE",
-            "winner": "NE"
-          },
-          {
-            "id": "401547431",
-            "winner": "BUF",
-            "pick": "WSH"
-          },
-          {
-            "pick": "JAX",
-            "id": "401547435",
-            "winner": "HOU"
+            "pick": "JAX"
           },
           {
             "winner": "IND",
+            "pick": "IND",
+            "id": "401547419"
+          },
+          {
+            "winner": "SF",
+            "id": "401547422",
+            "pick": "SF"
+          },
+          {
+            "pick": "NYG",
+            "id": "401547421",
+            "winner": "NYG"
+          },
+          {
+            "pick": "DAL",
+            "winner": "DAL",
+            "id": "401547415"
+          },
+          {
+            "pick": "DEN",
+            "winner": "WSH",
+            "id": "401547416"
+          },
+          {
+            "pick": "NE",
+            "id": "401547423",
+            "winner": "MIA"
+          },
+          {
+            "id": "401547425",
+            "winner": "NO",
+            "pick": "NO"
+          },
+          {
+            "pick": "PIT",
+            "winner": "PIT",
+            "id": "401547424"
+          }
+        ],
+        "completed": true
+      },
+      {
+        "completed": true,
+        "games": [
+          {
+            "winner": "SF",
+            "id": "401547426",
+            "pick": "NYG"
+          },
+          {
+            "winner": "CLE",
+            "pick": "TEN",
+            "id": "401547428"
+          },
+          {
+            "winner": "DET",
+            "pick": "DET",
+            "id": "401547433"
+          },
+          {
+            "pick": "NO",
+            "winner": "GB",
+            "id": "401547434"
+          },
+          {
+            "winner": "MIA",
+            "id": "401547429",
+            "pick": "DEN"
+          },
+          {
+            "id": "401547436",
+            "pick": "LAC",
+            "winner": "LAC"
+          },
+          {
+            "id": "401547430",
+            "winner": "NE",
+            "pick": "NE"
+          },
+          {
+            "pick": "WSH",
+            "winner": "BUF",
+            "id": "401547431"
+          },
+          {
+            "winner": "HOU",
+            "id": "401547435",
+            "pick": "JAX"
+          },
+          {
             "id": "401547427",
-            "pick": "BAL"
+            "pick": "BAL",
+            "winner": "IND"
           },
           {
-            "id": "401547432",
             "pick": "SEA",
-            "winner": "SEA"
+            "winner": "SEA",
+            "id": "401547432"
           },
           {
+            "pick": "CHI",
             "id": "401547438",
-            "winner": "KC",
-            "pick": "CHI"
+            "winner": "KC"
           },
           {
             "winner": "ARI",
-            "pick": "DAL",
-            "id": "401547437"
+            "id": "401547437",
+            "pick": "DAL"
           },
           {
-            "winner": "PIT",
             "pick": "PIT",
-            "id": "401547439"
+            "id": "401547439",
+            "winner": "PIT"
           },
           {
             "pick": "PHI",
@@ -1997,171 +2289,171 @@
             "id": "401547441",
             "pick": "CIN"
           }
-        ]
+        ],
+        "record": {
+          "wins": 7,
+          "loses": 9,
+          "ties": 0
+        },
+        "id": "232023"
       },
       {
-        "record": {
-          "ties": 0,
-          "loses": 6,
-          "wins": 10
-        },
-        "completed": true,
         "id": "242023",
         "games": [
           {
-            "pick": "GB",
             "winner": "DET",
+            "pick": "GB",
             "id": "401547442"
           },
           {
             "winner": "JAX",
-            "id": "401547227",
-            "pick": "ATL"
+            "pick": "ATL",
+            "id": "401547227"
           },
           {
-            "id": "401547443",
             "winner": "BUF",
-            "pick": "BUF"
+            "pick": "BUF",
+            "id": "401547443"
           },
           {
             "pick": "DEN",
-            "id": "401547444",
-            "winner": "DEN"
+            "winner": "DEN",
+            "id": "401547444"
           },
           {
-            "id": "401547445",
             "pick": "BAL",
-            "winner": "BAL"
+            "winner": "BAL",
+            "id": "401547445"
           },
           {
+            "winner": "TEN",
             "id": "401547452",
-            "pick": "CIN",
-            "winner": "TEN"
+            "pick": "CIN"
           },
           {
-            "winner": "LAR",
             "pick": "LAR",
-            "id": "401547449"
-          },
-          {
-            "id": "401547450",
-            "winner": "TB",
-            "pick": "NO"
-          },
-          {
-            "id": "401547451",
-            "winner": "PHI",
-            "pick": "PHI"
-          },
-          {
-            "id": "401547448",
-            "winner": "MIN",
-            "pick": "MIN"
-          },
-          {
-            "id": "401547446",
-            "pick": "PIT",
-            "winner": "HOU"
-          },
-          {
-            "pick": "LAC",
-            "winner": "LAC",
-            "id": "401547447"
-          },
-          {
-            "pick": "NE",
-            "id": "401547453",
-            "winner": "DAL"
-          },
-          {
-            "winner": "SF",
-            "pick": "SF",
-            "id": "401547454"
-          },
-          {
-            "winner": "KC",
-            "pick": "KC",
-            "id": "401547455"
-          },
-          {
-            "id": "401547456",
-            "winner": "SEA",
-            "pick": "SEA"
-          }
-        ]
-      },
-      {
-        "id": "252023",
-        "record": {
-          "wins": 9,
-          "loses": 5,
-          "ties": 0
-        },
-        "games": [
-          {
-            "id": "401547457",
-            "pick": "CHI",
-            "winner": "CHI"
-          },
-          {
-            "id": "401547228",
-            "pick": "BUF",
-            "winner": "JAX"
-          },
-          {
-            "pick": "ATL",
-            "winner": "ATL",
-            "id": "401547463"
-          },
-          {
-            "pick": "CAR",
-            "winner": "DET",
-            "id": "401547464"
-          },
-          {
-            "pick": "IND",
-            "id": "401547458",
-            "winner": "IND"
-          },
-          {
-            "id": "401547465",
-            "pick": "NYG",
-            "winner": "MIA"
+            "id": "401547449",
+            "winner": "LAR"
           },
           {
             "pick": "NO",
+            "winner": "TB",
+            "id": "401547450"
+          },
+          {
+            "winner": "PHI",
+            "pick": "PHI",
+            "id": "401547451"
+          },
+          {
+            "winner": "MIN",
+            "id": "401547448",
+            "pick": "MIN"
+          },
+          {
+            "pick": "PIT",
+            "id": "401547446",
+            "winner": "HOU"
+          },
+          {
+            "winner": "LAC",
+            "id": "401547447",
+            "pick": "LAC"
+          },
+          {
+            "pick": "NE",
+            "winner": "DAL",
+            "id": "401547453"
+          },
+          {
+            "pick": "SF",
+            "id": "401547454",
+            "winner": "SF"
+          },
+          {
+            "pick": "KC",
+            "id": "401547455",
+            "winner": "KC"
+          },
+          {
+            "winner": "SEA",
+            "id": "401547456",
+            "pick": "SEA"
+          }
+        ],
+        "completed": true,
+        "record": {
+          "loses": 6,
+          "wins": 10,
+          "ties": 0
+        }
+      },
+      {
+        "games": [
+          {
+            "winner": "CHI",
+            "id": "401547457",
+            "pick": "CHI"
+          },
+          {
+            "winner": "JAX",
+            "id": "401547228",
+            "pick": "BUF"
+          },
+          {
+            "winner": "ATL",
+            "pick": "ATL",
+            "id": "401547463"
+          },
+          {
+            "winner": "DET",
+            "id": "401547464",
+            "pick": "CAR"
+          },
+          {
+            "winner": "IND",
+            "id": "401547458",
+            "pick": "IND"
+          },
+          {
+            "pick": "NYG",
+            "winner": "MIA",
+            "id": "401547465"
+          },
+          {
             "winner": "NO",
+            "pick": "NO",
             "id": "401547459"
           },
           {
             "pick": "BAL",
-            "id": "401547460",
-            "winner": "PIT"
+            "winner": "PIT",
+            "id": "401547460"
           },
           {
             "pick": "PHI",
-            "id": "401547467",
-            "winner": "PHI"
+            "winner": "PHI",
+            "id": "401547467"
           },
           {
             "pick": "CIN",
-            "winner": "CIN",
-            "id": "401547466"
+            "id": "401547466",
+            "winner": "CIN"
           },
           {
-            "winner": "NYJ",
             "pick": "NYJ",
-            "id": "401547461"
+            "id": "401547461",
+            "winner": "NYJ"
           },
           {
-            "id": "401547462",
             "pick": "KC",
-            "winner": "KC"
+            "winner": "KC",
+            "id": "401547462"
           },
           {
-            "pick": "SF",
             "id": "401547354",
-            "winner": "SF"
+            "winner": "SF",
+            "pick": "SF"
           },
           {
             "pick": "GB",
@@ -2169,19 +2461,30 @@
             "id": "401547468"
           }
         ],
-        "completed": true
+        "record": {
+          "loses": 5,
+          "wins": 9,
+          "ties": 0
+        },
+        "completed": true,
+        "id": "252023"
       },
       {
+        "record": {
+          "ties": 0,
+          "loses": 6,
+          "wins": 9
+        },
         "games": [
           {
+            "id": "401547469",
             "winner": "KC",
-            "pick": "KC",
-            "id": "401547469"
+            "pick": "KC"
           },
           {
             "pick": "BAL",
-            "winner": "BAL",
-            "id": "401547229"
+            "id": "401547229",
+            "winner": "BAL"
           },
           {
             "pick": "ATL",
@@ -2190,28 +2493,28 @@
           },
           {
             "id": "401547475",
-            "pick": "MIN",
-            "winner": "MIN"
+            "winner": "MIN",
+            "pick": "MIN"
           },
           {
-            "pick": "SEA",
             "winner": "CIN",
-            "id": "401547471"
+            "id": "401547471",
+            "pick": "SEA"
           },
           {
-            "id": "401547476",
+            "pick": "CLE",
             "winner": "CLE",
-            "pick": "CLE"
+            "id": "401547476"
           },
           {
-            "id": "401547473",
+            "winner": "MIA",
             "pick": "CAR",
-            "winner": "MIA"
+            "id": "401547473"
           },
           {
-            "winner": "JAX",
+            "pick": "JAX",
             "id": "401547472",
-            "pick": "JAX"
+            "winner": "JAX"
           },
           {
             "pick": "NO",
@@ -2220,12 +2523,12 @@
           },
           {
             "winner": "LV",
-            "id": "401547474",
-            "pick": "LV"
+            "pick": "LV",
+            "id": "401547474"
           },
           {
-            "winner": "LAR",
             "pick": "LAR",
+            "winner": "LAR",
             "id": "401547479"
           },
           {
@@ -2234,29 +2537,107 @@
             "winner": "NYJ"
           },
           {
-            "winner": "DET",
             "pick": "DET",
+            "winner": "DET",
             "id": "401547478"
           },
           {
+            "pick": "BUF",
             "winner": "BUF",
-            "id": "401547481",
-            "pick": "BUF"
+            "id": "401547481"
           },
           {
-            "pick": "LAC",
+            "winner": "DAL",
             "id": "401547482",
-            "winner": "not completed"
+            "pick": "LAC"
           }
         ],
-        "record": {
-          "loses": 5,
-          "wins": 9,
-          "ties": 0
-        },
-        "completed": false,
+        "completed": true,
         "id": "262023"
+      },
+      {
+        "completed": false,
+        "games": [
+          {
+            "winner": "not completed",
+            "pick": "JAX",
+            "id": "401547483"
+          },
+          {
+            "winner": "not completed",
+            "pick": "LV",
+            "id": "401547490"
+          },
+          {
+            "id": "401547484",
+            "winner": "not completed",
+            "pick": "IND"
+          },
+          {
+            "pick": "BUF",
+            "winner": "not completed",
+            "id": "401547485"
+          },
+          {
+            "pick": "WSH",
+            "id": "401547486",
+            "winner": "not completed"
+          },
+          {
+            "winner": "not completed",
+            "pick": "ATL",
+            "id": "401547491"
+          },
+          {
+            "pick": "DET",
+            "id": "401547489",
+            "winner": "not completed"
+          },
+          {
+            "winner": "not completed",
+            "id": "401547492",
+            "pick": "LAR"
+          },
+          {
+            "pick": "SEA",
+            "winner": "not completed",
+            "id": "401547493"
+          },
+          {
+            "winner": "not completed",
+            "pick": "GB",
+            "id": "401547487"
+          },
+          {
+            "id": "401547488",
+            "winner": "not completed",
+            "pick": "KC"
+          },
+          {
+            "winner": "not completed",
+            "pick": "PHI",
+            "id": "401547494"
+          },
+          {
+            "winner": "not completed",
+            "id": "401547495",
+            "pick": "SF"
+          }
+        ],
+        "id": "272023",
+        "record": {
+          "ties": 0,
+          "loses": 0,
+          "wins": 0
+        }
       }
-    ]
+    ],
+    "record": {
+      "loses": 32,
+      "ties": 0,
+      "wins": 45
+    },
+    "roi": 0,
+    "id": "5AeB9qQUglQHvx7X05qp2B69nIw1"
   }
 ]

@@ -21,7 +21,7 @@ const PageLayout = ({ children }: { children?: ReactNode }) => {
     <div className="flex max-w-3xl w-full h-full flex-col items-center">
       <NotificationBanner />
       <Header />
-      <div className="w-full px-6 overflow-y-scroll h-full">{children}</div>
+      <div className="w-full px-5 overflow-y-scroll h-full">{children}</div>
       {location.pathname === "/scores" && numberOfPicksMissing > 0 ? (
         <NotificationLink
           text={`Make ${numberOfPicksMissing} Picks`}

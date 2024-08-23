@@ -66,11 +66,12 @@ const GameTeam = ({
       data-testid={testId}
       onClick={() => (readonly ? null : handlePick())}
       style={styles}
-      className="shadow-[0_0_4px_0_rgba(0,0,0,0.1)] w-[49%] px-3 py-4 rounded-md flex items-center justify-between text-sm"
+      className="shadow-[0_0_4px_0_rgba(0,0,0,0.1)] w-[49%] px-2 py-4 rounded-md flex items-center justify-between text-xs"
     >
       <div className="flex items-center">
         <p style={{ color: displayColor }}>
-          {abbreviation} <span className="font-bold">{name}</span>
+          {abbreviation}{" "}
+          <span className="font-bold text-[0.85rem]">{name}</span>
         </p>
         <p className="text-xs text-gray-400 text-center ml-1">
           ({record.wins} - {record.loses})
@@ -78,7 +79,7 @@ const GameTeam = ({
       </div>
       {showScore ? (
         <p
-          className="mr-5 font-bold text-purple-500 text-center"
+          className="mr-2 font-bold text-purple-500 text-center"
           data-testid={isHome ? "homeTeamScore" : "awayTeamScore"}
         >
           {score}
