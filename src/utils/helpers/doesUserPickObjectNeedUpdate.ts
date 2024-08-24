@@ -6,31 +6,31 @@ export const doesUserPickObjectNeedUpdate = ({
   latestWeekNumber,
   currentWeekGames,
   userPicks,
+  currentYearNumber,
 }: {
   latestWeekNumber: number;
   currentWeekGames: Game[];
   userPicks: Picks;
+  currentYearNumber: number;
 }) => {
-  let previousWeekPicksFinished = true;
-
   const currentWeekPicks = userPicks.find(
     ({ id }) =>
-      id === getWeekId({ seasontype: 2, week: latestWeekNumber, year: 2023 })
+      id ===
+      getWeekId({
+        seasontype: 2,
+        week: latestWeekNumber,
+        year: currentYearNumber,
+      })
   );
 
-  for (let i = 2; i <= latestWeekNumber; i++) {
-    if (!previousWeekPicksFinished) break;
-    const weekId = getWeekId({ seasontype: 2, week: i, year: 2023 });
-    const weekPicks = userPicks.find(({ id }) => id === weekId);
-
-    if (!weekPicks || (!weekPicks.completed && i !== latestWeekNumber))
-      previousWeekPicksFinished = false;
+  if (!currentWeekPicks) {
+    return true;
   }
 
   const currentWeeksPicksUpToDate =
-    currentWeekGames.filter(({ completed }) => completed).length ===
+    currentWeekGames.filter(({ completed }) => completed).length !==
     currentWeekPicks?.games.filter(({ winner }) => winner !== "not completed")
       .length;
 
-  return !previousWeekPicksFinished || !currentWeeksPicksUpToDate;
+  return currentWeeksPicksUpToDate;
 };

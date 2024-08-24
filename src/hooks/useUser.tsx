@@ -52,6 +52,7 @@ export const useUser = () => {
 
       const needUpdate = doesUserPickObjectNeedUpdate({
         latestWeekNumber: data?.parameters.week,
+        currentYearNumber: data?.parameters.year,
         currentWeekGames: getWeekData(data.schedule),
         userPicks: userPicks.picks,
       });
@@ -88,6 +89,7 @@ export const useUser = () => {
 
     const needUpdate = doesUserPickObjectNeedUpdate({
       latestWeekNumber: data?.parameters.week,
+      currentYearNumber: data?.parameters.year,
       currentWeekGames: getWeekData(data.schedule),
       userPicks: userPicks.picks,
     });
@@ -133,6 +135,7 @@ export const useUser = () => {
 
     const needUpdate = doesUserPickObjectNeedUpdate({
       latestWeekNumber: data?.parameters.week,
+      currentYearNumber: data?.parameters.year,
       currentWeekGames: getWeekData(data.schedule),
       userPicks: userPicks.picks,
     });

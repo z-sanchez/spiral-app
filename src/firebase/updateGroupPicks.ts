@@ -20,15 +20,17 @@ export const updateGroupPicks = async (db: Firestore) => {
     });
   }
 
-  const latestWeekNumber = await fetchCurrentWeekParams().then(
-    (result) => result.week
-  );
+  const latestParams = await fetchCurrentWeekParams().then((result) => result);
+  const latestWeekNumber = latestParams.week;
+
+  const latestYearNumber = latestParams.year;
 
   groupUserPickObjects = await Promise.all(
     groupUserPickObjects.map(async (pickObject) => {
       const updatedObject = await updateUserPickObjectForFirebase(
         pickObject,
-        latestWeekNumber
+        latestWeekNumber,
+        latestYearNumber
       );
       //update user pick object
       updateUserPickObject(updatedObject.id, updatedObject, db);
