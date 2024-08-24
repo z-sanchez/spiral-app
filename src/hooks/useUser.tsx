@@ -72,7 +72,13 @@ export const useUser = () => {
         ...userPicks,
         groupPicks,
       });
-      navigate("/");
+      setCookie(import.meta.env.VITE_COOKIE, firebaseAuthUser.uid, 365);
+
+      if (!appUser.color) {
+        navigate("/profileSettings");
+      } else {
+        navigate("/");
+      }
       return;
     }
 

@@ -17,6 +17,8 @@ export const SPIRAL_TEST_COOKIE_NAME = "spiralTestAppCookie";
 
 export const NO_PICK = "no pick";
 
+export const DEFAULT_APP_COLOR = "#a855f7";
+
 export const profileColorChoices = [
   "#fca5a5",
   "#f87171",

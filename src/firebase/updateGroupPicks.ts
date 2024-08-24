@@ -21,7 +21,8 @@ export const updateGroupPicks = async (db: Firestore) => {
   }
 
   const latestParams = await fetchCurrentWeekParams().then((result) => result);
-  const latestWeekNumber = latestParams.week;
+  const latestWeekNumber =
+    latestParams.seasontype !== 2 ? 1 : latestParams.week;
 
   const latestYearNumber = latestParams.year;
 
