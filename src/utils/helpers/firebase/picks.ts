@@ -48,12 +48,17 @@ export const createEmptyWeekPickObject = ({
 
 export const updateUserPickObjectForFirebase = async (
   userPickObject: UserPicksObject,
-  latestWeekNumber: number
+  latestWeekNumber: number,
+  latestYearNumber: number
 ): Promise<UserPicksObject> => {
   let updatedPicks = structuredClone(userPickObject.picks);
 
-  for (let i = 2; i <= latestWeekNumber; i++) {
-    const weekId = getWeekId({ seasontype: 2, week: i, year: 2023 });
+  for (let i = 1; i <= latestWeekNumber; i++) {
+    const weekId = getWeekId({
+      seasontype: 2,
+      week: i,
+      year: latestYearNumber,
+    });
 
     const hasWeekPicksFinished = updatedPicks.find(
       (weekPick) =>

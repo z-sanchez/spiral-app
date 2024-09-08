@@ -15,6 +15,8 @@ const useGameSchedule = () => {
 
   const currentWeekNumber = !isLoading ? data?.parameters.week : 0;
 
+  const currentYearNumber = !isLoading ? data?.parameters.year : 2024;
+
   const activeGames = currentWeeksGames.filter(({ completed }) => !completed);
   const gamesInProgress = activeGames.filter(
     ({ date }) => new Date(date) < new Date()
@@ -42,6 +44,7 @@ const useGameSchedule = () => {
     gamesInProgress,
     gamesNotStarted,
     currentWeekNumber,
+    currentYearNumber,
   };
 };
 

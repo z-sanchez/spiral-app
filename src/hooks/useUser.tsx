@@ -52,6 +52,7 @@ export const useUser = () => {
 
       const needUpdate = doesUserPickObjectNeedUpdate({
         latestWeekNumber: data?.parameters.week,
+        currentYearNumber: data?.parameters.year,
         currentWeekGames: getWeekData(data.schedule),
         userPicks: userPicks.picks,
       });
@@ -71,7 +72,13 @@ export const useUser = () => {
         ...userPicks,
         groupPicks,
       });
-      navigate("/");
+      setCookie(import.meta.env.VITE_COOKIE, firebaseAuthUser.uid, 365);
+
+      if (!appUser.color) {
+        navigate("/profileSettings");
+      } else {
+        navigate("/");
+      }
       return;
     }
 
@@ -88,6 +95,7 @@ export const useUser = () => {
 
     const needUpdate = doesUserPickObjectNeedUpdate({
       latestWeekNumber: data?.parameters.week,
+      currentYearNumber: data?.parameters.year,
       currentWeekGames: getWeekData(data.schedule),
       userPicks: userPicks.picks,
     });
@@ -133,6 +141,7 @@ export const useUser = () => {
 
     const needUpdate = doesUserPickObjectNeedUpdate({
       latestWeekNumber: data?.parameters.week,
+      currentYearNumber: data?.parameters.year,
       currentWeekGames: getWeekData(data.schedule),
       userPicks: userPicks.picks,
     });
