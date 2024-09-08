@@ -7,7 +7,7 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { authenticationState } from "../state/AuthState";
 import { User } from "../types/User";
 import { FormTextField } from "../components/Form/FormTextField";
-import { profileColorChoices } from "../utils/constants";
+import { DEFAULT_APP_COLOR, profileColorChoices } from "../utils/constants";
 import { FormButton } from "../components/Form/FormButton";
 import { Collapse } from "@mui/material";
 import { ReactComponent as DownArrowIcon } from "../assets/icons/down-arrow.svg";
@@ -43,16 +43,12 @@ const ProfileSettingsPage = () => {
       return;
     }
 
-    if (!selectedColor) {
-      setNotificationState({
-        show: true,
-        backgroundColor: "rgb(244 63 94)",
-        message: "No Color Picked",
-      });
-      return;
-    }
-
-    updateUserObjectColorAndUsername(id, selectedColor, usernameState, db)
+    updateUserObjectColorAndUsername(
+      id,
+      selectedColor ? selectedColor : DEFAULT_APP_COLOR,
+      usernameState,
+      db
+    )
       .then((result) => {
         result?.success
           ? setNotificationState({

@@ -1,6 +1,3 @@
-export const GAME_SCHEDULE_QUERY =
-  "https://cdn.espn.com/core/nfl/schedule?xhr=1&year=2023&seasontype=2";
-
 export const ENV_VARIABLES = {
   useMockData: import.meta.env.VITE_USE_MOCK_DATA,
 };
@@ -19,6 +16,8 @@ export const SPIRAL_COOKIE_NAME = "spiralAppCookie";
 export const SPIRAL_TEST_COOKIE_NAME = "spiralTestAppCookie";
 
 export const NO_PICK = "no pick";
+
+export const DEFAULT_APP_COLOR = "#a855f7";
 
 export const profileColorChoices = [
   "#fca5a5",

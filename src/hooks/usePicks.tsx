@@ -27,8 +27,12 @@ export const usePicks = () => {
   const [userPicksStateData, setPicks] = useRecoilState(userPicksState);
   const { db } = useRecoilValue(firestoreState) as { db: Firestore };
   const { user } = useRecoilValue(authenticationState) as { user: User };
-  const { currentWeeksGames, currentWeekId, currentWeekNumber } =
-    useGameSchedule();
+  const {
+    currentWeeksGames,
+    currentWeekId,
+    currentWeekNumber,
+    currentYearNumber,
+  } = useGameSchedule();
 
   console.log({ userPicksStateData, currentWeekId });
   const { picks, record, roi, groupPicks } = userPicksStateData;
@@ -130,14 +134,14 @@ export const usePicks = () => {
     const previousWeekId = getWeekId({
       seasontype: 2,
       week: previousWeekNumber,
-      year: 2023,
+      year: currentYearNumber,
     });
 
     getGroupWeekWinsRanked().forEach((winNumber, index) => {
       groupPicks.forEach((groupUser) => {
         const week = groupUser.picks.find(({ id }) => id === currentWeekId);
 
-        if (week?.record.wins === winNumber) {
+        if (week?.record.wins === winNumber && week) {
           const rankingNotifications = getRankingNotificationData(
             previousWeekId,
             currentWeekId,
@@ -173,11 +177,12 @@ export const usePicks = () => {
       rankingNotifications?: RankingNotifications;
     }[] = [];
 
-    const previousWeekNumber = currentWeekNumber - 1;
+    const previousWeekNumber =
+      currentWeekNumber !== 1 ? currentWeekNumber - 1 : currentWeekNumber;
     const previousWeekId = getWeekId({
       seasontype: 2,
       week: previousWeekNumber,
-      year: 2023,
+      year: currentYearNumber,
     });
 
     getGroupAllTimeWinsRanked().forEach((winNumber, index) => {
