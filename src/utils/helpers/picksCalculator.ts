@@ -21,9 +21,16 @@ export const getUserWeekRecord = (weekPicks: WeekPicks): Record => {
   return weekRecord;
 };
 
-export const getAllTimeRecord = (picks: Picks): Record => {
+export const getAllTimeRecord = (
+  picks: Picks,
+  latestYearNumber: number
+): Record => {
   return picks.reduce(
     (record, week) => {
+      const year = Number(week.id.slice(-4));
+      if (year !== latestYearNumber) {
+        return record;
+      }
       return {
         wins: record.wins + week.record.wins,
         loses: record.loses + week.record.loses,

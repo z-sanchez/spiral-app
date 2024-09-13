@@ -79,6 +79,6 @@ export const updateUserPickObjectForFirebase = async (
   return {
     ...userPickObject,
     picks: updatedPicks,
-    record: getAllTimeRecord(updatedPicks),
+    record: getAllTimeRecord(updatedPicks, latestYearNumber),
   };
 };
