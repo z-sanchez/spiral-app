@@ -9,11 +9,14 @@ export default defineConfig({
     svgr(),
     react(),
     VitePWA({
+      registerType: "autoUpdate",
+      injectRegister: false,
+
       manifest: {
         name: "Spiral v2",
         short_name: "Spiral",
-        description: "Pick'em App",
-        theme_color: "#ffffff",
+        description: "Fantasy Pick'em App",
+        theme_color: "#a855f7",
         icons: [
           {
             src: "/icons/spiral-v2-logo.png",
@@ -22,6 +25,18 @@ export default defineConfig({
             purpose: "any maskable",
           },
         ],
+      },
+      workbox: {
+        globPatterns: ["**/*.{js,css,html,svg,png,ico}"],
+        cleanupOutdatedCaches: true,
+        clientsClaim: true,
+      },
+
+      devOptions: {
+        enabled: false,
+        navigateFallback: "index.html",
+        suppressWarnings: true,
+        type: "module",
       },
     }),
   ],
