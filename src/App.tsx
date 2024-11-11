@@ -9,6 +9,7 @@ import { getFirestore } from "firebase/firestore";
 import { FIREBASE_CONFIGURATION } from "./utils/constants";
 import { useRecoilState } from "recoil";
 import { firestoreState } from "./state/FirestoreState";
+import { useEffect } from "react";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +29,14 @@ function App() {
   if (!firestoreStateData.db) {
     setFirestoreData({ db });
   }
+
+  useEffect(() => {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.addEventListener("controllerchange", () => {
+        window.location.reload();
+      });
+    }
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>

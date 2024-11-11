@@ -10,8 +10,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: "autoUpdate",
-      injectRegister: false,
-
+      injectRegister: "auto",
       manifest: {
         name: "Spiral v2",
         short_name: "Spiral",
