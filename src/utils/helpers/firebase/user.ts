@@ -1,17 +1,17 @@
 import { User as firebaseAuthUser } from "firebase/auth";
-import { UserObject } from "../../../types/Firebase";
+import { User } from "../../../types/Firebase";
 
 export const createUserObjectFromGoogleUser = ({
   uid,
   email,
   photoURL,
-}: firebaseAuthUser): UserObject => {
+}: firebaseAuthUser): User => {
   return {
     username: email ?? "",
     color: "",
     iconCharacter: "",
     id: uid,
-    photoUrl: photoURL ?? "",
+    photoURL: photoURL ?? null,
     email: email ?? "",
   };
 };

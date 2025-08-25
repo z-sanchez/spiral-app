@@ -1,4 +1,4 @@
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { authenticationState } from "../state/AuthState";
 import { createNewUserInFirebase } from "../firebase/createNewUserInFirebase";
 import { createUserObjectFromGoogleUser } from "../utils/helpers/firebase/user";
@@ -9,25 +9,11 @@ import { userExists } from "../firebase/userExists";
 import { getUser } from "../firebase/getUser";
 import { useNavigate } from "react-router-dom";
 import { setCookie } from "../utils/helpers/cookie";
-import { userPicksState } from "../state/UserPicksState";
-import { transformFirebaseUserToAppUser } from "../utils/helpers/transformFirebaseUserToAppUser";
 import { createUserPickObjectUser } from "../utils/helpers/firebase/picks";
 import { createNewPicksUserInFirebase } from "../firebase/createNewPicksUserInFirebase";
-import { getUserPicks } from "../firebase/getUserPicks";
-import { UserPicksObject } from "../types/Firebase";
-import { updateGroupPicks } from "../firebase/updateGroupPicks";
-import { doesUserPickObjectNeedUpdate } from "../utils/helpers/doesUserPickObjectNeedUpdate";
-import { useQuery } from "react-query";
-import { getWeekData } from "../utils/helpers/espn/getWeekData";
-import { getGroupPicks } from "../firebase/getGroupPicks";
-import { fetchCurrentWeekData } from "../utils/helpers/espn/fetchWeekData";
 
 export const useUser = () => {
-  const { isLoading, data } = useQuery("gameScheduleData", () =>
-    fetchCurrentWeekData()
-  );
   const [authState, setAuthState] = useRecoilState(authenticationState);
-  const setUserPicksState = useSetRecoilState(userPicksState);
   const navigate = useNavigate();
   const { db } = useRecoilValue(firestoreState) as { db: Firestore };
 
@@ -42,84 +28,24 @@ export const useUser = () => {
       const newUser = createUserObjectFromGoogleUser(firebaseAuthUser);
       await createNewUserInFirebase({ newUser, db });
 
-      const appUser = transformFirebaseUserToAppUser(newUser);
-
-      let userPicks = createUserPickObjectUser(appUser);
+      const userPicks = createUserPickObjectUser(newUser);
 
       await createNewPicksUserInFirebase({ newUser: userPicks, db });
-
-      let groupPicks = await getGroupPicks(db);
-
-      const needUpdate = doesUserPickObjectNeedUpdate({
-        latestWeekNumber: data?.parameters.week,
-        currentYearNumber: data?.parameters.year,
-        currentWeekGames: getWeekData(data.schedule),
-        userPicks: userPicks.picks,
-      });
-
-      if (needUpdate) {
-        groupPicks = await updateGroupPicks(db);
-        userPicks =
-          groupPicks.find(({ id }) => id === userPicks.id) || userPicks;
-      }
 
       setAuthState({
         signedIn: true,
         authUser: { ...firebaseAuthUser },
-        user: appUser,
+        user: newUser,
       });
-      setUserPicksState({
-        ...userPicks,
-        groupPicks,
-      });
+
       setCookie(import.meta.env.VITE_COOKIE, firebaseAuthUser.uid, 365);
 
-      if (!appUser.color) {
+      if (!newUser.color) {
         navigate("/profileSettings");
       } else {
         navigate("/");
       }
       return;
-    }
-
-    const user = await getUser({ userId: firebaseAuthUser.uid, db });
-    const appUser = transformFirebaseUserToAppUser(user);
-
-    let userPicks = (await getUserPicks({
-      userId: firebaseAuthUser.uid,
-      db,
-      userObject: appUser,
-    })) as UserPicksObject;
-
-    let groupPicks = await getGroupPicks(db);
-
-    const needUpdate = doesUserPickObjectNeedUpdate({
-      latestWeekNumber: data?.parameters.week,
-      currentYearNumber: data?.parameters.year,
-      currentWeekGames: getWeekData(data.schedule),
-      userPicks: userPicks.picks,
-    });
-
-    if (needUpdate) {
-      groupPicks = await updateGroupPicks(db);
-      userPicks = groupPicks.find(({ id }) => id === userPicks.id) || userPicks;
-    }
-
-    setAuthState({
-      signedIn: true,
-      authUser: { ...firebaseAuthUser },
-      user: appUser,
-    });
-    setUserPicksState({
-      ...userPicks,
-      groupPicks,
-    });
-    setCookie(import.meta.env.VITE_COOKIE, firebaseAuthUser.uid, 365);
-
-    if (!appUser.color) {
-      navigate("/profileSettings");
-    } else {
-      navigate("/");
     }
   };
 
@@ -129,39 +55,14 @@ export const useUser = () => {
     firebaseAuthUserId: string;
   }) => {
     const user = await getUser({ userId: firebaseAuthUserId, db });
-    const appUser = transformFirebaseUserToAppUser(user);
-
-    let userPicks = (await getUserPicks({
-      userId: firebaseAuthUserId,
-      db,
-      userObject: appUser,
-    })) as UserPicksObject;
-
-    let groupPicks = await getGroupPicks(db);
-
-    const needUpdate = doesUserPickObjectNeedUpdate({
-      latestWeekNumber: data?.parameters.week,
-      currentYearNumber: data?.parameters.year,
-      currentWeekGames: getWeekData(data.schedule),
-      userPicks: userPicks.picks,
-    });
-
-    if (needUpdate) {
-      groupPicks = await updateGroupPicks(db);
-      userPicks = groupPicks.find(({ id }) => id === userPicks.id) || userPicks;
-    }
 
     setAuthState({
       signedIn: true,
       authUser: JSON.parse(JSON.stringify(getAuth())),
-      user: appUser,
-    });
-    setUserPicksState({
-      ...userPicks,
-      groupPicks,
+      user,
     });
 
-    if (!appUser.color) {
+    if (!user.color) {
       navigate("/profileSettings");
     } else {
       navigate("/");
@@ -169,7 +70,6 @@ export const useUser = () => {
   };
 
   return {
-    userStateLoading: isLoading,
     authState,
     signInUser,
     signInUserWithCookie,

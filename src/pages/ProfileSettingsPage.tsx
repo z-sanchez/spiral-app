@@ -5,25 +5,22 @@ import { SectionIndicator } from "../components/SectionIndicator";
 import { ProfileIcon } from "../components/ProfileIcon";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { authenticationState } from "../state/AuthState";
-import { User } from "../types/User";
 import { FormTextField } from "../components/Form/FormTextField";
 import { DEFAULT_APP_COLOR, profileColorChoices } from "../utils/constants";
 import { FormButton } from "../components/Form/FormButton";
 import { Collapse } from "@mui/material";
 import { ReactComponent as DownArrowIcon } from "../assets/icons/down-arrow.svg";
 import { ReactComponent as UpArrowIcon } from "../assets/icons/up-arrow.svg";
-import { userPicksState } from "../state/UserPicksState";
 import { updateUserObjectColorAndUsername } from "../firebase/updateUser";
 import { firestoreState } from "../state/FirestoreState";
 import { Firestore } from "firebase/firestore";
-import { updateUserPickObject } from "../firebase/updateUserPicks";
 import { notificationState } from "../state/NotificationState";
 import { useNavigate } from "react-router-dom";
+import { User } from "../types/Firebase";
 
 const ProfileSettingsPage = () => {
   const [authData, setAuthData] = useRecoilState(authenticationState);
   const setNotificationState = useSetRecoilState(notificationState);
-  const [picksData, setPicksState] = useRecoilState(userPicksState);
 
   const { db } = useRecoilValue(firestoreState) as { db: Firestore };
   const { color, username, id } = authData.user as User;
@@ -62,28 +59,6 @@ const ProfileSettingsPage = () => {
               message: "Update Failed",
             });
       })
-      .then(() => {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { groupPicks, ...rest } = picksData;
-        return updateUserPickObject(
-          id,
-          { ...rest, username: usernameState, color: selectedColor },
-          db
-        );
-      })
-      .then((result) => {
-        result?.success
-          ? setNotificationState({
-              show: true,
-              backgroundColor: "rgb(34 197 94)",
-              message: "Update Made Successfully",
-            })
-          : setNotificationState({
-              show: true,
-              backgroundColor: "rgb(244 63 94)",
-              message: "Update Failed",
-            });
-      })
       .then(() =>
         setAuthData({
           ...authData,
@@ -94,21 +69,6 @@ const ProfileSettingsPage = () => {
           },
         })
       )
-      .then(() => {
-        setPicksState({
-          ...picksData,
-          username: usernameState,
-          color: selectedColor,
-          groupPicks: picksData.groupPicks.map((groupUser) => {
-            if (groupUser.id !== id) return groupUser;
-            return {
-              ...groupUser,
-              color: selectedColor,
-              username: usernameState,
-            };
-          }),
-        });
-      })
       .then(() => {
         navigate("/scores");
       });

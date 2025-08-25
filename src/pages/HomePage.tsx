@@ -1,5 +1,5 @@
 import { Game } from "../components/Game/Game";
-import { Scoreboard } from "../components/Scoreboard/Scoreboard";
+// import { Scoreboard } from "../components/Scoreboard/Scoreboard";
 import { SectionLabel } from "../components/SectionLabel";
 import { Tabs } from "../components/Tabs";
 import { PageLayout } from "../layouts/PageLayout";
@@ -24,13 +24,7 @@ const HomePage = () => {
     currentWeekNumber,
     activeGameScheduleInDays,
   } = useGameSchedule();
-  const {
-    makePick,
-    picks,
-    getCurrentWeekRecord,
-    getUserWeekRank,
-    getNumberOfPicksMissing,
-  } = usePicks();
+  const { makePick, picks, getNumberOfPicksMissing } = usePicks();
 
   const numberOfPicksNeeded = getNumberOfPicksMissing();
 
@@ -47,12 +41,12 @@ const HomePage = () => {
           <Tabs tabs={tabs} onTabChange={() => null}></Tabs>
         </div>
         <SectionLabel label={"Your Score"}></SectionLabel>
-        <Scoreboard
+        {/* <Scoreboard
           wins={String(getCurrentWeekRecord().wins)}
           loses={String(getCurrentWeekRecord().loses)}
           rank={String(getUserWeekRank())}
           rankStyle="text-green-500"
-        />
+        /> */}
         <div className="flex justify-between">
           <SectionLabel label={"Games"}></SectionLabel>
           {numberOfPicksNeeded ? (

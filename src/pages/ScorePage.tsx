@@ -12,14 +12,7 @@ import { ReactComponent as DownArrowIcon } from "../assets/icons/down-arrow.svg"
 import { ReactComponent as UpArrowIcon } from "../assets/icons/up-arrow.svg";
 
 const ScorePage = () => {
-  const {
-    getUserAllTimeRank,
-    allTimeRecord,
-    getCurrentWeekRecord,
-    getUserWeekRank,
-    getGroupUsersRankedByCurrentWeek,
-    getGroupUsersRankedByAllTime,
-  } = usePicks();
+  const { allTimeRecord } = usePicks();
   const { currentWeekNumber } = useGameSchedule();
   const tabs = [
     { id: "weekly", text: `Week ${currentWeekNumber} Picks`, active: true },
@@ -30,17 +23,19 @@ const ScorePage = () => {
   const activeTab = tabData.find(({ active }) => active);
   const isAllTime = activeTab?.id === "all-time";
 
-  const groupRankedForAllTime = getGroupUsersRankedByAllTime();
+  const groupRankedForAllTime = []; // getGroupUsersRankedByAllTime();
 
-  const groupRankedForWeek = getGroupUsersRankedByCurrentWeek();
+  const groupRankedForWeek = []; //getGroupUsersRankedByCurrentWeek();
 
-  const selectedGroupRank = isAllTime
-    ? groupRankedForAllTime
-    : groupRankedForWeek;
+  const selectedGroupRank = [];
 
-  const { wins, loses } = isAllTime ? allTimeRecord : getCurrentWeekRecord();
+  // isAllTime
+  //   ? groupRankedForAllTime
+  //   : groupRankedForWeek;
 
-  const rank = isAllTime ? getUserAllTimeRank() : getUserWeekRank();
+  const { wins, loses } = { wins: 0, loses: 0 }; //isAllTime ? allTimeRecord : getCurrentWeekRecord();
+
+  const rank = 1; // isAllTime ? getUserAllTimeRank() : getUserWeekRank();
 
   const handleTabClick = (selectedTabId: string) => {
     const newTabs = tabData.map((tab) => {
