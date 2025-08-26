@@ -1,11 +1,11 @@
 export const getWeekId = ({
-  seasontype,
+  seasonType,
   week,
   year,
 }: {
-  seasontype: number;
+  seasonType: number;
   week: number;
   year: number;
 }): string => {
-  return `week-${week}-year-${year}-type-${seasontype}`;
+  return `week-${week}-year-${year}-type-${seasonType}`;
 };

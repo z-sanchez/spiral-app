@@ -11,7 +11,7 @@ import { Collapse } from "@mui/material";
 import { useGameSchedule } from "../hooks/useGameSchedule";
 import { Competitors } from "../types/Competitors";
 import { usePicks } from "../hooks/usePicks";
-import { getPick } from "../utils/helpers/espn/getPick";
+// import { getPick } from "../utils/helpers/espn/getPick";
 import { getAwayTeam, getHomeTeam } from "../utils/helpers/espn/getTeam";
 import { getGameWinner } from "../utils/helpers/espn/getGameWinner";
 import { SectionIndicator } from "../components/SectionIndicator";
@@ -23,16 +23,21 @@ const HomePage = () => {
     completedGames,
     currentWeekNumber,
     activeGameScheduleInDays,
+    isLoading,
   } = useGameSchedule();
-  const { makePick, picks, getNumberOfPicksMissing } = usePicks();
-
-  const numberOfPicksNeeded = getNumberOfPicksMissing();
+  const { makePick } = usePicks();
 
   const tabs = [
     { id: "weekly", text: `Week ${currentWeekNumber} Picks`, active: true },
   ];
 
   const [showFinishedGames, setShowFinishedGames] = useState(true);
+
+  if (isLoading) {
+    return null;
+  }
+
+  const missingPicksTotal = 0;
 
   return (
     <>
@@ -49,9 +54,9 @@ const HomePage = () => {
         /> */}
         <div className="flex justify-between">
           <SectionLabel label={"Games"}></SectionLabel>
-          {numberOfPicksNeeded ? (
+          {missingPicksTotal ? (
             <SectionIndicator
-              text={`${numberOfPicksNeeded} Picks Missing`}
+              text={`${missingPicksTotal} Picks Missing`}
               backgroundColor={"#f44336"}
             />
           ) : (
@@ -66,7 +71,7 @@ const HomePage = () => {
             format(dateObject, "P") + " " + format(dateObject, "p");
           const isLive = dateObject < new Date();
           return (
-            <>
+            <div key={dateLabel}>
               <div className="flex items-center justify-between">
                 <p className="text-gray-800 mb-2 mt-4 text-xs font-medium">
                   {dateLabel}
@@ -79,7 +84,7 @@ const HomePage = () => {
                 const homeTeam = game.competitors.find(({ isHome }) => isHome);
                 const awayTeam = game.competitors.find(({ isHome }) => !isHome);
                 const isLive = new Date(game.date) < new Date();
-                const userPick = getPick(currentWeekId, game.id, picks);
+                const userPick = "";
 
                 return (
                   <Game
@@ -96,12 +101,12 @@ const HomePage = () => {
                     showScores={isLive}
                     readonly={isLive}
                     onPick={(teamPick: string) => {
-                      makePick(game.id, teamPick);
+                      makePick(currentWeekId, game.id, teamPick);
                     }}
                   />
                 );
               })}
-            </>
+            </div>
           );
         })}
         {completedGames.length ? (
@@ -122,7 +127,7 @@ const HomePage = () => {
                 const homeTeam = getHomeTeam(game) as Competitors;
                 const awayTeam = getAwayTeam(game) as Competitors;
 
-                const userPick = getPick(currentWeekId, game.id, picks);
+                const userPick = ""; //
 
                 const gameWinner = getGameWinner(game);
 

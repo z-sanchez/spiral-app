@@ -1,14 +1,5 @@
-export type Picks = WeekPicks[];
+export type SeasonPicks = { picks: WeekPicks; id: string; username: string };
 
-export type WeekPicks = {
-  id: string;
-  games: PickGame[];
-  status: string;
-};
+export type WeekPicks = { [key: string]: GamePick };
 
-type PickGame = {
-  id: string;
-  pick: string;
-  winner: string;
-  status: string;
-};
+type GamePick = { [key: string]: string };

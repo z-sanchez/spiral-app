@@ -3,15 +3,13 @@ import { BottomNavBar } from "../components/BottomNavBar";
 import { Header } from "../components/Header";
 import { NotificationLink } from "../components/NotificationLink";
 import { useLocation, useNavigate } from "react-router-dom";
-import { usePicks } from "../hooks/usePicks";
 import { NotificationBanner } from "../components/NotificationBanner";
 
 const PageLayout = ({ children }: { children?: ReactNode }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { getNumberOfPicksMissing } = usePicks();
-  const numberOfPicksMissing = getNumberOfPicksMissing();
+  const numberOfPicksMissing = 0;
 
   const handleNotificationClick = () => {
     navigate("/");

@@ -3,21 +3,33 @@ import { getWeekData } from "../utils/helpers/espn/getWeekData";
 import { getWeekId } from "../utils/helpers/espn/getWeekId";
 import { fetchCurrentWeekData } from "../utils/helpers/espn/fetchWeekData";
 import { sortScheduleIntoDays } from "../utils/helpers/sortScheduleIntoDays";
+import { GAME_SCHEDULE_POLL_TIME } from "../utils/constants";
 
 const useGameSchedule = () => {
-  const { isLoading, data } = useQuery("gameScheduleData", () =>
-    fetchCurrentWeekData()
+  const { isLoading, data } = useQuery(
+    "gameScheduleData",
+    () => {
+      return fetchCurrentWeekData();
+    },
+    { refetchInterval: GAME_SCHEDULE_POLL_TIME }
   );
 
-  const currentWeeksGames = !isLoading ? getWeekData(data?.schedule) : [];
+  const weekDateParams = {
+    week: data?.parameters?.week ?? 0,
+    year: data?.parameters?.year ?? 0,
+    seasonType: data?.parameters?.seasontype ?? 0,
+  };
 
-  const currentWeekId = !isLoading ? getWeekId(data?.parameters) : "";
+  const currentWeeksGames = data ? getWeekData(data.schedule) : [];
 
-  const currentWeekNumber = !isLoading ? data?.parameters.week : 0;
+  const currentWeekId = getWeekId(weekDateParams);
 
-  const currentYearNumber = !isLoading ? data?.parameters.year : 2024;
+  const currentWeekNumber = !data ? weekDateParams.week : null;
+
+  const currentYearNumber = !data ? weekDateParams.year : null;
 
   const activeGames = currentWeeksGames.filter(({ completed }) => !completed);
+
   const gamesInProgress = activeGames.filter(
     ({ date }) => new Date(date) < new Date()
   );
@@ -26,16 +38,10 @@ const useGameSchedule = () => {
   );
   const completedGames = currentWeeksGames.filter(({ completed }) => completed);
 
-  const getCurrentScheduleData = () => {
-    return data;
-  };
-
-  const activeGameScheduleInDays = !isLoading
-    ? sortScheduleIntoDays(activeGames)
-    : [];
+  const activeGameScheduleInDays = sortScheduleIntoDays(gamesNotStarted);
 
   return {
-    getCurrentScheduleData,
+    isLoading,
     activeGameScheduleInDays,
     currentWeeksGames,
     currentWeekId,

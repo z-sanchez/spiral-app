@@ -3,6 +3,8 @@ import { getWeekData } from "./getWeekData";
 import scheduleData from "../../../mock/scheduleData.json";
 import { EspnCurrentWeekParams } from "../../../types/EspnApi";
 
+const BASE_ESPN_QUERY = `https://cdn.espn.com/core/nfl/schedule?xhr=1`;
+
 const getEspnQuery = (params: EspnCurrentWeekParams) => {
   return `https://cdn.espn.com/core/nfl/schedule?xhr=1&year=${params.year}&seasontype=${params.seasontype}&week=${params.week}`;
 };
@@ -24,9 +26,7 @@ export const getCurrentWeekQuery = async () => {
 export const fetchCurrentWeekData = async () => {
   if (ENV_VARIABLES.useMockData) return scheduleData;
 
-  const currentWeekQuery = await getCurrentWeekQuery();
-
-  const result = await fetch(currentWeekQuery)
+  const result = await fetch(BASE_ESPN_QUERY)
     .then((result) => result.json())
     .then((schedule) => schedule.content);
 

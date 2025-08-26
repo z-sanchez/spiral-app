@@ -1,15 +1,15 @@
 import { atom } from "recoil";
-import { User } from "../types/User";
-import { User as firebaseUser } from "firebase/auth";
+import { User as FirebaseUser } from "firebase/auth";
+import { User } from "../types/Firebase";
 
 const defaultAuthState: {
   signedIn: boolean;
-  authUser: object | firebaseUser;
-  user: object | User;
+  authUser: FirebaseUser | null;
+  user: User | null;
 } = {
   signedIn: false,
-  authUser: {},
-  user: {},
+  authUser: null,
+  user: null,
 };
 
 export const authenticationState = atom({

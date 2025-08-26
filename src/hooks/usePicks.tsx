@@ -1,52 +1,58 @@
-import { WeekPicks } from "../types/Picks";
+import { updatePicks } from "../utils/helpers/updatePicks";
+import { authenticationState } from "../state/AuthState";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { updateUserPicks } from "../firebase/updateUserPicks";
+import { firestoreState } from "../state/FirestoreState";
+import { Firestore } from "firebase/firestore";
+import { notificationState } from "../state/NotificationState";
+import { getUserPicks } from "../firebase/getUserPicks";
+import { useQuery } from "react-query";
+import { useEffect } from "react";
 
 export const usePicks = () => {
-  // const setNotificationState = useSetRecoilState(notificationState);
-  // const { db } = useRecoilValue(firestoreState) as { db: Firestore };
+  const setNotificationState = useSetRecoilState(notificationState);
+  const { db } = useRecoilValue(firestoreState) as { db: Firestore };
+  const { user } = useRecoilValue(authenticationState);
 
-  const currentWeekPicks: WeekPicks | false = false;
+  const { data: userPicks, refetch: refetchPicks } = useQuery(
+    "useWeekPicks",
+    () => {
+      if (!user) return null;
+      return getUserPicks({ db, userObject: user });
+    },
+    { enabled: true }
+  );
 
-  const getNumberOfPicksMissing = () => {
-    return 0;
-    // const gamesEligibleForPicks = currentWeeksGames.filter(
-    //   ({ completed, date }) => !completed && new Date() < new Date(date)
-    // );
+  useEffect(() => {
+    refetchPicks();
+  }, [refetchPicks]);
 
-    // if (!weekPicks) return gamesEligibleForPicks.length;
+  const numberOfPicksMissing = 0;
 
-    // return (
-    //   weekPicks?.games.filter((game) => {
-    //     return (
-    //       game.pick === NO_PICK &&
-    //       gamesEligibleForPicks.find(({ id }) => id === game.id)
-    //     );
-    //   }).length || 0
-    // );
-  };
+  const makePick = (weekId: string, gameId: string, pick: string) => {
+    if (!user || userPicks === null || userPicks === undefined) return;
 
-  const makePick = (gameId: string, pick: string) => {
-    console.log({ gameId, pick });
-    // const updatedPicks = updatePicks({
-    //   picks,
-    //   weekId: currentWeekId,
-    //   gameId,
-    //   weekGames: currentWeeksGames,
-    //   pick,
-    // });
+    const updatedPicks = updatePicks({
+      picks: userPicks,
+      weekId,
+      gameId,
+      pick,
+    });
 
-    // updateUserPicks(user.id, updatedPicks, db).then((result) =>
-    //   result?.success
-    //     ? setNotificationState({
-    //         show: true,
-    //         backgroundColor: "rgb(34 197 94)",
-    //         message: "Pick Made Successfully",
-    //       })
-    //     : setNotificationState({
-    //         show: true,
-    //         backgroundColor: "rgb(244 63 94)",
-    //         message: "Pick Failed",
-    //       })
-    // );
+    updateUserPicks(user.id, updatedPicks, db).then((result) => {
+      refetchPicks();
+      result?.success
+        ? setNotificationState({
+            show: true,
+            backgroundColor: "rgb(34 197 94)",
+            message: "Pick Made Successfully",
+          })
+        : setNotificationState({
+            show: true,
+            backgroundColor: "rgb(244 63 94)",
+            message: "Pick Failed",
+          });
+    });
   };
 
   return {
@@ -54,7 +60,7 @@ export const usePicks = () => {
     picks: [],
     allTimeRecord: { wins: 0, loses: 0, ties: 0 },
     roi: 0,
-    getNumberOfPicksMissing,
-    currentWeekPicks,
+    numberOfPicksMissing,
+    userPicks,
   };
 };
