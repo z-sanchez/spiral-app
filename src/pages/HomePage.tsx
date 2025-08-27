@@ -11,7 +11,6 @@ import { Collapse } from "@mui/material";
 import { useGameSchedule } from "../hooks/useGameSchedule";
 import { Competitors } from "../types/Competitors";
 import { usePicks } from "../hooks/usePicks";
-// import { getPick } from "../utils/helpers/espn/getPick";
 import { getAwayTeam, getHomeTeam } from "../utils/helpers/espn/getTeam";
 import { getGameWinner } from "../utils/helpers/espn/getGameWinner";
 import { SectionIndicator } from "../components/SectionIndicator";
@@ -22,10 +21,13 @@ const HomePage = () => {
     currentWeekId,
     completedGames,
     currentWeekNumber,
+    gamesNotStarted,
     activeGameScheduleInDays,
     isLoading,
   } = useGameSchedule();
-  const { makePick } = usePicks();
+  const { makePick, numberOfPicksMadeThisWeek, currentWeekPicks } = usePicks({
+    weekId: currentWeekId,
+  });
 
   const tabs = [
     { id: "weekly", text: `Week ${currentWeekNumber} Picks`, active: true },
@@ -37,7 +39,9 @@ const HomePage = () => {
     return null;
   }
 
-  const missingPicksTotal = 0;
+  const missingPicksTotal = Math.abs(
+    gamesNotStarted.length - numberOfPicksMadeThisWeek
+  );
 
   return (
     <>
@@ -84,7 +88,7 @@ const HomePage = () => {
                 const homeTeam = game.competitors.find(({ isHome }) => isHome);
                 const awayTeam = game.competitors.find(({ isHome }) => !isHome);
                 const isLive = new Date(game.date) < new Date();
-                const userPick = "";
+                const userPick = currentWeekPicks?.[game.id] || null;
 
                 return (
                   <Game
@@ -127,7 +131,7 @@ const HomePage = () => {
                 const homeTeam = getHomeTeam(game) as Competitors;
                 const awayTeam = getAwayTeam(game) as Competitors;
 
-                const userPick = ""; //
+                const userPick = currentWeekPicks?.[game.id] || null;
 
                 const gameWinner = getGameWinner(game);
 

@@ -12,7 +12,7 @@ import { ReactComponent as DownArrowIcon } from "../assets/icons/down-arrow.svg"
 import { ReactComponent as UpArrowIcon } from "../assets/icons/up-arrow.svg";
 
 const ScorePage = () => {
-  const { allTimeRecord } = usePicks();
+  const { allTimeRecord } = usePicks({});
   const { currentWeekNumber } = useGameSchedule();
   const tabs = [
     { id: "weekly", text: `Week ${currentWeekNumber} Picks`, active: true },

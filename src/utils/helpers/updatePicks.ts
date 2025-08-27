@@ -13,6 +13,10 @@ export const updatePicks = ({
 }): SeasonPicks => {
   const newPicks = structuredClone(picks);
 
+  if (!newPicks.picks[weekId]) {
+    newPicks.picks[weekId] = {};
+  }
+
   newPicks.picks[weekId][gameId] = pick;
 
   return newPicks;

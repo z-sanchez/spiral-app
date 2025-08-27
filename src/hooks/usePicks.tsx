@@ -11,7 +11,7 @@ import { FIREBASE_COLLECTIONS } from "../utils/constants";
 import { SeasonPicks } from "../types/Picks";
 import { updateInFirebase } from "../firebase/updateInFirebase";
 
-export const usePicks = () => {
+export const usePicks = ({ weekId }: { weekId?: string }) => {
   const setNotificationState = useSetRecoilState(notificationState);
   const { db } = useRecoilValue(firestoreState) as { db: Firestore };
   const { user } = useRecoilValue(authenticationState);
@@ -33,7 +33,9 @@ export const usePicks = () => {
     refetchPicks();
   }, [refetchPicks]);
 
-  const numberOfPicksMissing = 0;
+  const currentWeekPicks = !weekId ? null : userPicks?.picks[weekId] || null;
+
+  const numberOfPicksMadeThisWeek = Object.keys(currentWeekPicks || {}).length;
 
   const makePick = (weekId: string, gameId: string, pick: string) => {
     if (!user || userPicks === null || userPicks === undefined) return;
@@ -68,10 +70,10 @@ export const usePicks = () => {
 
   return {
     makePick,
-    picks: [],
     allTimeRecord: { wins: 0, loses: 0, ties: 0 },
     roi: 0,
-    numberOfPicksMissing,
+    numberOfPicksMadeThisWeek,
+    currentWeekPicks,
     userPicks,
   };
 };
