@@ -1,19 +1,20 @@
-import { UserPicksObject } from "../types/Firebase";
 import { Firestore, setDoc, doc } from "firebase/firestore";
+import { User } from "../types/Firebase";
+import { createDefaultPicksObject } from "../utils/helpers/firebase/picks";
 
-export const createNewPicksUserInFirebase = async ({
-  newUser,
+export const createNewPickDocInFirebase = async ({
+  user,
   db,
 }: {
-  newUser: UserPicksObject;
+  user: User;
   db: Firestore;
 }) => {
-  if (import.meta.env.USE_MOCK_DATA) return;
-
   try {
-    await setDoc(doc(db, "picks", newUser.id), { ...newUser });
+    const defaultPickObject = createDefaultPicksObject(user);
 
-    console.log("Document written with ID: ", newUser.id);
+    await setDoc(doc(db, "picks", user.id), { ...defaultPickObject });
+
+    console.log("Document written with ID: ", user.id);
   } catch (e) {
     console.error("Error adding document: ", e);
   }

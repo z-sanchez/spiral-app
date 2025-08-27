@@ -7,7 +7,6 @@ export const userExists = async ({
   userId: string;
   db: Firestore;
 }): Promise<boolean> => {
-  if (import.meta.env.VITE_USE_MOCK_DATA) return true;
   try {
     const docRef = doc(db, "users", userId);
 

@@ -6,8 +6,6 @@ export const updateUserObjectColorAndUsername = async (
   username: string,
   db: Firestore
 ) => {
-  if (import.meta.env.VITE_USE_MOCK_DATA) return;
-
   try {
     const userDocRef = doc(db, "users", userId);
     console.log("UPDATING COLOR AND USERNAME", userId);

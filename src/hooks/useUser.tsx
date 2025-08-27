@@ -1,7 +1,6 @@
 import { useRecoilState, useRecoilValue } from "recoil";
 import { authenticationState } from "../state/AuthState";
 import { createNewUserInFirebase } from "../firebase/createNewUserInFirebase";
-import { createUserObjectFromGoogleUser } from "../utils/helpers/firebase/user";
 import { User, getAuth } from "firebase/auth";
 import { firestoreState } from "../state/FirestoreState";
 import { Firestore } from "firebase/firestore";
@@ -9,8 +8,7 @@ import { userExists } from "../firebase/userExists";
 import { getUser } from "../firebase/getUser";
 import { useNavigate } from "react-router-dom";
 import { setCookie } from "../utils/helpers/cookie";
-import { createUserPickObjectUser } from "../utils/helpers/firebase/picks";
-import { createNewPicksUserInFirebase } from "../firebase/createNewPicksUserInFirebase";
+import { createNewPickDocInFirebase } from "../firebase/createNewPicksUserInFirebase";
 
 export const useUser = () => {
   const [authState, setAuthState] = useRecoilState(authenticationState);
@@ -25,12 +23,9 @@ export const useUser = () => {
     const userExist = await userExists({ userId: firebaseAuthUser.uid, db });
 
     if (!userExist) {
-      const newUser = createUserObjectFromGoogleUser(firebaseAuthUser);
-      await createNewUserInFirebase({ newUser, db });
+      const newUser = await createNewUserInFirebase({ firebaseAuthUser, db });
 
-      const userPicks = createUserPickObjectUser(newUser);
-
-      await createNewPicksUserInFirebase({ newUser: userPicks, db });
+      await createNewPickDocInFirebase({ user: newUser, db });
 
       setAuthState({
         signedIn: true,
@@ -62,7 +57,7 @@ export const useUser = () => {
       user,
     });
 
-    if (!user.color) {
+    if (!user?.color) {
       navigate("/profileSettings");
     } else {
       navigate("/");

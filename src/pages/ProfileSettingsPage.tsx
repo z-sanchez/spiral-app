@@ -59,7 +59,8 @@ const ProfileSettingsPage = () => {
               message: "Update Failed",
             });
       })
-      .then(() =>
+      .then(() => {
+        if (!authData.user) return;
         setAuthData({
           ...authData,
           user: {
@@ -67,8 +68,8 @@ const ProfileSettingsPage = () => {
             color: selectedColor,
             username: usernameState,
           },
-        })
-      )
+        });
+      })
       .then(() => {
         navigate("/scores");
       });

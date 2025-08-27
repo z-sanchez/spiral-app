@@ -1,5 +1,5 @@
 import { Firestore, doc, getDoc } from "firebase/firestore";
-import getUserMockData from "../mock/getUserData.json";
+import { User } from "../types/Firebase";
 
 export const getUser = async ({
   userId,
@@ -7,16 +7,13 @@ export const getUser = async ({
 }: {
   userId: string;
   db: Firestore;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-}): Promise<any> => {
-  if (import.meta.env.VITE_USE_MOCK_DATA) return getUserMockData.user;
-
+}): Promise<User | null> => {
   try {
     const usersRef = doc(db, "users", userId);
     const querySnapshot = await getDoc(usersRef);
-    return querySnapshot.data();
+    return querySnapshot.data() as User;
   } catch (err) {
     console.log("ERROR HERE", { err });
   }
-  return true;
+  return null;
 };
