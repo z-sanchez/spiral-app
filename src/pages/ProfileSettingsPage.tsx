@@ -11,12 +11,12 @@ import { FormButton } from "../components/Form/FormButton";
 import { Collapse } from "@mui/material";
 import { ReactComponent as DownArrowIcon } from "../assets/icons/down-arrow.svg";
 import { ReactComponent as UpArrowIcon } from "../assets/icons/up-arrow.svg";
-import { updateUserObjectColorAndUsername } from "../firebase/updateUser";
 import { firestoreState } from "../state/FirestoreState";
 import { Firestore } from "firebase/firestore";
 import { notificationState } from "../state/NotificationState";
 import { useNavigate } from "react-router-dom";
 import { User } from "../types/Firebase";
+import { updateInFirebase } from "../firebase/updateInFirebase";
 
 const ProfileSettingsPage = () => {
   const [authData, setAuthData] = useRecoilState(authenticationState);
@@ -40,12 +40,15 @@ const ProfileSettingsPage = () => {
       return;
     }
 
-    updateUserObjectColorAndUsername(
-      id,
-      selectedColor ? selectedColor : DEFAULT_APP_COLOR,
-      usernameState,
-      db
-    )
+    updateInFirebase({
+      documentId: id,
+      collectionName: "users",
+      updatedDocFields: {
+        color: selectedColor ? selectedColor : DEFAULT_APP_COLOR,
+        username: usernameState,
+      },
+      db,
+    })
       .then((result) => {
         result?.success
           ? setNotificationState({

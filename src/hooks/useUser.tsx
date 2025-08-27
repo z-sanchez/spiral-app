@@ -4,11 +4,13 @@ import { createNewUserInFirebase } from "../firebase/createNewUserInFirebase";
 import { User, getAuth } from "firebase/auth";
 import { firestoreState } from "../state/FirestoreState";
 import { Firestore } from "firebase/firestore";
-import { userExists } from "../firebase/userExists";
-import { getUser } from "../firebase/getUser";
 import { useNavigate } from "react-router-dom";
 import { setCookie } from "../utils/helpers/cookie";
 import { createNewPickDocInFirebase } from "../firebase/createNewPicksUserInFirebase";
+import { getFromFirebase } from "../firebase/getFromFirebase";
+import { FIREBASE_COLLECTIONS } from "../utils/constants";
+import { User as AppUser } from "../types/Firebase";
+import { existsInFirebase } from "../firebase/existsInFirebase";
 
 export const useUser = () => {
   const [authState, setAuthState] = useRecoilState(authenticationState);
@@ -20,7 +22,11 @@ export const useUser = () => {
   }: {
     firebaseAuthUser: User;
   }) => {
-    const userExist = await userExists({ userId: firebaseAuthUser.uid, db });
+    const userExist = await existsInFirebase({
+      documentId: firebaseAuthUser.uid,
+      db,
+      collectionName: FIREBASE_COLLECTIONS.USERS,
+    });
 
     if (!userExist) {
       const newUser = await createNewUserInFirebase({ firebaseAuthUser, db });
@@ -49,7 +55,13 @@ export const useUser = () => {
   }: {
     firebaseAuthUserId: string;
   }) => {
-    const user = await getUser({ userId: firebaseAuthUserId, db });
+    const user = (await getFromFirebase({
+      documentId: firebaseAuthUserId,
+      collectionName: FIREBASE_COLLECTIONS.USERS,
+      db,
+    })) as AppUser | null;
+
+    if (!user) return;
 
     setAuthState({
       signedIn: true,

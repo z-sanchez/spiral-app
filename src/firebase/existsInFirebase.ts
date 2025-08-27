@@ -1,20 +1,22 @@
 import { Firestore, doc, getDoc } from "firebase/firestore";
 
-export const userExists = async ({
-  userId,
+export const existsInFirebase = async ({
+  documentId,
+  collectionName,
   db,
 }: {
-  userId: string;
+  documentId: string;
+  collectionName: string;
   db: Firestore;
 }): Promise<boolean> => {
   try {
-    const docRef = doc(db, "users", userId);
+    const docRef = doc(db, collectionName, documentId);
 
     const querySnapshot = await getDoc(docRef);
 
     return querySnapshot.exists();
   } catch (err) {
     console.log("ERROR HERE", { err });
-    return true;
+    return false;
   }
 };

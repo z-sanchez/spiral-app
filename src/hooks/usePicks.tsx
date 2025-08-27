@@ -1,13 +1,15 @@
 import { updatePicks } from "../utils/helpers/updatePicks";
 import { authenticationState } from "../state/AuthState";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { updateUserPicks } from "../firebase/updateUserPicks";
 import { firestoreState } from "../state/FirestoreState";
 import { Firestore } from "firebase/firestore";
 import { notificationState } from "../state/NotificationState";
-import { getUserPicks } from "../firebase/getUserPicks";
 import { useQuery } from "react-query";
 import { useEffect } from "react";
+import { getFromFirebase } from "../firebase/getFromFirebase";
+import { FIREBASE_COLLECTIONS } from "../utils/constants";
+import { SeasonPicks } from "../types/Picks";
+import { updateInFirebase } from "../firebase/updateInFirebase";
 
 export const usePicks = () => {
   const setNotificationState = useSetRecoilState(notificationState);
@@ -16,9 +18,13 @@ export const usePicks = () => {
 
   const { data: userPicks, refetch: refetchPicks } = useQuery(
     "useWeekPicks",
-    () => {
+    async () => {
       if (!user) return null;
-      return getUserPicks({ db, userObject: user });
+      return (await getFromFirebase({
+        db,
+        documentId: user.id,
+        collectionName: FIREBASE_COLLECTIONS.PICKS,
+      })) as SeasonPicks | null;
     },
     { enabled: true }
   );
@@ -39,7 +45,12 @@ export const usePicks = () => {
       pick,
     });
 
-    updateUserPicks(user.id, updatedPicks, db).then((result) => {
+    updateInFirebase({
+      documentId: user.id,
+      collectionName: FIREBASE_COLLECTIONS.PICKS,
+      updatedDocFields: updatedPicks,
+      db,
+    }).then((result) => {
       refetchPicks();
       result?.success
         ? setNotificationState({

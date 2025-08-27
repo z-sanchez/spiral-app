@@ -12,6 +12,11 @@ export const FIREBASE_CONFIGURATION = {
   measurementId: import.meta.env.MEASUREMENT_ID,
 };
 
+export const FIREBASE_COLLECTIONS = {
+  USERS: "users",
+  PICKS: "picks",
+};
+
 export const SPIRAL_COOKIE_NAME = "spiralAppCookie";
 export const SPIRAL_TEST_COOKIE_NAME = "spiralTestAppCookie";
 
