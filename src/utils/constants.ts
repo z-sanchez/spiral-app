@@ -15,6 +15,7 @@ export const FIREBASE_CONFIGURATION = {
 export const FIREBASE_COLLECTIONS = {
   USERS: "users",
   PICKS: "picks",
+  LEAGUES: "leagues",
 };
 
 export const SPIRAL_COOKIE_NAME = "spiralAppCookie";

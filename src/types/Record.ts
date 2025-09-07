@@ -1,5 +1,5 @@
 export type Record = {
   wins: number;
-  loses: number;
+  losses: number;
   ties: number;
 };
