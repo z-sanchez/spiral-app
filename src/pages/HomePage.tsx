@@ -73,7 +73,7 @@ const HomePage = () => {
           const dateObject = new Date(date);
           const dateLabel =
             format(dateObject, "P") + " " + format(dateObject, "p");
-          const isLive = dateObject < new Date();
+          const isLive = false; // dateObject < new Date();
           return (
             <div key={dateLabel}>
               <div className="flex items-center justify-between">
@@ -87,7 +87,7 @@ const HomePage = () => {
               {games.map((game) => {
                 const homeTeam = game.competitors.find(({ isHome }) => isHome);
                 const awayTeam = game.competitors.find(({ isHome }) => !isHome);
-                const isLive = new Date(game.date) < new Date();
+                const isLive = false; // new Date(game.date) < new Date();
                 const userPick = currentWeekPicks?.[game.id] || null;
 
                 return (
