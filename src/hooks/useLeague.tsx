@@ -34,6 +34,8 @@ export const useLeague = () => {
 
   const userAllTimeRecord = userAllTimeStanding?.record;
 
+  const userAllTimeRank = userAllTimeStanding?.rank;
+
   const userWeekStanding = league?.currentWeekStandings.find(
     (standing) => standing.id === user.id
   );
@@ -48,5 +50,8 @@ export const useLeague = () => {
     userAllTimeRecord,
     userCurrentWeekRank,
     userCurrentWeekRecord,
+    userAllTimeRank,
+    allTimeStandings: league?.allTimeStandings || [],
+    currentWeekStandings: league?.currentWeekStandings || [],
   };
 };

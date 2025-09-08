@@ -1,10 +1,12 @@
 import { ProfileIcon } from "./ProfileIcon";
 import { ReactComponent as UpArrowIcon } from "../assets/icons/up-arrow.svg";
 import { ReactComponent as DownArrowIcon } from "../assets/icons/down-arrow.svg";
-import { User } from "../types/User";
 import { Record } from "../types/Record";
 
-type LeaderboardLineProps = User & {
+type LeaderboardLineProps = {
+  iconCharacter: string;
+  username: string;
+  color: string;
   increaseIcon?: boolean;
   decreaseIcon?: boolean;
   hotStreakIcon?: boolean;
@@ -57,7 +59,7 @@ const LeaderboardLine = ({
         {username}
       </p>
       <p className="bg-gray-100 rounded-full text-purple-500 text-sm w-16 text-center">
-        {record.wins}-{record.loses}
+        {record.wins}-{record.losses}
       </p>
       <p className="w-10 ">
         {allTimeLeader ? <>&#128081;</> : null}

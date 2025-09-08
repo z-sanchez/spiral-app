@@ -39,6 +39,7 @@ export const createNewPickDocInFirebase = async ({
         record: { wins: 0, losses: 0, ties: 0 },
         winningPercentage: 0,
         rank: 0,
+        color: user.color,
       },
     ],
     allTimeStandings: [
@@ -51,6 +52,7 @@ export const createNewPickDocInFirebase = async ({
         gamesBack: 0,
         rank: 0,
         emblemStatus: [],
+        color: user.color,
       },
     ],
   };

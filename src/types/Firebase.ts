@@ -15,6 +15,7 @@ export type UserStanding = {
   record: Record;
   winningPercentage: number;
   rank: number;
+  color: string;
 };
 
 export type CurrentWeekStandings = UserStanding[];

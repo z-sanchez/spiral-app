@@ -4,16 +4,24 @@ import { SectionLabel } from "../components/SectionLabel";
 import { Tabs } from "../components/Tabs";
 // import { WeekSelector } from "../components/WeekSelector";
 import { PageLayout } from "../layouts/PageLayout";
-import { usePicks } from "../hooks/usePicks";
 import { LeaderboardLine } from "../components/LeaderboardLine";
 import { useGameSchedule } from "../hooks/useGameSchedule";
 import { Collapse } from "@mui/material";
 import { ReactComponent as DownArrowIcon } from "../assets/icons/down-arrow.svg";
 import { ReactComponent as UpArrowIcon } from "../assets/icons/up-arrow.svg";
+import { useLeague } from "../hooks/useLeague";
+import { UserStanding } from "../types/Firebase";
 
 const ScorePage = () => {
-  const { allTimeRecord } = usePicks({});
   const { currentWeekNumber } = useGameSchedule();
+  const {
+    userAllTimeRecord,
+    userCurrentWeekRecord,
+    userAllTimeRank,
+    userCurrentWeekRank,
+    allTimeStandings,
+    currentWeekStandings,
+  } = useLeague();
   const tabs = [
     { id: "weekly", text: `Week ${currentWeekNumber} Picks`, active: true },
     { id: "all-time", text: "All-Time", active: false },
@@ -23,19 +31,13 @@ const ScorePage = () => {
   const activeTab = tabData.find(({ active }) => active);
   const isAllTime = activeTab?.id === "all-time";
 
-  const groupRankedForAllTime = []; // getGroupUsersRankedByAllTime();
-
-  const groupRankedForWeek = []; //getGroupUsersRankedByCurrentWeek();
-
-  const selectedGroupRank = [];
-
-  // isAllTime
-  //   ? groupRankedForAllTime
-  //   : groupRankedForWeek;
-
-  const { wins, loses } = { wins: 0, loses: 0 }; //isAllTime ? allTimeRecord : getCurrentWeekRecord();
-
-  const rank = 1; // isAllTime ? getUserAllTimeRank() : getUserWeekRank();
+  const wins = isAllTime
+    ? userAllTimeRecord?.wins
+    : userCurrentWeekRecord?.wins;
+  const loses = isAllTime
+    ? userAllTimeRecord?.losses
+    : userCurrentWeekRecord?.losses;
+  const rank = isAllTime ? userAllTimeRank : userCurrentWeekRank;
 
   const handleTabClick = (selectedTabId: string) => {
     const newTabs = tabData.map((tab) => {
@@ -51,6 +53,10 @@ const ScorePage = () => {
 
     setTabData(newTabs);
   };
+
+  const standings: UserStanding[] = isAllTime
+    ? allTimeStandings
+    : currentWeekStandings;
 
   return (
     <>
@@ -73,41 +79,29 @@ const ScorePage = () => {
         />
         <SectionLabel label={"League Scores"}></SectionLabel>
         <div className="flex w-full items-center justify-center flex-col">
-          {selectedGroupRank.map((player) => {
-            const allTimeRank = groupRankedForAllTime.find(
-              ({ id }) => id === player.id
-            )?.rank;
-            const lastPlace =
-              allTimeRank ===
-              groupRankedForAllTime[groupRankedForAllTime.length - 1].rank;
-            const firstPlace =
-              groupRankedForAllTime.find(({ id }) => id === player.id)?.rank ===
-              1;
+          {standings.map((player) => {
+            const lastPlace = standings.every(
+              (p) => p.record.wins >= player.record.wins
+            );
+
+            const firstPlace = player.rank === 1;
 
             return (
               <LeaderboardLine
-                {...player}
                 key={player.id}
                 lastPlace={lastPlace}
+                record={player.record}
+                username={player.name}
+                rank={player.rank}
+                color={player.color}
+                iconCharacter={player.name.charAt(0).toUpperCase()}
                 allTimeLeader={firstPlace}
-                increaseIcon={
-                  !isAllTime
-                    ? player.rankingNotifications?.weekRankIncreased
-                    : false
-                }
-                decreaseIcon={
-                  !isAllTime
-                    ? player.rankingNotifications?.weekRankDecreased
-                    : false
-                }
-                hotStreakIcon={
-                  !isAllTime
-                    ? player.rankingNotifications?.isHotWeekStreak
-                    : false
-                }
-                bronzeMedalIcon={player.rankingNotifications?.bronzeMedal}
-                silverMedalIcon={player.rankingNotifications?.silverMedal}
-                trophyIcon={player.rankingNotifications?.trophy}
+                increaseIcon={false}
+                decreaseIcon={false}
+                hotStreakIcon={false}
+                bronzeMedalIcon={false}
+                silverMedalIcon={false}
+                trophyIcon={false}
               />
             );
           })}
