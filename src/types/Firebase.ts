@@ -25,12 +25,12 @@ export type AllTimeStandings = (UserStanding & {
 })[];
 
 export type League = {
-  id: string;
   name: string;
   userIds: string[];
   currentWeekStandings: CurrentWeekStandings;
   allTimeStandings: AllTimeStandings;
-  previousWeekStandings: AllTimeStandings[];
+  previousWeekStandings: { [key: string]: AllTimeStandings };
   lastUpdatedWeek: string;
+  lastCompletedWeek: string;
   lastUpdatedAt: string;
 };

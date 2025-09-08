@@ -1,0 +1,60 @@
+{
+  "name": "",
+  "previousWeekStandings": {},
+  "allTimeStandings": [
+    {
+      "emblemStatus": [],
+      "rank": 0,
+      "winningPercentage": 0,
+      "gamesBack": 0,
+      "name": "test1@test.com",
+      "record": {
+        "wins": 0,
+        "losses": 0,
+        "ties": 0
+      },
+      "id": "y3hbvnODWDh20Iw02fDypXZbnB83"
+    },
+    {
+      "record": {
+        "wins": 0,
+        "ties": 0,
+        "losses": 0
+      },
+      "id": "TcT21MEHGdZB8Pc6IhnmSyvO53c2",
+      "gamesBack": 0,
+      "winningPercentage": 0,
+      "rank": 0,
+      "name": "test2@test.com",
+      "emblemStatus": []
+    }
+  ],
+  "userIds": ["y3hbvnODWDh20Iw02fDypXZbnB83", "TcT21MEHGdZB8Pc6IhnmSyvO53c2"],
+  "lastUpdatedAt": "",
+  "currentWeekStandings": [
+    {
+      "id": "y3hbvnODWDh20Iw02fDypXZbnB83",
+      "name": "test1@test.com",
+      "record": {
+        "wins": 0,
+        "ties": 0,
+        "losses": 0
+      },
+      "winningPercentage": 0,
+      "rank": 0
+    },
+    {
+      "record": {
+        "ties": 0,
+        "losses": 0,
+        "wins": 0
+      },
+      "winningPercentage": 0,
+      "name": "test2@test.com",
+      "rank": 0,
+      "id": "TcT21MEHGdZB8Pc6IhnmSyvO53c2"
+    }
+  ],
+  "lastUpdatedWeek": "",
+  "lastCompletedWeek": ""
+}
