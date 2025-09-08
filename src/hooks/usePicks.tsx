@@ -70,8 +70,6 @@ export const usePicks = ({ weekId }: { weekId?: string }) => {
 
   return {
     makePick,
-    allTimeRecord: { wins: 0, loses: 0, ties: 0 },
-    roi: 0,
     numberOfPicksMadeThisWeek,
     currentWeekPicks,
     userPicks,

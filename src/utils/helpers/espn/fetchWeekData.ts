@@ -24,8 +24,6 @@ export const getCurrentWeekQuery = async () => {
 };
 
 export const fetchCurrentWeekData = async () => {
-  if (ENV_VARIABLES.useMockData) return scheduleData;
-
   const result = await fetch(BASE_ESPN_QUERY)
     .then((result) => result.json())
     .then((schedule) => schedule.content);

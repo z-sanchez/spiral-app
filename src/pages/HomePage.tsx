@@ -1,5 +1,5 @@
 import { Game } from "../components/Game/Game";
-// import { Scoreboard } from "../components/Scoreboard/Scoreboard";
+import { Scoreboard } from "../components/Scoreboard/Scoreboard";
 import { SectionLabel } from "../components/SectionLabel";
 import { Tabs } from "../components/Tabs";
 import { PageLayout } from "../layouts/PageLayout";
@@ -15,19 +15,25 @@ import { getAwayTeam, getHomeTeam } from "../utils/helpers/espn/getTeam";
 import { getGameWinner } from "../utils/helpers/espn/getGameWinner";
 import { SectionIndicator } from "../components/SectionIndicator";
 import { format } from "date-fns";
+import { useLeague } from "../hooks/useLeague";
 
 const HomePage = () => {
   const {
     currentWeekId,
     completedGames,
     currentWeekNumber,
-    gamesNotStarted,
     activeGameScheduleInDays,
     isLoading,
+    currentWeeksGames,
   } = useGameSchedule();
   const { makePick, numberOfPicksMadeThisWeek, currentWeekPicks } = usePicks({
     weekId: currentWeekId,
   });
+  const {
+    isLoading: isLoadingLeague,
+    userCurrentWeekRank,
+    userCurrentWeekRecord,
+  } = useLeague();
 
   const tabs = [
     { id: "weekly", text: `Week ${currentWeekNumber} Picks`, active: true },
@@ -35,12 +41,12 @@ const HomePage = () => {
 
   const [showFinishedGames, setShowFinishedGames] = useState(true);
 
-  if (isLoading) {
+  if (isLoading || isLoadingLeague) {
     return null;
   }
 
   const missingPicksTotal = Math.abs(
-    gamesNotStarted.length - numberOfPicksMadeThisWeek
+    currentWeeksGames.length - numberOfPicksMadeThisWeek
   );
 
   return (
@@ -50,12 +56,16 @@ const HomePage = () => {
           <Tabs tabs={tabs} onTabChange={() => null}></Tabs>
         </div>
         <SectionLabel label={"Your Score"}></SectionLabel>
-        {/* <Scoreboard
-          wins={String(getCurrentWeekRecord().wins)}
-          loses={String(getCurrentWeekRecord().loses)}
-          rank={String(getUserWeekRank())}
+        <Scoreboard
+          wins={
+            userCurrentWeekRecord ? String(userCurrentWeekRecord.wins) : "0"
+          }
+          loses={
+            userCurrentWeekRecord ? String(userCurrentWeekRecord.losses) : "0"
+          }
+          rank={userCurrentWeekRank ? String(userCurrentWeekRank) : "0"}
           rankStyle="text-green-500"
-        /> */}
+        />
         <div className="flex justify-between">
           <SectionLabel label={"Games"}></SectionLabel>
           {missingPicksTotal ? (
@@ -73,7 +83,7 @@ const HomePage = () => {
           const dateObject = new Date(date);
           const dateLabel =
             format(dateObject, "P") + " " + format(dateObject, "p");
-          const isLive = false; // dateObject < new Date();
+          const isLive = dateObject < new Date();
           return (
             <div key={dateLabel}>
               <div className="flex items-center justify-between">
@@ -87,7 +97,7 @@ const HomePage = () => {
               {games.map((game) => {
                 const homeTeam = game.competitors.find(({ isHome }) => isHome);
                 const awayTeam = game.competitors.find(({ isHome }) => !isHome);
-                const isLive = false; // new Date(game.date) < new Date();
+                const isLive = new Date(game.date) < new Date();
                 const userPick = currentWeekPicks?.[game.id] || null;
 
                 return (

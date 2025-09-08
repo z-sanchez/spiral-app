@@ -24,9 +24,9 @@ const useGameSchedule = () => {
 
   const currentWeekId = getWeekId(weekDateParams);
 
-  const currentWeekNumber = !data ? weekDateParams.week : null;
+  const currentWeekNumber = data ? weekDateParams.week : null;
 
-  const currentYearNumber = !data ? weekDateParams.year : null;
+  const currentYearNumber = data ? weekDateParams.year : null;
 
   const activeGames = currentWeeksGames.filter(({ completed }) => !completed);
 
@@ -38,7 +38,7 @@ const useGameSchedule = () => {
   );
   const completedGames = currentWeeksGames.filter(({ completed }) => completed);
 
-  const activeGameScheduleInDays = sortScheduleIntoDays(currentWeeksGames);
+  const activeGameScheduleInDays = sortScheduleIntoDays(gamesNotStarted);
 
   return {
     isLoading,
