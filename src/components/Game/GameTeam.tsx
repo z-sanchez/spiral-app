@@ -74,7 +74,7 @@ const GameTeam = ({
           <span className="font-bold text-[0.85rem]">{name}</span>
         </p>
         <p className="text-xs text-gray-400 text-center ml-1">
-          ({record.wins} - {record.loses})
+          ({record.wins} - {record.losses})
         </p>
       </div>
       {showScore ? (

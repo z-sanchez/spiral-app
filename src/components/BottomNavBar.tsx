@@ -16,7 +16,7 @@ const BottomNavBar = () => {
 
     signOut(auth).then(() => {
       setCookie(import.meta.env.VITE_COOKIE, "", 365);
-      setAuthState({ signedIn: false, authUser: {}, user: {} });
+      setAuthState({ signedIn: false, authUser: null, user: null });
     });
   };
 

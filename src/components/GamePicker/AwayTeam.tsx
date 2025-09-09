@@ -68,7 +68,7 @@ const AwayTeam = ({
                 {name}
               </p>
               <p className="font-light text-gray-400">
-                {record?.wins}-{record?.loses}
+                {record?.wins}-{record?.losses}
               </p>
             </div>
           </div>

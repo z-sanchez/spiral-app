@@ -1,4 +1,4 @@
-import { Firestore, doc, updateDoc } from "firebase/firestore";
+import { FieldValue, Firestore, doc, updateDoc } from "firebase/firestore";
 
 export const updateInFirebase = async ({
   documentId,
@@ -8,7 +8,7 @@ export const updateInFirebase = async ({
 }: {
   documentId: string;
   collectionName: string;
-  updatedDocFields: { [key: string]: unknown };
+  updatedDocFields: { [x: string]: FieldValue | Partial<unknown> | undefined };
   db: Firestore;
 }) => {
   try {

@@ -1,12 +1,12 @@
 import { useRecoilValue } from "recoil";
 import { ReactComponent as CoinIcon } from "../assets/icons/coin.svg";
 import { authenticationState } from "../state/AuthState";
-import { UserObject } from "../types/Firebase";
 import { ProfileIcon } from "./ProfileIcon";
 import { useNavigate } from "react-router";
+import { User } from "../types/Firebase";
 
 const Header = () => {
-  const { user } = useRecoilValue(authenticationState) as { user: UserObject };
+  const { user } = useRecoilValue(authenticationState) as { user: User };
   const navigate = useNavigate();
 
   return (
