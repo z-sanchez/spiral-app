@@ -26,6 +26,7 @@ export type AllTimeStandings = (UserStanding & {
 })[];
 
 export type League = {
+  id: string;
   name: string;
   userIds: string[];
   currentWeekStandings: CurrentWeekStandings;

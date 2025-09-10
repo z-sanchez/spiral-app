@@ -32,11 +32,19 @@ export const useUser = () => {
 
       await createNewPickDocInFirebase({ user: newUser, db });
 
+      setCookie(import.meta.env.VITE_COOKIE, firebaseAuthUser.uid, 365);
       setAuthState({
         signedIn: true,
         authUser: JSON.parse(JSON.stringify(getAuth())),
         user: newUser,
       });
+
+      if (!newUser?.color) {
+        navigate("/profileSettings");
+      } else {
+        navigate("/");
+      }
+      return;
     }
 
     setCookie(import.meta.env.VITE_COOKIE, firebaseAuthUser.uid, 365);
