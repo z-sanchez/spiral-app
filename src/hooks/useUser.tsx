@@ -10,7 +10,6 @@ import { createNewPickDocInFirebase } from "../firebase/createNewPicksUserInFire
 import { getFromFirebase } from "../firebase/getFromFirebase";
 import { FIREBASE_COLLECTIONS } from "../utils/constants";
 import { User as AppUser } from "../types/Firebase";
-import { existsInFirebase } from "../firebase/existsInFirebase";
 
 export const useUser = () => {
   const [authState, setAuthState] = useRecoilState(authenticationState);
@@ -22,32 +21,37 @@ export const useUser = () => {
   }: {
     firebaseAuthUser: User;
   }) => {
-    const userExist = await existsInFirebase({
+    const user = (await getFromFirebase({
       documentId: firebaseAuthUser.uid,
       db,
       collectionName: FIREBASE_COLLECTIONS.USERS,
-    });
+    })) as AppUser | null;
 
-    if (!userExist) {
+    if (!user || user === null) {
       const newUser = await createNewUserInFirebase({ firebaseAuthUser, db });
 
       await createNewPickDocInFirebase({ user: newUser, db });
 
       setAuthState({
         signedIn: true,
-        authUser: { ...firebaseAuthUser },
+        authUser: JSON.parse(JSON.stringify(getAuth())),
         user: newUser,
       });
-
-      setCookie(import.meta.env.VITE_COOKIE, firebaseAuthUser.uid, 365);
-
-      if (!newUser.color) {
-        navigate("/profileSettings");
-      } else {
-        navigate("/");
-      }
-      return;
     }
+
+    setCookie(import.meta.env.VITE_COOKIE, firebaseAuthUser.uid, 365);
+    setAuthState({
+      signedIn: true,
+      authUser: JSON.parse(JSON.stringify(getAuth())),
+      user: user,
+    });
+
+    if (!user?.color) {
+      navigate("/profileSettings");
+    } else {
+      navigate("/");
+    }
+    return;
   };
 
   const signInUserWithCookie = async ({

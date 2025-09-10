@@ -5,6 +5,7 @@ import { addToFirebase } from "./addToFirebase";
 import { FIREBASE_COLLECTIONS } from "../utils/constants";
 import { updateInFirebase } from "./updateInFirebase";
 import { getFromFirebase } from "./getFromFirebase";
+import { SeasonPicks } from "../types/Picks";
 
 export const createNewPickDocInFirebase = async ({
   user,
@@ -13,7 +14,7 @@ export const createNewPickDocInFirebase = async ({
   user: User;
   db: Firestore;
 }) => {
-  const defaultPickObject = createDefaultPicksObject(user);
+  const defaultPickObject: SeasonPicks = createDefaultPicksObject(user);
 
   addToFirebase({
     firebaseEntity: defaultPickObject,
