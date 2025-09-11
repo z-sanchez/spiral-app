@@ -6,7 +6,7 @@ import { ProfileIcon } from "../components/ProfileIcon";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { authenticationState } from "../state/AuthState";
 import { FormTextField } from "../components/Form/FormTextField";
-import { DEFAULT_APP_COLOR, profileColorChoices } from "../utils/constants";
+import { FIREBASE_COLLECTIONS, profileColorChoices } from "../utils/constants";
 import { FormButton } from "../components/Form/FormButton";
 import { Collapse } from "@mui/material";
 import { ReactComponent as DownArrowIcon } from "../assets/icons/down-arrow.svg";
@@ -42,9 +42,8 @@ const ProfileSettingsPage = () => {
 
     updateInFirebase({
       documentId: id,
-      collectionName: "users",
+      collectionName: FIREBASE_COLLECTIONS.PICKS,
       updatedDocFields: {
-        color: selectedColor ? selectedColor : DEFAULT_APP_COLOR,
         username: usernameState,
       },
       db,
