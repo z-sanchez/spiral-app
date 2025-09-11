@@ -115,7 +115,10 @@ const HomePage = () => {
                     showScores={isLive}
                     readonly={isLive}
                     onPick={(teamPick: string) => {
-                      makePick(currentWeekId, game.id, teamPick);
+                      if (isLive) {
+                        return new Promise((resolve) => resolve(false));
+                      }
+                      return makePick(currentWeekId, game.id, teamPick);
                     }}
                   />
                 );
@@ -165,7 +168,7 @@ const HomePage = () => {
                       ...awayTeam,
                       isPicked: userPick === awayTeam.abbreviation,
                     }}
-                    onPick={() => null}
+                    onPick={() => new Promise((resolve) => resolve(false))}
                     readonly={true}
                   />
                 );

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Competitors } from "../../types/Competitors";
 import { GameTeam } from "./GameTeam";
 
@@ -9,7 +10,7 @@ type GameProps = {
   showScores?: boolean;
   homeTeam: Competitors & { score?: string; isPicked?: boolean };
   awayTeam: Competitors & { score?: string; isPicked?: boolean };
-  onPick: (team: string) => void;
+  onPick: (team: string) => Promise<boolean>;
 };
 
 const Game = ({
@@ -21,26 +22,48 @@ const Game = ({
   correctPick,
   onPick,
 }: GameProps) => {
+  const [pick, setPick] = useState<string>(
+    awayTeam.isPicked
+      ? awayTeam.abbreviation
+      : homeTeam.isPicked
+      ? homeTeam.abbreviation
+      : ""
+  );
+
+  const handlePick = async (team: string) => {
+    if (readonly) return;
+    setPick(team);
+    const success = await onPick(team);
+    if (!success) {
+      setPick("");
+    }
+  };
+
+  const homeTeamIsPicked = pick === homeTeam.abbreviation;
+  const awayTeamIsPicked = pick === awayTeam.abbreviation;
+
   return (
     <div className="py-4 flex justify-between">
       <GameTeam
         {...awayTeam}
+        isPicked={awayTeamIsPicked}
         showScore={showScores}
         isCorrectPick={
-          showResults && awayTeam.isPicked ? correctPick : undefined
+          showResults && awayTeamIsPicked ? correctPick : undefined
         }
         readonly={readonly}
-        handlePick={() => onPick(awayTeam.abbreviation)}
+        handlePick={() => handlePick(awayTeam.abbreviation)}
         testId="awayTeam"
       />
       <GameTeam
         {...homeTeam}
+        isPicked={homeTeamIsPicked}
         showScore={showScores}
         isCorrectPick={
-          showResults && homeTeam.isPicked ? correctPick : undefined
+          showResults && homeTeamIsPicked ? correctPick : undefined
         }
         readonly={readonly}
-        handlePick={() => onPick(homeTeam.abbreviation)}
+        handlePick={() => handlePick(homeTeam.abbreviation)}
         testId="homeTeam"
       />
     </div>

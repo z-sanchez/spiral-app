@@ -1,60 +1,50 @@
 {
-  "name": "",
-  "previousWeekStandings": {},
+  "key": "1757556449567",
   "allTimeStandings": [
     {
-      "emblemStatus": [],
-      "rank": 0,
-      "winningPercentage": 0,
-      "gamesBack": 0,
+      "id": "ipJjXeLRCZMrJHHUMzOiELIF1f93",
+      "rank": 2,
       "name": "test1@test.com",
-      "record": {
-        "wins": 0,
-        "losses": 0,
-        "ties": 0
-      },
-      "id": "y3hbvnODWDh20Iw02fDypXZbnB83"
+      "record": { "ties": 0, "wins": 7, "losses": 9 },
+      "emblemStatus": [],
+      "color": "rgba(179, 35, 164, 1)",
+      "winningPercentage": 0.438,
+      "gamesBack": 2
     },
     {
-      "record": {
-        "wins": 0,
-        "ties": 0,
-        "losses": 0
-      },
-      "id": "TcT21MEHGdZB8Pc6IhnmSyvO53c2",
+      "record": { "losses": 7, "wins": 9, "ties": 0 },
+      "name": "zieksanchez3@gmail.com",
+      "emblemStatus": [],
+      "color": "rgba(179, 35, 164, 1)",
+      "winningPercentage": 0.563,
+      "id": "1Lf09IYm1oREwmlgLhabg39IbnZ2",
       "gamesBack": 0,
-      "winningPercentage": 0,
-      "rank": 0,
-      "name": "test2@test.com",
-      "emblemStatus": []
+      "rank": 1
     }
   ],
-  "userIds": ["y3hbvnODWDh20Iw02fDypXZbnB83", "TcT21MEHGdZB8Pc6IhnmSyvO53c2"],
-  "lastUpdatedAt": "",
+  "previousWeekStandings": {},
+  "id": "league_1757556449567",
+  "lastCompletedWeek": "",
+  "name": "Test League",
+  "userIds": ["ipJjXeLRCZMrJHHUMzOiELIF1f93", "1Lf09IYm1oREwmlgLhabg39IbnZ2"],
+  "lastUpdatedWeek": "week-1-year-2024-type-2",
+  "lastUpdatedAt": "2025-09-11T02:14:42.503Z",
   "currentWeekStandings": [
     {
-      "id": "y3hbvnODWDh20Iw02fDypXZbnB83",
       "name": "test1@test.com",
-      "record": {
-        "wins": 0,
-        "ties": 0,
-        "losses": 0
-      },
-      "winningPercentage": 0,
-      "rank": 0
+      "color": "rgba(179, 35, 164, 1)",
+      "rank": 2,
+      "record": { "losses": 9, "ties": 0, "wins": 7 },
+      "id": "ipJjXeLRCZMrJHHUMzOiELIF1f93",
+      "winningPercentage": 0.438
     },
     {
-      "record": {
-        "ties": 0,
-        "losses": 0,
-        "wins": 0
-      },
-      "winningPercentage": 0,
-      "name": "test2@test.com",
-      "rank": 0,
-      "id": "TcT21MEHGdZB8Pc6IhnmSyvO53c2"
+      "color": "rgba(179, 35, 164, 1)",
+      "rank": 1,
+      "record": { "ties": 0, "losses": 7, "wins": 9 },
+      "winningPercentage": 0.563,
+      "name": "zieksanchez3@gmail.com",
+      "id": "1Lf09IYm1oREwmlgLhabg39IbnZ2"
     }
-  ],
-  "lastUpdatedWeek": "",
-  "lastCompletedWeek": ""
+  ]
 }

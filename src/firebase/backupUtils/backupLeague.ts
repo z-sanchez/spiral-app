@@ -29,7 +29,7 @@ export const uploadLeagueBackup = async ({
 }): Promise<void> => {
   addToFirebase({
     firebaseEntity: leagueData,
-    documentId: "1CgEQaLpYa8t0mj0IaSc",
+    documentId: "league_1757556449567",
     collectionName: FIREBASE_COLLECTIONS.LEAGUES,
     db,
   });

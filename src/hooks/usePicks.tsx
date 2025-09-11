@@ -37,8 +37,8 @@ export const usePicks = ({ weekId }: { weekId?: string }) => {
 
   const numberOfPicksMadeThisWeek = Object.keys(currentWeekPicks || {}).length;
 
-  const makePick = (weekId: string, gameId: string, pick: string) => {
-    if (!user || userPicks === null || userPicks === undefined) return;
+  const makePick = async (weekId: string, gameId: string, pick: string) => {
+    if (!user || userPicks === null || userPicks === undefined) return false;
 
     const updatedPicks = updatePicks({
       picks: userPicks,
@@ -47,25 +47,31 @@ export const usePicks = ({ weekId }: { weekId?: string }) => {
       pick,
     });
 
-    updateInFirebase({
+    return await updateInFirebase({
       documentId: user.id,
       collectionName: FIREBASE_COLLECTIONS.PICKS,
       updatedDocFields: updatedPicks,
       db,
-    }).then((result) => {
-      refetchPicks();
-      result?.success
-        ? setNotificationState({
-            show: true,
-            backgroundColor: "rgb(34 197 94)",
-            message: "Pick Made Successfully",
-          })
-        : setNotificationState({
-            show: true,
-            backgroundColor: "rgb(244 63 94)",
-            message: "Pick Failed",
-          });
-    });
+    })
+      .then((result) => {
+        refetchPicks();
+        result?.success
+          ? setNotificationState({
+              show: true,
+              backgroundColor: "rgb(34 197 94)",
+              message: "Pick Made Successfully",
+            })
+          : setNotificationState({
+              show: true,
+              backgroundColor: "rgb(244 63 94)",
+              message: "Pick Failed",
+            });
+
+        return result.success;
+      })
+      .catch(() => {
+        return false;
+      });
   };
 
   return {

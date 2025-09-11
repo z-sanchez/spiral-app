@@ -79,32 +79,34 @@ const ScorePage = () => {
         />
         <SectionLabel label={"League Scores"}></SectionLabel>
         <div className="flex w-full items-center justify-center flex-col">
-          {standings.map((player) => {
-            const lastPlace = standings.every(
-              (p) => p.record.wins >= player.record.wins
-            );
+          {standings
+            .sort((a, b) => b.record.wins - a.record.wins)
+            .map((player) => {
+              const lastPlace = standings.every(
+                (p) => p.record.wins >= player.record.wins
+              );
 
-            const firstPlace = player.rank === 1;
+              const firstPlace = player.rank === 1;
 
-            return (
-              <LeaderboardLine
-                key={player.id}
-                lastPlace={lastPlace}
-                record={player.record}
-                username={player.name}
-                rank={player.rank}
-                color={player.color}
-                iconCharacter={player.name.charAt(0).toUpperCase()}
-                allTimeLeader={firstPlace}
-                increaseIcon={false}
-                decreaseIcon={false}
-                hotStreakIcon={false}
-                bronzeMedalIcon={false}
-                silverMedalIcon={false}
-                trophyIcon={false}
-              />
-            );
-          })}
+              return (
+                <LeaderboardLine
+                  key={player.id}
+                  lastPlace={lastPlace}
+                  record={player.record}
+                  username={player.name}
+                  rank={player.rank}
+                  color={player.color}
+                  iconCharacter={player.name.charAt(0).toUpperCase()}
+                  allTimeLeader={firstPlace}
+                  increaseIcon={false}
+                  decreaseIcon={false}
+                  hotStreakIcon={false}
+                  bronzeMedalIcon={false}
+                  silverMedalIcon={false}
+                  trophyIcon={false}
+                />
+              );
+            })}
         </div>
         <div
           className="flex justify-between items-center"
