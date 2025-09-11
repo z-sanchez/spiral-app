@@ -30,35 +30,27 @@ export const useUser = () => {
     if (!user || user === null) {
       const newUser = await createNewUserInFirebase({ firebaseAuthUser, db });
 
-      await createNewPickDocInFirebase({ user: newUser, db });
-
-      setCookie(import.meta.env.VITE_COOKIE, firebaseAuthUser.uid, 365);
       setAuthState({
         signedIn: true,
         authUser: JSON.parse(JSON.stringify(getAuth())),
         user: newUser,
       });
-
-      if (!newUser?.color) {
-        navigate("/profileSettings");
-      } else {
-        navigate("/");
-      }
-      return;
+    } else {
+      setAuthState({
+        signedIn: true,
+        authUser: JSON.parse(JSON.stringify(getAuth())),
+        user: user,
+      });
     }
 
     setCookie(import.meta.env.VITE_COOKIE, firebaseAuthUser.uid, 365);
-    setAuthState({
-      signedIn: true,
-      authUser: JSON.parse(JSON.stringify(getAuth())),
-      user: user,
-    });
 
-    if (!user?.color) {
-      navigate("/profileSettings");
-    } else {
+    if (user?.leagueId) {
       navigate("/");
+    } else {
+      navigate("/join-league" + window.location.search);
     }
+
     return;
   };
 
@@ -81,16 +73,42 @@ export const useUser = () => {
       user,
     });
 
-    if (!user?.color) {
-      navigate("/profileSettings");
-    } else {
+    if (user?.leagueId) {
       navigate("/");
+    } else {
+      navigate("/join-league" + window.location.search);
     }
+  };
+
+  const addUserToLeague = async ({
+    leagueId,
+    key,
+  }: {
+    leagueId: string;
+    key: string;
+  }) => {
+    if (!authState.user) return;
+
+    const userLeagueId = await createNewPickDocInFirebase({
+      user: authState.user,
+      db,
+      leagueId,
+      leagueKey: key,
+    });
+
+    setAuthState({
+      signedIn: true,
+      authUser: JSON.parse(JSON.stringify(getAuth())),
+      user: { ...authState.user, leagueId: userLeagueId || null },
+    });
+
+    navigate("/");
   };
 
   return {
     authState,
     signInUser,
     signInUserWithCookie,
+    addUserToLeague,
   };
 };

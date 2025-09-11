@@ -7,6 +7,7 @@ export type User = {
   id: string;
   photoURL: string | null;
   email: string;
+  leagueId: string | null;
 };
 
 export type UserStanding = {
@@ -27,6 +28,7 @@ export type AllTimeStandings = (UserStanding & {
 
 export type League = {
   id: string;
+  key: string;
   name: string;
   userIds: string[];
   currentWeekStandings: CurrentWeekStandings;

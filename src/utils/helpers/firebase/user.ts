@@ -7,6 +7,7 @@ export const createUserObjectFromGoogleUser = ({
   photoURL,
 }: firebaseAuthUser): User => {
   return {
+    leagueId: null,
     username: email ?? "",
     color: "rgba(179, 35, 164, 1)",
     iconCharacter: "",

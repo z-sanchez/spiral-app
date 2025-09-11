@@ -10,10 +10,22 @@ import { SeasonPicks } from "../types/Picks";
 export const createNewPickDocInFirebase = async ({
   user,
   db,
+  leagueId,
+  leagueKey,
 }: {
   user: User;
   db: Firestore;
+  leagueId: string;
+  leagueKey: string;
 }) => {
+  const savedLeague = (await getFromFirebase({
+    documentId: leagueId,
+    collectionName: FIREBASE_COLLECTIONS.LEAGUES,
+    db,
+  })) as League;
+
+  if (!savedLeague || savedLeague.key !== leagueKey) return;
+
   const defaultPickObject: SeasonPicks = createDefaultPicksObject(user);
 
   addToFirebase({
@@ -22,12 +34,6 @@ export const createNewPickDocInFirebase = async ({
     collectionName: FIREBASE_COLLECTIONS.PICKS,
     db,
   });
-
-  const savedLeague = (await getFromFirebase({
-    documentId: "1CgEQaLpYa8t0mj0IaSc",
-    collectionName: FIREBASE_COLLECTIONS.LEAGUES,
-    db,
-  })) as League;
 
   const updatedLeague: League = {
     ...savedLeague,
@@ -58,10 +64,26 @@ export const createNewPickDocInFirebase = async ({
     ],
   };
 
+  const updatedUser: User = {
+    ...user,
+    leagueId,
+  };
+
   updateInFirebase({
     updatedDocFields: { ...updatedLeague },
-    documentId: "1CgEQaLpYa8t0mj0IaSc",
+    documentId: leagueId,
     collectionName: FIREBASE_COLLECTIONS.LEAGUES,
     db,
   });
+
+  updateInFirebase({
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //@ts-ignore
+    updatedDocFields: { ...updatedUser },
+    documentId: user.id,
+    collectionName: FIREBASE_COLLECTIONS.USERS,
+    db,
+  });
+
+  return leagueId;
 };

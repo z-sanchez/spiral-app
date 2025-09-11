@@ -21,7 +21,7 @@ export const useLeague = () => {
     async () => {
       return (await getFromFirebase({
         db,
-        documentId: "1CgEQaLpYa8t0mj0IaSc",
+        documentId: user.leagueId!,
         collectionName: FIREBASE_COLLECTIONS.LEAGUES,
       })) as League | null;
     },

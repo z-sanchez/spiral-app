@@ -19,6 +19,7 @@ export const createDefaultLeagueObject = ({
   lastUpdatedWeek: "",
   lastCompletedWeek: "",
   lastUpdatedAt: new Date().toISOString(),
+  key: `${Date.now()}`,
 });
 
 export const createNewLeagueInFirebase = async ({
