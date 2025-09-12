@@ -38,7 +38,7 @@ const useGameSchedule = () => {
   );
   const completedGames = currentWeeksGames.filter(({ completed }) => completed);
 
-  const activeGameScheduleInDays = sortScheduleIntoDays(gamesNotStarted);
+  const activeGameScheduleInDays = sortScheduleIntoDays(currentWeeksGames);
 
   return {
     isLoading,
