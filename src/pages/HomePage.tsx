@@ -44,8 +44,9 @@ const HomePage = () => {
     { id: "weekly", text: `Week ${currentWeekNumber} Picks`, active: true },
   ];
 
-  const missingPicksTotal = Math.abs(
-    activeGames.length - numberOfPicksMadeThisWeek
+  const missingPicksTotal = Math.max(
+    activeGames.length - numberOfPicksMadeThisWeek,
+    0
   );
 
   return (

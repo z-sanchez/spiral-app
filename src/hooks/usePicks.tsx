@@ -38,6 +38,7 @@ export const usePicks = ({ weekId }: { weekId?: string }) => {
   const currentWeekPicks = !weekId ? null : userPicks?.picks[weekId] || null;
 
   const numberOfPicksMadeThisWeek = Object.keys(currentWeekPicks || {}).length; //+ optimisticPickCount;
+  console.log({ numberOfPicksMadeThisWeek });
 
   const makePick = async (weekId: string, gameId: string, pick: string) => {
     if (!user || userPicks === null || userPicks === undefined) return false;
