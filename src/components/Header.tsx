@@ -13,7 +13,7 @@ const Header = () => {
     <div className="flex h-16 px-6 w-full justify-between items-center flex-shrink-0">
       <div className="flex items-center">
         <CoinIcon className="stroke-purple-500" />
-        <p className="text-purple-500 font-bold text-sm ml-1">Pot $125</p>
+        <p className="text-purple-500 font-bold text-sm ml-1">Pot $180</p>
       </div>
       <ProfileIcon
         character={user.username[0]}

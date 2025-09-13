@@ -34,6 +34,7 @@ const LeaderboardLine = ({
   lastPlace,
   allTimeLeader,
 }: LeaderboardLineProps) => {
+  const showEmblems = false;
   return (
     <div className="w-full flex items-center justify-between border-b-2 py-3 border-gray-50">
       <p className="text-purple-500 font-bold text-sm text-center w-4">
@@ -61,14 +62,16 @@ const LeaderboardLine = ({
       <p className="bg-gray-100 rounded-full text-purple-500 text-sm w-16 text-center">
         {record.wins}-{record.losses}
       </p>
-      <p className="w-10 ">
-        {allTimeLeader ? <>&#128081;</> : null}
-        {lastPlace ? <>&#128546;</> : null}
-        {hotStreakIcon ? <>&#128293;</> : null}
-        {bronzeMedalIcon ? <>&#129353;</> : null}
-        {silverMedalIcon ? <>&#129352;</> : null}
-        {trophyIcon ? <>&#127942;</> : null}
-      </p>
+      {showEmblems ? (
+        <p className="w-10 ">
+          {allTimeLeader ? <>&#128081;</> : null}
+          {lastPlace ? <>&#128546;</> : null}
+          {hotStreakIcon ? <>&#128293;</> : null}
+          {bronzeMedalIcon ? <>&#129353;</> : null}
+          {silverMedalIcon ? <>&#129352;</> : null}
+          {trophyIcon ? <>&#127942;</> : null}
+        </p>
+      ) : null}
     </div>
   );
 };

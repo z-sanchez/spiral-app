@@ -16,37 +16,36 @@ import { getGameWinner } from "../utils/helpers/espn/getGameWinner";
 import { SectionIndicator } from "../components/SectionIndicator";
 import { format } from "date-fns";
 import { useLeague } from "../hooks/useLeague";
+import { Spinner } from "../components/Spinner";
 
 const HomePage = () => {
+  const [showFinishedGames, setShowFinishedGames] = useState(true);
+
   const {
     currentWeekId,
     completedGames,
     currentWeekNumber,
     activeGameScheduleInDays,
-    isLoading,
-    currentWeeksGames,
+    activeGames,
   } = useGameSchedule();
-  const { makePick, numberOfPicksMadeThisWeek, currentWeekPicks } = usePicks({
+
+  const {
+    makePick,
+    numberOfPicksMadeThisWeek,
+    currentWeekPicks,
+    isLoading: isLoadingPicks,
+  } = usePicks({
     weekId: currentWeekId,
   });
-  const {
-    isLoading: isLoadingLeague,
-    userCurrentWeekRank,
-    userCurrentWeekRecord,
-  } = useLeague();
+
+  const { userCurrentWeekRank, userCurrentWeekRecord } = useLeague();
 
   const tabs = [
     { id: "weekly", text: `Week ${currentWeekNumber} Picks`, active: true },
   ];
 
-  const [showFinishedGames, setShowFinishedGames] = useState(true);
-
-  if (isLoading || isLoadingLeague) {
-    return null;
-  }
-
   const missingPicksTotal = Math.abs(
-    currentWeeksGames.length - numberOfPicksMadeThisWeek
+    activeGames.length - numberOfPicksMadeThisWeek
   );
 
   return (
@@ -79,53 +78,63 @@ const HomePage = () => {
             </p>
           )}
         </div>
-        {activeGameScheduleInDays.map(({ date, games }) => {
-          const dateObject = new Date(date);
-          const dateLabel =
-            format(dateObject, "P") + " " + format(dateObject, "p");
-          const isLive = dateObject < new Date();
-          return (
-            <div key={dateLabel}>
-              <div className="flex items-center justify-between">
-                <p className="text-gray-800 mb-2 mt-4 text-xs font-medium">
-                  {dateLabel}
-                </p>
-                {isLive ? (
-                  <LockIcon className="fill-purple-500 h-5 w-5" />
-                ) : null}
-              </div>
-              {games.map((game) => {
-                const homeTeam = game.competitors.find(({ isHome }) => isHome);
-                const awayTeam = game.competitors.find(({ isHome }) => !isHome);
-                const isLive = new Date(game.date) < new Date();
-                const userPick = currentWeekPicks?.[game.id] || null;
+        {isLoadingPicks ? (
+          <div className="w-full h-full flex justify-center items-center flex-col">
+            <Spinner />
+          </div>
+        ) : (
+          activeGameScheduleInDays.map(({ date, games }) => {
+            const dateObject = new Date(date);
+            const dateLabel =
+              format(dateObject, "P") + " " + format(dateObject, "p");
+            const isLive = dateObject < new Date();
+            return (
+              <div key={dateLabel}>
+                <div className="flex items-center justify-between">
+                  <p className="text-gray-800 mb-2 mt-4 text-xs font-medium">
+                    {dateLabel}
+                  </p>
+                  {isLive ? (
+                    <LockIcon className="fill-purple-500 h-5 w-5" />
+                  ) : null}
+                </div>
+                {games.map((game) => {
+                  const homeTeam = game.competitors.find(
+                    ({ isHome }) => isHome
+                  );
+                  const awayTeam = game.competitors.find(
+                    ({ isHome }) => !isHome
+                  );
+                  const isLive = new Date(game.date) < new Date();
+                  const userPick = currentWeekPicks?.[game.id] || null;
 
-                return (
-                  <Game
-                    key={game.id}
-                    gameId={game.id}
-                    homeTeam={{
-                      ...(homeTeam as Competitors),
-                      isPicked: userPick === homeTeam?.abbreviation,
-                    }}
-                    awayTeam={{
-                      ...(awayTeam as Competitors),
-                      isPicked: userPick === awayTeam?.abbreviation,
-                    }}
-                    showScores={isLive}
-                    readonly={isLive}
-                    onPick={(teamPick: string) => {
-                      if (isLive) {
-                        return new Promise((resolve) => resolve(false));
-                      }
-                      return makePick(currentWeekId, game.id, teamPick);
-                    }}
-                  />
-                );
-              })}
-            </div>
-          );
-        })}
+                  return (
+                    <Game
+                      key={game.id}
+                      gameId={game.id}
+                      homeTeam={{
+                        ...(homeTeam as Competitors),
+                        isPicked: userPick === homeTeam?.abbreviation,
+                      }}
+                      awayTeam={{
+                        ...(awayTeam as Competitors),
+                        isPicked: userPick === awayTeam?.abbreviation,
+                      }}
+                      showScores={isLive}
+                      readonly={isLive}
+                      onPick={(teamPick: string) => {
+                        if (isLive) {
+                          return new Promise((resolve) => resolve(false));
+                        }
+                        return makePick(currentWeekId, game.id, teamPick);
+                      }}
+                    />
+                  );
+                })}
+              </div>
+            );
+          })
+        )}
         {completedGames.length ? (
           <>
             <div

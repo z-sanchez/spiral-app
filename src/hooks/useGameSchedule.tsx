@@ -11,7 +11,7 @@ const useGameSchedule = () => {
     () => {
       return fetchCurrentWeekData();
     },
-    { refetchInterval: GAME_SCHEDULE_POLL_TIME }
+    { refetchInterval: GAME_SCHEDULE_POLL_TIME, refetchOnWindowFocus: false }
   );
 
   const weekDateParams = {
@@ -38,7 +38,7 @@ const useGameSchedule = () => {
   );
   const completedGames = currentWeeksGames.filter(({ completed }) => completed);
 
-  const activeGameScheduleInDays = sortScheduleIntoDays(currentWeeksGames);
+  const activeGameScheduleInDays = sortScheduleIntoDays(activeGames);
 
   return {
     isLoading,

@@ -69,11 +69,11 @@ const GameTeam = ({
       className="shadow-[0_0_4px_0_rgba(0,0,0,0.1)] w-[49%] px-2 py-4 rounded-md flex items-center justify-between text-xs"
     >
       <div className="flex items-center">
-        <p style={{ color: displayColor }}>
+        <p style={{ color: displayColor }} className="w-24">
           {abbreviation}{" "}
           <span className="font-bold text-[0.85rem]">{name}</span>
         </p>
-        <p className="text-xs text-gray-400 text-center ml-1">
+        <p className="text-xs text-gray-400 text-center ml-1 min-w-fit">
           ({record.wins} - {record.losses})
         </p>
       </div>

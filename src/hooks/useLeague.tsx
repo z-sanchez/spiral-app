@@ -25,7 +25,7 @@ export const useLeague = () => {
         collectionName: FIREBASE_COLLECTIONS.LEAGUES,
       })) as League | null;
     },
-    { refetchInterval: GAME_SCHEDULE_POLL_TIME }
+    { refetchInterval: GAME_SCHEDULE_POLL_TIME, refetchOnWindowFocus: false }
   );
 
   const userAllTimeStanding = league?.allTimeStandings.find(

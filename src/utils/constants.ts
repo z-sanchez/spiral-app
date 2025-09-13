@@ -23,7 +23,9 @@ export const SPIRAL_TEST_COOKIE_NAME = "spiralTestAppCookie";
 
 export const NO_PICK = "no pick";
 
-export const GAME_SCHEDULE_POLL_TIME = 100000;
+export const GAME_SCHEDULE_POLL_TIME = 600000; // 10 minutes
+export const LEAGUE_STANDING_POLL_TIME = 600000; // 10 minutes
+export const USER_PICK_POLL_TIME = 600000; // 10 minutes
 
 export const DEFAULT_APP_COLOR = "#a855f7";
 
