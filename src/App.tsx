@@ -9,6 +9,7 @@ import { FIREBASE_CONFIGURATION } from "./utils/constants";
 import { useRecoilState } from "recoil";
 import { firestoreState } from "./state/FirestoreState";
 import { useEffect } from "react";
+import { uploadLeagueBackup } from "./firebase/backupUtils/backupLeague";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,11 @@ function App() {
   const db = getFirestore(app);
 
   if (!firestoreStateData.db) {
+    uploadLeagueBackup({
+      leagueData: testingLeague.league,
+      userPicks: testingLeague.users,
+      db,
+    });
     setFirestoreData({ db });
   }
 
@@ -35,9 +41,7 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Container>
-        <AppRoutes />
-      </Container>
+      <Container>{/* <AppRoutes /> */}</Container>
     </QueryClientProvider>
   );
 }
