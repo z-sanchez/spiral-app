@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Competitors } from "../../types/Competitors";
 import { GameTeam } from "./GameTeam";
 
@@ -30,10 +30,10 @@ const Game = ({
 
   const [pick, setPick] = useState<string>(userPick);
 
-  // Sync with updates from parent if user.pick ever changes
-  useEffect(() => {
-    setPick(userPick);
-  }, [userPick]);
+  // // Sync with updates from parent if user.pick ever changes
+  // useEffect(() => {
+  //   setPick(userPick);
+  // }, [userPick]);
 
   const handlePick = async (team: string) => {
     if (readonly) return;

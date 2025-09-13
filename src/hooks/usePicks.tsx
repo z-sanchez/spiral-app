@@ -5,50 +5,44 @@ import { firestoreState } from "../state/FirestoreState";
 import { Firestore } from "firebase/firestore";
 import { notificationState } from "../state/NotificationState";
 import { useQuery } from "react-query";
-import { useState } from "react";
+import { useEffect } from "react";
 import { getFromFirebase } from "../firebase/getFromFirebase";
-import { FIREBASE_COLLECTIONS, USER_PICK_POLL_TIME } from "../utils/constants";
+import { FIREBASE_COLLECTIONS } from "../utils/constants";
 import { SeasonPicks } from "../types/Picks";
 import { updateInFirebase } from "../firebase/updateInFirebase";
 
 export const usePicks = ({ weekId }: { weekId?: string }) => {
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
   const setNotificationState = useSetRecoilState(notificationState);
   const { db } = useRecoilValue(firestoreState) as { db: Firestore };
   const { user } = useRecoilValue(authenticationState);
-  const [optimisticPickCount, setOptimisticPickCount] = useState(0);
+  // const [optimisticPickCount, setOptimisticPickCount] = useState(0);
 
-  const { data: userPicks } = useQuery(
-    ["useWeekPicks", user?.id],
+  const { data: userPicks, refetch: refetchPicks } = useQuery(
+    "useWeekPicks",
     async () => {
       if (!user) return null;
-
-      setIsLoading(true);
-      const userPicks = (await getFromFirebase({
+      return (await getFromFirebase({
         db,
         documentId: user.id,
         collectionName: FIREBASE_COLLECTIONS.PICKS,
       })) as SeasonPicks | null;
-
-      setIsLoading(false);
-      return userPicks;
     },
-    {
-      refetchInterval: USER_PICK_POLL_TIME,
-      refetchOnWindowFocus: false,
-      enabled: !!user?.id, // ⛔ prevents initial fetch with undefined user
-    }
+    { enabled: true }
   );
+
+  useEffect(() => {
+    refetchPicks();
+  }, [refetchPicks]);
 
   const currentWeekPicks = !weekId ? null : userPicks?.picks[weekId] || null;
 
-  const numberOfPicksMadeThisWeek =
-    Object.keys(currentWeekPicks || {}).length + optimisticPickCount;
+  const numberOfPicksMadeThisWeek = Object.keys(currentWeekPicks || {}).length; //+ optimisticPickCount;
 
   const makePick = async (weekId: string, gameId: string, pick: string) => {
     if (!user || userPicks === null || userPicks === undefined) return false;
 
-    const isNewPick = !currentWeekPicks?.[gameId];
+    // const isNewPick = !currentWeekPicks?.[gameId];
 
     const updatedPicks = updatePicks({
       picks: userPicks,
@@ -64,6 +58,7 @@ export const usePicks = ({ weekId }: { weekId?: string }) => {
       db,
     })
       .then((result) => {
+        refetchPicks();
         result?.success
           ? setNotificationState({
               show: true,
@@ -76,9 +71,9 @@ export const usePicks = ({ weekId }: { weekId?: string }) => {
               message: "Pick Failed",
             });
 
-        if (isNewPick) {
-          setOptimisticPickCount(optimisticPickCount + 1);
-        }
+        // if (isNewPick) {
+        //   setOptimisticPickCount(optimisticPickCount + 1);
+        // }
 
         return result.success;
       })
@@ -92,6 +87,6 @@ export const usePicks = ({ weekId }: { weekId?: string }) => {
     numberOfPicksMadeThisWeek,
     currentWeekPicks,
     userPicks,
-    isLoading,
+    isLoading: false,
   };
 };
