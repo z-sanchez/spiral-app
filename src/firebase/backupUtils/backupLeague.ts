@@ -2,7 +2,7 @@ import { Firestore } from "firebase/firestore";
 import { getFromFirebase } from "../getFromFirebase";
 import { addToFirebase } from "../addToFirebase";
 import { FIREBASE_COLLECTIONS } from "../../utils/constants";
-import { League } from "../../types/Firebase";
+import { League, User } from "../../types/Firebase";
 
 export const backupLeague = async ({
   leagueId,
@@ -11,13 +11,29 @@ export const backupLeague = async ({
   leagueId: string;
   db: Firestore;
 }): Promise<string> => {
-  const league = await getFromFirebase({
+  const league = (await getFromFirebase({
     documentId: leagueId,
     collectionName: "leagues",
     db,
-  });
+  })) as League;
 
-  return JSON.stringify(league);
+  const users: User[] = [];
+
+  if (league) {
+    await Promise.all(
+      league.userIds.map(async (id) => {
+        users.push(
+          (await getFromFirebase({
+            documentId: id,
+            collectionName: FIREBASE_COLLECTIONS.PICKS,
+            db,
+          })) as User
+        );
+      })
+    );
+  }
+
+  return JSON.stringify({ league, users });
 };
 
 export const uploadLeagueBackup = async ({
