@@ -9,7 +9,9 @@ import { FIREBASE_CONFIGURATION } from "./utils/constants";
 import { useRecoilState } from "recoil";
 import { firestoreState } from "./state/FirestoreState";
 import { useEffect } from "react";
+import { backupLeague } from "./firebase/backupUtils/backupLeague";
 import { uploadLeagueBackup } from "./firebase/backupUtils/backupLeague";
+import testingLeague from "./prod-env-backup-sep-13.json";
 
 const queryClient = new QueryClient();
 
@@ -23,11 +25,15 @@ function App() {
   const db = getFirestore(app);
 
   if (!firestoreStateData.db) {
-    uploadLeagueBackup({
-      leagueData: testingLeague.league,
-      userPicks: testingLeague.users,
-      db,
-    });
+    // backupLeague({ leagueId: "", db }).then((data) =>
+    //   console.log(data)
+    // );
+    // uploadLeagueBackup({
+    //   leagueData: testingLeague.league,
+    //   userPicks: testingLeague.picks,
+    //   users: testingLeague.users,
+    //   db,
+    // });
     setFirestoreData({ db });
   }
 
