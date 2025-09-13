@@ -6,7 +6,7 @@ import { ProfileIcon } from "../components/ProfileIcon";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { authenticationState } from "../state/AuthState";
 import { FormTextField } from "../components/Form/FormTextField";
-import { FIREBASE_COLLECTIONS, profileColorChoices } from "../utils/constants";
+import { profileColorChoices } from "../utils/constants";
 import { FormButton } from "../components/Form/FormButton";
 import { Collapse } from "@mui/material";
 import { ReactComponent as DownArrowIcon } from "../assets/icons/down-arrow.svg";
@@ -16,7 +16,7 @@ import { Firestore } from "firebase/firestore";
 import { notificationState } from "../state/NotificationState";
 import { useNavigate } from "react-router-dom";
 import { User } from "../types/Firebase";
-import { updateInFirebase } from "../firebase/updateInFirebase";
+import { updateProfileInFirebase } from "../firebase/updateProfileInFIrebase";
 
 const ProfileSettingsPage = () => {
   const [authData, setAuthData] = useRecoilState(authenticationState);
@@ -40,13 +40,13 @@ const ProfileSettingsPage = () => {
       return;
     }
 
-    updateInFirebase({
-      documentId: id,
-      collectionName: FIREBASE_COLLECTIONS.PICKS,
-      updatedDocFields: {
-        username: usernameState,
-      },
+    if (!id) return;
+
+    updateProfileInFirebase({
+      id: id!,
       db,
+      color: selectedColor ? selectedColor : "rgb(168, 85, 247)",
+      username: usernameState,
     })
       .then((result) => {
         result?.success

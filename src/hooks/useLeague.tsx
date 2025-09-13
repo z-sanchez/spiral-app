@@ -2,13 +2,10 @@ import { useRecoilValue } from "recoil";
 import { firestoreState } from "../state/FirestoreState";
 import { Firestore } from "firebase/firestore";
 import { useQuery } from "react-query";
-import { getFromFirebase } from "../firebase/getFromFirebase";
-import {
-  FIREBASE_COLLECTIONS,
-  GAME_SCHEDULE_POLL_TIME,
-} from "../utils/constants";
+import { GAME_SCHEDULE_POLL_TIME } from "../utils/constants";
 import { League } from "../types/Firebase";
 import { authenticationState } from "../state/AuthState";
+import { getLeagueDataFromFirebase } from "../firebase/getLeagueDataFromFirebase";
 
 export const useLeague = () => {
   const { db } = useRecoilValue(firestoreState) as { db: Firestore };
@@ -19,10 +16,9 @@ export const useLeague = () => {
   const { isLoading, data: league } = useQuery(
     "useLeague",
     async () => {
-      return (await getFromFirebase({
+      return (await getLeagueDataFromFirebase({
         db,
-        documentId: user.leagueId!,
-        collectionName: FIREBASE_COLLECTIONS.LEAGUES,
+        leagueId: user.leagueId!,
       })) as League | null;
     },
     { refetchInterval: GAME_SCHEDULE_POLL_TIME, refetchOnWindowFocus: false }

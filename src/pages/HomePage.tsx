@@ -67,15 +67,19 @@ const HomePage = () => {
         />
         <div className="flex justify-between">
           <SectionLabel label={"Games"}></SectionLabel>
-          {missingPicksTotal ? (
-            <SectionIndicator
-              text={`${missingPicksTotal} Picks Missing`}
-              backgroundColor={"#f44336"}
-            />
-          ) : (
-            <p className="text-green-500 text-xs self-center font-medium">
-              All Picks Submitted!
-            </p>
+          {isLoadingPicks ? null : (
+            <>
+              {missingPicksTotal ? (
+                <SectionIndicator
+                  text={`${missingPicksTotal} Picks Missing`}
+                  backgroundColor={"#f44336"}
+                />
+              ) : (
+                <p className="text-green-500 text-xs self-center font-medium">
+                  All Picks Submitted!
+                </p>
+              )}
+            </>
           )}
         </div>
         {isLoadingPicks ? (
