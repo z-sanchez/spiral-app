@@ -29,6 +29,8 @@ const HomePage = () => {
     activeGames,
   } = useGameSchedule();
 
+  console.log({ currentWeekId });
+
   const {
     makePick,
     numberOfPicksMadeThisWeek,
@@ -126,11 +128,11 @@ const HomePage = () => {
                         isPicked: userPick === awayTeam?.abbreviation,
                       }}
                       showScores={isLive}
-                      readonly={isLive}
+                      readonly={false}
                       onPick={(teamPick: string) => {
-                        if (isLive) {
-                          return new Promise((resolve) => resolve(false));
-                        }
+                        // if (isLive) {
+                        //   return new Promise((resolve) => resolve(false));
+                        // }
                         return makePick(currentWeekId, game.id, teamPick);
                       }}
                     />

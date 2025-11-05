@@ -3,7 +3,7 @@ import { getWeekData } from "./getWeekData";
 import scheduleData from "../../../mock/scheduleData.json";
 import { EspnCurrentWeekParams } from "../../../types/EspnApi";
 
-const BASE_ESPN_QUERY = `https://cdn.espn.com/core/nfl/schedule?xhr=1`;
+const BASE_ESPN_QUERY = `https://cdn.espn.com/core/nfl/schedule?xhr=1&year=${2025}&seasontype=${2}&week=${9}`;
 
 const getEspnQuery = (params: EspnCurrentWeekParams) => {
   return `https://cdn.espn.com/core/nfl/schedule?xhr=1&year=${params.year}&seasontype=${params.seasontype}&week=${params.week}`;
