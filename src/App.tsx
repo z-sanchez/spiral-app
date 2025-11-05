@@ -1,5 +1,5 @@
 import Container from "./components/Container";
-import { AppRoutes } from "./Routes";
+// import { AppRoutes } from "./Routes";
 import { QueryClientProvider, QueryClient } from "react-query";
 // Required for side-effects
 import "firebase/firestore";
@@ -9,9 +9,9 @@ import { FIREBASE_CONFIGURATION } from "./utils/constants";
 import { useRecoilState } from "recoil";
 import { firestoreState } from "./state/FirestoreState";
 import { useEffect } from "react";
-import { backupLeague } from "./firebase/backupUtils/backupLeague";
-import { uploadLeagueBackup } from "./firebase/backupUtils/backupLeague";
-import testingLeague from "./prod-env-backup-sep-13.json";
+// import { backupLeague } from "./firebase/backupUtils/backupLeague";
+// import { uploadLeagueBackup } from "./firebase/backupUtils/backupLeague";
+// import testingLeague from "./oct-29-prod-backup.json";
 
 const queryClient = new QueryClient();
 
@@ -25,7 +25,7 @@ function App() {
   const db = getFirestore(app);
 
   if (!firestoreStateData.db) {
-    // backupLeague({ leagueId: "", db }).then((data) =>
+    // backupLeague({ leagueId: "league_1757565255954", db }).then((data) =>
     //   console.log(data)
     // );
     // uploadLeagueBackup({
@@ -34,7 +34,7 @@ function App() {
     //   users: testingLeague.users,
     //   db,
     // });
-    setFirestoreData({ db });
+    // setFirestoreData({ db });
   }
 
   useEffect(() => {
