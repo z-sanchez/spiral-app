@@ -29,7 +29,7 @@ export const backupLeague = async ({
             documentId: id,
             collectionName: FIREBASE_COLLECTIONS.USERS,
             db,
-          })) as User
+          })) as User,
         );
 
         userPicks.push(
@@ -37,9 +37,9 @@ export const backupLeague = async ({
             documentId: id,
             collectionName: FIREBASE_COLLECTIONS.PICKS,
             db,
-          })) as SeasonPicks
+          })) as SeasonPicks,
         );
-      })
+      }),
     );
   }
 
@@ -82,4 +82,69 @@ export const uploadLeagueBackup = async ({
       });
     }),
   ]);
+};
+
+export const resetUserPicks = async ({
+  userId,
+  db,
+}: {
+  userId: string;
+  db: Firestore;
+}): Promise<void> => {
+  const userPicks = (await getFromFirebase({
+    documentId: userId,
+    collectionName: FIREBASE_COLLECTIONS.PICKS,
+    db,
+  })) as SeasonPicks;
+
+  if (userPicks) {
+    const updatedPicks = {
+      ...userPicks,
+      picks: {},
+    };
+
+    await addToFirebase({
+      firebaseEntity: updatedPicks,
+      documentId: updatedPicks.id,
+      collectionName: FIREBASE_COLLECTIONS.PICKS,
+      db,
+    });
+  }
+};
+
+export const resetLeague = async ({
+  leagueId,
+  db,
+}: {
+  leagueId: string;
+  db: Firestore;
+}): Promise<void> => {
+  const league = (await getFromFirebase({
+    documentId: leagueId,
+    collectionName: FIREBASE_COLLECTIONS.LEAGUES,
+    db,
+  })) as League;
+
+  if (league) {
+    await Promise.all(
+      league.userIds.map(async (userId) => {
+        await resetUserPicks({ userId, db });
+      }),
+    );
+  }
+
+  await addToFirebase({
+    firebaseEntity: {
+      ...league,
+      currentWeekStandings: [],
+      allTimeStandings: [],
+      previousWeekStandings: {},
+      lastUpdatedWeek: "",
+      lastCompletedWeek: "",
+      lastUpdatedAt: new Date().toISOString(),
+    },
+    documentId: league.id,
+    collectionName: FIREBASE_COLLECTIONS.LEAGUES,
+    db,
+  });
 };
