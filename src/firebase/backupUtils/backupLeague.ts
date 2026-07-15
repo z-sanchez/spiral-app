@@ -135,13 +135,15 @@ export const resetLeague = async ({
 
   await addToFirebase({
     firebaseEntity: {
-      ...league,
+      id: league.id,
+      key: league.key,
+      name: league.name,
+      userIds: league.userIds,
       currentWeekStandings: [],
       allTimeStandings: [],
-      previousWeekStandings: {},
-      lastUpdatedWeek: "",
-      lastCompletedWeek: "",
-      lastUpdatedAt: new Date().toISOString(),
+      computedWeekStandings: {},
+      lastUpdatedAt: "",
+      lastComputedWeek: "",
     },
     documentId: league.id,
     collectionName: FIREBASE_COLLECTIONS.LEAGUES,
