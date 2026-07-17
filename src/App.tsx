@@ -9,6 +9,7 @@ import { FIREBASE_CONFIGURATION } from "./utils/constants";
 import { useRecoilState } from "recoil";
 import { firestoreState } from "./state/FirestoreState";
 import { useEffect } from "react";
+// import { backupLeague } from "./firebase/backupUtils/backupLeague";
 // import { resetLeague } from "./firebase/backupUtils/backupLeague";
 // import { uploadLeagueBackup } from "./firebase/backupUtils/backupLeague";
 // import { BACKUP } from "./test-env-reset";
