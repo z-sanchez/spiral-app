@@ -12,14 +12,13 @@ export const createDefaultLeagueObject = ({
 }): League => ({
   id: leagueId,
   name: leagueName,
+  key: `${Date.now()}`,
   userIds: [],
   currentWeekStandings: [],
+  computedWeekStandings: {},
   allTimeStandings: [],
-  previousWeekStandings: {},
-  lastUpdatedWeek: "",
-  lastCompletedWeek: "",
+  lastComputedWeek: "",
   lastUpdatedAt: new Date().toISOString(),
-  key: `${Date.now()}`,
 });
 
 export const createNewLeagueInFirebase = async ({

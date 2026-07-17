@@ -12,29 +12,25 @@ export type User = {
 
 export type UserStanding = {
   id: string;
-  name: string;
   record: Record;
   winningPercentage: number;
   rank: number;
-  color: string;
 };
 
 export type CurrentWeekStandings = UserStanding[];
 
 export type AllTimeStandings = (UserStanding & {
   gamesBack: number;
-  emblemStatus: string[];
 })[];
 
 export type League = {
   id: string;
-  key: string;
   name: string;
+  key: string;
   userIds: string[];
   currentWeekStandings: CurrentWeekStandings;
   allTimeStandings: AllTimeStandings;
-  previousWeekStandings: { [key: string]: AllTimeStandings };
-  lastUpdatedWeek: string;
-  lastCompletedWeek: string;
+  computedWeekStandings: { [key: string]: CurrentWeekStandings };
   lastUpdatedAt: string;
+  lastComputedWeek: string;
 };

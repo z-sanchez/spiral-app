@@ -1,4 +1,5 @@
 import { useState } from "react";
+import type { LeagueWithUserDetails } from "../firebase/getLeagueDataFromFirebase";
 import { Scoreboard } from "../components/Scoreboard/Scoreboard";
 import { SectionLabel } from "../components/SectionLabel";
 import { Tabs } from "../components/Tabs";
@@ -10,7 +11,6 @@ import { Collapse } from "@mui/material";
 import { ReactComponent as DownArrowIcon } from "../assets/icons/down-arrow.svg";
 import { ReactComponent as UpArrowIcon } from "../assets/icons/up-arrow.svg";
 import { useLeague } from "../hooks/useLeague";
-import { UserStanding } from "../types/Firebase";
 
 const ScorePage = () => {
   const { currentWeekNumber } = useGameSchedule();
@@ -54,9 +54,9 @@ const ScorePage = () => {
     setTabData(newTabs);
   };
 
-  const standings: UserStanding[] = isAllTime
-    ? allTimeStandings
-    : currentWeekStandings;
+  const standings = isAllTime
+    ? (allTimeStandings as LeagueWithUserDetails["allTimeStandings"])
+    : (currentWeekStandings as LeagueWithUserDetails["currentWeekStandings"]);
 
   return (
     <>
@@ -81,32 +81,38 @@ const ScorePage = () => {
         <div className="flex w-full items-center justify-center flex-col">
           {standings
             .sort((a, b) => b.record.wins - a.record.wins)
-            .map((player) => {
-              const lastPlace = standings.every(
-                (p) => p.record.wins >= player.record.wins
-              );
+            .map(
+              (
+                player:
+                  | LeagueWithUserDetails["allTimeStandings"][0]
+                  | LeagueWithUserDetails["currentWeekStandings"][0],
+              ) => {
+                const lastPlace = standings.every(
+                  (p) => p.record.wins >= player.record.wins,
+                );
 
-              const firstPlace = player.rank === 1;
+                const firstPlace = player.rank === 1;
 
-              return (
-                <LeaderboardLine
-                  key={player.id}
-                  lastPlace={lastPlace}
-                  record={player.record}
-                  username={player.name}
-                  rank={player.rank}
-                  color={player.color}
-                  iconCharacter={player.name.charAt(0).toUpperCase()}
-                  allTimeLeader={firstPlace}
-                  increaseIcon={false}
-                  decreaseIcon={false}
-                  hotStreakIcon={false}
-                  bronzeMedalIcon={false}
-                  silverMedalIcon={false}
-                  trophyIcon={false}
-                />
-              );
-            })}
+                return (
+                  <LeaderboardLine
+                    key={player.id}
+                    lastPlace={lastPlace}
+                    record={player.record}
+                    username={player.name}
+                    rank={player.rank}
+                    color={player.color}
+                    iconCharacter={player.name.charAt(0).toUpperCase()}
+                    allTimeLeader={firstPlace}
+                    increaseIcon={false}
+                    decreaseIcon={false}
+                    hotStreakIcon={false}
+                    bronzeMedalIcon={false}
+                    silverMedalIcon={false}
+                    trophyIcon={false}
+                  />
+                );
+              },
+            )}
         </div>
         <div
           className="flex justify-between items-center"

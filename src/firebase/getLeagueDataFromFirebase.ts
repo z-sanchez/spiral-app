@@ -3,13 +3,24 @@ import { League, User } from "../types/Firebase";
 import { FIREBASE_COLLECTIONS } from "../utils/constants";
 import { getFromFirebase } from "./getFromFirebase";
 
+export type LeagueWithUserDetails = League & {
+  allTimeStandings: (League["allTimeStandings"][number] & {
+    name: string;
+    color: string;
+  })[];
+  currentWeekStandings: (League["currentWeekStandings"][number] & {
+    name: string;
+    color: string;
+  })[];
+};
+
 export const getLeagueDataFromFirebase = async ({
   db,
   leagueId,
 }: {
   db: Firestore;
   leagueId: string;
-}): Promise<League | null> => {
+}): Promise<LeagueWithUserDetails | null> => {
   const league = (await getFromFirebase({
     db,
     documentId: leagueId,
@@ -26,7 +37,7 @@ export const getLeagueDataFromFirebase = async ({
             documentId: userId,
             collectionName: FIREBASE_COLLECTIONS.USERS,
           })) as User | null;
-        })
+        }),
       )) as User[])
     : [];
 

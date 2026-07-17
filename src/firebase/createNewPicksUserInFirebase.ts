@@ -42,24 +42,19 @@ export const createNewPickDocInFirebase = async ({
       ...savedLeague.currentWeekStandings,
       {
         id: user.id,
-        name: user.username,
         record: { wins: 0, losses: 0, ties: 0 },
         winningPercentage: 0,
         rank: 0,
-        color: user.color,
       },
     ],
     allTimeStandings: [
       ...savedLeague.allTimeStandings,
       {
         id: user.id,
-        name: user.username,
         record: { wins: 0, losses: 0, ties: 0 },
         winningPercentage: 0,
         gamesBack: 0,
         rank: 0,
-        emblemStatus: [],
-        color: user.color,
       },
     ],
   };
