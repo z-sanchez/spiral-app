@@ -12,7 +12,7 @@ import {
   LeagueWithUserDetails,
 } from "../firebase/getLeagueDataFromFirebase";
 
-export const useLeague = () => {
+export const useLeague = ({ currentWeekId }: { currentWeekId: string }) => {
   const { db } = useRecoilValue(firestoreState) as { db: Firestore };
   const user = useRecoilValue(authenticationState).user;
 
@@ -44,7 +44,7 @@ export const useLeague = () => {
 
   const userAllTimeRank = userAllTimeStanding?.rank;
 
-  const userWeekStanding = league?.currentWeekStandings.find(
+  const userWeekStanding = league?.computedWeekStandings[currentWeekId]?.find(
     (standing) => standing.id === user.id,
   );
 
@@ -52,7 +52,23 @@ export const useLeague = () => {
 
   const userCurrentWeekRank = userWeekStanding?.rank;
 
-  console.log("league", league);
+  const currentWeekStandings =
+    league?.computedWeekStandings[currentWeekId]?.map((standing) => {
+      const user = league?.leagueUserData.find((u) => u.id === standing.id);
+      return {
+        ...standing,
+        name: user?.username || "Unknown User",
+        color: user?.color || "",
+      };
+    }) ||
+    league?.leagueUserData.map((user) => ({
+      id: user.id,
+      name: user.username,
+      color: user.color,
+      record: { wins: 0, losses: 0 },
+      rank: 0,
+    })) ||
+    [];
 
   return {
     isLoading,
@@ -65,7 +81,7 @@ export const useLeague = () => {
       (league?.allTimeStandings as LeagueWithUserDetails["allTimeStandings"]) ||
       [],
     currentWeekStandings:
-      (league?.currentWeekStandings as LeagueWithUserDetails["currentWeekStandings"]) ||
+      (currentWeekStandings as LeagueWithUserDetails["currentWeekStandings"]) ||
       [],
   };
 };

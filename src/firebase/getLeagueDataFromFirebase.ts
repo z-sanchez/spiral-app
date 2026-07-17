@@ -12,6 +12,11 @@ export type LeagueWithUserDetails = League & {
     name: string;
     color: string;
   })[];
+  leagueUserData: {
+    id: string;
+    username: string;
+    color: string;
+  }[];
 };
 
 export const getLeagueDataFromFirebase = async ({
@@ -61,5 +66,10 @@ export const getLeagueDataFromFirebase = async ({
           color: user?.color || "",
         };
       }) || [],
+    leagueUserData: users.map((user) => ({
+      id: user.id,
+      username: user.username,
+      color: user.color,
+    })),
   };
 };

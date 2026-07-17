@@ -13,7 +13,7 @@ export const getCurrentWeekQuery = async () => {
   const currentWeekParams = await fetchCurrentWeekParams().then(
     (params: EspnCurrentWeekParams) => {
       return params;
-    }
+    },
   );
 
   if (currentWeekParams.seasontype !== 2) {
@@ -35,7 +35,7 @@ export const fetchWeekData = async (weekNumber: number) => {
   if (ENV_VARIABLES.useMockData) return getWeekData(scheduleData.schedule);
 
   const resultData = await fetch(
-    `https://cdn.espn.com/core/nfl/schedule?xhr=1&year=2024&seasontype=2&week=${weekNumber}`
+    `https://cdn.espn.com/core/nfl/schedule?xhr=1&year=2024&seasontype=2&week=${weekNumber}`,
   ).then((result) => result.json());
 
   return getWeekData(resultData.content.schedule);
@@ -45,7 +45,7 @@ export const fetchCurrentWeekParams = async () => {
   if (ENV_VARIABLES.useMockData) scheduleData.parameters;
 
   const resultData = await fetch(
-    `https://cdn.espn.com/core/nfl/schedule?xhr=1`
+    `https://cdn.espn.com/core/nfl/schedule?xhr=1`,
   ).then((result) => result.json());
 
   return resultData.content.parameters;

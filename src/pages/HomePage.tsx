@@ -38,7 +38,9 @@ const HomePage = () => {
     weekId: currentWeekId,
   });
 
-  const { userCurrentWeekRank, userCurrentWeekRecord } = useLeague();
+  const { userCurrentWeekRank, userCurrentWeekRecord } = useLeague({
+    currentWeekId,
+  });
 
   const tabs = [
     { id: "weekly", text: `Week ${currentWeekNumber} Picks`, active: true },
@@ -46,7 +48,7 @@ const HomePage = () => {
 
   const missingPicksTotal = Math.max(
     activeGames.length - numberOfPicksMadeThisWeek,
-    0
+    0,
   );
 
   return (
@@ -105,10 +107,10 @@ const HomePage = () => {
                 </div>
                 {games.map((game) => {
                   const homeTeam = game.competitors.find(
-                    ({ isHome }) => isHome
+                    ({ isHome }) => isHome,
                   );
                   const awayTeam = game.competitors.find(
-                    ({ isHome }) => !isHome
+                    ({ isHome }) => !isHome,
                   );
                   const isLive = new Date(game.date) < new Date();
                   const userPick = currentWeekPicks?.[game.id] || null;

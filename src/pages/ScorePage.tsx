@@ -13,7 +13,7 @@ import { ReactComponent as UpArrowIcon } from "../assets/icons/up-arrow.svg";
 import { useLeague } from "../hooks/useLeague";
 
 const ScorePage = () => {
-  const { currentWeekNumber } = useGameSchedule();
+  const { currentWeekNumber, currentWeekId } = useGameSchedule();
   const {
     userAllTimeRecord,
     userCurrentWeekRecord,
@@ -21,7 +21,7 @@ const ScorePage = () => {
     userCurrentWeekRank,
     allTimeStandings,
     currentWeekStandings,
-  } = useLeague();
+  } = useLeague({ currentWeekId });
   const tabs = [
     { id: "weekly", text: `Week ${currentWeekNumber} Picks`, active: true },
     { id: "all-time", text: "All-Time", active: false },
@@ -72,9 +72,9 @@ const ScorePage = () => {
         {/* <WeekSelector activeWeekNumber={3} /> */}
         <SectionLabel label={"Your Score"}></SectionLabel>
         <Scoreboard
-          wins={String(wins)}
-          loses={String(loses)}
-          rank={String(rank)}
+          wins={wins !== undefined ? String(wins) : "0"}
+          loses={loses !== undefined ? String(loses) : "0"}
+          rank={rank !== undefined ? String(rank) : "0"}
           rankStyle="text-green-500"
         />
         <SectionLabel label={"League Scores"}></SectionLabel>
