@@ -1,0 +1,132 @@
+// test users 1 and 2, no picks, no grades
+export const BACKUP = {
+  league: {
+    currentWeekStandings: [],
+    allTimeStandings: [],
+    lastUpdatedAt: "",
+    id: "league_1757565255954",
+    lastComputedWeek: "",
+    computedWeekStandings: {},
+    userIds: [
+      "evDAfugUS7X86pGL4yOLGX3Q8P02",
+      "YK5kmp0BMzVpLK2wT0eLzDr9XdB3",
+      "PH20XRhudLX1SIN7SVH5foLXawY2",
+      "uZQfFwv22JeAoAE5t12CsnjKe603",
+      "WHzLHaFF9wXMYaAYQCJ2ev5zOXq1",
+      "DHU1ls2NhpUda1DqSyYE5bKQUK63",
+      "3pOFYdiQTIYvLYQakzj9XldgTH32",
+      "dBYC5suQBRUF6Vrehaw8tFD3oGD3",
+    ],
+    name: "Sancheesy League",
+    key: "1757565255954",
+  },
+  users: [
+    {
+      iconCharacter: "",
+      color: "#14b8a6",
+      leagueId: "league_1757565255954",
+      username: "Bruhdot",
+      photoURL:
+        "https://lh3.googleusercontent.com/a/ACg8ocKlTpxSZKngf6sfCMZmcSkGj9YyDxrnzrgH4t00DtB80pnD8g=s96-c",
+      email: "zieksanchez3@gmail.com",
+      id: "evDAfugUS7X86pGL4yOLGX3Q8P02",
+    },
+    {
+      photoURL: null,
+      username: "ricksanchez3@yahoo.com",
+      leagueId: "league_1757565255954",
+      color: "rgba(179, 35, 164, 1)",
+      iconCharacter: "",
+      id: "YK5kmp0BMzVpLK2wT0eLzDr9XdB3",
+      email: "ricksanchez3@yahoo.com",
+    },
+    {
+      id: "PH20XRhudLX1SIN7SVH5foLXawY2",
+      color: "rgba(179, 35, 164, 1)",
+      photoURL:
+        "https://lh3.googleusercontent.com/a/ACg8ocLxHA94t-hi28VTAlXV8jdK2OFIb1ChPSIMzGOoxU11vavF_Q=s96-c",
+      username: "amanda3491@gmail.com",
+      email: "amanda3491@gmail.com",
+      leagueId: "league_1757565255954",
+      iconCharacter: "",
+    },
+    {
+      iconCharacter: "",
+      id: "uZQfFwv22JeAoAE5t12CsnjKe603",
+      color: "#fbbf24",
+      leagueId: "league_1757565255954",
+      photoURL:
+        "https://lh3.googleusercontent.com/a/ACg8ocLjDSu3OevSOuKeONNJ_TJTcvZpenpaM15NLd-0LmB_Pj94cQ=s96-c",
+      username: "Big Cheesie",
+      email: "mumychelsea@gmail.com",
+    },
+    {
+      username: "forg",
+      photoURL:
+        "https://lh3.googleusercontent.com/a/ACg8ocJfxeBJNP6tGqkLetSgX_VDV0VZ9gVBFVyoNng3-b-lwjxHpXjj=s96-c",
+      color: "#84cc16",
+      leagueId: "league_1757565255954",
+      iconCharacter: "",
+      email: "samanthasanchez887@gmail.com",
+      id: "WHzLHaFF9wXMYaAYQCJ2ev5zOXq1",
+    },
+    {
+      leagueId: "league_1757565255954",
+      iconCharacter: "",
+      color: "rgba(179, 35, 164, 1)",
+      username: "ovaisqureshi77@gmail.com",
+      photoURL:
+        "https://lh3.googleusercontent.com/a/ACg8ocInHVAPx9zFNbStG9Vj6rwWV5lRSKaenVw89zeK6bPRYiJE0jeT=s96-c",
+      email: "ovaisqureshi77@gmail.com",
+      id: "DHU1ls2NhpUda1DqSyYE5bKQUK63",
+    },
+    {
+      username: "test1@test.com",
+      photoURL: null,
+      leagueId: "league_1757565255954",
+      iconCharacter: "",
+      email: "test1@test.com",
+      id: "3pOFYdiQTIYvLYQakzj9XldgTH32",
+      color: "rgba(179, 35, 164, 1)",
+    },
+    {
+      color: "rgba(179, 35, 164, 1)",
+      username: "test2@test.com",
+      photoURL: null,
+      email: "test2@test.com",
+      leagueId: "league_1757565255954",
+      iconCharacter: "",
+      id: "dBYC5suQBRUF6Vrehaw8tFD3oGD3",
+    },
+  ],
+  picks: [
+    { picks: {}, id: "evDAfugUS7X86pGL4yOLGX3Q8P02", username: "Bruhdot" },
+    {
+      id: "YK5kmp0BMzVpLK2wT0eLzDr9XdB3",
+      picks: {},
+      username: "ricksanchez3@yahoo.com",
+    },
+    {
+      username: "amanda3491@gmail.com",
+      picks: {},
+      id: "PH20XRhudLX1SIN7SVH5foLXawY2",
+    },
+    { picks: {}, username: "Big Cheesie", id: "uZQfFwv22JeAoAE5t12CsnjKe603" },
+    { picks: {}, username: "forg", id: "WHzLHaFF9wXMYaAYQCJ2ev5zOXq1" },
+    {
+      id: "DHU1ls2NhpUda1DqSyYE5bKQUK63",
+      picks: {},
+      username: "ovaisqureshi77@gmail.com",
+    },
+    {
+      username: "test1@test.com",
+      picks: {},
+      id: "3pOFYdiQTIYvLYQakzj9XldgTH32",
+    },
+    {
+      username: "test2@test.com",
+      id: "dBYC5suQBRUF6Vrehaw8tFD3oGD3",
+      picks: {},
+    },
+  ],
+};
