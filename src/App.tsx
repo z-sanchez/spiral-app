@@ -13,6 +13,8 @@ import { useEffect } from "react";
 // import { resetLeague } from "./firebase/backupUtils/backupLeague";
 // import { uploadLeagueBackup } from "./firebase/backupUtils/backupLeague";
 // import { BACKUP } from "./test-env-reset";
+// import { BACKUP } from "./empty-test-league";
+// import { uploadLeagueBackup } from "./firebase/backupUtils/backupLeague";
 
 const queryClient = new QueryClient();
 

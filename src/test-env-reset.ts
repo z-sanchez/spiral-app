@@ -227,28 +227,47 @@ export const BACKUP = {
     },
   ],
   picks: [
-    { picks: {}, username: "Bruhdot", id: "evDAfugUS7X86pGL4yOLGX3Q8P02" },
+    {
+      picks: {},
+      username: "Bruhdot",
+      id: "evDAfugUS7X86pGL4yOLGX3Q8P02",
+      pickPreferenceRanking: {},
+    },
     {
       id: "YK5kmp0BMzVpLK2wT0eLzDr9XdB3",
       username: "ricksanchez3@yahoo.com",
       picks: {},
+      pickPreferenceRanking: {},
     },
     {
       username: "amanda3491@gmail.com",
       id: "PH20XRhudLX1SIN7SVH5foLXawY2",
       picks: {},
+      pickPreferenceRanking: {},
     },
-    { id: "uZQfFwv22JeAoAE5t12CsnjKe603", username: "Big Cheesie", picks: {} },
-    { picks: {}, username: "forg", id: "WHzLHaFF9wXMYaAYQCJ2ev5zOXq1" },
+    {
+      id: "uZQfFwv22JeAoAE5t12CsnjKe603",
+      username: "Big Cheesie",
+      picks: {},
+      pickPreferenceRanking: {},
+    },
+    {
+      picks: {},
+      username: "forg",
+      id: "WHzLHaFF9wXMYaAYQCJ2ev5zOXq1",
+      pickPreferenceRanking: {},
+    },
     {
       username: "ovaisqureshi77@gmail.com",
       id: "DHU1ls2NhpUda1DqSyYE5bKQUK63",
       picks: {},
+      pickPreferenceRanking: {},
     },
     {
       id: "9r79U8lERjgX50MYFPhAgHhkVn33",
       username: "test@test.com",
       picks: {},
+      pickPreferenceRanking: {},
     },
   ],
 };

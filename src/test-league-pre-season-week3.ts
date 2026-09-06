@@ -307,23 +307,41 @@ export const BACKUP = {
     },
   ],
   picks: [
-    { picks: {}, id: "evDAfugUS7X86pGL4yOLGX3Q8P02", username: "Bruhdot" },
+    {
+      picks: {},
+      id: "evDAfugUS7X86pGL4yOLGX3Q8P02",
+      username: "Bruhdot",
+      pickPreferenceRanking: {},
+    },
     {
       id: "YK5kmp0BMzVpLK2wT0eLzDr9XdB3",
       picks: {},
       username: "ricksanchez3@yahoo.com",
+      pickPreferenceRanking: {},
     },
     {
       username: "amanda3491@gmail.com",
       picks: {},
       id: "PH20XRhudLX1SIN7SVH5foLXawY2",
+      pickPreferenceRanking: {},
     },
-    { picks: {}, username: "Big Cheesie", id: "uZQfFwv22JeAoAE5t12CsnjKe603" },
-    { picks: {}, username: "forg", id: "WHzLHaFF9wXMYaAYQCJ2ev5zOXq1" },
+    {
+      picks: {},
+      username: "Big Cheesie",
+      id: "uZQfFwv22JeAoAE5t12CsnjKe603",
+      pickPreferenceRanking: {},
+    },
+    {
+      picks: {},
+      username: "forg",
+      id: "WHzLHaFF9wXMYaAYQCJ2ev5zOXq1",
+      pickPreferenceRanking: {},
+    },
     {
       id: "DHU1ls2NhpUda1DqSyYE5bKQUK63",
       picks: {},
       username: "ovaisqureshi77@gmail.com",
+      pickPreferenceRanking: {},
     },
     {
       username: "test1@test.com",
@@ -348,6 +366,7 @@ export const BACKUP = {
         },
       },
       id: "3pOFYdiQTIYvLYQakzj9XldgTH32",
+      pickPreferenceRanking: {},
     },
     {
       username: "test2@test.com",
@@ -372,6 +391,7 @@ export const BACKUP = {
           "401874393": "CHI",
         },
       },
+      pickPreferenceRanking: {},
     },
   ],
 };
