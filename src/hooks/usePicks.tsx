@@ -13,6 +13,8 @@ import {
 } from "../utils/constants";
 import { SeasonPicks } from "../types/Picks";
 import { updateInFirebase } from "../firebase/updateInFirebase";
+import { useEffect } from "react";
+import { useLocation, useNavigate } from "react-router";
 
 export const usePicks = ({ weekId }: { weekId?: string }) => {
   const setNotificationState = useSetRecoilState(notificationState);
@@ -20,6 +22,8 @@ export const usePicks = ({ weekId }: { weekId?: string }) => {
   const { db } = useRecoilValue(firestoreState) as { db: Firestore };
   const { user } = useRecoilValue(authenticationState);
   const picksQueryKey = ["useWeekPicks", user?.id];
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const {
     data: userPicks,
@@ -44,6 +48,16 @@ export const usePicks = ({ weekId }: { weekId?: string }) => {
       refetchOnReconnect: false,
     },
   );
+
+  useEffect(() => {
+    if (
+      userPicks &&
+      Object.keys(userPicks.pickPreferenceRanking).length === 0 &&
+      location.pathname !== "/pick-preference"
+    ) {
+      navigate("/pick-preference");
+    }
+  }, [userPicks, location.pathname, navigate]);
 
   const currentWeekPicks = !weekId ? null : userPicks?.picks[weekId] || null;
 
@@ -122,11 +136,76 @@ export const usePicks = ({ weekId }: { weekId?: string }) => {
       });
   };
 
+  const updatePickPreferenceRanking = async (pickPreferenceRanking: {
+    [key: string]: number;
+  }) => {
+    if (!user) return false;
+
+    const previousPicks = queryClient.getQueryData<SeasonPicks | null>(
+      picksQueryKey,
+    );
+
+    if (previousPicks === null || previousPicks === undefined) return false;
+
+    const updatedPicks = { ...previousPicks, pickPreferenceRanking };
+
+    await queryClient.cancelQueries(picksQueryKey);
+
+    queryClient.setQueryData<SeasonPicks | null>(picksQueryKey, updatedPicks);
+
+    return await updateInFirebase({
+      documentId: user.id,
+      collectionName: FIREBASE_COLLECTIONS.PICKS,
+      updatedDocFields: updatedPicks,
+      db,
+    })
+      .then(async (result) => {
+        if (!result?.success) {
+          queryClient.setQueryData<SeasonPicks | null>(
+            picksQueryKey,
+            previousPicks,
+          );
+
+          setNotificationState({
+            show: true,
+            backgroundColor: "rgb(244 63 94)",
+            message: "Failed to Save Rankings",
+          });
+
+          return false;
+        }
+
+        await refetchPicks();
+        setNotificationState({
+          show: true,
+          backgroundColor: "rgb(34 197 94)",
+          message: "Rankings Saved Successfully",
+        });
+
+        return true;
+      })
+      .catch(() => {
+        queryClient.setQueryData<SeasonPicks | null>(
+          picksQueryKey,
+          previousPicks,
+        );
+
+        setNotificationState({
+          show: true,
+          backgroundColor: "rgb(244 63 94)",
+          message: "Failed to Save Rankings",
+        });
+
+        return false;
+      });
+  };
+
   return {
     makePick,
     numberOfPicksMadeThisWeek,
     currentWeekPicks,
     userPicks,
     isLoading,
+    updatePickPreferenceRanking,
   };
 };

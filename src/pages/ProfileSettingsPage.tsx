@@ -134,7 +134,12 @@ const ProfileSettingsPage = () => {
         </div>
       </div>
       <FormButton
+        text="Update Preferred Picks"
+        onClick={() => navigate("/pick-preference")}
+      />
+      <FormButton
         text="Update Profile"
+        alternateStyle
         onClick={() => submitProfileUpdates()}
       />
     </PageLayout>

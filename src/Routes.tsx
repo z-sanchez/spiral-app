@@ -9,6 +9,7 @@ import {
 import "./index.css";
 import { HomePage } from "./pages/HomePage";
 import { ScorePage } from "./pages/ScorePage";
+import { PickPreferenceRankingPage } from "./pages/PickPreferenceRanking";
 import { LoginPage } from "./pages/LoginPage";
 import { useRecoilValue } from "recoil";
 import { authenticationState } from "./state/AuthState";
@@ -40,6 +41,10 @@ export const AppRoutes = () => {
         <Route element={<PrivateRoutes />}>
           <Route element={<HomePage />} path="/" />
           <Route element={<ScorePage />} path="/scores" />
+          <Route
+            element={<PickPreferenceRankingPage />}
+            path="/pick-preference"
+          />
           <Route element={<ProfileSettingsPage />} path="/profileSettings" />
           <Route element={<JoinLeaguePage />} path="/join-league" />
         </Route>
