@@ -9,5 +9,6 @@ export const createDefaultPicksObject = ({
     id,
     username,
     picks: {},
+    pickPreferenceRanking: {},
   };
 };
