@@ -33,6 +33,7 @@ const HomePage = () => {
     makePick,
     numberOfPicksMadeThisWeek,
     currentWeekPicks,
+    userPicks,
     isLoading: isLoadingPicks,
   } = usePicks({
     weekId: currentWeekId,
@@ -113,7 +114,33 @@ const HomePage = () => {
                     ({ isHome }) => !isHome,
                   );
                   const isLive = new Date(game.date) < new Date();
-                  const userPick = currentWeekPicks?.[game.id] || null;
+                  let userPick = currentWeekPicks?.[game.id] || null;
+
+                  if (
+                    userPick === null &&
+                    isLive &&
+                    Object.keys(userPicks?.pickPreferenceRanking || {}).length >
+                      0
+                  ) {
+                    const homeTeamRank =
+                      userPicks?.pickPreferenceRanking?.[
+                        homeTeam?.abbreviation || ""
+                      ];
+                    const awayTeamRank =
+                      userPicks?.pickPreferenceRanking?.[
+                        awayTeam?.abbreviation || ""
+                      ];
+
+                    if (
+                      homeTeamRank !== undefined &&
+                      awayTeamRank !== undefined
+                    ) {
+                      userPick =
+                        homeTeamRank < awayTeamRank
+                          ? homeTeam?.abbreviation || null
+                          : awayTeam?.abbreviation || null;
+                    }
+                  }
 
                   return (
                     <Game
@@ -160,7 +187,31 @@ const HomePage = () => {
                 const homeTeam = getHomeTeam(game) as Competitors;
                 const awayTeam = getAwayTeam(game) as Competitors;
 
-                const userPick = currentWeekPicks?.[game.id] || null;
+                let userPick = currentWeekPicks?.[game.id] || null;
+
+                if (
+                  userPick === null &&
+                  Object.keys(userPicks?.pickPreferenceRanking || {}).length > 0
+                ) {
+                  const homeTeamRank =
+                    userPicks?.pickPreferenceRanking?.[
+                      homeTeam?.abbreviation || ""
+                    ];
+                  const awayTeamRank =
+                    userPicks?.pickPreferenceRanking?.[
+                      awayTeam?.abbreviation || ""
+                    ];
+
+                  if (
+                    homeTeamRank !== undefined &&
+                    awayTeamRank !== undefined
+                  ) {
+                    userPick =
+                      homeTeamRank < awayTeamRank
+                        ? homeTeam?.abbreviation || null
+                        : awayTeam?.abbreviation || null;
+                  }
+                }
 
                 const gameWinner = getGameWinner(game);
 
