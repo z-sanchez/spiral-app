@@ -15,6 +15,7 @@ import { useEffect } from "react";
 // import { BACKUP } from "./test-env-reset";
 // import { BACKUP } from "./empty-test-league";
 // import { uploadLeagueBackup } from "./firebase/backupUtils/backupLeague";
+// import { BACKUP_LEAGUE } from "./week-0-league-backup";
 
 const queryClient = new QueryClient();
 
@@ -32,9 +33,9 @@ function App() {
     //   console.log(data),
     // );
     // uploadLeagueBackup({
-    //   leagueData: BACKUP.league,
-    //   userPicks: BACKUP.picks,
-    //   users: BACKUP.users,
+    //   leagueData: BACKUP_LEAGUE.league,
+    //   userPicks: BACKUP_LEAGUE.picks,
+    //   users: BACKUP_LEAGUE.users,
     //   db,
     // });
     // resetLeague({ leagueId: "league_1757565255954", db }).then(() => {
