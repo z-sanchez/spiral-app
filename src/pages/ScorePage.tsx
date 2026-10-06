@@ -11,6 +11,7 @@ import { Collapse } from "@mui/material";
 import { ReactComponent as DownArrowIcon } from "../assets/icons/down-arrow.svg";
 import { ReactComponent as UpArrowIcon } from "../assets/icons/up-arrow.svg";
 import { useLeague } from "../hooks/useLeague";
+import { LeaderboardHeader } from "../components/LeaderboardHeader";
 
 const ScorePage = () => {
   const { currentWeekNumber, currentWeekId } = useGameSchedule();
@@ -22,6 +23,8 @@ const ScorePage = () => {
     allTimeStandings,
     currentWeekStandings,
   } = useLeague({ currentWeekId });
+
+  console.log(currentWeekStandings);
   const tabs = [
     { id: "weekly", text: `Week ${currentWeekNumber} Picks`, active: true },
     { id: "all-time", text: "All-Time", active: false },
@@ -79,6 +82,7 @@ const ScorePage = () => {
         />
         <SectionLabel label={"League Scores"}></SectionLabel>
         <div className="flex w-full items-center justify-center flex-col">
+          <LeaderboardHeader />
           {standings
             .sort((a, b) => b.record.wins - a.record.wins)
             .map(
@@ -109,6 +113,8 @@ const ScorePage = () => {
                     bronzeMedalIcon={false}
                     silverMedalIcon={false}
                     trophyIcon={false}
+                    gamesBack={player.gamesBack}
+                    streak={player.streak}
                   />
                 );
               },

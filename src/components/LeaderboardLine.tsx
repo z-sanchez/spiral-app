@@ -17,6 +17,25 @@ type LeaderboardLineProps = {
   record: Record;
   rank: number;
   allTimeLeader?: boolean;
+  gamesBack?: number;
+  streak?: { count: number; type: "win" | "loss" };
+};
+
+const Streak = ({
+  streak,
+}: {
+  streak?: { count: number; type: "win" | "loss" };
+}) => {
+  if (!streak) return "";
+  const text = `${streak.count}${streak.type === "win" ? "W" : "L"}`;
+
+  return (
+    <p
+      className={` bg-gray-100 text-sm w-16 text-center rounded-full ${streak?.type === "win" ? "text-green-500" : "text-red-500"}`}
+    >
+      {text}
+    </p>
+  );
 };
 
 const LeaderboardLine = ({
@@ -33,6 +52,8 @@ const LeaderboardLine = ({
   trophyIcon,
   lastPlace,
   allTimeLeader,
+  gamesBack,
+  streak,
 }: LeaderboardLineProps) => {
   const showEmblems = false;
   return (
@@ -42,7 +63,7 @@ const LeaderboardLine = ({
       </p>
       <div className="flex items-center">
         {!increaseIcon && !decreaseIcon ? (
-          <p className="w-8"></p>
+          <p className=""></p>
         ) : (
           <>
             {increaseIcon ? (
@@ -62,6 +83,10 @@ const LeaderboardLine = ({
       <p className="bg-gray-100 rounded-full text-purple-500 text-sm w-16 text-center">
         {record.wins}-{record.losses}
       </p>
+      <p className="text-gray-500 text-sm w-16 text-center">
+        {gamesBack !== undefined ? `${gamesBack} GB` : ""}
+      </p>
+      <Streak streak={streak} />
       {showEmblems ? (
         <p className="w-10 ">
           {allTimeLeader ? <>&#128081;</> : null}

@@ -15,13 +15,13 @@ export type UserStanding = {
   record: Record;
   winningPercentage: number;
   rank: number;
+  gamesBack?: number;
+  streak?: { count: number; type: "win" | "loss" };
 };
 
 export type CurrentWeekStandings = UserStanding[];
 
-export type AllTimeStandings = (UserStanding & {
-  gamesBack: number;
-})[];
+export type AllTimeStandings = UserStanding[];
 
 export type League = {
   id: string;
