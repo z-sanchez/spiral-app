@@ -1,7 +1,6 @@
 import { useRecoilValue } from "recoil";
 import { firestoreState } from "../state/FirestoreState";
 import { Firestore } from "firebase/firestore";
-import { AllTimeStandings } from "../types/Firebase";
 import { useQuery } from "react-query";
 import {
   LEAGUE_STANDING_POLL_TIME,
@@ -12,41 +11,6 @@ import {
   getLeagueDataFromFirebase,
   LeagueWithUserDetails,
 } from "../firebase/getLeagueDataFromFirebase";
-import { UserStanding } from "../types/Firebase";
-
-const patchLeagueData = (
-  league: LeagueWithUserDetails | null | undefined,
-  currentWeekId: string,
-) => {
-  if (!league) return null;
-
-  const standingsForThisWeek = league.computedWeekStandings[currentWeekId];
-  const allTimeStandings = league.allTimeStandings;
-
-  const updatedStandingsForThisWeek: UserStanding[] = standingsForThisWeek.map(
-    (standing) => ({
-      // new fields
-      gamesBack: 0.5,
-      streak: { count: 2, type: "win" },
-      ...standing,
-    }),
-  );
-
-  const updatedStandingsAllTime: AllTimeStandings = allTimeStandings.map(
-    (standing) => ({
-      // new fields
-      gamesBack: 0.5,
-      streak: { count: 2, type: "win" },
-      ...standing,
-    }),
-  );
-
-  league.computedWeekStandings[currentWeekId] = updatedStandingsForThisWeek;
-  //@ts-expect-error this is being replaced later
-  league.allTimeStandings = updatedStandingsAllTime;
-
-  return league;
-};
 
 export const useLeague = ({ currentWeekId }: { currentWeekId: string }) => {
   const { db } = useRecoilValue(firestoreState) as { db: Firestore };
@@ -54,7 +18,7 @@ export const useLeague = ({ currentWeekId }: { currentWeekId: string }) => {
 
   if (!user) throw new Error("No user found in useLeague hook");
 
-  const { isLoading, data: leagueUnpatched } = useQuery(
+  const { isLoading, data: league } = useQuery(
     "useLeague",
     async () => {
       return (await getLeagueDataFromFirebase({
@@ -71,10 +35,6 @@ export const useLeague = ({ currentWeekId }: { currentWeekId: string }) => {
       refetchOnReconnect: false,
     },
   );
-
-  //TODO: Adding fields API is not yet implemented, remove this once implemented
-  const league = patchLeagueData(leagueUnpatched, currentWeekId);
-  console.log(leagueUnpatched);
 
   const userAllTimeStanding = league?.allTimeStandings.find(
     (standing) => standing.id === user.id,

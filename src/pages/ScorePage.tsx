@@ -7,9 +7,9 @@ import { Tabs } from "../components/Tabs";
 import { PageLayout } from "../layouts/PageLayout";
 import { LeaderboardLine } from "../components/LeaderboardLine";
 import { useGameSchedule } from "../hooks/useGameSchedule";
-import { Collapse } from "@mui/material";
-import { ReactComponent as DownArrowIcon } from "../assets/icons/down-arrow.svg";
-import { ReactComponent as UpArrowIcon } from "../assets/icons/up-arrow.svg";
+// import { Collapse } from "@mui/material";
+// import { ReactComponent as DownArrowIcon } from "../assets/icons/down-arrow.svg";
+// import { ReactComponent as UpArrowIcon } from "../assets/icons/up-arrow.svg";
 import { useLeague } from "../hooks/useLeague";
 import { LeaderboardHeader } from "../components/LeaderboardHeader";
 
@@ -30,7 +30,7 @@ const ScorePage = () => {
     { id: "all-time", text: "All-Time", active: false },
   ];
   const [tabData, setTabData] = useState(tabs);
-  const [showEmojiGuide, setShowEmojiGuide] = useState(false);
+  // const [showEmojiGuide, setShowEmojiGuide] = useState(false);
   const activeTab = tabData.find(({ active }) => active);
   const isAllTime = activeTab?.id === "all-time";
 
@@ -82,7 +82,7 @@ const ScorePage = () => {
         />
         <SectionLabel label={"League Scores"}></SectionLabel>
         <div className="flex w-full items-center justify-center flex-col">
-          <LeaderboardHeader />
+          <LeaderboardHeader isAllTime={isAllTime} />
           {standings
             .sort((a, b) => b.record.wins - a.record.wins)
             .map(
@@ -100,6 +100,8 @@ const ScorePage = () => {
                 return (
                   <LeaderboardLine
                     key={player.id}
+                    winPercentage={player.winningPercentage}
+                    isAllTime={isAllTime}
                     lastPlace={lastPlace}
                     record={player.record}
                     username={player.name}
@@ -120,7 +122,7 @@ const ScorePage = () => {
               },
             )}
         </div>
-        <div
+        {/* <div
           className="flex justify-between items-center"
           onClick={() => setShowEmojiGuide((prev) => !prev)}
         >
@@ -130,8 +132,8 @@ const ScorePage = () => {
           ) : (
             <UpArrowIcon className="fill-purple-500" />
           )}
-        </div>
-        <Collapse in={showEmojiGuide}>
+        </div> */}
+        {/* <Collapse in={showEmojiGuide}>
           <div className="flex flex-col">
             <p>
               &#128081;
@@ -160,7 +162,7 @@ const ScorePage = () => {
               <span className="text-sm font-light">= All-Time Last Place</span>
             </p>
           </div>
-        </Collapse>
+        </Collapse> */}
       </PageLayout>
     </>
   );

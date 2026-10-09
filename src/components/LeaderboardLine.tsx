@@ -4,6 +4,8 @@ import { ReactComponent as DownArrowIcon } from "../assets/icons/down-arrow.svg"
 import { Record } from "../types/Record";
 
 type LeaderboardLineProps = {
+  winPercentage?: number;
+  isAllTime: boolean;
   iconCharacter: string;
   username: string;
   color: string;
@@ -26,12 +28,15 @@ const Streak = ({
 }: {
   streak?: { count: number; type: "win" | "loss" };
 }) => {
-  if (!streak) return "";
+  if (!streak)
+    return (
+      <p className="bg-gray-100 text-sm w-12 text-center rounded-full">-</p>
+    );
   const text = `${streak.count}${streak.type === "win" ? "W" : "L"}`;
 
   return (
     <p
-      className={` bg-gray-100 text-sm w-16 text-center rounded-full ${streak?.type === "win" ? "text-green-500" : "text-red-500"}`}
+      className={` bg-gray-100 text-sm w-12 text-center rounded-full ${streak?.type === "win" ? "text-green-500" : "text-red-500"}`}
     >
       {text}
     </p>
@@ -54,11 +59,13 @@ const LeaderboardLine = ({
   allTimeLeader,
   gamesBack,
   streak,
+  isAllTime,
+  winPercentage,
 }: LeaderboardLineProps) => {
   const showEmblems = false;
   return (
     <div className="w-full flex items-center justify-between border-b-2 py-3 border-gray-50">
-      <p className="text-purple-500 font-bold text-sm text-center w-4">
+      <p className="text-purple-500 font-bold text-sm text-center w-8">
         {rank}
       </p>
       <div className="flex items-center">
@@ -77,16 +84,21 @@ const LeaderboardLine = ({
 
         <ProfileIcon character={iconCharacter} backgroundColor={color} />
       </div>
-      <p className="text-gray-700 w-5/12 px-2 text-start truncate">
+      <p className="text-gray-700 w-4/12 px-2 text-start truncate">
         {username}
       </p>
-      <p className="bg-gray-100 rounded-full text-purple-500 text-sm w-16 text-center">
+      <p className="bg-gray-100 rounded-full text-purple-500 text-sm w-12 text-center">
         {record.wins}-{record.losses}
       </p>
-      <p className="text-gray-500 text-sm w-16 text-center">
-        {gamesBack !== undefined ? `${gamesBack} GB` : ""}
+      <p className="text-gray-500 text-sm w-12 text-center">
+        {gamesBack !== undefined ? `${gamesBack} GB` : "0 GB"}
       </p>
-      <Streak streak={streak} />
+      {winPercentage !== undefined ? (
+        <p className="text-gray-500 text-sm w-12 text-center">
+          {winPercentage.toFixed(3)}
+        </p>
+      ) : null}
+      {isAllTime ? null : <Streak streak={streak} />}
       {showEmblems ? (
         <p className="w-10 ">
           {allTimeLeader ? <>&#128081;</> : null}

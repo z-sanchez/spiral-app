@@ -1,52 +1,29 @@
-import { ENV_VARIABLES } from "../../constants";
-import { getWeekData } from "./getWeekData";
-import scheduleData from "../../../mock/scheduleData.json";
 import { EspnCurrentWeekParams } from "../../../types/EspnApi";
 
 const BASE_ESPN_QUERY = `https://cdn.espn.com/core/nfl/schedule?xhr=1`;
+
+const GAME_WEEK = import.meta.env.VITE_GAME_WEEK;
+const GAME_YEAR = import.meta.env.VITE_GAME_YEAR;
+const SEASON_TYPE = import.meta.env.VITE_SEASON_TYPE;
 
 const getEspnQuery = (params: EspnCurrentWeekParams) => {
   return `https://cdn.espn.com/core/nfl/schedule?xhr=1&year=${params.year}&seasontype=${params.seasontype}&week=${params.week}`;
 };
 
-export const getCurrentWeekQuery = async () => {
-  const currentWeekParams = await fetchCurrentWeekParams().then(
-    (params: EspnCurrentWeekParams) => {
-      return params;
-    },
-  );
+export const fetchCurrentWeekData = async () => {
+  let espnQuery = BASE_ESPN_QUERY;
 
-  if (currentWeekParams.seasontype !== 2) {
-    return getEspnQuery({ ...currentWeekParams, week: 1, seasontype: 2 });
+  if (GAME_WEEK && GAME_YEAR && SEASON_TYPE) {
+    espnQuery = getEspnQuery({
+      year: GAME_YEAR,
+      seasontype: SEASON_TYPE,
+      week: GAME_WEEK,
+    });
   }
 
-  return getEspnQuery(currentWeekParams);
-};
-
-export const fetchCurrentWeekData = async () => {
-  const result = await fetch(BASE_ESPN_QUERY)
+  const result = await fetch(espnQuery)
     .then((result) => result.json())
     .then((schedule) => schedule.content);
 
   return result;
-};
-
-export const fetchWeekData = async (weekNumber: number) => {
-  if (ENV_VARIABLES.useMockData) return getWeekData(scheduleData.schedule);
-
-  const resultData = await fetch(
-    `https://cdn.espn.com/core/nfl/schedule?xhr=1&year=2024&seasontype=2&week=${weekNumber}`,
-  ).then((result) => result.json());
-
-  return getWeekData(resultData.content.schedule);
-};
-
-export const fetchCurrentWeekParams = async () => {
-  if (ENV_VARIABLES.useMockData) scheduleData.parameters;
-
-  const resultData = await fetch(
-    `https://cdn.espn.com/core/nfl/schedule?xhr=1`,
-  ).then((result) => result.json());
-
-  return resultData.content.parameters;
 };
