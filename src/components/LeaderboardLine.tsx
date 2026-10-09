@@ -30,13 +30,13 @@ const Streak = ({
 }) => {
   if (!streak)
     return (
-      <p className="bg-gray-100 text-sm w-12 text-center rounded-full">-</p>
+      <p className="bg-gray-100 text-xs w-12 text-center rounded-full">-</p>
     );
   const text = `${streak.count}${streak.type === "win" ? "W" : "L"}`;
 
   return (
     <p
-      className={` bg-gray-100 text-sm w-12 text-center rounded-full ${streak?.type === "win" ? "text-green-500" : "text-red-500"}`}
+      className={` bg-gray-100 text-xs w-12 text-center rounded-full ${streak?.type === "win" ? "text-green-500" : "text-red-500"}`}
     >
       {text}
     </p>
@@ -65,9 +65,7 @@ const LeaderboardLine = ({
   const showEmblems = false;
   return (
     <div className="w-full flex items-center justify-between border-b-2 py-3 border-gray-50">
-      <p className="text-purple-500 font-bold text-sm text-center w-8">
-        {rank}
-      </p>
+      <p className="text-purple-500 font-bold text-sm text-start w-8">{rank}</p>
       <div className="flex items-center">
         {!increaseIcon && !decreaseIcon ? (
           <p className=""></p>
@@ -90,14 +88,12 @@ const LeaderboardLine = ({
       <p className="bg-gray-100 rounded-full text-purple-500 text-sm w-12 text-center">
         {record.wins}-{record.losses}
       </p>
-      <p className="text-gray-500 text-sm w-12 text-center">
+      <p className="text-gray-500 text-xs w-12 text-center">
         {gamesBack !== undefined ? `${gamesBack} GB` : "0 GB"}
       </p>
-      {winPercentage !== undefined ? (
-        <p className="text-gray-500 text-sm w-12 text-center">
-          {winPercentage.toFixed(3)}
-        </p>
-      ) : null}
+      <p className="text-gray-500 text-xs w-12 text-center">
+        {winPercentage !== undefined ? winPercentage.toFixed(3) : "-"}
+      </p>
       {isAllTime ? null : <Streak streak={streak} />}
       {showEmblems ? (
         <p className="w-10 ">
