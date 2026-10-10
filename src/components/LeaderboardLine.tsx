@@ -65,7 +65,9 @@ const LeaderboardLine = ({
   const showEmblems = false;
   return (
     <div className="w-full flex items-center justify-between border-b-2 py-3 border-gray-50">
-      <p className="text-purple-500 font-bold text-sm text-start w-8">{rank}</p>
+      <p className="text-purple-500 font-bold text-sm text-start w-8">
+        {rank} &#128081;
+      </p>
       <div className="flex items-center">
         {!increaseIcon && !decreaseIcon ? (
           <p className=""></p>
@@ -82,6 +84,7 @@ const LeaderboardLine = ({
 
         <ProfileIcon character={iconCharacter} backgroundColor={color} />
       </div>
+
       <p className="text-gray-700 w-4/12 px-2 text-start truncate">
         {username}
       </p>
@@ -109,4 +112,78 @@ const LeaderboardLine = ({
   );
 };
 
-export { LeaderboardLine };
+type NewProfileIconProps = {
+  character: string;
+  backgroundColor?: string;
+  size?: "large" | "small";
+  handleClick?: () => void;
+};
+const NewProfileIcon = ({
+  character,
+  backgroundColor,
+  handleClick,
+}: NewProfileIconProps) => {
+  return (
+    <div
+      onClick={() => (handleClick ? handleClick() : null)}
+      className={
+        "flex justify-center items-center rounded-full outline-2 outline-white drop-shadow-md h-7 w-7 mx-2"
+      }
+      style={{
+        backgroundColor: backgroundColor ? backgroundColor : "",
+      }}
+    >
+      <p className={"text-center font-semibold text-white text-sm "}>
+        {character}
+      </p>
+    </div>
+  );
+};
+
+const NewLeaderboardLine = ({
+  // record,
+  iconCharacter,
+  rank,
+  username,
+  color,
+  increaseIcon,
+  decreaseIcon,
+  // hotStreakIcon,
+  // silverMedalIcon,
+  // bronzeMedalIcon,
+  // trophyIcon,
+  // lastPlace,
+  // allTimeLeader,
+  // gamesBack,
+  // streak,
+  isAllTime,
+  // winPercentage,
+}: LeaderboardLineProps) => {
+  // const showEmblems = false;
+  return (
+    <div className="flex items-center py-2 text-gray-700">
+      <p className="text-sm w-12 text-start sticky left-0 flex-shrink-0 z-10 text-purple-500 font-bold bg-white">
+        {rank} &#128081;
+      </p>
+      <p className="flex w-60 text-start sticky left-12 flex-shrink-0 bg-white">
+        {!increaseIcon && !decreaseIcon ? null : (
+          <>
+            {increaseIcon ? <UpArrowIcon className="fill-green-500" /> : null}
+            {decreaseIcon ? <DownArrowIcon className="fill-red-500" /> : null}
+          </>
+        )}
+        <NewProfileIcon character={iconCharacter} backgroundColor={color} />{" "}
+        <span className="w-30 truncate text-gray-700">{username}</span>
+      </p>
+
+      <p className="text-sm w-14 shrink-0 text-center">W/L</p>
+      <p className="text-sm w-14 shrink-0 text-center">GB</p>
+      <p className="text-sm w-14 shrink-0 text-center">W%</p>
+      {isAllTime ? null : (
+        <p className="text-sm w-14 shrink-0 text-center">STRK</p>
+      )}
+    </div>
+  );
+};
+
+export { LeaderboardLine, NewLeaderboardLine };
