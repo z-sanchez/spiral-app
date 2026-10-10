@@ -129,7 +129,7 @@ const ScorePage = () => {
             )}
         </div>
         <div className="flex w-full justify-center flex-col overflow-x-auto">
-          <div className="flex flex-col justify-start">
+          <div className="flex flex-col justify-start w-max min-w-full">
             <NewLeaderboardHeader isAllTime={isAllTime} />
             {standings
               .sort((a, b) => b.record.wins - a.record.wins)
