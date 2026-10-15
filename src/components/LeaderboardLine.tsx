@@ -43,6 +43,23 @@ const Streak = ({
   );
 };
 
+const NewStreak = ({
+  streak,
+}: {
+  streak?: { count: number; type: "win" | "loss" };
+}) => {
+  if (!streak) return <p className="text-sm w-14 shrink-0 text-center">-</p>;
+  const text = `${streak.count}${streak.type === "win" ? "W" : "L"}`;
+
+  return (
+    <p
+      className={` text-sm w-14 shrink-0 text-center ${streak?.type === "win" ? "text-green-500" : "text-red-500"}`}
+    >
+      {text}
+    </p>
+  );
+};
+
 const LeaderboardLine = ({
   record,
   iconCharacter,
@@ -141,7 +158,7 @@ const NewProfileIcon = ({
 };
 
 const NewLeaderboardLine = ({
-  // record,
+  record,
   iconCharacter,
   rank,
   username,
@@ -154,18 +171,18 @@ const NewLeaderboardLine = ({
   // trophyIcon,
   // lastPlace,
   // allTimeLeader,
-  // gamesBack,
-  // streak,
+  gamesBack,
+  streak,
   isAllTime,
-  // winPercentage,
+  winPercentage,
 }: LeaderboardLineProps) => {
   // const showEmblems = false;
   return (
     <div className="flex items-center py-2 text-gray-700">
       <p className="text-sm w-12 text-start sticky left-0 flex-shrink-0 z-10 text-purple-500 font-bold bg-white">
-        {rank} &#128081;
+        {rank} <span className="text-xs">&#128081; &#128081;</span>
       </p>
-      <p className="flex w-60 text-start sticky left-12 flex-shrink-0 bg-white">
+      <p className="flex w-52 text-start sticky left-12 flex-shrink-0 bg-white">
         {!increaseIcon && !decreaseIcon ? null : (
           <>
             {increaseIcon ? <UpArrowIcon className="fill-green-500" /> : null}
@@ -173,15 +190,20 @@ const NewLeaderboardLine = ({
           </>
         )}
         <NewProfileIcon character={iconCharacter} backgroundColor={color} />{" "}
-        <span className="w-30 truncate text-gray-700">{username}</span>
+        <span className="w-36 truncate text-gray-700 px-1">{username}</span>
       </p>
 
-      <p className="text-sm w-14 shrink-0 text-center">W/L</p>
-      <p className="text-sm w-14 shrink-0 text-center">GB</p>
-      <p className="text-sm w-14 shrink-0 text-center">W%</p>
-      {isAllTime ? null : (
-        <p className="text-sm w-14 shrink-0 text-center">STRK</p>
-      )}
+      <p className="bg-gray-100 rounded-full text-purple-500 text-sm w-16 text-center">
+        {record.wins}-{record.losses}
+      </p>
+      <p className="text-sm w-16 shrink-0 text-center">
+        {" "}
+        {gamesBack !== undefined ? `${gamesBack} GB` : "0 GB"}
+      </p>
+      <p className="text-sm w-16 shrink-0 text-center">
+        {winPercentage !== undefined ? winPercentage.toFixed(3) : "-"}
+      </p>
+      {isAllTime ? null : <NewStreak streak={streak} />}
     </div>
   );
 };
