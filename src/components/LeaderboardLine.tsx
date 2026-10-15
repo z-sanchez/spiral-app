@@ -179,9 +179,13 @@ const NewLeaderboardLine = ({
   // const showEmblems = false;
   return (
     <div className="flex items-center py-2 text-gray-700">
-      <p className="text-sm w-12 text-start sticky left-0 flex-shrink-0 z-10 text-purple-500 font-bold bg-white">
-        {rank} <span className="text-xs">&#128081; &#128081;</span>
-      </p>
+      <div className="flex flex-col w-12 sticky left-0 flex-shrink-0 z-10 items-start">
+        <p className=" text-purple-500 font-bold bg-white text-sm">{rank}</p>
+        <p className="text-xs">
+          <span>&#128081; &#128081;</span>
+        </p>
+      </div>
+
       <p className="flex w-52 text-start sticky left-12 flex-shrink-0 bg-white">
         {!increaseIcon && !decreaseIcon ? null : (
           <>
