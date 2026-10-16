@@ -1,26 +1,22 @@
 import { useState } from "react";
 import type { LeagueWithUserDetails } from "../firebase/getLeagueDataFromFirebase";
+import { useStandings } from "../hooks/useStandings";
 import { Scoreboard } from "../components/Scoreboard/Scoreboard";
 import { SectionLabel } from "../components/SectionLabel";
 import { Tabs } from "../components/Tabs";
 // import { WeekSelector } from "../components/WeekSelector";
 import { PageLayout } from "../layouts/PageLayout";
-import {
-  LeaderboardLine,
-  NewLeaderboardLine,
-} from "../components/LeaderboardLine";
+import { LeaderboardLine } from "../components/LeaderboardLine";
 import { useGameSchedule } from "../hooks/useGameSchedule";
 import { Collapse } from "@mui/material";
 import { ReactComponent as DownArrowIcon } from "../assets/icons/down-arrow.svg";
 import { ReactComponent as UpArrowIcon } from "../assets/icons/up-arrow.svg";
 import { useLeague } from "../hooks/useLeague";
-import {
-  LeaderboardHeader,
-  NewLeaderboardHeader,
-} from "../components/LeaderboardHeader";
+import { LeaderboardHeader } from "../components/LeaderboardHeader";
 
 const ScorePage = () => {
-  const { currentWeekNumber, currentWeekId } = useGameSchedule();
+  const { currentWeekNumber, currentWeekId, weekDateParams } =
+    useGameSchedule();
   const {
     userAllTimeRecord,
     userCurrentWeekRecord,
@@ -28,9 +24,18 @@ const ScorePage = () => {
     userCurrentWeekRank,
     allTimeStandings,
     currentWeekStandings,
+    computedWeekStandings,
   } = useLeague({ currentWeekId });
 
-  console.log(currentWeekStandings);
+  const { calculatedEmblems, calculatedWeekProgress } = useStandings({
+    weekStandings: currentWeekStandings,
+    allTimeStandings: allTimeStandings,
+    computedStandings: computedWeekStandings,
+    week: weekDateParams.week as number,
+    year: weekDateParams.year as number,
+    seasonType: weekDateParams.seasonType as number,
+  });
+
   const tabs = [
     { id: "weekly", text: `Week ${currentWeekNumber} Picks`, active: true },
     { id: "all-time", text: "All-Time", active: false },
@@ -87,50 +92,9 @@ const ScorePage = () => {
           rankStyle="text-green-500"
         />
         <SectionLabel label={"League Scores"}></SectionLabel>
-        <div className="flex w-full items-center justify-center flex-col">
-          <LeaderboardHeader isAllTime={isAllTime} />
-          {standings
-            .sort((a, b) => b.record.wins - a.record.wins)
-            .map(
-              (
-                player:
-                  | LeagueWithUserDetails["allTimeStandings"][0]
-                  | LeagueWithUserDetails["currentWeekStandings"][0],
-              ) => {
-                const lastPlace = standings.every(
-                  (p) => p.record.wins >= player.record.wins,
-                );
-
-                const firstPlace = player.rank === 1;
-
-                return (
-                  <LeaderboardLine
-                    key={player.id}
-                    winPercentage={player.winningPercentage}
-                    isAllTime={isAllTime}
-                    lastPlace={lastPlace}
-                    record={player.record}
-                    username={player.name}
-                    rank={player.rank}
-                    color={player.color}
-                    iconCharacter={player.name.charAt(0).toUpperCase()}
-                    allTimeLeader={firstPlace}
-                    increaseIcon={true}
-                    decreaseIcon={false}
-                    hotStreakIcon={false}
-                    bronzeMedalIcon={false}
-                    silverMedalIcon={false}
-                    trophyIcon={false}
-                    gamesBack={player.gamesBack}
-                    streak={player.streak}
-                  />
-                );
-              },
-            )}
-        </div>
         <div className="flex w-full justify-center flex-col overflow-x-auto">
           <div className="flex flex-col justify-start w-max min-w-full">
-            <NewLeaderboardHeader isAllTime={isAllTime} />
+            <LeaderboardHeader isAllTime={isAllTime} />
             {standings
               .sort((a, b) => b.record.wins - a.record.wins)
               .map(
@@ -139,32 +103,31 @@ const ScorePage = () => {
                     | LeagueWithUserDetails["allTimeStandings"][0]
                     | LeagueWithUserDetails["currentWeekStandings"][0],
                 ) => {
-                  const lastPlace = standings.every(
-                    (p) => p.record.wins >= player.record.wins,
-                  );
+                  const userEmblems =
+                    calculatedEmblems.find(
+                      (profile) => profile.userId === player.id,
+                    )?.emblems || [];
 
-                  const firstPlace = player.rank === 1;
+                  const userProgress =
+                    calculatedWeekProgress.find(
+                      (progress) => progress.userId === player.id,
+                    )?.progress || "none";
 
                   return (
-                    <NewLeaderboardLine
+                    <LeaderboardLine
                       key={player.id}
                       winPercentage={player.winningPercentage}
-                      isAllTime={isAllTime}
-                      lastPlace={lastPlace}
                       record={player.record}
                       username={player.name}
                       rank={player.rank}
                       color={player.color}
                       iconCharacter={player.name.charAt(0).toUpperCase()}
-                      allTimeLeader={firstPlace}
-                      increaseIcon={true}
-                      decreaseIcon={false}
-                      hotStreakIcon={false}
-                      bronzeMedalIcon={false}
-                      silverMedalIcon={false}
-                      trophyIcon={false}
+                      increaseIcon={userProgress === "progressed"}
+                      decreaseIcon={userProgress === "regressed"}
+                      isAllTime={isAllTime}
                       gamesBack={player.gamesBack}
                       streak={player.streak}
+                      emblems={userEmblems}
                     />
                   );
                 },

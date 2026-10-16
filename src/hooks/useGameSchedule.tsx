@@ -61,6 +61,7 @@ const useGameSchedule = () => {
     gamesNotStarted,
     currentWeekNumber,
     currentYearNumber,
+    weekDateParams,
   };
 };
 

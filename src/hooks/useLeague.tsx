@@ -83,5 +83,8 @@ export const useLeague = ({ currentWeekId }: { currentWeekId: string }) => {
     currentWeekStandings:
       (currentWeekStandings as LeagueWithUserDetails["currentWeekStandings"]) ||
       [],
+    computedWeekStandings:
+      (league?.computedWeekStandings as LeagueWithUserDetails["computedWeekStandings"]) ||
+      [],
   };
 };

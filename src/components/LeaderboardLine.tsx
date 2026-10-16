@@ -1,7 +1,7 @@
-import { ProfileIcon } from "./ProfileIcon";
 import { ReactComponent as UpArrowIcon } from "../assets/icons/up-arrow.svg";
 import { ReactComponent as DownArrowIcon } from "../assets/icons/down-arrow.svg";
-import { Record } from "../types/Record";
+import { Record as WinLossRecord } from "../types/Record";
+import { EmblemType } from "../types/Emblems";
 
 type LeaderboardLineProps = {
   winPercentage?: number;
@@ -11,12 +11,8 @@ type LeaderboardLineProps = {
   color: string;
   increaseIcon?: boolean;
   decreaseIcon?: boolean;
-  hotStreakIcon?: boolean;
-  silverMedalIcon?: boolean;
-  bronzeMedalIcon?: boolean;
-  trophyIcon?: boolean;
-  lastPlace?: boolean;
-  record: Record;
+  emblems?: EmblemType[];
+  record: WinLossRecord;
   rank: number;
   allTimeLeader?: boolean;
   gamesBack?: number;
@@ -24,26 +20,6 @@ type LeaderboardLineProps = {
 };
 
 const Streak = ({
-  streak,
-}: {
-  streak?: { count: number; type: "win" | "loss" };
-}) => {
-  if (!streak)
-    return (
-      <p className="bg-gray-100 text-xs w-12 text-center rounded-full">-</p>
-    );
-  const text = `${streak.count}${streak.type === "win" ? "W" : "L"}`;
-
-  return (
-    <p
-      className={` bg-gray-100 text-xs w-12 text-center rounded-full ${streak?.type === "win" ? "text-green-500" : "text-red-500"}`}
-    >
-      {text}
-    </p>
-  );
-};
-
-const NewStreak = ({
   streak,
 }: {
   streak?: { count: number; type: "win" | "loss" };
@@ -60,86 +36,17 @@ const NewStreak = ({
   );
 };
 
-const LeaderboardLine = ({
-  record,
-  iconCharacter,
-  rank,
-  username,
-  color,
-  increaseIcon,
-  decreaseIcon,
-  hotStreakIcon,
-  silverMedalIcon,
-  bronzeMedalIcon,
-  trophyIcon,
-  lastPlace,
-  allTimeLeader,
-  gamesBack,
-  streak,
-  isAllTime,
-  winPercentage,
-}: LeaderboardLineProps) => {
-  const showEmblems = false;
-  return (
-    <div className="w-full flex items-center justify-between border-b-2 py-3 border-gray-50">
-      <p className="text-purple-500 font-bold text-sm text-start w-8">
-        {rank} &#128081;
-      </p>
-      <div className="flex items-center">
-        {!increaseIcon && !decreaseIcon ? (
-          <p className=""></p>
-        ) : (
-          <>
-            {increaseIcon ? (
-              <UpArrowIcon className="fill-green-500 w-8" />
-            ) : null}
-            {decreaseIcon ? (
-              <DownArrowIcon className="fill-red-500 w-8" />
-            ) : null}
-          </>
-        )}
-
-        <ProfileIcon character={iconCharacter} backgroundColor={color} />
-      </div>
-
-      <p className="text-gray-700 w-4/12 px-2 text-start truncate">
-        {username}
-      </p>
-      <p className="bg-gray-100 rounded-full text-purple-500 text-sm w-12 text-center">
-        {record.wins}-{record.losses}
-      </p>
-      <p className="text-gray-500 text-xs w-12 text-center">
-        {gamesBack !== undefined ? `${gamesBack} GB` : "0 GB"}
-      </p>
-      <p className="text-gray-500 text-xs w-12 text-center">
-        {winPercentage !== undefined ? winPercentage.toFixed(3) : "-"}
-      </p>
-      {isAllTime ? null : <Streak streak={streak} />}
-      {showEmblems ? (
-        <p className="w-10 ">
-          {allTimeLeader ? <>&#128081;</> : null}
-          {lastPlace ? <>&#128546;</> : null}
-          {hotStreakIcon ? <>&#128293;</> : null}
-          {bronzeMedalIcon ? <>&#129353;</> : null}
-          {silverMedalIcon ? <>&#129352;</> : null}
-          {trophyIcon ? <>&#127942;</> : null}
-        </p>
-      ) : null}
-    </div>
-  );
-};
-
-type NewProfileIconProps = {
+type ProfileIconProps = {
   character: string;
   backgroundColor?: string;
   size?: "large" | "small";
   handleClick?: () => void;
 };
-const NewProfileIcon = ({
+const ProfileIcon = ({
   character,
   backgroundColor,
   handleClick,
-}: NewProfileIconProps) => {
+}: ProfileIconProps) => {
   return (
     <div
       onClick={() => (handleClick ? handleClick() : null)}
@@ -157,7 +64,27 @@ const NewProfileIcon = ({
   );
 };
 
-const NewLeaderboardLine = ({
+const EmblemMap: Record<EmblemType, () => JSX.Element> = {
+  allTimeLeader: () => <>&#128081;</>,
+  allTimeSecondPlace: () => <>&#129352;</>,
+  allTimeThirdPlace: () => <>&#129353;</>,
+  onFire: () => <>&#128293;</>,
+  lastWeekWinner: () => <>&#127942;</>,
+  allTimeLastPlace: () => <>&#128546;</>,
+};
+
+const renderEmblems = (emblems?: EmblemType[]) => {
+  if (!emblems || emblems.length === 0) return null;
+  return (
+    <div className="flex space-x-1">
+      {emblems.map((emblem, index) => (
+        <span key={index}>{EmblemMap[emblem]()}</span>
+      ))}
+    </div>
+  );
+};
+
+const LeaderboardLine = ({
   record,
   iconCharacter,
   rank,
@@ -165,35 +92,33 @@ const NewLeaderboardLine = ({
   color,
   increaseIcon,
   decreaseIcon,
-  // hotStreakIcon,
-  // silverMedalIcon,
-  // bronzeMedalIcon,
-  // trophyIcon,
-  // lastPlace,
-  // allTimeLeader,
   gamesBack,
   streak,
   isAllTime,
   winPercentage,
+  emblems,
 }: LeaderboardLineProps) => {
-  // const showEmblems = false;
   return (
     <div className="flex items-center py-2 text-gray-700">
-      <div className="flex flex-col w-12 sticky left-0 flex-shrink-0 z-10 items-start">
+      <div className="flex flex-row w-12 sticky left-0 flex-shrink-0 z-10 items-start">
         <p className=" text-purple-500 font-bold bg-white text-sm">{rank}</p>
-        <p className="text-xs">
-          <span>&#128081; &#128081;</span>
-        </p>
+        <p className="text-xs ml-2 text-center">{renderEmblems(emblems)}</p>
       </div>
 
       <p className="flex w-52 text-start sticky left-12 flex-shrink-0 bg-white">
-        {!increaseIcon && !decreaseIcon ? null : (
+        {!increaseIcon && !decreaseIcon ? (
+          <span className="w-6" />
+        ) : (
           <>
-            {increaseIcon ? <UpArrowIcon className="fill-green-500" /> : null}
-            {decreaseIcon ? <DownArrowIcon className="fill-red-500" /> : null}
+            {increaseIcon ? (
+              <UpArrowIcon className="fill-green-500 w-6" />
+            ) : null}
+            {decreaseIcon ? (
+              <DownArrowIcon className="fill-red-500 w-6" />
+            ) : null}
           </>
         )}
-        <NewProfileIcon character={iconCharacter} backgroundColor={color} />{" "}
+        <ProfileIcon character={iconCharacter} backgroundColor={color} />{" "}
         <span className="w-36 truncate text-gray-700 px-1">{username}</span>
       </p>
 
@@ -207,9 +132,9 @@ const NewLeaderboardLine = ({
       <p className="text-sm w-16 shrink-0 text-center">
         {winPercentage !== undefined ? winPercentage.toFixed(3) : "-"}
       </p>
-      {isAllTime ? null : <NewStreak streak={streak} />}
+      {isAllTime ? null : <Streak streak={streak} />}
     </div>
   );
 };
 
-export { LeaderboardLine, NewLeaderboardLine };
+export { LeaderboardLine };
