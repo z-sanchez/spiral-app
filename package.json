@@ -17,6 +17,7 @@
     "@dnd-kit/utilities": "^3.2.2",
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.14.4",
+    "@nivo/bump": "^0.99.0",
     "@types/react-test-renderer": "^18.0.7",
     "date-fns": "^2.30.0",
     "firebase": "^10.3.0",

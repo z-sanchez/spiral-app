@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { BumpChart } from "../components/BumpChart";
 import type { LeagueWithUserDetails } from "../firebase/getLeagueDataFromFirebase";
 import { useStandings } from "../hooks/useStandings";
 import { Scoreboard } from "../components/Scoreboard/Scoreboard";
@@ -39,11 +40,13 @@ const ScorePage = () => {
   const tabs = [
     { id: "weekly", text: `Week ${currentWeekNumber} Picks`, active: true },
     { id: "all-time", text: "All-Time", active: false },
+    { id: "bump-chart", text: "📊", active: false },
   ];
   const [tabData, setTabData] = useState(tabs);
   const [showEmojiGuide, setShowEmojiGuide] = useState(false);
   const activeTab = tabData.find(({ active }) => active);
   const isAllTime = activeTab?.id === "all-time";
+  const isTabBumpChart = activeTab?.id === "bump-chart";
 
   const wins = isAllTime
     ? userAllTimeRecord?.wins
@@ -84,97 +87,109 @@ const ScorePage = () => {
           ></Tabs>
         </div>
         {/* <WeekSelector activeWeekNumber={3} /> */}
-        <SectionLabel label={"Your Score"}></SectionLabel>
-        <Scoreboard
-          wins={wins !== undefined ? String(wins) : "0"}
-          loses={loses !== undefined ? String(loses) : "0"}
-          rank={rank !== undefined ? String(rank) : "0"}
-          rankStyle="text-green-500"
-        />
-        <SectionLabel label={"League Scores"}></SectionLabel>
-        <div className="flex w-full justify-center flex-col overflow-x-auto">
-          <div className="flex flex-col justify-start w-max min-w-full">
-            <LeaderboardHeader isAllTime={isAllTime} />
-            {standings
-              .sort((a, b) => b.record.wins - a.record.wins)
-              .map(
-                (
-                  player:
-                    | LeagueWithUserDetails["allTimeStandings"][0]
-                    | LeagueWithUserDetails["currentWeekStandings"][0],
-                ) => {
-                  const userEmblems =
-                    calculatedEmblems.find(
-                      (profile) => profile.userId === player.id,
-                    )?.emblems || [];
+        {isTabBumpChart ? (
+          <BumpChart />
+        ) : (
+          <>
+            <SectionLabel label={"Your Score"}></SectionLabel>
+            <Scoreboard
+              wins={wins !== undefined ? String(wins) : "0"}
+              loses={loses !== undefined ? String(loses) : "0"}
+              rank={rank !== undefined ? String(rank) : "0"}
+              rankStyle="text-green-500"
+            />
+            <SectionLabel label={"League Scores"}></SectionLabel>
+            <div className="flex w-full justify-center flex-col overflow-x-auto">
+              <div className="flex flex-col justify-start w-max min-w-full">
+                <LeaderboardHeader isAllTime={isAllTime} />
+                {standings
+                  .sort((a, b) => b.record.wins - a.record.wins)
+                  .map(
+                    (
+                      player:
+                        | LeagueWithUserDetails["allTimeStandings"][0]
+                        | LeagueWithUserDetails["currentWeekStandings"][0],
+                    ) => {
+                      const userEmblems =
+                        calculatedEmblems.find(
+                          (profile) => profile.userId === player.id,
+                        )?.emblems || [];
 
-                  const userProgress =
-                    calculatedWeekProgress.find(
-                      (progress) => progress.userId === player.id,
-                    )?.progress || "none";
+                      const userProgress =
+                        calculatedWeekProgress.find(
+                          (progress) => progress.userId === player.id,
+                        )?.progress || "none";
 
-                  return (
-                    <LeaderboardLine
-                      key={player.id}
-                      winPercentage={player.winningPercentage}
-                      record={player.record}
-                      username={player.name}
-                      rank={player.rank}
-                      color={player.color}
-                      iconCharacter={player.name.charAt(0).toUpperCase()}
-                      increaseIcon={userProgress === "progressed"}
-                      decreaseIcon={userProgress === "regressed"}
-                      isAllTime={isAllTime}
-                      gamesBack={player.gamesBack}
-                      streak={player.streak}
-                      emblems={userEmblems}
-                    />
-                  );
-                },
+                      return (
+                        <LeaderboardLine
+                          key={player.id}
+                          winPercentage={player.winningPercentage}
+                          record={player.record}
+                          username={player.name}
+                          rank={player.rank}
+                          color={player.color}
+                          iconCharacter={player.name.charAt(0).toUpperCase()}
+                          increaseIcon={userProgress === "progressed"}
+                          decreaseIcon={userProgress === "regressed"}
+                          isAllTime={isAllTime}
+                          gamesBack={player.gamesBack}
+                          streak={player.streak}
+                          emblems={userEmblems}
+                        />
+                      );
+                    },
+                  )}
+              </div>
+            </div>
+            <div
+              className="flex justify-between items-center"
+              onClick={() => setShowEmojiGuide((prev) => !prev)}
+            >
+              <SectionLabel label={"Emoji Guide"}></SectionLabel>
+              {showEmojiGuide ? (
+                <DownArrowIcon className="fill-purple-500" />
+              ) : (
+                <UpArrowIcon className="fill-purple-500" />
               )}
-          </div>
-        </div>
-        <div
-          className="flex justify-between items-center"
-          onClick={() => setShowEmojiGuide((prev) => !prev)}
-        >
-          <SectionLabel label={"Emoji Guide"}></SectionLabel>
-          {showEmojiGuide ? (
-            <DownArrowIcon className="fill-purple-500" />
-          ) : (
-            <UpArrowIcon className="fill-purple-500" />
-          )}
-        </div>
-        <Collapse in={showEmojiGuide}>
-          <div className="flex flex-col">
-            <p>
-              &#128081;
-              <span className="text-sm font-light">= All-Time Leader</span>
-            </p>
-            <p>
-              &#128293;
-              <span className="text-sm font-light">
-                = 1st place for two weeks or more
-              </span>
-            </p>
-            <p>
-              &#129353;
-              <span className="text-sm font-light">= All-Time 3rd Place</span>
-            </p>
-            <p>
-              &#129352;
-              <span className="text-sm font-light">= All-Time 2nd Place</span>
-            </p>
-            <p>
-              &#127942;
-              <span className="text-sm font-light">= Last Week Winner</span>
-            </p>
-            <p>
-              &#128546;
-              <span className="text-sm font-light">= All-Time Last Place</span>
-            </p>
-          </div>
-        </Collapse>
+            </div>
+            <Collapse in={showEmojiGuide}>
+              <div className="flex flex-col">
+                <p>
+                  &#128081;
+                  <span className="text-sm font-light">= All-Time Leader</span>
+                </p>
+                <p>
+                  &#128293;
+                  <span className="text-sm font-light">
+                    = 1st place for two weeks or more
+                  </span>
+                </p>
+                <p>
+                  &#129353;
+                  <span className="text-sm font-light">
+                    = All-Time 3rd Place
+                  </span>
+                </p>
+                <p>
+                  &#129352;
+                  <span className="text-sm font-light">
+                    = All-Time 2nd Place
+                  </span>
+                </p>
+                <p>
+                  &#127942;
+                  <span className="text-sm font-light">= Last Week Winner</span>
+                </p>
+                <p>
+                  &#128546;
+                  <span className="text-sm font-light">
+                    = All-Time Last Place
+                  </span>
+                </p>
+              </div>
+            </Collapse>
+          </>
+        )}
       </PageLayout>
     </>
   );
