@@ -1,3 +1,4 @@
+import { convertWeekStandingsToBumpChartData } from "../utils/helpers/nivo";
 import { useState } from "react";
 import { BumpChart } from "../components/BumpChart";
 import type { LeagueWithUserDetails } from "../firebase/getLeagueDataFromFirebase";
@@ -26,6 +27,7 @@ const ScorePage = () => {
     allTimeStandings,
     currentWeekStandings,
     computedWeekStandings,
+    leagueUserIdandNames,
   } = useLeague({ currentWeekId });
 
   const { calculatedEmblems, calculatedWeekProgress } = useStandings({
@@ -75,6 +77,11 @@ const ScorePage = () => {
     ? (allTimeStandings as LeagueWithUserDetails["allTimeStandings"])
     : (currentWeekStandings as LeagueWithUserDetails["currentWeekStandings"]);
 
+  const bumpChartData = convertWeekStandingsToBumpChartData(
+    computedWeekStandings,
+    leagueUserIdandNames,
+  );
+
   return (
     <>
       <PageLayout>
@@ -88,7 +95,7 @@ const ScorePage = () => {
         </div>
         {/* <WeekSelector activeWeekNumber={3} /> */}
         {isTabBumpChart ? (
-          <BumpChart />
+          <BumpChart data={bumpChartData} />
         ) : (
           <>
             <SectionLabel label={"Your Score"}></SectionLabel>

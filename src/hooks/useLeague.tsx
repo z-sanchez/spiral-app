@@ -70,6 +70,12 @@ export const useLeague = ({ currentWeekId }: { currentWeekId: string }) => {
     })) ||
     [];
 
+  const leagueUserIdandNames =
+    league?.leagueUserData.map((user) => ({
+      id: user.id,
+      name: user.username,
+    })) || [];
+
   return {
     isLoading,
     league,
@@ -77,6 +83,7 @@ export const useLeague = ({ currentWeekId }: { currentWeekId: string }) => {
     userCurrentWeekRank,
     userCurrentWeekRecord,
     userAllTimeRank,
+    leagueUserIdandNames,
     allTimeStandings:
       (league?.allTimeStandings as LeagueWithUserDetails["allTimeStandings"]) ||
       [],
