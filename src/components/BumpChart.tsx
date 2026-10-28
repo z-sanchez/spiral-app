@@ -99,6 +99,9 @@ export const BumpChart = ({ data }: { data: BumpChartData }) => {
               </strong>
               <div>Week {point.data.x}</div>
               <div>Rank {point.data.y}</div>
+              <div>
+                {point.data.record.wins}-{point.data.record.losses}
+              </div>
             </div>
           )}
           lineTooltip={({ serie }) => (
@@ -116,10 +119,12 @@ export const BumpChart = ({ data }: { data: BumpChartData }) => {
               type="button"
               onClick={() => select(id)}
               className={`flex items-center gap-2 rounded-full border px-3 py-1 text-sm ${
-                selected === id
-                  ? "border-black font-semibold"
-                  : "border-gray-300"
+                selected === id ? "" : "border-gray-300"
               }`}
+              style={{
+                color: selected === id ? colorMap[id] : undefined,
+                borderColor: selected === id ? colorMap[id] : undefined,
+              }}
             >
               <span
                 className="inline-block h-3 w-3 rounded-full"
